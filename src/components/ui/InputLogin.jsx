@@ -22,7 +22,7 @@ export const InputLogin = React.forwardRef(
             ref={ref}
             type={type}
             placeholder={placeholder}
-            className={`w-full  py-2 border rounded-lg outline-none transition-colors duration-200 placeholder:text-slate-300 ${leftIcon ? 'pl-8' : 'pl-3'} ${error ? 'border-red-500 focus:border-red-600' : 'border-gray-500 focus:ring-2 focus:ring-sea-green-700'}`}
+            className={`w-full  py-2 border rounded-lg outline-none transition-colors duration-200 placeholder:text-slate-300 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${leftIcon ? 'pl-8' : 'pl-3'} ${error ? 'border-red-500 focus:border-red-600' : 'border-gray-500 focus:ring-2 focus:ring-sea-green-700'}`}
             {...props}
           />
         </div>

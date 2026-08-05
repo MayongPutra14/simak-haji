@@ -4,8 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { InputLogin } from '../ui/InputLogin.jsx';
 import { loginSchema } from '../../utils/loginScema.js';
 import {
-  MdOutlineEmail as IconEmail,
   MdLockOutline as IconLock,
+  MdOutlinePermIdentity as IconPerson,
 } from 'react-icons/md';
 import { Button } from '../ui/Button.jsx';
 
@@ -29,10 +29,10 @@ export const LoginContainer = () => {
     >
       {/* INPUT EMAIL */}
       <InputLogin
-        label="Email"
-        type="email"
-        placeholder="user@gmail.com"
-        leftIcon={<IconEmail />}
+        label="Nomor Porsi"
+        type="number"
+        placeholder="1000623881"
+        leftIcon={<IconPerson />}
         error={errors.email?.message}
         {...register('email')}
       />
