@@ -1,9 +1,10 @@
 import { z } from 'zod';
 
 export const loginSchema = z.object({
-  email: z
-    .string({ requiredError: 'Email tidak boleh kosong' })
-    .email({ message: 'Format email tidak valid' }),
+  porsiNumber: z
+    .string()
+    .length(10, 'Nomor porsi harus persis 10 digit')
+    .regex(/^[0-9]+$/, 'Nomor porsi hanya boleh berisi angka'),
   password: z
     .string({ requiredError: 'Password tidak boleh kosong ' })
     .min(1, { message: 'Password tidak boleh kosong' })

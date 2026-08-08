@@ -21,5 +21,8 @@ export default defineConfig([
         ecmaFeatures: { jsx: true },
       },
     },
+    rules: {
+      camelcase: 'off',
+    },
   },
 ]);

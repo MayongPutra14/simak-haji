@@ -1,10 +1,12 @@
 export const Button = ({
   children,
   type = 'button',
+  icon: Icon,
   variant = 'primary',
   isLoading = false,
   disabled = false,
   className = '',
+  onClick,
   ...props
 }) => {
   // Pilihan gaya berdasarkan varian
@@ -24,6 +26,7 @@ export const Button = ({
     <button
       type={type}
       disabled={disabled || isLoading}
+      onClick={onClick}
       className={`${baseStyle} ${variants[variant]} ${className}`}
       {...props}
     >
@@ -53,6 +56,8 @@ export const Button = ({
 
       {/* TEXT CONTENT BUTTON */}
       {isLoading ? 'Memproses...' : children}
+
+      {Icon && Icon}
     </button>
   );
 };

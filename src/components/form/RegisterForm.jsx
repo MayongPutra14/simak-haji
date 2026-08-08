@@ -1,23 +1,27 @@
-import { Link } from 'react-router';
 import { useState } from 'react';
+import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { InputLogin } from '../ui/InputLogin.jsx';
-import { loginSchema } from '../../utils/loginSchema.js';
-import {
-  MdLockOutline as IconLock,
-  MdOutlinePermIdentity as IconPerson,
-} from 'react-icons/md';
+import { InputLogin as InputRegistration } from '../ui/InputLogin.jsx';
+import { registrationSchema } from '../../utils/registerFormSchema.js';
 import { Button } from '../ui/Button.jsx';
+import {
+  LuIdCard as IconIdCard,
+  LuPhone as IconPhone,
+  LuLock as IconLock,
+} from 'react-icons/lu';
+import { MdOutlinePermIdentity as IconPerson } from 'react-icons/md';
 
-export const LoginForm = ({ onSubmit }) => {
+export const RegisterForm = ({ onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm({ resolver: zodResolver(loginSchema) });
+  } = useForm({
+    resolver: zodResolver(registrationSchema),
+  });
 
   const handleOnSubmit = async (data) => {
     if (onSubmit) {
@@ -29,19 +33,39 @@ export const LoginForm = ({ onSubmit }) => {
       onSubmit={handleSubmit(handleOnSubmit)}
       className="flex flex-col justify-center gap-4 bg-white w-[90%] max-w-md mx-auto p-6 rounded-2xl"
     >
-      {/* INPUT EMAIL */}
-      <InputLogin
+      {/* INPUT NAMA */}
+      <InputRegistration
+        label="Nama Lengkap"
+        type="text"
+        placeholder="Masukan Nama lengkap"
+        leftIcon={<IconPerson />}
+        error={errors.name?.message}
+        {...register('name')}
+      />
+
+      {/* INPUT NOMOR PORSI */}
+      <InputRegistration
         label="Nomor Porsi"
         type="number"
         placeholder="1000623881"
-        leftIcon={<IconPerson />}
+        leftIcon={<IconIdCard />}
         error={errors.porsiNumber?.message}
         {...register('porsiNumber')}
       />
 
+      {/* INPUT NOMOR WhatsApp */}
+      <InputRegistration
+        label="Nomor WhatsApp"
+        type="number"
+        placeholder="089633415543"
+        leftIcon={<IconPhone />}
+        error={errors.whatsappNumber?.message}
+        {...register('whatsappNumber')}
+      />
+
       {/* INPUT PASSWORD */}
-      <InputLogin
-        label="Password"
+      <InputRegistration
+        label="password"
         type={showPassword ? 'text' : 'password'}
         placeholder="✱✱✱✱✱✱"
         leftIcon={<IconLock />}
@@ -66,17 +90,15 @@ export const LoginForm = ({ onSubmit }) => {
       </div>
 
       {/* BUTTON SUBMIT */}
-      <Button type="submit" variant="primary" isLoading={isSubmitting}>
-        Masuk
+      <Button type="submit" variant="primary" disabled={isSubmitting}>
+        {isSubmitting ? 'Memproses...' : 'Daftar'}
       </Button>
 
+      {/* LINK TO LOGIN */}
       <div className="mt-6 text-center text-sm text-gray-600">
-        Belum punya akun?{' '}
-        <Link
-          to="/register"
-          className="text-sea-green-600 font-semibold underline"
-        >
-          Daftar Sekarang
+        Sudah punya akun?{' '}
+        <Link to="/" className="text-sea-green-600 font-semibold underline">
+          masuk
         </Link>
       </div>
     </form>
