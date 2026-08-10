@@ -1,4 +1,4 @@
-import SimakLogo from '../../assets/images/simak-logo.png';
+import SimakLogo from '../../assets/images/simak-logo.webp';
 
 export const LogoSimak = ({ title, subtitle }) => {
   return (
