@@ -1,15 +1,27 @@
+import { Link } from 'react-router';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { InputLogin } from '../ui/InputLogin.jsx';
 import { loginSchema } from '../../utils/loginSchema.js';
+<<<<<<< HEAD
+=======
+import {
+  MdLockOutline as IconLock,
+  MdOutlinePermIdentity as IconPerson,
+} from 'react-icons/md';
+>>>>>>> origin/client
 import { Button } from '../ui/Button.jsx';
 import { LuIdCard as IconIdCard, LuLock as IconLock } from 'react-icons/lu';
 
+<<<<<<< HEAD
 import axios from 'axios';
 
 const LoginForm = ({ onSubmit }) => {
+=======
+export const LoginForm = ({ onSubmit }) => {
+>>>>>>> origin/client
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState('');
 
@@ -24,6 +36,7 @@ const LoginForm = ({ onSubmit }) => {
   });
 
   const handleOnSubmit = async (data) => {
+<<<<<<< HEAD
     setLoginError('');
 
     try {
@@ -58,12 +71,20 @@ const LoginForm = ({ onSubmit }) => {
     } catch (error) {
       console.error('Gagal terhubung ke server', error);
       setLoginError('Terjadi kesalahan jaringan atau server.');
+=======
+    if (onSubmit) {
+      await onSubmit(data);
+>>>>>>> origin/client
     }
   };
 
   return (
     <form
+<<<<<<< HEAD
       onSubmit={handleSubmit(onSubmit)}
+=======
+      onSubmit={handleSubmit(handleOnSubmit)}
+>>>>>>> origin/client
       className="flex flex-col justify-center gap-4 bg-white w-[90%] max-w-md mx-auto p-6 rounded-2xl"
     >
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-2">
@@ -80,7 +101,11 @@ const LoginForm = ({ onSubmit }) => {
         label="Nomor Porsi"
         type="number"
         placeholder="1000623881"
+<<<<<<< HEAD
         leftIcon={<IconIdCard />}
+=======
+        leftIcon={<IconPerson />}
+>>>>>>> origin/client
         error={errors.porsiNumber?.message}
         {...register('porsiNumber')}
       />
@@ -120,7 +145,11 @@ const LoginForm = ({ onSubmit }) => {
           to="/register"
           className="text-sea-green-600 font-semibold underline"
         >
+<<<<<<< HEAD
           daftar
+=======
+          Daftar Sekarang
+>>>>>>> origin/client
         </Link>
       </div>
     </form>

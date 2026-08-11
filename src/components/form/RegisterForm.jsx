@@ -5,15 +5,26 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { InputLogin as InputRegistration } from '../ui/InputLogin.jsx';
 import { registrationSchema } from '../../utils/registerFormSchema.js';
 import { Button } from '../ui/Button.jsx';
+<<<<<<< HEAD
 import { MdOutlinePermIdentity as IconPerson } from 'react-icons/md';
+=======
+>>>>>>> origin/client
 import {
   LuIdCard as IconIdCard,
   LuPhone as IconPhone,
   LuLock as IconLock,
 } from 'react-icons/lu';
+<<<<<<< HEAD
 
 const RegisterForm = ({ onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);
+=======
+import { MdOutlinePermIdentity as IconPerson } from 'react-icons/md';
+
+export const RegisterForm = ({ onSubmit }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+>>>>>>> origin/client
   const {
     register,
     handleSubmit,
@@ -22,6 +33,7 @@ const RegisterForm = ({ onSubmit }) => {
     resolver: zodResolver(registrationSchema),
   });
 
+<<<<<<< HEAD
   return (
     <div className="w-[90%] max-w-md mx-auto">
       <form
@@ -103,3 +115,86 @@ const RegisterForm = ({ onSubmit }) => {
 };
 
 export default RegisterForm;
+=======
+  const handleOnSubmit = async (data) => {
+    if (onSubmit) {
+      await onSubmit(data);
+    }
+  };
+  return (
+    <form
+      onSubmit={handleSubmit(handleOnSubmit)}
+      className="flex flex-col justify-center gap-4 bg-white w-[90%] max-w-md mx-auto p-6 rounded-2xl"
+    >
+      {/* INPUT NAMA */}
+      <InputRegistration
+        label="Nama Lengkap"
+        type="text"
+        placeholder="Masukan Nama lengkap"
+        leftIcon={<IconPerson />}
+        error={errors.name?.message}
+        {...register('name')}
+      />
+
+      {/* INPUT NOMOR PORSI */}
+      <InputRegistration
+        label="Nomor Porsi"
+        type="number"
+        placeholder="1000623881"
+        leftIcon={<IconIdCard />}
+        error={errors.porsiNumber?.message}
+        {...register('porsiNumber')}
+      />
+
+      {/* INPUT NOMOR WhatsApp */}
+      <InputRegistration
+        label="Nomor WhatsApp"
+        type="number"
+        placeholder="089633415543"
+        leftIcon={<IconPhone />}
+        error={errors.whatsappNumber?.message}
+        {...register('whatsappNumber')}
+      />
+
+      {/* INPUT PASSWORD */}
+      <InputRegistration
+        label="password"
+        type={showPassword ? 'text' : 'password'}
+        placeholder="✱✱✱✱✱✱"
+        leftIcon={<IconLock />}
+        error={errors.password?.message}
+        {...register('password')}
+      />
+
+      <div className="flex items-center gap-2 -mt-1 mb-4">
+        <input
+          type="checkbox"
+          id="showPassword"
+          checked={showPassword}
+          onChange={(event) => setShowPassword(event.target.checked)}
+          className="w-4 h-4 accent-sea-green-700 rounded cursor-pointer"
+        />
+        <label
+          htmlFor="showPassword"
+          className="text-sm text-slate-600 cursor-pointer select-none"
+        >
+          Tampilkan Password
+        </label>
+      </div>
+
+      {/* BUTTON SUBMIT */}
+      <Button type="submit" variant="primary" disabled={isSubmitting}>
+        {isSubmitting ? 'Memproses...' : 'Daftar'}
+      </Button>
+
+      {/* LINK TO LOGIN */}
+      <div className="mt-6 text-center text-sm text-gray-600">
+        Sudah punya akun?{' '}
+        <Link to="/" className="text-sea-green-600 font-semibold underline">
+          masuk
+        </Link>
+      </div>
+    </form>
+  );
+};
+>>>>>>> origin/client

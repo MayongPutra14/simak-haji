@@ -8,6 +8,10 @@ import UserDashboardPage from './pages/UserDashboardPage.jsx';
 import { NotFoundPage } from './pages/NotFoundPage.jsx';
 
 function App() {
+  const [isAuthenticate, setIsAuthenticate] = useState(() => {
+    return Boolean(localStorage.getItem('token'));
+  });
+
   return (
     <BrowserRouter>
       <Routes>
