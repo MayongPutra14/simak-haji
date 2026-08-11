@@ -49,3 +49,28 @@
   font-weight: 700;
   src: url('./assets/fonts/poppins-v24-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
+.materi-container {
+    position: relative;
+    user-select: none; /* Mencegah user memblok/copy teks */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+.watermark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Klik akan tembus ke bawah watermark */
+    z-index: 9999;
+    opacity: 0.15; /* Transparan agar materi tetap terbaca */
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 24px;
+    color: red;
+    font-weight: bold;
+    transform: rotate(-30deg);
+    overflow: hidden;
+}

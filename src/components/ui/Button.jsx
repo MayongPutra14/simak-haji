@@ -1,13 +1,15 @@
 export const Button = ({
   children,
   type = 'button',
+  icon: Icon,
   variant = 'primary',
   isLoading = false,
   disabled = false,
   className = '',
+  onClick,
   ...props
 }) => {
-  // Pilihan gaya berdasarkan varian
+  // STYLE VARIANT
   const baseStyle =
     'w-full py-2.5 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 disabled:cursor-not-allowed';
 
@@ -24,6 +26,7 @@ export const Button = ({
     <button
       type={type}
       disabled={disabled || isLoading}
+      onClick={onClick}
       className={`${baseStyle} ${variants[variant]} ${className}`}
       {...props}
     >
@@ -53,6 +56,7 @@ export const Button = ({
 
       {/* TEXT CONTENT BUTTON */}
       {isLoading ? 'Memproses...' : children}
+      {Icon && Icon}
     </button>
   );
 };
