@@ -1,9 +1,11 @@
-import { NotFoundUI } from '../components/ui/404NotFound';
+import NotFoundUI from '../components/ui/404NotFound';
 
-export const NotFoundPage = () => {
+const NotFoundPage = () => {
   return (
     <>
       <NotFoundUI />
     </>
   );
 };
+
+export default NotFoundPage;

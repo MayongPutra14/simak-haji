@@ -7,7 +7,7 @@ import { InputRadio } from '../ui/InputRadio';
 import { InputSelect } from '../ui/InputSelect';
 import { Button } from '../ui/Button';
 
-export const Step2Personal = (onNext, onBack, initialData = {}) => {
+const Step2Personal = ({ onNext, initialData = {} }) => {
   const {
     register,
     handleSubmit,
@@ -22,7 +22,10 @@ export const Step2Personal = (onNext, onBack, initialData = {}) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleOnSubmit)} className="flex flex-col gap-4 mx-auto">
+    <form
+      onSubmit={handleSubmit(handleOnSubmit)}
+      className="flex flex-col gap-4 mx-auto"
+    >
       <InputText
         label="Nama Ayah Kandung"
         required={true}
@@ -79,9 +82,6 @@ export const Step2Personal = (onNext, onBack, initialData = {}) => {
 
       {/* BUTTON */}
       <div className="flex justify-between">
-        <Button variant="primary" onClick={onBack}>
-          Kembali
-        </Button>
         <Button type="submit" variant="primary">
           Selanjutnya
         </Button>
@@ -89,3 +89,5 @@ export const Step2Personal = (onNext, onBack, initialData = {}) => {
     </form>
   );
 };
+
+export default Step2Personal;

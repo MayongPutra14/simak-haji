@@ -4,7 +4,7 @@ import * as RegistrationForm from '../../utils/registerFormSchema';
 import { InputRadio } from '../ui/InputRadio';
 import { Button } from '../ui/Button';
 
-export const Step3Background = ({ onNext, onBack, initialData = {} }) => {
+const Step3Background = ({ onNext, onBack, initialData = {} }) => {
   const {
     register,
     handleSubmit,
@@ -64,7 +64,7 @@ export const Step3Background = ({ onNext, onBack, initialData = {} }) => {
 
       {/* BUTTON */}
       <div className="flex justify-between">
-        <Button variant="primary" onClick={onBack}>
+        <Button type="button" variant="primary" onClick={onBack}>
           Kembali
         </Button>
         <Button type="submit" variant="primary">
@@ -74,3 +74,5 @@ export const Step3Background = ({ onNext, onBack, initialData = {} }) => {
     </form>
   );
 };
+
+export default Step3Background;

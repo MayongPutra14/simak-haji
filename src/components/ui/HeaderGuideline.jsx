@@ -1,6 +1,6 @@
 import { GuidelineForm } from './GiudelineForm';
 
-export const HeaderGuideline = () => {
+const HeaderGuideline = () => {
   return (
     <div className="flex flex-col gap-4 mb-4 mx-auto">
       {/* Header Banner */}
@@ -19,3 +19,5 @@ export const HeaderGuideline = () => {
     </div>
   );
 };
+
+export default HeaderGuideline;

@@ -93,7 +93,10 @@ const RegisterForm = ({ onSubmit }) => {
         {/* LINK TO LOGIN */}
         <div className="mt-6 text-center text-sm text-gray-600">
           Sudah punya akun?{' '}
-          <Link to="/" className="text-sea-green-600 font-semibold underline">
+          <Link
+            to="/login"
+            className="text-sea-green-600 font-semibold underline"
+          >
             masuk
           </Link>
         </div>

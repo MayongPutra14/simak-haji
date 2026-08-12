@@ -7,12 +7,15 @@ import UserDashboardPage from './pages/UserDashboardPage.jsx';
 import MateriPage from './pages/MateriPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import IdentityPages from './pages/IdentityPages.jsx';
+import LandingPage from './pages/LandingPage.jsx';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
@@ -22,6 +25,7 @@ function App() {
 
         <Route element={<ProtectedRoute allowedRoles={['user']} />}>
           <Route path="/user-dashboard" element={<UserDashboardPage />} />
+          <Route path="/form-identity" element={<IdentityPages />} />
           <Route path="/materi" element={<MateriPage />} />
         </Route>
 

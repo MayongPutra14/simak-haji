@@ -1,14 +1,15 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router';
 import axios from 'axios';
-import RegisterFormFragment from '../fragments/RegisterFragment';
+import { useNavigate } from 'react-router';
+import { useState } from 'react';
+import IdentityFormFragment from '../fragments/IndentityFormFragment';
 import Modal from '../components/ui/Modal';
 import {
   IoCloseOutline as IconClose,
   IoCheckmark as IconCheck,
 } from 'react-icons/io5';
 
-const RegisterPage = () => {
+const IdentityPages = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const [modal, setModal] = useState({
@@ -25,7 +26,7 @@ const RegisterPage = () => {
   const showErrorModal = (errorMessage) => {
     setModal({
       isOpen: true,
-      title: 'Registrasi Gagal',
+      title: 'Gagal Mengirim Data',
       description:
         errorMessage || 'Terjadi kesalahan sistem. Silahkan coba lagi nanti.',
       icon: <IconClose className="w-7 h-7" />,
@@ -39,13 +40,14 @@ const RegisterPage = () => {
   const showSuccessModal = () => {
     setModal({
       isOpen: true,
-      title: 'Registrasi Berhasil',
-      description: 'Silahkan masuk untuk mengakses dashboard',
+      title: 'Pengisian Data Berhasil',
+      description:
+        'Terima kasih! Yuk, cek halaman profilmu untuk melihat data selengkapnya.',
       icon: <IconCheck className="w-7 h-7" />,
       iconBgColor: 'bg-sea-green-100',
       iconColor: 'text-sea-green-400',
       buttonColor: 'bg-sea-green-500 hover:bg-sea-green-700 text-white',
-      onConfirm: () => navigate('/login'),
+      onConfirm: () => navigate('/user-dashboard'),
     });
   };
 
@@ -56,35 +58,28 @@ const RegisterPage = () => {
     }));
   };
 
-  const handleRegister = async (data) => {
-    try {
-      const formData = new FormData();
-      formData.append('nama', data.name);
-      formData.append('nomor_porsi', data.porsiNumber);
-      formData.append('whatsapp', data.whatsappNumber);
-      formData.append('password', data.password);
+  const handleOnSubmit = async (fromData) => {
+    setIsLoading(true);
 
+    try {
       const response = await axios.post(
-        'https://simak-api.vercel.app/api/register.php',
-        formData,
+        'http://localhost/simak_api/identity_register.php',
+        fromData,
       );
 
-      if (response.data.status === 'success') {
+      if (response.status === 'success') {
         showSuccessModal();
-      } else {
-        showErrorModal(response.message);
       }
     } catch (error) {
-      console.error('Error from registration:', error);
-      showErrorModal(
-        error.response?.message ||
-          'Gagal terhubung ke server. Pastikan koneksi Anda stabil',
-      );
+      showErrorModal(error.response?.message || 'Terjadi Kesalahan Sistem');
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
-    <section className="bg-sea-green-800 min-h-screen flex flex-col justify-center pb-12 pt-4">
-      <RegisterFormFragment onSubmit={handleRegister} />
+    <section className=" bg-sea-green-800 min-h-screen flex flex-col justify-center pb-12 pt-4">
+      <IdentityFormFragment onSubmit={handleOnSubmit} isLoading={isLoading} />
 
       <Modal
         isOpen={modal.isOpen}
@@ -94,11 +89,10 @@ const RegisterPage = () => {
         icon={modal.icon}
         iconBgColor={modal.iconBgColor}
         iconColor={modal.iconColor}
-        buttonText="Tutup"
         buttonColor={modal.buttonColor}
       />
     </section>
   );
 };
 
-export default RegisterPage;
+export default IdentityPages;

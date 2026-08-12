@@ -47,7 +47,7 @@ const LoginPage = () => {
       formData.append('password', data.password);
 
       const response = await axios.post(
-        'http://localhost/simak_api/login.php',
+        'https://simak-api.vercel.app/api/login.php',
         formData,
       );
 

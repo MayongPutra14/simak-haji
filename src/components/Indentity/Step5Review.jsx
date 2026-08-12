@@ -1,9 +1,4 @@
-export const Step5Review = ({
-  formData,
-  onBack,
-  onSubmitAll,
-  isSubmitting,
-}) => {
+const Step5Review = ({ formData, onBack, onSubmitAll, isSubmitting }) => {
   return (
     <div className="bg-white p-6 rounded-2xl shadow-md border flex flex-col gap-6">
       <div>
@@ -152,11 +147,11 @@ export const Step5Review = ({
           disabled={isSubmitting}
           className="px-6 py-2.5 bg-emerald-600 text-white font-bold rounded-lg hover:bg-emerald-700 transition shadow-lg shadow-emerald-600/20 disabled:opacity-50"
         >
-          {isSubmitting
-            ? 'Mengirim Data...'
-            : 'Submit Pendaftaran SIMAK 2027'}
+          {isSubmitting ? 'Mengirim Data...' : 'Kirim Data'}
         </button>
       </div>
     </div>
   );
 };
+
+export default Step5Review;
