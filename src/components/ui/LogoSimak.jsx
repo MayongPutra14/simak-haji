@@ -1,6 +1,6 @@
 import SimakLogo from '../../assets/images/simak-logo.webp';
 
-export const LogoSimak = ({ title, subtitle }) => {
+const LogoSimak = ({ title, subtitle }) => {
   return (
     <div className="flex items-center justify-center py-8 sm:px-6 lg:px-8">
       <header className="w-full text-center">
@@ -22,3 +22,5 @@ export const LogoSimak = ({ title, subtitle }) => {
     </div>
   );
 };
+
+export default LogoSimak;

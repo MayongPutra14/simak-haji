@@ -5,11 +5,11 @@ import {
 } from 'react-icons/io5';
 import SimakLogo from '../../assets/images/simak-logo.webp';
 
-export const NotFoundUI = () => {
+const NotFoundUI = () => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    // Kembali ke halaman/link sebelumnya di riwayat browser
+    // Back to previous link
     navigate(-1);
   };
 
@@ -66,3 +66,5 @@ export const NotFoundUI = () => {
     </section>
   );
 };
+
+export default NotFoundUI;

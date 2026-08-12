@@ -1,7 +1,7 @@
-import { LoginForm } from '../components/form/LoginForm';
-import { LogoSimak } from '../components/ui/LogoSimak';
+import LoginForm from '../components/form/LoginForm';
+import LogoSimak from '../components/ui/LogoSimak';
 
-export const LoginFormFragment = ({ onSubmit }) => {
+const LoginFormFragment = ({ onSubmit }) => {
   return (
     <div>
       <LogoSimak
@@ -14,3 +14,5 @@ export const LoginFormFragment = ({ onSubmit }) => {
     </div>
   );
 };
+
+export default LoginFormFragment;

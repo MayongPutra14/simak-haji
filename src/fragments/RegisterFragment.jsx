@@ -1,4 +1,4 @@
-import { LogoSimak } from '../components/ui/LogoSimak';
+import LogoSimak from '../components/ui/LogoSimak';
 import RegisterForm from '../components/form/RegisterForm';
 
 const RegisterFormFragment = ({ onSubmit }) => {

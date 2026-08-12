@@ -8,7 +8,7 @@ import {
   IoCheckmark as IconCheck,
 } from 'react-icons/io5';
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
   const navigate = useNavigate();
 
   const [modal, setModal] = useState({
@@ -100,3 +100,5 @@ export const RegisterPage = () => {
     </section>
   );
 };
+
+export default RegisterPage;
