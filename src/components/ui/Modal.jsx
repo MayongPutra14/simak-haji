@@ -16,11 +16,7 @@ import { useEffect } from 'react';
  * @param {Function} [props.onConfirm] - Callback opsional khusus untuk tombol aksi
  */
 
-<<<<<<< HEAD
 const Modal = ({
-=======
-export const Modal = ({
->>>>>>> origin/client
   isOpen,
   onClose,
   icon,
