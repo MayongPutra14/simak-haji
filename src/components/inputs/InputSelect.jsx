@@ -35,16 +35,16 @@ export const InputSelect = React.forwardRef(
         {/* SELECT: DROPDOWN */}
         <div className="mt-1">
           <select
+            {...props}
             ref={ref}
             className={`w-full px-3 py-2 border-b-2 bg-gray-50 focus:bg-white focus:outline-none transition-colors duration-200 text-sm md:text-base text-gray-700 cursor-pointer rounded-t-md ${
               errorMessage
                 ? 'border-red-500 focus:border-red-600'
                 : 'border-gray-300 focus:border-sea-green-600'
             }`}
-            {...props}
           >
             {/* PLACE HOLDER / DEFAULT */}
-            <option value="" disabled hidden>
+            <option value="" disabled>
               {placeholder}
             </option>
 

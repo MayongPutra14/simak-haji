@@ -3,14 +3,19 @@ import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import IdentityFormFragment from '../fragments/IndentityFormFragment';
 import Modal from '../components/ui/Modal';
+import { useAuth } from '../features/auth/useAuth';
 import {
   IoCloseOutline as IconClose,
   IoCheckmark as IconCheck,
 } from 'react-icons/io5';
 
-const IdentityPages = () => {
+const IdentityPage = () => {
+  const { user, completeIdentity } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const currentUser = JSON.parse(localStorage.getItem('user_data')) || {};
+  const userId = currentUser.id || currentUser.data?.id || user?.id;
 
   const [modal, setModal] = useState({
     isOpen: false,
@@ -47,7 +52,7 @@ const IdentityPages = () => {
       iconBgColor: 'bg-sea-green-100',
       iconColor: 'text-sea-green-400',
       buttonColor: 'bg-sea-green-500 hover:bg-sea-green-700 text-white',
-      onConfirm: () => navigate('/user-dashboard'),
+      onConfirm: () => navigate('/user-dashboard', { replace: true }),
     });
   };
 
@@ -58,27 +63,44 @@ const IdentityPages = () => {
     }));
   };
 
-  const handleOnSubmit = async (fromData) => {
+  const handleOnSubmit = async (formData) => {
     setIsLoading(true);
 
+    if (!userId) {
+      setIsLoading(false);
+      showErrorModal('Sesi login tidak valid silahkan login kembali');
+      return;
+    }
     try {
       const response = await axios.post(
-        'http://localhost/simak_api/identity_register.php',
-        fromData,
+        'https://simak-api.vercel.app/api/update_profile.php',
+        {
+          usr_id: userId,
+          ...formData,
+          is_completed: true,
+        },
       );
 
-      if (response.status === 'success') {
-        showSuccessModal();
+      if (response.data?.status === 'error') {
+        showErrorModal(response.data?.message || 'Gagal memperbarui profile');
+        return;
       }
+
+      completeIdentity();
+      localStorage.removeItem(`identity_form_draft_${userId || 'guest'}`);
+
+      showSuccessModal();
     } catch (error) {
-      showErrorModal(error.response?.message || 'Terjadi Kesalahan Sistem');
+      showErrorModal(
+        error.response?.data?.message || 'Terjadi Kesalahan Sistem',
+      );
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <section className=" bg-sea-green-800 min-h-screen flex flex-col justify-center pb-12 pt-4">
+    <section className="bg-sea-green-800 pb-12 pt-4">
       <IdentityFormFragment onSubmit={handleOnSubmit} isLoading={isLoading} />
 
       <Modal
@@ -95,4 +117,4 @@ const IdentityPages = () => {
   );
 };
 
-export default IdentityPages;
+export default IdentityPage;

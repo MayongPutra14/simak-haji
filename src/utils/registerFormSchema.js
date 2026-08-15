@@ -16,6 +16,14 @@ export const registrationSchema = z.object({
 });
 
 // STEP 2 PERSONAL
+// const MAX_FILE_SIZE = 1 * 1024 * 1024;
+// const ACCEPTED_IMAGE_TYPES = [
+//   'image/jpeg',
+//   'image/jpg',
+//   'image/png',
+//   'image/webp',
+// ];
+
 export const Step2PersonalSchema = z.object({
   fatherName: z
     .string()
@@ -23,7 +31,7 @@ export const Step2PersonalSchema = z.object({
     .min(3, 'Nama ayah kandung minimal 3 karakter'),
   birthDate: z.string().min(1, 'Tanggal lahir wajib diisi'),
   gender: z.enum(['laki-laki', 'perempuan'], {
-    errorMap: (issue, ctx) => {
+    errorMap: () => {
       return { message: 'Pilih jenis kelamin Anda' };
     },
   }),
@@ -35,6 +43,27 @@ export const Step2PersonalSchema = z.object({
   village: z.string().min(1, 'Desa/Kelurahan wajib diisi'),
   subDistrict: z.string().min(1, 'Pilih kecamatan Anda'),
   subDistrictOther: z.string().optional(),
+  // profileImage: z
+  //   .any()
+  //   .refine((value) => {
+  //     if (!value) return false;
+  //     if (typeof value === 'string') return value.trim().length > 0;
+  //     if (value instanceof FileList) return value.length > 0;
+  //     if (value instanceof File) return true;
+  //     return false;
+  //   }, 'Gambar profil wajib diunggah')
+  //   .refine((value) => {
+  //     if (typeof value === 'string') return true;
+  //     const file = value instanceof FileList ? value[0] : value;
+  //     if (!file) return true;
+  //     return file.size <= MAX_FILE_SIZE;
+  //   }, 'Ukuran gambar maksimal adalah 1MB, silakan kompres atau ganti gambar')
+  //   .refine((value) => {
+  //     if (typeof value === 'string') return true;
+  //     const file = value instanceof FileList ? value[0] : value;
+  //     if (!file) return true;
+  //     return ACCEPTED_IMAGE_TYPES.includes(file.type);
+  //   }, 'Format gambar tidak didukung. Gunakan PNG, JPEG, JPG, atau WEBP'),
 });
 
 export const gender = [

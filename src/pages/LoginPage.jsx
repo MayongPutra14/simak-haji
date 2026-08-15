@@ -1,13 +1,14 @@
-import { useState } from 'react';
 import axios from 'axios';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useAuth } from '../features/auth/useAuth';
 import LoginFormFragment from '../fragments/LoginFormFragment';
 import Modal from '../components/ui/Modal';
 import { IoCloseOutline as IconClose } from 'react-icons/io5';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-
+  const { login } = useAuth();
   const [modal, setModal] = useState({
     isOpen: false,
     title: '',
@@ -43,7 +44,7 @@ const LoginPage = () => {
   const handleLogin = async (data) => {
     try {
       const formData = new FormData();
-      formData.append('nomor_porsi', data.posrsiNumber);
+      formData.append('nomor_porsi', data.porsiNumber);
       formData.append('password', data.password);
 
       const response = await axios.post(
@@ -51,18 +52,24 @@ const LoginPage = () => {
         formData,
       );
 
-      if (response.data.status === 'success') {
-        const userData = response.data.data;
+      const result = Array.isArray(response.data)
+        ? response.data[0]
+        : response.data;
+
+      if (result && result.status === 'success') {
+        const userData = result.data;
+
+        login(userData);
 
         localStorage.setItem('user', JSON.stringify(userData));
 
         if (userData.role === 'admin') {
           navigate('/admin-dashboard');
         } else {
-          navigate('/user-dasboard');
+          navigate('/user/home');
         }
       } else {
-        showErrorModal(response.data.message);
+        showErrorModal(result?.message || 'Login Gagal');
       }
     } catch (error) {
       console.error('Internal Server Error', error);

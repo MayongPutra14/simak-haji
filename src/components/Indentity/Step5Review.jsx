@@ -1,156 +1,183 @@
-const Step5Review = ({ formData, onBack, onSubmitAll, isSubmitting }) => {
+import { Button } from '../ui/Button';
+
+const Step5Review = ({
+  onBack,
+  onNext,
+  initialData = {},
+  isLoading = false,
+}) => {
+  const renderValue = (value) => {
+    if (!value || (Array.isArray(value) && value.length === 0)) {
+      return (
+        <span className="text-gray-400 italic">Tidak diisi / Tidak ada</span>
+      );
+    }
+
+    if (Array.isArray(value)) {
+      return (
+        <ul className="list-disc list-inside space-y-0.5">
+          {value.map((item, index) => (
+            <li key={index} className="text-gray-800 text-sm md:text-base">
+              {item}
+            </li>
+          ))}
+        </ul>
+      );
+    }
+
+    return (
+      <span className="text-gray-800 text-sm md:text-base font-medium">
+        {value}
+      </span>
+    );
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onNext(initialData);
+  };
+
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-md border flex flex-col gap-6">
-      <div>
-        <h3 className="font-bold text-lg text-slate-800 border-b pb-2">
-          Review Data Pendaftaran
-        </h3>
-        <p className="text-xs text-slate-500 mt-1">
-          Periksa kembali data Anda dengan teliti sebelum melakukan konfirmasi
-          akhir. Pastikan tidak ada kesalahan pengetikan.
-        </p>
-      </div>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+      <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm flex flex-col gap-6">
+        <div>
+          <h2 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
+            Rangkuman Data Pendaftaran
+          </h2>
+          <p className="text-xs md:text-sm text-red-500 mt-1">
+            Mohon periksa kembali data Anda sebelum melakukan pengiriman akhir.
+          </p>
+        </div>
 
-      {/* KELOMPOK 1: INFORMASI AKUN */}
-      <div className="space-y-3">
-        <h4 className="text-xs font-semibold text-emerald-700 uppercase tracking-wider bg-emerald-50 px-3 py-1.5 rounded-md">
-          1. Informasi Akun
-        </h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm bg-slate-50 p-4 rounded-xl border">
-          <div>
-            <span className="text-slate-400 block text-xs">Nama Lengkap</span>
-            <span className="font-medium text-slate-800">
-              {formData.name || '-'}
-            </span>
+        {/* SECTION 1: DATA PERSONAL */}
+        <div className="flex flex-col gap-3">
+          <h3 className="text-md font-semibold text-sea-green-700 bg-sea-green-50 p-2 rounded">
+            1. Data Personal
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-2">
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">
+                Nama Ayah Kandung
+              </p>
+              {renderValue(initialData.fatherName)}
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">
+                Tanggal Lahir
+              </p>
+              {renderValue(initialData.birthDate)}
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">
+                Jenis Kelamin
+              </p>
+              {renderValue(initialData.gender)}
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">
+                Tempat / Kota Kelahiran
+              </p>
+              {renderValue(initialData.birthPlace)}
+            </div>
+            <div className="md:col-span-2">
+              <p className="text-xs text-gray-500 font-semibold">
+                Alamat (Sesuai SPPH)
+              </p>
+              {renderValue(initialData.address)}
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">
+                Desa / Kelurahan
+              </p>
+              {renderValue(initialData.village)}
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">Kecamatan</p>
+              {renderValue(initialData.subDistrict)}
+            </div>
           </div>
-          <div>
-            <span className="text-slate-400 block text-xs">Nomor Porsi</span>
-            <span className="font-medium text-slate-800">
-              {formData.porsiNumber || '-'}
-            </span>
+        </div>
+
+        {/* SECTION 2: BACKGROUND */}
+        <div className="flex flex-col gap-3">
+          <h3 className="text-md font-semibold text-sea-green-700 bg-sea-green-50 p-2 rounded">
+            2. Latar Belakang & Program
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-2">
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">Pekerjaan</p>
+              {renderValue(initialData.job)}
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">
+                Pendidikan Terakhir
+              </p>
+              {renderValue(initialData.education)}
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">
+                Program Keberangkatan
+              </p>
+              {renderValue(initialData.program)}
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">
+                Pengalaman Haji / Umroh
+              </p>
+              {renderValue(initialData.experience)}
+            </div>
+            <div className="md:col-span-2">
+              <p className="text-xs text-gray-500 font-semibold">
+                Berangkat Bersama
+              </p>
+              {renderValue(initialData.companion)}
+            </div>
           </div>
-          <div>
-            <span className="text-slate-400 block text-xs">Nomor WhatsApp</span>
-            <span className="font-medium text-slate-800">
-              {formData.whatsappNumber || '-'}
-            </span>
+        </div>
+
+        {/* SECTION 3: HEALTH & SKILLS */}
+        <div className="flex flex-col gap-3">
+          <h3 className="text-md font-semibold text-sea-green-700 bg-sea-green-50 p-2 rounded">
+            3. Keterampilan & Kesehatan
+          </h3>
+          <div className="grid grid-cols-1 gap-4 px-2">
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">
+                Kemampuan yang Dikuasai
+              </p>
+              {renderValue(initialData.skill)}
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">
+                Hal Positif Yang Dapat Dikontribusikan
+              </p>
+              {renderValue(initialData.positiveTrait)}
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">
+                Kesehatan dan Kebutuhan Khusus
+              </p>
+              {renderValue(initialData.healthCondition)}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* KELOMPOK 2: DATA PRIBADI & DOMISILI (Step 2) */}
-      <div className="space-y-3">
-        <h4 className="text-xs font-semibold text-emerald-700 uppercase tracking-wider bg-emerald-50 px-3 py-1.5 rounded-md">
-          2. Data Diri & Domisili
-        </h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm bg-slate-50 p-4 rounded-xl border">
-          <div>
-            <span className="text-slate-400 block text-xs">
-              Nama Ayah Kandung
-            </span>
-            <span className="font-medium text-slate-800">
-              {formData.fatherName || '-'}
-            </span>
-          </div>
-          <div>
-            <span className="text-slate-400 block text-xs">Tanggal Lahir</span>
-            <span className="font-medium text-slate-800">
-              {formData.birthDate || '-'}
-            </span>
-          </div>
-          <div>
-            <span className="text-slate-400 block text-xs">Jenis Kelamin</span>
-            <span className="font-medium text-slate-800">
-              {formData.gender || '-'}
-            </span>
-          </div>
-          <div>
-            <span className="text-slate-400 block text-xs">Tempat Lahir</span>
-            <span className="font-medium text-slate-800">
-              {formData.birthPlace || '-'}
-            </span>
-          </div>
-          <div className="md:col-span-2">
-            <span className="text-slate-400 block text-xs">Alamat Lengkap</span>
-            <span className="font-medium text-slate-800">
-              {formData.address}, Kel. {formData.village}, Kec.{' '}
-              {formData.subDistrict}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* KELOMPOK 3: BACKGROUND (Step 3) */}
-      <div className="space-y-3">
-        <h4 className="text-xs font-semibold text-emerald-700 uppercase tracking-wider bg-emerald-50 px-3 py-1.5 rounded-md">
-          3. Latar Belakang
-        </h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm bg-slate-50 p-4 rounded-xl border">
-          <div>
-            <span className="text-slate-400 block text-xs">
-              Pendidikan Terakhir
-            </span>
-            <span className="font-medium text-slate-800">
-              {formData.education || '-'}
-            </span>
-          </div>
-          <div>
-            <span className="text-slate-400 block text-xs">Pekerjaan</span>
-            <span className="font-medium text-slate-800">
-              {formData.occupation || '-'}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* KELOMPOK 4: KESEHATAN & KEAHLIAN (Step 4) */}
-      <div className="space-y-3">
-        <h4 className="text-xs font-semibold text-emerald-700 uppercase tracking-wider bg-emerald-50 px-3 py-1.5 rounded-md">
-          4. Kesehatan & Keahlian
-        </h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm bg-slate-50 p-4 rounded-xl border">
-          <div>
-            <span className="text-slate-400 block text-xs">
-              Kondisi Kesehatan / Riwayat Penyakit
-            </span>
-            <span className="font-medium text-slate-800">
-              {Array.isArray(formData.healthConditions) &&
-              formData.healthConditions.length > 0
-                ? formData.healthConditions.join(', ')
-                : 'Tidak ada catatan khusus'}
-            </span>
-          </div>
-          <div>
-            <span className="text-slate-400 block text-xs">
-              Keahlian Khusus
-            </span>
-            <span className="font-medium text-slate-800">
-              {formData.skills || '-'}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* TOMBOL AKSI */}
-      <div className="flex justify-between items-center pt-4 border-t mt-2">
-        <button
+      {/* NAVIGATION BUTTONS */}
+      <div className="flex justify-between items-center gap-4 w-80">
+        <Button
           type="button"
+          variant="primary"
           onClick={onBack}
-          disabled={isSubmitting}
-          className="px-4 py-2 bg-slate-200 text-slate-700 rounded-lg hover:bg-slate-300 transition"
+          disabled={isLoading}
         >
-          Kembali Edit
-        </button>
-        <button
-          type="button"
-          onClick={onSubmitAll}
-          disabled={isSubmitting}
-          className="px-6 py-2.5 bg-emerald-600 text-white font-bold rounded-lg hover:bg-emerald-700 transition shadow-lg shadow-emerald-600/20 disabled:opacity-50"
-        >
-          {isSubmitting ? 'Mengirim Data...' : 'Kirim Data'}
-        </button>
+          Kembali
+        </Button>
+        <Button type="submit" variant="primary" disabled={isLoading}>
+          {isLoading ? 'Mengirim Data...' : 'Kirim Data'}
+        </Button>
       </div>
-    </div>
+    </form>
   );
 };
 

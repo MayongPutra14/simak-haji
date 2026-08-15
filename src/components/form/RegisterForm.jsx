@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { InputLogin as InputRegistration } from '../ui/InputLogin.jsx';
+import { InputLogin as InputRegistration } from '../inputs/InputLogin.jsx';
 import { registrationSchema } from '../../utils/registerFormSchema.js';
 import { Button } from '../ui/Button.jsx';
 import { MdOutlinePermIdentity as IconPerson } from 'react-icons/md';

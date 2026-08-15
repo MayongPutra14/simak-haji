@@ -1,21 +1,33 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as RegistrationForm from '../../utils/registerFormSchema';
-import { InputCheckbox } from '../ui/InputCheckbox';
+import { InputCheckbox } from '../inputs/InputCheckbox';
 import { Button } from '../ui/Button';
 
 const Step4HealthSkills = ({ onNext, onBack, initialData = {} }) => {
   const {
     register,
     handleSubmit,
+    control,
+    getValues,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(RegistrationForm.Step4SkillsSchema),
     defaultValues: initialData,
   });
 
+  // WATCH ALL OF CHECKBOX
+  const skillValue = useWatch({ control, name: 'skill' });
+  const positiveTraitValue = useWatch({ control, name: 'positiveTrait' });
+  const healthConditionValue = useWatch({ control, name: 'healthCondition' });
+
   const handleOnSubmit = (data) => {
     onNext(data);
+  };
+
+  const handleBackWithData = () => {
+    const currentValues = getValues();
+    onBack(currentValues);
   };
 
   return (
@@ -30,6 +42,7 @@ const Step4HealthSkills = ({ onNext, onBack, initialData = {} }) => {
         options={RegistrationForm.skillOptions}
         hasOtherOption={true}
         error={errors.skill?.message}
+        value={skillValue}
         {...register('skill')}
       />
 
@@ -40,6 +53,7 @@ const Step4HealthSkills = ({ onNext, onBack, initialData = {} }) => {
         options={RegistrationForm.positiveTraitOptions}
         hasOtherOption={true}
         error={errors.positiveTrait?.message}
+        value={positiveTraitValue}
         {...register('positiveTrait')}
       />
 
@@ -50,12 +64,13 @@ const Step4HealthSkills = ({ onNext, onBack, initialData = {} }) => {
         options={RegistrationForm.healthConditionOptions}
         hasOtherOption={true}
         error={errors.healthCondition?.message}
+        value={healthConditionValue}
         {...register('healthCondition')}
       />
 
       {/* BUTTON */}
-      <div className="flex justify-between">
-        <Button type="button" variant="primary" onClick={onBack}>
+      <div className="flex justify-between items-center gap-4 w-80">
+        <Button type="button" variant="primary" onClick={handleBackWithData}>
           Kembali
         </Button>
         <Button type="submit" variant="primary">

@@ -1,20 +1,29 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as RegistrationForm from '../../utils/registerFormSchema';
-import { InputText } from '../ui/InputText';
-import { InputDate } from '../ui/InputDate';
-import { InputRadio } from '../ui/InputRadio';
-import { InputSelect } from '../ui/InputSelect';
+import { InputText } from '../inputs/InputText';
+import { InputDate } from '../inputs/InputDate';
+import { InputRadio } from '../inputs/InputRadio';
+import { InputSelect } from '../inputs/InputSelect';
 import { Button } from '../ui/Button';
 
 const Step2Personal = ({ onNext, initialData = {} }) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(RegistrationForm.Step2PersonalSchema),
-    defaultValues: initialData,
+    defaultValues: {
+      ...initialData,
+      birthPlace: initialData?.birthPlace ?? '',
+    },
+  });
+
+  const genderValue = useWatch({
+    control,
+    name: 'gender',
   });
 
   const handleOnSubmit = (data) => {
@@ -24,7 +33,7 @@ const Step2Personal = ({ onNext, initialData = {} }) => {
   return (
     <form
       onSubmit={handleSubmit(handleOnSubmit)}
-      className="flex flex-col gap-4 mx-auto"
+      className="flex flex-col gap-4"
     >
       <InputText
         label="Nama Ayah Kandung"
@@ -46,6 +55,7 @@ const Step2Personal = ({ onNext, initialData = {} }) => {
         required={true}
         options={RegistrationForm.gender}
         error={errors.gender?.message}
+        value={genderValue}
         {...register('gender')}
       />
 
@@ -76,12 +86,12 @@ const Step2Personal = ({ onNext, initialData = {} }) => {
       <InputText
         label="Kecamatan"
         required={true}
-        error={errors.district?.message}
-        {...register('district')}
+        error={errors.subDistrict?.message}
+        {...register('subDistrict')}
       />
 
       {/* BUTTON */}
-      <div className="flex justify-between">
+      <div className="w-32">
         <Button type="submit" variant="primary">
           Selanjutnya
         </Button>

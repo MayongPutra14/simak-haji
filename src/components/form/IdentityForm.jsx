@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import useFormDraft from '../../hooks/useFormDraf.js';
 import {
   Step2Personal,
   Step3Background,
@@ -6,38 +6,36 @@ import {
   Step5Review,
 } from '../Indentity/indexFile.js';
 
-const IdentityForm = ({ onSubmit, isSubmitting = false }) => {
-  const [currentStep, setCurrentStep] = useState();
-  const [formData, setFormData] = useState();
+const IdentityForm = ({ onSubmit, isSubmitting = false, userId }) => {
+  const { currentStep, setCurrentStep, formData, setFormData } =
+    useFormDraft(userId);
 
   const handleNext = (stepData) => {
-    setFormData((prev) => {
-      const updateData = { ...prev, ...stepData };
+    const updateData = { ...formData, ...stepData };
+    setFormData(updateData);
 
-      if (currentStep === 4) {
-        if (onSubmit) onSubmit(updateData);
-      }
-      return updateData;
-    });
-
-    if (currentStep < 4) {
+    if (currentStep === 4) {
+      if (onSubmit) onSubmit(updateData);
+    } else {
       setCurrentStep((prev) => prev + 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
-  const handleBack = () => {
+  const handleBack = (currentStepData = {}) => {
     if (currentStep > 1) {
+      setFormData((prev) => ({ ...prev, ...currentStepData }));
       setCurrentStep((prev) => prev - 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+
   return (
-    <div className="w-full max-w-2xl mx-auto flex flex-col gap-6">
+    <div className="flex flex-col w-[92%] max-w-4xl mx-auto">
       {/* PROGRESS BAR */}
-      <div className=" bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+      <div className=" bg-white p-4 mb-4 rounded-lg border border-gray-200 shadow-sm">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+          <span className="text-xs font-semibold text-slate-600">
             Langkah {currentStep} dari 4
           </span>
           <span className="text-xs font-bold text-sea-green-600">
@@ -48,7 +46,7 @@ const IdentityForm = ({ onSubmit, isSubmitting = false }) => {
         {/* PROGRESS BAR LINE */}
         <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
           <div
-            className="bg-sea-green-500 h-full transition-all duration-300 ease-out"
+            className="bg-sea-green-400 h-full transition-all duration-300 ease-out"
             style={{ width: `${(currentStep / 4) * 100}%` }}
           />
         </div>
