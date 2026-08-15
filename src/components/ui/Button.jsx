@@ -15,7 +15,7 @@ export const Button = ({
 
   const variants = {
     primary:
-      'bg-sea-green-600 hover:bg-sea-green-700 text-white disabled:bg-gray-400',
+      'bg-sea-green-600 hover:bg-sea-green-700 text-white cursor-poiter disabled:bg-gray-400',
     secondary:
       'bg-slate-900 hover:bg-slate-800 text-white disabled:bg-gray-400',
     outline:

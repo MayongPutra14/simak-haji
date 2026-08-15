@@ -65,19 +65,19 @@ const RegisterPage = () => {
       formData.append('password', data.password);
 
       const response = await axios.post(
-        'http://localhost/simak_api/register.php',
+        'https://simak-api.vercel.app/api/register.php',
         formData,
       );
 
       if (response.data.status === 'success') {
         showSuccessModal();
       } else {
-        showErrorModal(response.data.message);
+        showErrorModal(response.message);
       }
     } catch (error) {
       console.error('Error from registration:', error);
       showErrorModal(
-        error.response?.data?.message ||
+        error.response?.message ||
           'Gagal terhubung ke server. Pastikan koneksi Anda stabil',
       );
     }
@@ -102,3 +102,5 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
+
+

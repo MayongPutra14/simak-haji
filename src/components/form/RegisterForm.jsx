@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { InputLogin as InputRegistration } from '../ui/InputLogin.jsx';
+import { InputLogin as InputRegistration } from '../inputs/InputLogin.jsx';
 import { registrationSchema } from '../../utils/registerFormSchema.js';
 import { Button } from '../ui/Button.jsx';
 import { MdOutlinePermIdentity as IconPerson } from 'react-icons/md';
@@ -93,7 +93,10 @@ const RegisterForm = ({ onSubmit }) => {
         {/* LINK TO LOGIN */}
         <div className="mt-6 text-center text-sm text-gray-600">
           Sudah punya akun?{' '}
-          <Link to="/" className="text-sea-green-600 font-semibold underline">
+          <Link
+            to="/login"
+            className="text-sea-green-600 font-semibold underline"
+          >
             masuk
           </Link>
         </div>

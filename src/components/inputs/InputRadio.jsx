@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export const InputRadio = React.forwardRef(
   (
@@ -12,6 +12,7 @@ export const InputRadio = React.forwardRef(
       name,
       onChange,
       onBlur,
+      value: formValue = '',
       ...props
     },
     ref,
@@ -21,38 +22,47 @@ export const InputRadio = React.forwardRef(
 
     const errorMessage = typeof error === 'string' ? error : error?.message;
 
+    useEffect(() => {
+      if (formValue !== undefined && formValue !== null && formValue !== '') {
+        const standardValues = options.map((option) =>
+          typeof option === 'string' ? option : option.value || option.label,
+        );
+
+        const isCustomValue = !standardValues.includes(formValue);
+
+        if (isCustomValue && hasOtherOption) {
+          setIsOtherSelected(true);
+          setOthertext(formValue);
+        } else {
+          setIsOtherSelected(false);
+          setOthertext('');
+        }
+      } else {
+        setIsOtherSelected(false);
+        setOthertext('');
+      }
+    }, [formValue, options, hasOtherOption]);
+
     // handler when user choose regular option
     const handleOptionChange = (event) => {
       setIsOtherSelected(false);
+      setOthertext('');
       if (onChange) onChange(event);
     };
 
-    // function to handle person choose "yang lain" opstion
-    const handleOtherRadioChange = (event) => {
+    // function to handle person choose "yang lain" option
+    const handleOtherRadioChange = () => {
       setIsOtherSelected(true);
-      const customEvent = {
-        ...event,
-        target: {
-          ...event.target,
-          name: name,
-          value: otherText,
-        },
-      };
-      if (onChange) onChange(customEvent);
+      if (onChange) onChange({ target: { name: name, value: otherText } });
     };
 
     // hadnler when user is typing on "Yang lain"
     const handleOtherTextChange = (event) => {
       const textValue = event.target.value;
       setOthertext(textValue);
+      setIsOtherSelected(true);
 
-      const customEvent = {
-        target: {
-          name: name,
-          value: textValue,
-        },
-      };
-      if (onChange) onChange(customEvent);
+      if (onChange) onChange({ target: { name: name, value: textValue } });
     };
 
     return (
@@ -75,26 +85,32 @@ export const InputRadio = React.forwardRef(
 
         {/* RADIO LIST  */}
         <div className="flex flex-col gap-2 mt-1">
-          {options.map((option, index) => (
-            <label
-              key={index}
-              className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
-            >
-              <input
-                ref={ref}
-                name={name}
-                type="radio"
-                value={option.value || option.label}
-                onBlur={onBlur}
-                onChange={handleOptionChange}
-                className="w-4 h-4 md:w-5 text-sea-green-600 accent-sea-green-600 border-gray-300 focus:ring-sea-green-600 cursor-pointer"
-                {...props}
-              />
-              <span className="text-sm md:text-base text-gray-700">
-                {option.label}
-              </span>
-            </label>
-          ))}
+          {options.map((option, index) => {
+            const optValue = option.value || option.label;
+            const isChecked = !isOtherSelected && formValue === optValue;
+
+            return (
+              <label
+                key={index}
+                className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+              >
+                <input
+                  ref={ref}
+                  name={name}
+                  type="radio"
+                  value={optValue}
+                  checked={isChecked}
+                  onBlur={onBlur}
+                  onChange={handleOptionChange}
+                  className="w-4 h-4 md:w-5 text-sea-green-600 accent-sea-green-600 border-gray-300 focus:ring-sea-green-600 cursor-pointer"
+                  {...props}
+                />
+                <span className="text-sm md:text-base text-gray-700">
+                  {option.label}
+                </span>
+              </label>
+            );
+          })}
 
           {/* OTHER OPTION */}
           {hasOtherOption && (
@@ -117,7 +133,12 @@ export const InputRadio = React.forwardRef(
                 type="text"
                 value={otherText}
                 onChange={handleOtherTextChange}
-                onFocus={() => setIsOtherSelected(true)}
+                onFocus={() => {
+                  setIsOtherSelected(true);
+                  if (onChange) {
+                    onChange({ target: { name: name, value: otherText } });
+                  }
+                }}
                 placeholder="Jawaban Anda"
                 className="w-full border-b border-gray-300 focus:border-sea-green-600 focus:outline-none text-sm md:text-base py-0.5 transition-colors bg-transparent"
               />

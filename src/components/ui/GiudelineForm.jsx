@@ -9,7 +9,7 @@ export const GuidelineForm = () => {
   return (
     <div>
       {/* Container Utama bergaya Google Form */}
-      <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg shadow-sm overflow-hidden">
         {/* Garis Aksen Ungu di Bagian Atas */}
         <div className="h-2.5 bg-sea-green-700 w-full"></div>
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'react-router';
-import { InputLogin } from '../ui/InputLogin.jsx';
+import { InputLogin } from '../inputs/InputLogin.jsx';
 import { loginSchema } from '../../utils/loginSchema.js';
 import { Button } from '../ui/Button.jsx';
 import { LuIdCard as IconIdCard, LuLock as IconLock } from 'react-icons/lu';
