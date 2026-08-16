@@ -1,17 +1,19 @@
 import { Outlet } from 'react-router';
 import Header from '../components/ui/Header';
-import BottomNav from '../components/ui/BottomNavbar';
+import Navigation from '../components/ui/Navigation';
 
 export default function UserLayout() {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <Header />
+    <div className="flex flex-col min-h-screen bg-gray-50 md:flex-row">
+      <Navigation role="user" />
 
-      <main className="flex-1 container mx-auto px-4 pt-16 pb-20">
-        <Outlet />
-      </main>
+      <div className="flex flex-col flex-1 transition-all duration-300 md:pl-64">
+        <Header />
 
-      <BottomNav />
+        <main className="container flex-1 px-4 pt-16 pb-20 mx-auto">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }
