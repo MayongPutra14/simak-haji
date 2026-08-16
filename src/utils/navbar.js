@@ -11,7 +11,7 @@ import {
   IoScanSharp as IconScanFill,
 } from 'react-icons/io5';
 
-export const getNavItems = (role) => {
+export default function getNavItems(role) {
   const commonItems = {
     home: {
       id: 'home',
