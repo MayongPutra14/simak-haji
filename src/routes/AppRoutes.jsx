@@ -4,14 +4,13 @@ import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import AdminDashboardPage from '../pages/AdminDashboardPage';
 import AdminScanPage from '../pages/AdminScanPage';
-import UserDashboardPage from '../pages/UserDashboardPage';
 import MateriPage from '../pages/MateriPage';
 import IdentityPage from '../pages/IdentityPage';
 import NotFoundPage from '../pages/NotFoundPage';
 import ProtectedRoute from './ProtectedRoute';
-// import HomePage from '../pages/HomePage';
 import UserProfilePage from '../pages/UserProfilePage';
 import UserLayout from '../layouts/UserLayout';
+import UserHomePage from '../pages/UserHomePages';
 import {
   RequiredCompletedIdentity,
   RequiredInCompletedIdentity,
@@ -31,12 +30,11 @@ export default function AppRoutes() {
 
       {/* USER ROUTES */}
       <Route element={<ProtectedRoute allowedRoles={['user']} />}>
-
         <Route element={<RequiredCompletedIdentity />}>
           <Route path="/user" element={<UserLayout />}>
             <Route index element={<Navigate to={'dashboard'} replace />} />
 
-            <Route path="home" element={<UserDashboardPage />} />
+            <Route path="home" element={<UserHomePage />} />
             <Route path="profile" element={<UserProfilePage />} />
             <Route path="materi" element={<MateriPage />} />
           </Route>

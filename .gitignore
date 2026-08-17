@@ -22,7 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-questionForm.md
+*.md
+!README,md
 zoba.js
 *.env
 db.json

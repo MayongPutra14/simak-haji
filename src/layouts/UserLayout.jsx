@@ -10,7 +10,7 @@ export default function UserLayout() {
       <div className="flex flex-col flex-1 transition-all duration-300 md:pl-64">
         <Header />
 
-        <main className="container flex-1 px-4 pt-16 pb-20 mx-auto">
+        <main className="container flex-1 pt-0 pb-20 mx-auto">
           <Outlet />
         </main>
       </div>
