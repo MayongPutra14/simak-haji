@@ -15,6 +15,19 @@
   --color-sea-green-800: #18633a;
   --color-sea-green-900: #165132;
   --color-sea-green-950: #062d19;
+
+  /* YELLOW COLOR */
+  --color-galliano-50: #fffde7;
+  --color-galliano-100: #fffbc1;
+  --color-galliano-200: #fff386;
+  --color-galliano-300: #ffe541;
+  --color-galliano-400: #ffd40d;
+  --color-galliano-500: #e3b100;
+  --color-galliano-600: #d19200;
+  --color-galliano-700: #a66702;
+  --color-galliano-800: #89500a;
+  --color-galliano-900: #74410f;
+  --color-galliano-950: #442104;
 }
 
 /* poppins-regular - latin */
@@ -51,26 +64,26 @@
 }
 
 .materi-container {
-    position: relative;
-    user-select: none; /* Mencegah user memblok/copy teks */
-    -webkit-user-select: none;
-    -moz-user-select: none;
+  position: relative;
+  user-select: none; /* Mencegah user memblok/copy teks */
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }
 
 .watermark-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Klik akan tembus ke bawah watermark */
-    z-index: 9999;
-    opacity: 0.15; /* Transparan agar materi tetap terbaca */
-    display: flex;
-    flex-wrap: wrap;
-    font-size: 24px;
-    color: red;
-    font-weight: bold;
-    transform: rotate(-30deg);
-    overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Klik akan tembus ke bawah watermark */
+  z-index: 9999;
+  opacity: 0.15; /* Transparan agar materi tetap terbaca */
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 24px;
+  color: red;
+  font-weight: bold;
+  transform: rotate(-30deg);
+  overflow: hidden;
 }

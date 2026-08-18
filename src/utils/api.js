@@ -8,16 +8,34 @@ export const getUserGlobalProfile = () => {
 
   try {
     return JSON.parse(globalProfile);
-  } catch (_error) {
+  } catch (error) {
+    console.error('Error fetching global data:', error);
     return globalProfile;
   }
 };
 
-export const getUserProfile = async () => {
+export const getUserProfile = async (userId) => {
   try {
-    const response = await axios.get(`${BASE_URL}/get_profile.php`);
+    const response = await axios.post(`${BASE_URL}/get_profile.php`, {
+      user_id: userId,
+    });
+
     return response.data;
-  } catch (_error) {
+  } catch (error) {
+    console.error('Error fetching profile data:', error);
+    return null;
+  }
+};
+
+export const getSchedules = async (userId) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/get_jadwal.php`, {
+      user_id: userId,
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching schedules:', error);
     return null;
   }
 };
