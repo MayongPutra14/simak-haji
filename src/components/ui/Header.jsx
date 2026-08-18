@@ -1,70 +1,64 @@
-import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { useAuth } from '../../features/auth/useAuth';
 
-export default function Header({
-  user = { name: 'Ahmad Fauzi', role: 'Admin', avatar: null },
-}) {
-  // FALLBACK IF DATA NOT FOUND
-  const initialName = user.name
-    ? user.name
-      .split(' ')
-      .map((n) => n[0])
-      .slice(0, 2)
-      .join('')
-      .toUpperCase()
-    : 'U';
+const DEFAULT_PROFILE = {
+  nama_lengkap: 'Guest User',
+  role: 'guest',
+};
 
-  const [imageError, setImageError] = useState(false);
+export default function Header() {
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
+  const profile = user || DEFAULT_PROFILE;
 
-  // PLACE HOLDER PICTURE
-  const defaultAvatarUrl =
-    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256';
+  const encodedName = encodeURIComponent(profile.nama_lengkap);
+  const uiAvatarUrl = `https://ui-avatars.com/api/?name=${encodedName}&background=random&color=fff&bold=true`;
+  const avatarSrc = profile.avatar || uiAvatarUrl;
 
-  const avatarSrc = user.avatar || defaultAvatarUrl;
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
     <header className="sticky top-0 z-40 px-4 py-3 text-white border-b shadow-md bg-sea-green-800 border-sea-green-700/30 md:py-5">
-      <div className="flex items-center justify-between ">
+      <div className="flex items-center justify-between">
         {/* LEFT SIDE: Profil User */}
         <div className="flex items-center gap-3">
-          {/* CIRCLE AVATAR */}
           <div className="relative shrink-0">
-            {!imageError ? (
-              <img
-                src={avatarSrc}
-                alt={user.name}
-                onError={() => setImageError(true)}
-                className="object-cover w-10 h-10 rounded-full shadow-sm ring-2 ring-sea-green-700 md:w-15 md:h-15"
-              />
-            ) : (
-              // FALLBACK AVATAR
-              <div className="flex items-center justify-center w-10 h-10 text-sm font-semibold text-white rounded-full shadow-sm bg-sea-green-700 ring-2 ring-sea-green-700">
-                {initialName}
-              </div>
-            )}
-
-            {/* INDICATOR STATUS ONLINE */}
+            <img
+              src={avatarSrc}
+              alt={profile.nama_lengkap}
+              className="object-cover w-10 h-10 rounded-full shadow-sm ring-2 ring-sea-green-700 md:w-12 md:h-12"
+            />
             <span
               className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-sea-green-800 rounded-full"
               title="Online"
             />
           </div>
 
-          {/* USERNAME & ROLE */}
-          <div className="flex flex-col text-xs md:text-xl">
-            <span className=" text-white/70 font-normal leading-none mb-0.5">
+          <div className="flex flex-col text-xs md:text-base">
+            <span className="text-white/70 font-normal leading-none mb-0.5">
               Selamat datang,
             </span>
-            <h1 className="font-semibold text-white leading-tight tracking-tight truncate max-w-45 xs:max-w-[220px]">
-              {user.name}
+            <h1 className="font-semibold text-white leading-tight tracking-tight truncate max-w-45 sm:max-w-60">
+              {profile.nama_lengkap}
             </h1>
           </div>
         </div>
 
-        {/* LEFT SIDE: BADGE ROLE */}
-        <div className="flex items-center">
+        {/* RIGHT SIDE: BADGE ROLE & TOMBOL LOGOUT */}
+        <div className="flex items-center gap-3">
           <span className="text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full bg-sea-green-700/70 text-white/90 border border-sea-green-700">
-            {user.role}
+            {profile.role}
           </span>
+
+          <button
+            onClick={handleLogout}
+            className="px-3 py-1.5 text-xs font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 cursor-pointer"
+          >
+            Logout
+          </button>
         </div>
       </div>
     </header>
