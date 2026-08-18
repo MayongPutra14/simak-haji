@@ -1,7 +1,7 @@
 import { useAuth } from '../features/auth/useAuth';
 import UserHomeFragment from '../fragments/UserHomeFragment';
 
-export const UserHomePage = () => {
+const UserHomePage = () => {
   const { user } = useAuth();
 
   if (!user) return null;

@@ -23,6 +23,14 @@ export default defineConfig([
     },
     rules: {
       camelcase: 'off',
+      'no-unused-vars': [
+        'warn',
+        {
+          varsIgnorePattern: '^_',
+          argsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
     },
   },
 ]);

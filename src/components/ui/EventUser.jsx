@@ -89,7 +89,7 @@ export const EventDashboard = ({
             onClick={onActionClick}
             className="w-full py-2.5 rounded-xl text-sm font-semibold bg-sea-green-600 hover:bg-sea-green-700 text-white transition-colors"
           >
-            Lihat Detail Event
+            Materi Bacaan
           </Button>
         </div>
       </div>

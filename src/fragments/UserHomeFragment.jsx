@@ -1,5 +1,5 @@
 import QRcodeUser from '../components/ui/QRcodeUser';
-import EventUser from '../components/ui/EventUser';
+import EventDashboard from '../components/ui/EventUser';
 import { useDashboardEvent } from '../features/eventsDashboard/useDashboardEvent';
 
 const UserHomeFragment = ({ user }) => {
@@ -17,7 +17,7 @@ const UserHomeFragment = ({ user }) => {
     <>
       <QRcodeUser qrValue={qrHash} />
 
-      <EventUser
+      <EventDashboard
         eventData={eventData}
         isLoading={isLoading}
         onActionClick={handleActionClick}

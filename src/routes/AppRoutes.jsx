@@ -11,6 +11,7 @@ import ProtectedRoute from './ProtectedRoute';
 import UserProfilePage from '../pages/UserProfilePage';
 import UserLayout from '../layouts/UserLayout';
 import UserHomePage from '../pages/UserHomePages';
+import UserSchedulePage from '../pages/UserSchedulePage';
 import {
   RequiredCompletedIdentity,
   RequiredInCompletedIdentity,
@@ -36,6 +37,7 @@ export default function AppRoutes() {
 
             <Route path="home" element={<UserHomePage />} />
             <Route path="profile" element={<UserProfilePage />} />
+            <Route path="jadwal" element={<UserSchedulePage />} />
             <Route path="materi" element={<MateriPage />} />
           </Route>
         </Route>
