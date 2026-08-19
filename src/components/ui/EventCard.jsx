@@ -24,7 +24,7 @@ const EventCard = ({ event, isLoading = false }) => {
 
   if (isLoading) {
     return (
-      <div className="w-full max-w-md p-5 mx-auto my-12 transition-all bg-white border border-gray-200 shadow-sm rounded-xl animate-pulse">
+      <div className="w-full max-w-md p-5 mx-auto transition-all bg-white border border-gray-200 shadow-sm rounded-xl animate-pulse">
         {/* SKELETOn TITLE */}
         <div className="w-3/4 mb-3 rounded-md h-7 bg-slate-200" />
         <div className="w-full pb-3 border-b border-gray-100" />
