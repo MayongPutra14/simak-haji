@@ -33,7 +33,7 @@ export default function AppRoutes() {
       <Route element={<ProtectedRoute allowedRoles={['user']} />}>
         <Route element={<RequiredCompletedIdentity />}>
           <Route path="/user" element={<UserLayout />}>
-            <Route index element={<Navigate to={'dashboard'} replace />} />
+            <Route index element={<Navigate to={'home'} replace />} />
 
             <Route path="home" element={<UserHomePage />} />
             <Route path="profile" element={<UserProfilePage />} />

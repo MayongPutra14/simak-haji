@@ -2,6 +2,40 @@ import axios from 'axios';
 
 const BASE_URL = 'https://simak-api.vercel.app/api';
 
+export const api = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+/**
+ * update profile/user identity
+ * @param {string|number} userId
+ * @param {Object} formData
+ */
+
+export const updateProfileIdentity = async (userId, formData) => {
+  if (!formData)
+    throw new Error(
+      'Login session is not valid, please tyr againSesi login tidak valid, silahkan login kembali.',
+    );
+
+  const payload = {
+    user_id: userId,
+    ...formData,
+    is_completed: true,
+  };
+
+  const response = await api.post('/update_profile.php', payload);
+  if (response?.status === 'failed' || response?.status === 'error') {
+    throw new Error(response.data?.message || 'Gagal memperbarui profile');
+  }
+
+  return response.data;
+};
+
+
 export const getUserGlobalProfile = () => {
   const globalProfile = localStorage.getItem('user');
   if (!globalProfile) return null;

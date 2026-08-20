@@ -1,6 +1,6 @@
 import { Button } from '../ui/Button';
 
-const Step5Review = ({
+const Step6Review = ({
   onBack,
   onNext,
   initialData = {},
@@ -161,6 +161,33 @@ const Step5Review = ({
             </div>
           </div>
         </div>
+
+        {/* SECTION 4: REFERENCE (DITAMBAHKAN DI SINI) */}
+        <div className="flex flex-col gap-3">
+          <h3 className="text-md font-semibold text-sea-green-700 bg-sea-green-50 p-2 rounded">
+            4. Informasi Referensi
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-2">
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">
+                Nama Lengkap Referensi
+              </p>
+              {renderValue(initialData.referenceName)}
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 font-semibold">
+                Nomor Whatsapp Referensi
+              </p>
+              {renderValue(initialData.referenceWhatsapp)}
+            </div>
+            <div className="md:col-span-2">
+              <p className="text-xs text-gray-500 font-semibold">
+                Asal Referensi
+              </p>
+              {renderValue(initialData.referenceOrigin)}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* NAVIGATION BUTTONS */}
@@ -168,7 +195,7 @@ const Step5Review = ({
         <Button
           type="button"
           variant="primary"
-          onClick={onBack}
+          onClick={() => onBack()}
           disabled={isLoading}
         >
           Kembali
@@ -181,4 +208,4 @@ const Step5Review = ({
   );
 };
 
-export default Step5Review;
+export default Step6Review;

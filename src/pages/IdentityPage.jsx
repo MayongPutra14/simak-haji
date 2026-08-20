@@ -1,9 +1,9 @@
-import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import IdentityFormFragment from '../fragments/IndentityFormFragment';
 import Modal from '../components/ui/Modal';
 import { useAuth } from '../features/auth/useAuth';
+import { updateProfileIdentity } from '../utils/api';
 import {
   IoCloseOutline as IconClose,
   IoCheckmark as IconCheck,
@@ -52,7 +52,7 @@ const IdentityPage = () => {
       iconBgColor: 'bg-sea-green-100',
       iconColor: 'text-sea-green-400',
       buttonColor: 'bg-sea-green-500 hover:bg-sea-green-700 text-white',
-      onConfirm: () => navigate('/user-dashboard', { replace: true }),
+      onConfirm: () => navigate('/user/home', { replace: true }),
     });
   };
 
@@ -66,34 +66,21 @@ const IdentityPage = () => {
   const handleOnSubmit = async (formData) => {
     setIsLoading(true);
 
-    if (!userId) {
-      setIsLoading(false);
-      showErrorModal('Sesi login tidak valid silahkan login kembali');
-      return;
-    }
     try {
-      const response = await axios.post(
-        'https://simak-api.vercel.app/api/update_profile.php',
-        {
-          usr_id: userId,
-          ...formData,
-          is_completed: true,
-        },
-      );
-
-      if (response.data?.status === 'error') {
-        showErrorModal(response.data?.message || 'Gagal memperbarui profile');
-        return;
-      }
+      await updateProfileIdentity(userId, formData);
 
       completeIdentity();
       localStorage.removeItem(`identity_form_draft_${userId || 'guest'}`);
+      localStorage.removeItem('identity_form_draft_guest');
 
       showSuccessModal();
     } catch (error) {
-      showErrorModal(
-        error.response?.data?.message || 'Terjadi Kesalahan Sistem',
-      );
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        'Terjadi kesalahan sistem.';
+
+      showErrorModal(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -101,7 +88,11 @@ const IdentityPage = () => {
 
   return (
     <section className="bg-sea-green-800 pb-12 pt-4">
-      <IdentityFormFragment onSubmit={handleOnSubmit} isLoading={isLoading} />
+      <IdentityFormFragment
+        onSubmit={handleOnSubmit}
+        isLoading={isLoading}
+        userId={userId}
+      />
 
       <Modal
         isOpen={modal.isOpen}

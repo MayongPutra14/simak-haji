@@ -61,8 +61,6 @@ const LoginPage = () => {
 
         login(userData);
 
-        localStorage.setItem('user', JSON.stringify(userData));
-
         if (userData.role === 'admin') {
           navigate('/admin-dashboard');
         } else {
