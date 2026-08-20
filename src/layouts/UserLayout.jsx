@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router';
-import Header from '../components/ui/Header';
-import Navigation from '../components/ui/Navigation';
+import Header from '../components/ui/global/Header';
+import Navigation from '../components/ui/global/Navigation';
 
 export default function UserLayout() {
   return (

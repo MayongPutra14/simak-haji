@@ -9,7 +9,7 @@ export const RequiredCompletedIdentity = () => {
     user.is_completed === 0 || user.is_completed === false;
 
   if (user.role === 'user' && isProfileComplete) {
-    return <Navigate to={'/form-identity'} replace />;
+    return <Navigate to={'/user/form'} replace />;
   }
 
   return <Outlet />;
@@ -24,7 +24,7 @@ export const RequiredInCompletedIdentity = () => {
     user.is_completed === 1 || user.is_completed === true;
 
   if (isProfileComplete) {
-    return <Navigate to={'/user-dashboard'} replace />;
+    return <Navigate to={'/user/home'} replace />;
   }
 
   return <Outlet />;

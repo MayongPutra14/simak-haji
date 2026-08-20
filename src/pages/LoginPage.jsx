@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../features/auth/useAuth';
 import LoginFormFragment from '../fragments/LoginFormFragment';
-import Modal from '../components/ui/Modal';
+import Modal from '../components/ui/global/Modal';
 import { IoCloseOutline as IconClose } from 'react-icons/io5';
 
 const LoginPage = () => {

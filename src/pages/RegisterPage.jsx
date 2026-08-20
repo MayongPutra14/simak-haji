@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import RegisterFormFragment from '../fragments/RegisterFragment';
-import Modal from '../components/ui/Modal';
+import Modal from '../components/ui/global/Modal';
 import {
   IoCloseOutline as IconClose,
   IoCheckmark as IconCheck,
@@ -102,5 +102,3 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
-
-
