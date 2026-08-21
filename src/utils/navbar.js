@@ -5,10 +5,12 @@ import {
   IoCalendarClear as IconCalendarFill,
   IoPersonOutline as IconPersonOutline,
   IoPerson as IconPersonFill,
-  IoGridOutline as IconMenuOutline,
-  IoGrid as IconMenuFill,
-  IoScanOutline as IconScanOutline,
-  IoScanSharp as IconScanFill,
+  IoQrCodeOutline as IconQrOutline,
+  IoQrCode as IconQrFill,
+  IoWalletOutline as IconWalletOutline,
+  IoWallet as IconWalletFill,
+  IoPeopleOutline as IconPeopleOutline,
+  IoPeople as IconPeopleFill,
 } from 'react-icons/io5';
 
 export default function getNavItems(role) {
@@ -16,57 +18,68 @@ export default function getNavItems(role) {
     home: {
       id: 'home',
       label: 'Beranda',
-      path: '/user/home',
+      path: role === 'admin' ? '/admin/home' : '/user/home',
       IconOutline: IconHomeOutline,
       IconFill: IconHomeFill,
     },
     schedule: {
       id: 'schedule',
       label: 'Jadwal',
-      path: '/user/jadwal',
+      path: role === 'admin' ? '/admin/jadwal' : '/user/jadwal',
       IconOutline: IconCalendarOutline,
       IconFill: IconCalendarFill,
     },
+    finance: {
+      id: 'finance',
+      label: 'Keuangan',
+      path: role === 'admin' ? '/admin/keuangan' : '/user/keuangan',
+      IconOutline: IconWalletOutline,
+      IconFill: IconWalletFill,
+    },
     profile: {
       id: 'profile',
-      label: 'Profile',
-      path: '/user/profile',
+      label: 'Profil',
+      path: role === 'admin' ? '/admin/profile' : '/user/profile',
       IconOutline: IconPersonOutline,
       IconFill: IconPersonFill,
     },
-    more: {
-      id: 'more',
-      label: 'Lainnya',
-      path: '/user/others',
-      IconOutline: IconMenuOutline,
-      IconFill: IconMenuFill,
-    },
   };
 
+  // MENU SCAN QR (only for jamaah / user)
   const qrItem = {
     id: 'scan-qr',
     label: 'Scan QR',
-    path: '/admin/scanQR',
-    IconOutline: IconScanOutline,
-    IconFill: IconScanFill,
-    isPrimary: true, // CONDITIONAL RENDERING
+    path: '/user/scan-qr',
+    IconOutline: IconQrOutline,
+    IconFill: IconQrFill,
+    isPrimary: true, // Floating button for mobile
+  };
+
+  // MENU JAMAAH (only for admin)
+  const jamaahItem = {
+    id: 'jamaah',
+    label: 'Jamaah',
+    path: '/admin/jamaah',
+    IconOutline: IconPeopleOutline,
+    IconFill: IconPeopleFill,
   };
 
   if (role === 'admin') {
     return [
       commonItems.home,
+      jamaahItem,
       commonItems.schedule,
-      qrItem,
+      commonItems.finance,
       commonItems.profile,
-      commonItems.more,
     ];
   }
 
-  // DEFAULT ROLE = USER
+  // DEFAULT ROLE = USER / JAMAAH
   return [
     commonItems.home,
     commonItems.schedule,
+    qrItem,
+    commonItems.finance,
     commonItems.profile,
-    commonItems.more,
   ];
-};
+}
