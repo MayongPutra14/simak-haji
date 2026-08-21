@@ -23,7 +23,7 @@ export const RequiredInCompletedIdentity = () => {
   const isProfileComplete =
     user.is_completed === 1 || user.is_completed === true;
 
-  if (isProfileComplete) {
+  if (user.role === 'user' && isProfileComplete) {
     return <Navigate to={'/user/home'} replace />;
   }
 

@@ -12,6 +12,7 @@ import {
 } from './IdentityGuard';
 
 // ADMIN
+import AdminLayout from '../layouts/AdminLayout';
 import AdminDashboardPage from '../pages/admin/AdminDashboardPage';
 import AdminScanPage from '../pages/admin/AdminScanPage';
 import MateriPage from '../pages/user/MateriPage';
@@ -33,9 +34,13 @@ export default function AppRoutes() {
       <Route path="/admin-input" element={<CreateUserPage />} />
       <Route path="/under-development" element={<UnderDevelopment />} />
 
+      {/* ADMIN ROUTES */}
       <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-        <Route path="/admin-dashboard" element={<AdminDashboardPage />} />
-        <Route path="/admin-scan" element={<AdminScanPage />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Navigate to="home" replace />} />
+          <Route path="home" element={<AdminDashboardPage />} />
+          <Route path="scan" element={<AdminScanPage />} />
+        </Route>
       </Route>
 
       {/* USER ROUTES */}
