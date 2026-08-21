@@ -1,4 +1,4 @@
-import NotFoundUI from '../components/ui/404NotFound';
+import NotFoundUI from '../components/ui/global/404NotFound';
 
 const NotFoundPage = () => {
   return (

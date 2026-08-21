@@ -23,7 +23,9 @@ export default function AuthProvider({ children }) {
   const logout = useCallback(() => {
     setUser(null);
     localStorage.removeItem('user_data');
+    localStorage.removeItem('user');
     localStorage.removeItem('token');
+    localStorage.removeItem('identity_form_draft_guest');
   }, []);
 
   // FUNCTION TO CHANGE is_complete TO true AFTER FILL THE FORM

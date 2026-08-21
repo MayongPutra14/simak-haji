@@ -1,5 +1,5 @@
-import LogoSimak from '../components/ui/LogoSimak';
-import RegisterForm from '../components/form/RegisterForm';
+import LogoSimak from '../components/ui/global/LogoSimak';
+import RegisterForm from '../components/ui/form/RegisterForm';
 
 const RegisterFormFragment = ({ onSubmit }) => {
   return (

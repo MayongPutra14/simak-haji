@@ -1,6 +1,6 @@
-import LogoSimak from '../components/ui/LogoSimak';
+import LogoSimak from '../components/ui/global/LogoSimak';
 import { useNavigate } from 'react-router';
-import { Button } from '../components/ui/Button';
+import { Button } from '../components/ui/global/Button';
 
 const LandingPage = () => {
   const navigate = useNavigate();

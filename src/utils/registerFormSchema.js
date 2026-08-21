@@ -193,7 +193,6 @@ export const cityOptions = [
 // STEP 3 BACKGROUND
 export const Step3BackgroundSchema = z.object({
   job: z.string().min(1, 'Pekerjaan wajib dipilih'),
-  education: z.string().optional(),
   program: z.string().min(1, 'Program keberangkatan wajib dipilih'),
   experience: z.string().min(1, 'Pengalaman Haji / Umroh wajib dipilih'),
   companion: z.string().min(1, 'Pilih dengan siapa Anda akan berangkat'),
@@ -360,4 +359,35 @@ export const healthConditionOptions = [
   // --- KEBUTUHAN KHUSUS & PERAWATAN ---
   { label: 'Membutuhkan Kursi Roda', value: 'Membutuhkan Kursi Roda' },
   { label: 'Rutin Konsumsi Obat', value: 'Rutin Konsumsi Obat' },
+];
+
+// STEP 5 REFERENCE
+export const Step5Reference = z.object({
+  referenceName: z
+    .string()
+    .min(1, 'Nama ayah kandung wajib diisi')
+    .min(3, 'Nama ayah kandung minimal 3 karakter'),
+  referenceWhatsapp: z
+    .string()
+    .min(1, 'Nomor whatsapp referensi harus di isi')
+    .regex(/^[0-9]+$/, 'Nomor whatsapp harus berupa angka saja')
+    .min(9, 'Nomor whatsapp minimal 9 karakter'),
+  referenceOrigin: z.string().min(1, 'Pekerjaan wajib dipilih'),
+});
+
+export const referenceOriginOptions = [
+  // --- TAHUN SIMAK ---
+  { label: 'SIMAK 2022', value: 'SIMAK 2022' },
+  { label: 'SIMAK 2023', value: 'SIMAK 2023' },
+  { label: 'SIMAK 2024', value: 'SIMAK 2024' },
+  { label: 'SIMAK 2025', value: 'SIMAK 2025' },
+  { label: 'SIMAK 2026', value: 'SIMAK 2026' },
+
+  // --- KARYAWAN & INSTITUSI ---
+  { label: 'KARYAWAN KEMENHAJ', value: 'KARYAWAN KEMENHAJ' },
+  { label: 'KARYAWAN KEMENAG', value: 'KARYAWAN KEMENAG' },
+
+  // --- LAINNYA ---
+  { label: 'NON SIMAK', value: 'NON SIMAK' },
+  { label: 'MEDIA SOSIAL', value: 'MEDIA SOSIAL' },
 ];

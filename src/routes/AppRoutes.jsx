@@ -1,21 +1,29 @@
+// GLOBAL
 import { Routes, Route, Navigate } from 'react-router';
 import LandingPage from '../pages/LandingPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
-import AdminDashboardPage from '../pages/AdminDashboardPage';
-import AdminScanPage from '../pages/AdminScanPage';
-import MateriPage from '../pages/MateriPage';
-import IdentityPage from '../pages/IdentityPage';
-import NotFoundPage from '../pages/NotFoundPage';
 import ProtectedRoute from './ProtectedRoute';
-import UserProfilePage from '../pages/UserProfilePage';
-import UserLayout from '../layouts/UserLayout';
-import UserHomePage from '../pages/UserHomePages';
-import UserSchedulePage from '../pages/UserSchedulePage';
+import NotFoundPage from '../pages/NotFoundPage';
+import UnderDevelopment from '../components/ui/global/UnderDevelopment';
 import {
   RequiredCompletedIdentity,
   RequiredInCompletedIdentity,
 } from './IdentityGuard';
+
+// ADMIN
+import AdminLayout from '../layouts/AdminLayout';
+import AdminDashboardPage from '../pages/admin/AdminDashboardPage';
+import AdminScanPage from '../pages/admin/AdminScanPage';
+import MateriPage from '../pages/user/MateriPage';
+import CreateUserPage from '../pages/admin/CreateUserPage';
+
+// USER
+import IdentityPage from '../pages/user/IdentityPage';
+import UserProfilePage from '../pages/user/UserProfilePage';
+import UserLayout from '../layouts/UserLayout';
+import UserHomePage from '../pages/user/UserHomePages';
+import UserSchedulePage from '../pages/user/UserSchedulePage';
 
 export default function AppRoutes() {
   return (
@@ -23,17 +31,23 @@ export default function AppRoutes() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/admin-input" element={<CreateUserPage />} />
+      <Route path="/under-development" element={<UnderDevelopment />} />
 
+      {/* ADMIN ROUTES */}
       <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-        <Route path="/admin-dashboard" element={<AdminDashboardPage />} />
-        <Route path="/admin-scan" element={<AdminScanPage />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Navigate to="home" replace />} />
+          <Route path="home" element={<AdminDashboardPage />} />
+          <Route path="scan" element={<AdminScanPage />} />
+        </Route>
       </Route>
 
       {/* USER ROUTES */}
       <Route element={<ProtectedRoute allowedRoles={['user']} />}>
         <Route element={<RequiredCompletedIdentity />}>
           <Route path="/user" element={<UserLayout />}>
-            <Route index element={<Navigate to={'dashboard'} replace />} />
+            <Route index element={<Navigate to={'home'} replace />} />
 
             <Route path="home" element={<UserHomePage />} />
             <Route path="profile" element={<UserProfilePage />} />
@@ -43,7 +57,7 @@ export default function AppRoutes() {
         </Route>
 
         <Route element={<RequiredInCompletedIdentity />}>
-          <Route path="/form-identity" element={<IdentityPage />} />
+          <Route path="user/form" element={<IdentityPage />} />
         </Route>
       </Route>
 
