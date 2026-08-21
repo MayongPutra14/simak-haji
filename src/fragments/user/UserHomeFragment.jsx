@@ -1,10 +1,8 @@
-import QRcodeUser from '../../components/user/QRcodeUser';
 import EventDashboard from '../../components/user/EventUser';
 import { useDashboardEvent } from '../../features/eventsDashboard/useDashboardEvent';
+import PrayTimesWidget from '../../components/ui/global/PrayTimesWidget';
 
 const UserHomeFragment = ({ user }) => {
-  const qrHash = user?.qr_code_hash || 'INVALID';
-
   const { eventData, isLoading } = useDashboardEvent(user?.id);
 
   const handleActionClick = () => {
@@ -15,7 +13,7 @@ const UserHomeFragment = ({ user }) => {
 
   return (
     <>
-      <QRcodeUser qrValue={qrHash} />
+      <PrayTimesWidget />
 
       <EventDashboard
         eventData={eventData}

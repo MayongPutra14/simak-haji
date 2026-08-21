@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
 import { useAuth } from '../../../features/auth/useAuth';
-
+import { MdLogout as IconLogout } from 'react-icons/md';
 const DEFAULT_PROFILE = {
   nama_lengkap: 'Guest User',
   role: 'guest',
@@ -21,7 +21,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 px-4 py-3 text-white border-b shadow-md bg-sea-green-950 border-sea-green-700/30 md:py-5">
+    <header className="sticky top-0 z-40 px-4 py-3 text-white border-b shadow-md bg-sea-green-900 border-sea-green-700/30 md:py-5">
       <div className="flex items-center justify-between">
         {/* LEFT SIDE: Profil User */}
         <div className="flex items-center gap-3">
@@ -48,16 +48,17 @@ export default function Header() {
         </div>
 
         {/* RIGHT SIDE: BADGE ROLE & TOMBOL LOGOUT */}
-        <div className="flex items-center gap-3">
-          <span className="text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full bg-sea-green-700/70 text-white/90 border border-sea-green-700">
+        <div className="flex items-center gap-1">
+          <span className="text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-sm bg-sea-green-700/70 text-white/90 border border-sea-green-700">
             {profile.role}
           </span>
 
           <button
             onClick={handleLogout}
-            className="px-3 py-1.5 text-xs font-medium text-white bg-red-600 hover:bg-red-800 rounded-lg transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 cursor-pointer md:hidden"
+            className="flex items-center gap-0.5 px-3 py-1.5 text-xs font-medium text-white bg-red-600 hover:bg-red-800 rounded-lg transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 cursor-pointer md:hidden"
           >
-            Logout
+            Keluar
+            <IconLogout />
           </button>
         </div>
       </div>

@@ -4,7 +4,7 @@ import Navigation from '../components/ui/global/Navigation';
 
 export default function AdminLayout() {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 md:flex-row">
+    <div className="flex flex-col min-h-screen md:flex-row">
       <Navigation role="admin" />
 
       <div className="flex flex-col flex-1 transition-all duration-300 md:pl-64">

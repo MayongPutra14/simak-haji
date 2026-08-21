@@ -9,7 +9,7 @@ export default function Navigation({ role = 'user' }) {
     <>
       {/* DESKTOP SIDEBAR (md size ke atas) */}
       <aside
-        className="fixed top-0 bottom-0 left-0 z-40 flex-col justify-between hidden w-64 min-h-screen p-4 border-r shadow-2xl md:flex bg-sea-green-950 border-sea-green-800/80"
+        className="fixed top-0 bottom-0 left-0 z-40 flex-col justify-between hidden w-64 min-h-screen p-4 border-r shadow-2xl md:flex bg-sea-green-900 border-sea-green-800/80"
         aria-label="Desktop Navigation"
       >
         <div>
@@ -41,9 +41,9 @@ export default function Navigation({ role = 'user' }) {
         </div>
       </aside>
 
-      {/* MOBILE BOTTOM NAVBAR (Kurang dari md size) */}
+      {/* MOBILE BOTTOM NAVBAR */}
       <nav
-        className="fixed bottom-0 left-0 right-0 z-50 px-2 border-t shadow-2xl md:hidden bg-sea-green-950/95 backdrop-blur-md border-sea-green-800/80 pb-safe"
+        className="fixed bottom-0 left-0 right-0 z-50 px-2 border-t shadow-2xl md:hidden bg-sea-green-900 backdrop-blur-md border-sea-green-800/80 pb-safe"
         aria-label="Mobile Navigation"
       >
         <div className="flex items-center justify-around max-w-md mx-auto">
@@ -178,7 +178,7 @@ function PrimaryNavItem({ item }) {
           <>
             <div
               className={`
-                p-3.5 rounded-full shadow-xl border-4 border-sea-green-950
+                p-3.5 rounded-full shadow-xl border-4 border-sea-green-800
                 transition-all duration-300 ease-out
                 ${
           isActive
