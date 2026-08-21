@@ -6,6 +6,7 @@ import RegisterPage from '../pages/RegisterPage';
 import ProtectedRoute from './ProtectedRoute';
 import NotFoundPage from '../pages/NotFoundPage';
 import UnderDevelopment from '../components/ui/global/UnderDevelopment';
+import AdminHome from '../pages/admin/Home';
 import {
   RequiredCompletedIdentity,
   RequiredInCompletedIdentity,
@@ -13,7 +14,7 @@ import {
 
 // ADMIN
 import AdminLayout from '../layouts/AdminLayout';
-import AdminDashboardPage from '../pages/admin/AdminDashboardPage';
+// import AdminDashboardPage from '../pages/admin/AdminDashboardPage';
 import AdminScanPage from '../pages/admin/AdminScanPage';
 import MateriPage from '../pages/user/MateriPage';
 import CreateUserPage from '../pages/admin/CreateUserPage';
@@ -38,7 +39,7 @@ export default function AppRoutes() {
       <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="home" replace />} />
-          <Route path="home" element={<AdminDashboardPage />} />
+          <Route path="home" element={<AdminHome />} />
           <Route path="scan" element={<AdminScanPage />} />
         </Route>
       </Route>
