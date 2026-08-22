@@ -33,7 +33,6 @@ export default function AppRoutes() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/admin-input" element={<CreateUserPage />} />
-      <Route path="/under-development" element={<UnderDevelopment />} />
 
       {/* ADMIN ROUTES */}
       <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
@@ -62,6 +61,7 @@ export default function AppRoutes() {
         </Route>
       </Route>
 
+      <Route path="/maintenance" element={<UnderDevelopment />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

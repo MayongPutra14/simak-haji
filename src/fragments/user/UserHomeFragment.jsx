@@ -1,6 +1,7 @@
 import EventDashboard from '../../components/user/EventUser';
 import { useDashboardEvent } from '../../features/eventsDashboard/useDashboardEvent';
 import PrayTimesWidget from '../../components/ui/global/PrayTimesWidget';
+import FeatureHubContainer from '../../components/ui/global/FeatureHubMenu';
 
 const UserHomeFragment = ({ user }) => {
   const { eventData, isLoading } = useDashboardEvent(user?.id);
@@ -14,6 +15,8 @@ const UserHomeFragment = ({ user }) => {
   return (
     <>
       <PrayTimesWidget />
+
+      <FeatureHubContainer />
 
       <EventDashboard
         eventData={eventData}
