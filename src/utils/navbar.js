@@ -25,21 +25,21 @@ export default function getNavItems(role) {
     schedule: {
       id: 'schedule',
       label: 'Jadwal',
-      path: role === 'admin' ? '/admin/jadwal' : '/user/jadwal',
+      path: role === 'admin' ? '/maintenance' : '/user/jadwal',
       IconOutline: IconCalendarOutline,
       IconFill: IconCalendarFill,
     },
     finance: {
       id: 'finance',
       label: 'Keuangan',
-      path: role === 'admin' ? '/admin/keuangan' : '/user/keuangan',
+      path: role === 'admin' ? '/maintenance' : '/user/keuangan',
       IconOutline: IconWalletOutline,
       IconFill: IconWalletFill,
     },
     profile: {
       id: 'profile',
       label: 'Profil',
-      path: role === 'admin' ? '/admin/profile' : '/user/profile',
+      path: role === 'admin' ? '/maintenance' : '/user/profile',
       IconOutline: IconPersonOutline,
       IconFill: IconPersonFill,
     },
@@ -49,7 +49,7 @@ export default function getNavItems(role) {
   const qrItem = {
     id: 'scan-qr',
     label: 'Scan QR',
-    path: '/user/scan-qr',
+    path: '/maintenance',
     IconOutline: IconQrOutline,
     IconFill: IconQrFill,
     isPrimary: true, // Floating button for mobile
@@ -59,7 +59,7 @@ export default function getNavItems(role) {
   const jamaahItem = {
     id: 'jamaah',
     label: 'Jamaah',
-    path: '/admin/jamaah',
+    path: '/maintenance',
     IconOutline: IconPeopleOutline,
     IconFill: IconPeopleFill,
   };
@@ -83,3 +83,5 @@ export default function getNavItems(role) {
     commonItems.profile,
   ];
 }
+
+

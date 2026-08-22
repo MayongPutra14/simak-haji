@@ -3,7 +3,7 @@ import { useState } from 'react';
 import IdentityFormFragment from '../../fragments/user/IndentityFormFragment';
 import Modal from '../../components/ui/global/Modal';
 import { useAuth } from '../../features/auth/useAuth';
-import { updateProfileIdentity } from '../../utils/api';
+import { updateProfileIdentity } from '../../utils/client/api';
 import {
   IoCloseOutline as IconClose,
   IoCheckmark as IconCheck,

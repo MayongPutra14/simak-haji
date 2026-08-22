@@ -126,7 +126,7 @@ function StandardNavItem({ item }) {
       to={path}
       end
       className={({ isActive }) => `
-        group relative flex flex-col items-center justify-center min-w-14 px-2 rounded-xl
+        group relative flex flex-col items-center justify-center min-w-14 px-2 py-3 rounded-xl
         transition-all duration-200 ease-in-out select-none cursor-pointer
         ${isActive ? 'text-white' : 'text-sea-green-300 hover:text-sea-green-100'}
       `}
@@ -136,7 +136,7 @@ function StandardNavItem({ item }) {
         return (
           <>
             <div
-              className={`p-1.5 rounded-xl transition-all duration-300 ${
+              className={`p-2 rounded-xl transition-all duration-300 ${
                 isActive
                   ? 'bg-linear-to-r from-sea-green-600 to-sea-green-400 text-white shadow-md'
                   : ''
