@@ -1,10 +1,10 @@
 import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as RegistrationForm from '../../../utils/registerFormSchema';
-import { InputText } from '../inputs/InputText';
-import { InputDate } from '../inputs/InputDate';
-import { InputRadio } from '../inputs/InputRadio';
-import { InputSelect } from '../inputs/InputSelect';
+import InputText from '../inputs/InputText';
+import InputDate from '../inputs/InputDate';
+import InputRadio from '../inputs/InputRadio';
+import InputSelect from '../inputs/InputSelect';
 import { Button } from '../global/Button';
 
 const Step2Personal = ({ onNext, initialData = {} }) => {
@@ -38,6 +38,8 @@ const Step2Personal = ({ onNext, initialData = {} }) => {
       <InputText
         label="Nama Ayah Kandung"
         required={true}
+        variant="underlined"
+        withCard={true}
         error={errors.fatherName?.message}
         {...register('fatherName')}
       />
@@ -46,6 +48,8 @@ const Step2Personal = ({ onNext, initialData = {} }) => {
         label="Tanggal Lahir"
         description="Tanggal lahir sesuai KTP"
         required={true}
+        variant="underlined"
+        withCard={true}
         error={errors.birthDate?.message}
         {...register('birthDate')}
       />
@@ -54,6 +58,8 @@ const Step2Personal = ({ onNext, initialData = {} }) => {
         label="Jenis Kelamin"
         required={true}
         options={RegistrationForm.gender}
+        variant="underlined"
+        withCard={true}
         error={errors.gender?.message}
         value={genderValue}
         {...register('gender')}
@@ -64,6 +70,8 @@ const Step2Personal = ({ onNext, initialData = {} }) => {
         required={true}
         placeholder="-- Pilih Kota --"
         options={RegistrationForm.cityOptions}
+        variant="underlined"
+        withCard={true}
         error={errors.birthPlace?.message}
         {...register('birthPlace')}
       />
@@ -72,6 +80,8 @@ const Step2Personal = ({ onNext, initialData = {} }) => {
         label="Alamat (Sesuai SPPH)"
         description="Isi dengan nama jalan hingga RT dan RW saja"
         required={true}
+        variant="underlined"
+        withCard={true}
         error={errors.address?.message}
         {...register('address')}
       />
@@ -79,6 +89,8 @@ const Step2Personal = ({ onNext, initialData = {} }) => {
       <InputText
         label="Desa / Kelurahan"
         required={true}
+        variant="underlined"
+        withCard={true}
         error={errors.village?.message}
         {...register('village')}
       />
@@ -86,6 +98,8 @@ const Step2Personal = ({ onNext, initialData = {} }) => {
       <InputText
         label="Kecamatan"
         required={true}
+        variant="underlined"
+        withCard={true}
         error={errors.subDistrict?.message}
         {...register('subDistrict')}
       />

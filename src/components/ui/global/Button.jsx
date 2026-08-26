@@ -27,13 +27,13 @@ export const Button = ({
       type={type}
       disabled={disabled || isLoading}
       onClick={onClick}
-      className={`${baseStyle} ${variants[variant]} ${className}`}
+      className={`${baseStyle} ${variants[variant]} ${className} cursor-pointer`}
       {...props}
     >
       {/* SPINNER LOADING... */}
       {isLoading && (
         <svg
-          className="animate-spin h-5 w-5 text-current"
+          className="w-5 h-5 text-current animate-spin"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

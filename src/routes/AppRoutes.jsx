@@ -14,7 +14,6 @@ import {
 
 // ADMIN
 import AdminLayout from '../layouts/AdminLayout';
-// import AdminDashboardPage from '../pages/admin/AdminDashboardPage';
 import AdminScanPage from '../pages/admin/AdminScanPage';
 import MateriPage from '../pages/user/MateriPage';
 import CreateUserPage from '../pages/admin/CreateUserPage';
@@ -32,7 +31,6 @@ export default function AppRoutes() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/admin-input" element={<CreateUserPage />} />
 
       {/* ADMIN ROUTES */}
       <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
@@ -40,6 +38,13 @@ export default function AppRoutes() {
           <Route index element={<Navigate to="home" replace />} />
           <Route path="home" element={<AdminHome />} />
           <Route path="scan" element={<AdminScanPage />} />
+
+          {/* CRUD USER */}
+          <Route path="users">
+            {/* <Route index element={<UserListPage />} /> */}
+            <Route path="create" element={<CreateUserPage />} />
+            {/* <Route path=":id/edit" element={<EditUserPage />} /> */}
+          </Route>
         </Route>
       </Route>
 

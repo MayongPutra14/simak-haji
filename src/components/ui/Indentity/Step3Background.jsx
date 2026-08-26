@@ -1,7 +1,7 @@
 import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as RegistrationForm from '../../../utils/registerFormSchema';
-import { InputRadio } from '../inputs/InputRadio';
+import InputRadio from '../inputs/InputRadio';
 import { Button } from '../global/Button';
 
 const Step3Background = ({ onNext, onBack, initialData = {} }) => {
@@ -41,6 +41,8 @@ const Step3Background = ({ onNext, onBack, initialData = {} }) => {
         required={true}
         hasOtherOption={true}
         options={RegistrationForm.jobOptions}
+        variant="underlined"
+        withCard={true}
         error={errors.job?.message}
         value={jobValue}
         {...register('job')}
@@ -48,8 +50,11 @@ const Step3Background = ({ onNext, onBack, initialData = {} }) => {
 
       <InputRadio
         label="Pendidikan Terakhir"
+        required={false}
         options={RegistrationForm.educationOptions}
         error={errors.education?.message}
+        variant="underlined"
+        withCard={true}
         value={educationValue}
         {...register('education')}
       />
@@ -59,6 +64,8 @@ const Step3Background = ({ onNext, onBack, initialData = {} }) => {
         required={true}
         hasOtherOption={true}
         options={RegistrationForm.programOptions}
+        variant="underlined"
+        withCard={true}
         error={errors.program?.message}
         value={programValue}
         {...register('program')}
@@ -68,6 +75,8 @@ const Step3Background = ({ onNext, onBack, initialData = {} }) => {
         label="Pengalaman Haji / Umroh"
         required={true}
         options={RegistrationForm.experienceOptions}
+        variant="underlined"
+        withCard={true}
         error={errors.experience?.message}
         value={experienceValue}
         {...register('experience')}
@@ -78,6 +87,8 @@ const Step3Background = ({ onNext, onBack, initialData = {} }) => {
         required={true}
         hasOtherOption={true}
         options={RegistrationForm.companionOptions}
+        variant="underlined"
+        withCard={true}
         error={errors.companion?.message}
         value={companionValue}
         {...register('companion')}

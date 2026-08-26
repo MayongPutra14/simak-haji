@@ -16,13 +16,13 @@ export const registrationSchema = z.object({
 });
 
 // STEP 2 PERSONAL
-// const MAX_FILE_SIZE = 1 * 1024 * 1024;
-// const ACCEPTED_IMAGE_TYPES = [
-//   'image/jpeg',
-//   'image/jpg',
-//   'image/png',
-//   'image/webp',
-// ];
+const MAX_FILE_SIZE = 1 * 1024 * 1024;
+const ACCEPTED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+];
 
 export const Step2PersonalSchema = z.object({
   fatherName: z
@@ -30,40 +30,17 @@ export const Step2PersonalSchema = z.object({
     .min(1, 'Nama ayah kandung wajib diisi')
     .min(3, 'Nama ayah kandung minimal 3 karakter'),
   birthDate: z.string().min(1, 'Tanggal lahir wajib diisi'),
-  gender: z.enum(['laki-laki', 'perempuan'], {
-    errorMap: () => {
-      return { message: 'Pilih jenis kelamin Anda' };
-    },
-  }),
+  gender: z.preprocess(
+    (val) => (val === null || val === undefined ? '' : val),
+    z.string().min(1, 'Jenis kelamin wajib diisi'),
+  ),
   birthPlace: z.string().min(1, 'Pilih tempat/kota kelahiran'),
   address: z
     .string()
     .min(1, 'Alamat wajib diisi')
     .min(5, 'Alamat lengkap minimal 5 karakter'),
   village: z.string().min(1, 'Desa/Kelurahan wajib diisi'),
-  subDistrict: z.string().min(1, 'Pilih kecamatan Anda'),
-  subDistrictOther: z.string().optional(),
-  // profileImage: z
-  //   .any()
-  //   .refine((value) => {
-  //     if (!value) return false;
-  //     if (typeof value === 'string') return value.trim().length > 0;
-  //     if (value instanceof FileList) return value.length > 0;
-  //     if (value instanceof File) return true;
-  //     return false;
-  //   }, 'Gambar profil wajib diunggah')
-  //   .refine((value) => {
-  //     if (typeof value === 'string') return true;
-  //     const file = value instanceof FileList ? value[0] : value;
-  //     if (!file) return true;
-  //     return file.size <= MAX_FILE_SIZE;
-  //   }, 'Ukuran gambar maksimal adalah 1MB, silakan kompres atau ganti gambar')
-  //   .refine((value) => {
-  //     if (typeof value === 'string') return true;
-  //     const file = value instanceof FileList ? value[0] : value;
-  //     if (!file) return true;
-  //     return ACCEPTED_IMAGE_TYPES.includes(file.type);
-  //   }, 'Format gambar tidak didukung. Gunakan PNG, JPEG, JPG, atau WEBP'),
+  subDistrict: z.string().min(1, 'Kecamatan wajib diisi'),
 });
 
 export const gender = [
@@ -192,10 +169,23 @@ export const cityOptions = [
 
 // STEP 3 BACKGROUND
 export const Step3BackgroundSchema = z.object({
-  job: z.string().min(1, 'Pekerjaan wajib dipilih'),
-  program: z.string().min(1, 'Program keberangkatan wajib dipilih'),
-  experience: z.string().min(1, 'Pengalaman Haji / Umroh wajib dipilih'),
-  companion: z.string().min(1, 'Pilih dengan siapa Anda akan berangkat'),
+  job: z.preprocess(
+    (val) => (val === null || val === undefined ? '' : val),
+    z.string().min(1, 'Pekerjaan wajib dipilih'),
+  ),
+  education: z.string().nullable().optional(),
+  program: z.preprocess(
+    (val) => (val === null || val === undefined ? '' : val),
+    z.string().min(1, 'Program keberangkatan wajib dipilih'),
+  ),
+  experience: z.preprocess(
+    (val) => (val === null || val === undefined ? '' : val),
+    z.string().min(1, 'Pengalaman Haji/Umrah wajib dipilih'),
+  ),
+  companion: z.preprocess(
+    (val) => (val === null || val === undefined ? '' : val),
+    z.string().min(1, 'Pilih bersama siapa Anda berangkat'),
+  ),
 });
 
 export const jobOptions = [
@@ -255,59 +245,27 @@ export const companionOptions = [
 ];
 
 // STEP 4 HEALTH & SKILLS
-export const Step4SkillsSchema = z
-  .object({
-    // array minimal 1 elemen untuk memastikan setidaknya ada 1 checkbox yang dicentang
-    skill: z
-      .array(z.string())
-      .min(1, 'Pilih minimal satu kemampuan yang dikuasai'),
-    skillOther: z.string().optional(),
 
-    positiveTrait: z
+export const Step4SkillsSchema = z.object({
+  skill: z.preprocess(
+    (val) => (Array.isArray(val) ? val : []),
+    z.array(z.string()).min(1, 'Pilih minimal satu kemampuan yang dikuasai'),
+  ),
+
+  positiveTrait: z.preprocess(
+    (val) => (Array.isArray(val) ? val : []),
+    z
       .array(z.string())
       .min(1, 'Pilih minimal satu hal positif yang dapat dikontribusikan'),
-    positiveTraitOther: z.string().optional(),
+  ),
 
-    healthCondition: z
+  healthCondition: z.preprocess(
+    (val) => (Array.isArray(val) ? val : []),
+    z
       .array(z.string())
       .min(1, 'Pilih minimal satu kondisi kesehatan atau kebutuhan khusus'),
-    healthConditionOther: z.string().optional(),
-  })
-  .superRefine((data, ctx) => {
-    // Validasi kondisional jika opsi "Lainnya" dicentang
-    if (
-      data.skill.includes('Lainnya') &&
-      (!data.skillOther || data.skillOther.trim() === '')
-    ) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Sebutkan kemampuan lainnya',
-        path: ['skillOther'],
-      });
-    }
-
-    if (
-      data.positiveTrait.includes('Lainnya') &&
-      (!data.positiveTraitOther || data.positiveTraitOther.trim() === '')
-    ) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Sebutkan kontribusi positif lainnya',
-        path: ['positiveTraitOther'],
-      });
-    }
-
-    if (
-      data.healthCondition.includes('Lainnya') &&
-      (!data.healthConditionOther || data.healthConditionOther.trim() === '')
-    ) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Sebutkan kondisi kesehatan lainnya',
-        path: ['healthConditionOther'],
-      });
-    }
-  });
+  ),
+});
 
 export const skillOptions = [
   // --- KEMAMPUAN BAHASA ---
@@ -373,6 +331,27 @@ export const Step5Reference = z.object({
     .regex(/^[0-9]+$/, 'Nomor whatsapp harus berupa angka saja')
     .min(9, 'Nomor whatsapp minimal 9 karakter'),
   referenceOrigin: z.string().min(1, 'Pekerjaan wajib dipilih'),
+  profileImage: z
+    .any()
+    .refine((value) => {
+      if (!value) return false;
+      if (typeof value === 'string') return value.trim().length > 0;
+      if (value instanceof FileList) return value.length > 0;
+      if (value instanceof File) return true;
+      return false;
+    }, 'Foto profil wajib diunggah')
+    .refine((value) => {
+      if (typeof value === 'string') return true;
+      const file = value instanceof FileList ? value[0] : value;
+      if (!file) return true;
+      return file.size <= MAX_FILE_SIZE;
+    }, 'Ukuran gambar maksimal adalah 1MB, silakan kompres atau ganti gambar')
+    .refine((value) => {
+      if (typeof value === 'string') return true;
+      const file = value instanceof FileList ? value[0] : value;
+      if (!file) return true;
+      return ACCEPTED_IMAGE_TYPES.includes(file.type);
+    }, 'Format gambar tidak didukung. Gunakan PNG, JPEG, JPG, atau WEBP'),
 });
 
 export const referenceOriginOptions = [
