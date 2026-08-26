@@ -28,3 +28,4 @@ prompt/
 zoba.js
 *.env
 db.json
+api_docs

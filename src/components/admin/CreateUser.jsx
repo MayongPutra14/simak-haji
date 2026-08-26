@@ -1,128 +1,390 @@
-import InputCreate from '../ui/inputs/InputCreateUser';
+import InputText from '../ui/inputs/InputText';
+import { useForm, useWatch } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as CreateUserSchema from '../../utils/admin/createUserSchema';
+import { Button } from '../ui/global/Button';
+import InputRadio from '../ui/inputs/InputRadio';
+import InputSelect from '../ui/inputs/InputSelect';
+import InputDate from '../ui/inputs/InputDate';
+import InputImage from '../ui/inputs/InputImage';
 
-const CreateUser = () => {
+const CreateUser = ({ onSubmit }) => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(CreateUserSchema.createUserSchema),
+  });
+
+  const handleOnSubmit = () => {};
+
+  const genderValue = useWatch({
+    control,
+    name: 'gender',
+  });
+
   return (
-    <div className="w-[95%] max-w-4xl p-6 mx-auto mt-5 bg-white border shadow-sm md:p-8 rounded-xl border-slate-200">
+    <div className="w-[95%] md:w-[98%]  p-6 mx-auto mt-5 bg-white border shadow-sm md:p-8 rounded-xl border-slate-200">
       <h1 className="mb-6 text-2xl font-bold text-slate-800">
         Registrasi Akun Baru
       </h1>
 
       <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
-        {/* SEKSI 1: DATA DIRI */}
+        {/* SECTION 1: PERSONAL IDENTITY */}
         <section className="space-y-4">
-          <div className="bg-sea-green-50 text-sea-green-700 px-4 py-2.5 rounded-lg font-semibold text-sm sm:text-base">
-            Data Diri
-          </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <InputCreate
+          <h2 className="bg-sea-green-50 text-sea-green-700 px-4 py-2.5 rounded-lg font-semibold text-md md:text-xl">
+            DATA PRIBADI
+          </h2>
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+            {/* POSRSI NUMBER */}
+            <InputText
+              label="Nomor Porsi"
+              placeholder="1000623881"
+              required={true}
+              error={errors.fatherName?.message}
+              {...register('fatherName')}
+            />
+
+            {/* FULL NAME */}
+            <InputText
               label="Nama Lengkap"
-              placeholder="Masukkan nama lengkap"
+              required={true}
+              placeholder="Budi Erlambang"
+              error={errors.fatherName?.message}
+              {...register('fullName')}
             />
-            <InputCreate
-              label="Nomor NIK / KTP"
-              placeholder="Masukkan 16 digit NIK"
+
+            {/* FATHER NAME */}
+            <InputText
+              label="Nama Ayah Kandung"
+              placeholder="Erlambang Poetra Ningrat"
+              required={true}
+              error={errors.fatherName?.message}
+              {...register('fatherName')}
             />
-            <InputCreate
+
+            {/* GENDER */}
+            <InputRadio
+              label="Jenis Kelamin"
+              required={true}
+              direction="horizontal"
+              options={CreateUserSchema.gender}
+              error={errors.gender?.message}
+              value={genderValue}
+              {...register('gender')}
+            />
+
+            {/* BIRTHDAY */}
+            <InputDate
               label="Tanggal Lahir"
-              type="date"
-              placeholder="Pilih tanggal lahir"
+              required={true}
+              error={errors.birthDate?.message}
+              {...register('birthDate')}
             />
-            <InputCreate
-              label="Nomor Telepon"
-              placeholder="Contoh: 081234567890"
+
+            {/* AGE */}
+            <InputText
+              label="Usia"
+              placeholder="60"
+              required={true}
+              error={errors.fatherName?.message}
+              {...register('fatherName')}
+            />
+
+            {/* PHONE NUMBER/WA */}
+            <InputText
+              label="Nomor Telfon Aktif"
+              placeholder="08947578852"
+              required={true}
+              error={errors.fatherName?.message}
+              {...register('fatherName')}
+            />
+
+            {/* EDUCATION */}
+            <InputSelect
+              label="Pendidikan"
+              placeholder="-- Pilih Pendikan --"
+              options={CreateUserSchema.educationOptions}
+              error={errors.education?.message}
+              {...register('education')}
+            />
+
+            {/* JOB */}
+            <InputText
+              label="Pekerjaan"
+              placeholder="Petani"
+              required={true}
+              error={errors.fatherName?.message}
+              {...register('fatherName')}
+            />
+
+            {/* ADDRESS */}
+            <InputText
+              label="Alamat"
+              placeholder="Perum Zamrud RT 01 RW 03"
+              required={true}
+              error={errors.fatherName?.message}
+              {...register('fatherName')}
+            />
+
+            {/* VILLAGE */}
+            <InputText
+              label="Desa"
+              placeholder="Cikampek Utara"
+              required={true}
+              error={errors.fatherName?.message}
+              {...register('fatherName')}
+            />
+
+            {/* IMAGE PROFILE */}
+            <InputImage
+              label="Foto Profil"
+              required={true}
+              error={errors.profileImage?.message}
+              {...register('avatar')}
             />
           </div>
         </section>
 
-        {/* SEKSI 2: BACKGROUND DAN PEKERJAAN */}
+        {/* SECTION 2: HAJJ DATA */}
         <section className="space-y-4">
-          <div className="bg-sea-green-50 text-sea-green-700 px-4 py-2.5 rounded-lg font-semibold text-sm sm:text-base">
-            Background dan Pekerjaan
-          </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <InputCreate
-              label="Pendidikan Terakhir"
-              placeholder="Contoh: S1 Teknik Informatika"
+          <h2 className="bg-sea-green-50 text-sea-green-700 px-4 py-2.5 rounded-lg font-semibold text-md md:text-xl">
+            DATA HAJI
+          </h2>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {/* PORTION POSITION */}
+            <InputText
+              label="Posisi Porsi"
+              placeholder="Cikampek Utara"
+              required={true}
+              error={errors.fatherName?.message}
+              {...register('fatherName')}
             />
-            <InputCreate
-              label="Pekerjaan / Jabatan"
-              placeholder="Masukkan posisi pekerjaan"
+
+            {/* STATUS PORTION */}
+            <InputSelect
+              label="Status Porsi"
+              placeholder="-- Pilih Status Porsi --"
+              options={CreateUserSchema.statusPortionOptions}
+              error={errors.education?.message}
+              {...register('education')}
             />
-            <InputCreate
-              label="Instansi / Perusahaan"
-              placeholder="Masukkan nama perusahaan"
+
+            {/* BACKUP PORTION POSITION */}
+            <InputText
+              label="Porsi Cadangan"
+              placeholder="Cikampek Utara"
+              required={true}
+              error={errors.fatherName?.message}
+              {...register('fatherName')}
             />
-            <InputCreate
-              label="Pengalaman Kerja (Tahun)"
-              type="number"
-              placeholder="Contoh: 3"
+
+            {/* BACKUP STATUS PORTION */}
+            <InputSelect
+              label="Status Cadangan"
+              placeholder="-- Pilih Status Porsi --"
+              options={CreateUserSchema.statusPortionOptions}
+              error={errors.education?.message}
+              {...register('education')}
+            />
+
+            {/* ZONA */}
+            <InputText
+              label="Zona Jamaah"
+              placeholder="A"
+              options={CreateUserSchema.statusPortionOptions}
+              error={errors.education?.message}
+              {...register('education')}
+            />
+
+            {/* DEAPATURE PROGRAM */}
+            <InputText
+              label="Program Keberangkatan"
+              placeholder="Reguler"
+              options={CreateUserSchema.statusPortionOptions}
+              error={errors.education?.message}
+              {...register('education')}
+            />
+
+            {/* MAHRAM NAME */}
+            <InputText
+              label="Nama Mahram"
+              placeholder="Siti Fatimah"
+              options={CreateUserSchema.statusPortionOptions}
+              error={errors.education?.message}
+              {...register('education')}
+            />
+
+            {/* MAHRAM NAME */}
+            <InputText
+              label="Hubungan Mahram"
+              placeholder="Istri"
+              options={CreateUserSchema.statusPortionOptions}
+              error={errors.education?.message}
+              {...register('education')}
+            />
+
+            {/* REFERENCE NAME */}
+            <InputText
+              label="Nama Referensi"
+              placeholder="Abdul Ghani"
+              options={CreateUserSchema.statusPortionOptions}
+              error={errors.education?.message}
+              {...register('education')}
+            />
+
+            {/* REFERENCE NAME */}
+            <InputText
+              label="Asal Refereni"
+              placeholder="Angota SIMAK 2022"
+              options={CreateUserSchema.statusPortionOptions}
+              error={errors.education?.message}
+              {...register('education')}
             />
           </div>
         </section>
 
-        {/* SEKSI 3: KESEHATAN */}
+        {/* SEKSI 3: CONTROL PROCESS HAJJ */}
         <section className="space-y-4">
-          <div className="bg-sea-green-50 text-sea-green-700 px-4 py-2.5 rounded-lg font-semibold text-sm sm:text-base">
-            Kesehatan
+          <div className="bg-sea-green-50 text-sea-green-700 px-4 py-2.5 rounded-lg font-semibold text-md md:text-xl">
+            Kontrol Proses Haji
           </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <InputCreate
-              label="Golongan Darah"
-              placeholder="Contoh: O / A / B / AB"
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {/* GFORM */}
+            <InputSelect
+              label="Google Form"
+              required={true}
+              placeholder="-- Pilih Status --"
+              options={CreateUserSchema.statusControlProcessOptions}
+              error={errors.birthPlace?.message}
+              {...register('birthPlace')}
             />
-            <InputCreate
-              label="Riwayat Penyakit"
-              placeholder="Tuliskan jika ada (opsional)"
+
+            {/* PHOTO */}
+            <InputSelect
+              label="Foto"
+              required={true}
+              placeholder="-- Pilih Status --"
+              options={CreateUserSchema.statusControlProcessOptions}
+              error={errors.birthPlace?.message}
+              {...register('birthPlace')}
             />
-            <InputCreate
-              label="Tinggi Badan (cm)"
-              type="number"
-              placeholder="Contoh: 170"
+
+            {/* SPPH */}
+            <InputSelect
+              label="SPPH"
+              required={true}
+              placeholder="-- Pilih Status --"
+              options={CreateUserSchema.statusControlProcessOptions}
+              error={errors.birthPlace?.message}
+              {...register('birthPlace')}
             />
-            <InputCreate
-              label="Berat Badan (kg)"
-              type="number"
-              placeholder="Contoh: 65"
+
+            {/* PASSWORD*/}
+            <InputText
+              label="Passport"
+              required={true}
+              placeholder="X1234567"
+              error={errors.birthPlace?.message}
+              {...register('birthPlace')}
+            />
+
+            {/* VISA */}
+            <InputText
+              label="Visa"
+              required={true}
+              placeholder="TI8765432"
+              error={errors.birthPlace?.message}
+              {...register('birthPlace')}
             />
           </div>
         </section>
 
-        {/* SEKSI 4: AKUN */}
+        {/* SECTION 4: REGISTRATION & PLACEMENT */}
         <section className="space-y-4">
-          <div className="bg-red-50 text-red-700 px-4 py-2.5 rounded-lg font-semibold text-sm sm:text-base">
-            Seksi Akun
+          <div className="bg-sea-green-50 text-sea-green-700 px-4 py-2.5 rounded-lg font-semibold text-md md:text-xl">
+            REGISTRASI & PENEMPATAN
+          </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {/* REGISTRATION NUMBER */}
+            <InputText
+              label="Nomor Registrasi"
+              required={true}
+              placeholder="D154"
+              error={errors.birthPlace?.message}
+              {...register('birthPlace')}
+            />
+
+            {/* PLOT */}
+            <InputText
+              label="Nomor PLOT"
+              required={true}
+              placeholder="D15"
+              error={errors.birthPlace?.message}
+              {...register('birthPlace')}
+            />
+
+            {/* KLOTER */}
+            <InputText
+              label="Kloter"
+              required={true}
+              placeholder="JKS 16"
+              error={errors.birthPlace?.message}
+              {...register('birthPlace')}
+            />
+
+            {/* GROUP */}
+            <InputText
+              label="Rombongan"
+              required={true}
+              placeholder="11"
+              error={errors.birthPlace?.message}
+              {...register('birthPlace')}
+            />
+
+            {/* Team */}
+            <InputText
+              label="Regu"
+              required={true}
+              placeholder="40"
+              error={errors.birthPlace?.message}
+              {...register('birthPlace')}
+            />
+          </div>
+        </section>
+
+        {/* SECTION 5: HEALTH & SKILL */}
+        <section className="space-y-4">
+          <div className="bg-sea-green-50 text-sea-green-700 px-4 py-2.5 rounded-lg font-semibold text-md md:text-xl">
+            KESEHATAN & KONTRIBUSI
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <InputCreate
-              label="Username"
-              placeholder="Masukkan username unik"
-            />
-            <InputCreate
-              label="Email"
-              type="email"
-              placeholder="contoh@domain.com"
-            />
-            <InputCreate
-              label="Kata Sandi"
-              type="password"
-              placeholder="Minimal 8 karakter"
-            />
-            <InputCreate
-              label="Konfirmasi Kata Sandi"
-              type="password"
-              placeholder="Ulangi kata sandi"
-            />
+            <InputText label="Nomor Porsi" placeholder="" readOnly={true} />
+            <InputText label="Password" type="password" placeholder="✱✱✱✱✱✱" />
+          </div>
+        </section>
+
+        {/* SECTION 6: ACCOUNT */}
+        <section className="space-y-4">
+          <div className="bg-red-50 text-red-700 px-4 py-2.5 rounded-lg font-semibold text-md md:text-xl">
+            AKUN JAMAAH
+          </div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <InputText label="Nomor Porsi" placeholder="" readOnly={true} />
+            <InputText label="Password" type="password" placeholder="✱✱✱✱✱✱" />
           </div>
         </section>
 
         {/* SUBMIT BUTTON */}
-        <div className="flex justify-end pt-4">
-          <button
-            type="submit"
-            className="w-full md:w-auto px-6 py-2.5 bg-sea-green-700 hover:bg-sea-green-800 text-white font-medium rounded-lg transition-colors duration-200"
-          >
-            Daftarkan Akun
-          </button>
+        <div className="flex justify-end gap-4 pt-4">
+          <Button type="submit" variant="secondary" isLoading={isSubmitting}>
+            Kembali
+          </Button>
+          <Button type="submit" isLoading={isSubmitting}>
+            Input Data
+          </Button>
         </div>
       </form>
     </div>
