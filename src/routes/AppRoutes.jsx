@@ -17,6 +17,7 @@ import AdminLayout from '../layouts/AdminLayout';
 import AdminScanPage from '../pages/admin/AdminScanPage';
 import MateriPage from '../pages/user/MateriPage';
 import CreateUserPage from '../pages/admin/CreateUserPage';
+import ListUsersPage from '../pages/admin/ListUsersPage';
 
 // USER
 import IdentityPage from '../pages/user/IdentityPage';
@@ -41,7 +42,8 @@ export default function AppRoutes() {
 
           {/* CRUD USER */}
           <Route path="users">
-            {/* <Route index element={<UserListPage />} /> */}
+            {/* <Route path="/listUser" element={<ListUser />} /> */}
+            <Route index element={<ListUsersPage />} />
             <Route path="create" element={<CreateUserPage />} />
             {/* <Route path=":id/edit" element={<EditUserPage />} /> */}
           </Route>

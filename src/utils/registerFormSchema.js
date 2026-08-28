@@ -108,6 +108,7 @@ export const cityOptions = [
   { label: 'Depok', value: 'Depok' },
   { label: 'Sukabumi', value: 'Sukabumi' },
   { label: 'Tasikmalaya', value: 'Tasikmalaya' },
+  { label: 'Karawang', value: 'Karawang' },
   // --- BANTEN ---
   { label: 'Cilegon', value: 'Cilegon' },
   { label: 'Serang', value: 'Serang' },
@@ -167,6 +168,39 @@ export const cityOptions = [
   { label: 'Sorong', value: 'Sorong' },
 ];
 
+export const districtOptions = [
+  { label: 'Banyusari', value: 'BANYUSARI' },
+  { label: 'Batujaya', value: 'BATUJAYA' },
+  { label: 'Ciampel', value: 'CIAMPEL' },
+  { label: 'Cibuaya', value: 'CIBUAYA' },
+  { label: 'Cikampek', value: 'CIKAMPEK' },
+  { label: 'Cilamaya Kulon', value: 'CILAMAYA KULON' },
+  { label: 'Cilamaya Wetan', value: 'CILAMAYA WETAN' },
+  { label: 'Cilebar', value: 'CILEBAR' },
+  { label: 'Jatisari', value: 'JATISARI' },
+  { label: 'Jayakerta', value: 'JAYAKERTA' },
+  { label: 'Karawang Barat', value: 'KARAWANG BARAT' },
+  { label: 'Karawang Timur', value: 'KARAWANG TIMUR' },
+  { label: 'Klari', value: 'KLARI' },
+  { label: 'Kutawaluya', value: 'KUTAWALUYA' },
+  { label: 'Lemahabang', value: 'LEMAHABANG' },
+  { label: 'Majalaya', value: 'MAJALAYA' },
+  { label: 'Pakisjaya', value: 'PAKISJAYA' },
+  { label: 'Pangkalan', value: 'PANGKALAN' },
+  { label: 'Pedes', value: 'PEDES' },
+  { label: 'Purwasari', value: 'PURWASARI' },
+  { label: 'Rawamerta', value: 'RAWAMERTA' },
+  { label: 'Rengasdengklok', value: 'RENGASDENGKLOK' },
+  { label: 'Tegalwaru', value: 'TEGALWARU' },
+  { label: 'Telagasari', value: 'TELAGASARI' },
+  { label: 'Telukjambe Barat', value: 'TELUKJAMBE BARAT' },
+  { label: 'Telukjambe Timur', value: 'TELUKJAMBE TIMUR' },
+  { label: 'Tempuran', value: 'TEMPURAN' },
+  { label: 'Tirtajaya', value: 'TIRTAJAYA' },
+  { label: 'Tirtamulya', value: 'TIRTAMULYA' },
+  { label: 'Kotabaru', value: 'KOTABARU' },
+];
+
 // STEP 3 BACKGROUND
 export const Step3BackgroundSchema = z.object({
   job: z.preprocess(
@@ -186,6 +220,7 @@ export const Step3BackgroundSchema = z.object({
     (val) => (val === null || val === undefined ? '' : val),
     z.string().min(1, 'Pilih bersama siapa Anda berangkat'),
   ),
+  nama_mahram: z.string().min(1, 'Nama pendamping atau mahram wajib diisi'),
 });
 
 export const jobOptions = [

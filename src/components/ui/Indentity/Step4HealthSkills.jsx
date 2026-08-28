@@ -69,7 +69,7 @@ const Step4HealthSkills = ({ onNext, onBack, initialData = {} }) => {
       />
 
       {/* BUTTON */}
-      <div className="flex justify-between items-center gap-4 w-80">
+      <div className="flex items-center gap-4 w-80">
         <Button type="button" variant="primary" onClick={handleBackWithData}>
           Kembali
         </Button>

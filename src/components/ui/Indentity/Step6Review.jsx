@@ -66,7 +66,7 @@ const Step6Review = ({
         </div>
 
         {/* SECTION 1: DATA PERSONAL */}
-        <div className="flex flex-col gap-3">
+        <aside className="flex flex-col gap-3">
           <h3 className="p-2 font-semibold rounded text-md text-sea-green-700 bg-sea-green-50">
             1. Data Personal
           </h3>
@@ -118,10 +118,10 @@ const Step6Review = ({
               {renderValue(initialData.subDistrict)}
             </div>
           </div>
-        </div>
+        </aside>
 
         {/* SECTION 2: BACKGROUND */}
-        <div className="flex flex-col gap-3">
+        <aside className="flex flex-col gap-3">
           <h3 className="p-2 font-semibold rounded text-md text-sea-green-700 bg-sea-green-50">
             2. Latar Belakang & Program
           </h3>
@@ -154,11 +154,17 @@ const Step6Review = ({
               </p>
               {renderValue(initialData.companion)}
             </div>
+            <div className="md:col-span-2">
+              <p className="text-xs font-semibold text-gray-500">
+                Nama Pendamping
+              </p>
+              {renderValue(initialData.companionName)}
+            </div>
           </div>
-        </div>
+        </aside>
 
         {/* SECTION 3: HEALTH & SKILLS */}
-        <div className="flex flex-col gap-3">
+        <aside className="flex flex-col gap-3">
           <h3 className="p-2 font-semibold rounded text-md text-sea-green-700 bg-sea-green-50">
             3. Keterampilan & Kesehatan
           </h3>
@@ -182,10 +188,10 @@ const Step6Review = ({
               {renderValue(initialData.healthCondition)}
             </div>
           </div>
-        </div>
+        </aside>
 
         {/* SECTION 4: REFERENCE (DITAMBAHKAN DI SINI) */}
-        <div className="flex flex-col gap-3">
+        <aside className="flex flex-col gap-3">
           <h3 className="p-2 font-semibold rounded text-md text-sea-green-700 bg-sea-green-50">
             4. Informasi Referensi
           </h3>
@@ -209,11 +215,11 @@ const Step6Review = ({
               {renderValue(initialData.referenceOrigin)}
             </div>
           </div>
-        </div>
+        </aside>
       </div>
 
       {/* NAVIGATION BUTTONS */}
-      <div className="flex items-center justify-between gap-4 w-80">
+      <div className="flex items-center gap-4 w-80">
         <Button
           type="button"
           variant="primary"

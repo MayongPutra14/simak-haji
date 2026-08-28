@@ -2,6 +2,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as RegistrationForm from '../../../utils/registerFormSchema';
 import InputRadio from '../inputs/InputRadio';
+import InputText from '../inputs/InputText';
 import { Button } from '../global/Button';
 
 const Step3Background = ({ onNext, onBack, initialData = {} }) => {
@@ -94,8 +95,18 @@ const Step3Background = ({ onNext, onBack, initialData = {} }) => {
         {...register('companion')}
       />
 
+      <InputText
+        label="Nama Pendamping Utama / Mahram"
+        description="Wajib diisi. Isi dengan nama anggota keluarga inti yang berangkat dalam satu rombongan/kloter dengan Anda."
+        required={true}
+        variant="underlined"
+        withCard={true}
+        error={errors.nama_mahram?.message}
+        {...register('nama_mahram')}
+      />
+
       {/* BUTTON */}
-      <div className="flex justify-between items-center gap-4 w-80">
+      <div className="flex items-center gap-4 w-80">
         <Button type="button" variant="primary" onClick={handleBackWithData}>
           Kembali
         </Button>
