@@ -59,7 +59,7 @@ export default function getNavItems(role) {
   const jamaahItem = {
     id: 'jamaah',
     label: 'Jamaah',
-    path: '/admin/users/create',
+    path: '/admin/users',
     IconOutline: IconPeopleOutline,
     IconFill: IconPeopleFill,
   };
@@ -83,5 +83,3 @@ export default function getNavItems(role) {
     commonItems.profile,
   ];
 }
-
-

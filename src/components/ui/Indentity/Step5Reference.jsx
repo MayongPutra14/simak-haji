@@ -108,12 +108,12 @@ const Step5Reference = ({ onNext, onBack, initialData = {} }) => {
         variant="underlined"
         withCard={true}
         value={profileImageValue}
-        onChange={handleProfileImageChange} // LOCALSTORAGE SAVE ONCHANGE
+        onChange={handleProfileImageChange}
         error={errors.profileImage?.message}
       />
 
       {/* BUTTON */}
-      <div className="flex items-center justify-between gap-4 w-80">
+      <div className="flex items-center gap-4 w-80">
         <Button type="button" variant="primary" onClick={handleBackWithData}>
           Kembali
         </Button>

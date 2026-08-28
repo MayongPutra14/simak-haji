@@ -35,7 +35,6 @@ export const updateProfileIdentity = async (userId, formData) => {
   return response.data;
 };
 
-
 export const getUserGlobalProfile = () => {
   const globalProfile = localStorage.getItem('user');
   if (!globalProfile) return null;
@@ -71,5 +70,23 @@ export const getSchedules = async (userId) => {
   } catch (error) {
     console.error('Error fetching schedules:', error);
     return null;
+  }
+};
+
+// ADMIN
+export const getAdminUsersData = async () => {
+  try {
+    const response = await api.post(`${BASE_URL}/admin_manage.php`, {
+      action: 'get_users',
+    });
+
+    if (!response.data) {
+      throw new Error('Data jamaah tidak ditemukan');
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching users data:', error);
+    throw error;
   }
 };

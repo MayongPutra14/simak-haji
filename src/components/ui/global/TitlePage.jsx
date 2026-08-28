@@ -24,7 +24,7 @@ const TitlePage = ({
       />
 
       {/* GRADIENT RING TO LEFT */}
-      <div className={`absolute inset-0 bg-linear-to-r ${gradientClass}`} />
+      <div className={`absolute inset-0 bg-linear-to-tr ${gradientClass}`} />
 
       {/* SECOND CONTAINER: TITLE & SUB-TITLE  */}
       <div className="relative z-10 w-full px-6 py-12 text-white md:px-12 md:py-16">

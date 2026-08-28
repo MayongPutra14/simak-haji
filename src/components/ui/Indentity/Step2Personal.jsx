@@ -95,9 +95,11 @@ const Step2Personal = ({ onNext, initialData = {} }) => {
         {...register('village')}
       />
 
-      <InputText
+      <InputSelect
         label="Kecamatan"
         required={true}
+        placeholder="-- Pilih Kecamatan --"
+        options={RegistrationForm.districtOptions}
         variant="underlined"
         withCard={true}
         error={errors.subDistrict?.message}

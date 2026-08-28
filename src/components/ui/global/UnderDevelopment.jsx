@@ -1,44 +1,11 @@
 import { useNavigate } from 'react-router';
-import { Button } from './Button'; // Sesuaikan path import komponen Button Anda
-
-// Aset Ilustrasi
+import { Button } from './Button';
 import BrickIlustration from '../../../assets/images/brick.webp';
 import ConstructionIlustration from '../../../assets/images/construction.webp';
-
-// Inline Icon Components
-const IconHome = ({ className = 'w-4 h-4' }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={2}
-    stroke="currentColor"
-    className={className}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-    />
-  </svg>
-);
-
-const IconBack = ({ className = 'w-4 h-4' }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={2}
-    stroke="currentColor"
-    className={className}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-    />
-  </svg>
-);
+import {
+  IoArrowBackOutline as IconBack,
+  IoHomeOutline as IconHome,
+} from 'react-icons/io5';
 
 const UnderDevelopment = () => {
   const navigate = useNavigate();
@@ -53,7 +20,7 @@ const UnderDevelopment = () => {
 
   return (
     <div className="relative min-h-screen w-full bg-white rounded-2xl border border-slate-100 p-6 sm:p-12 flex flex-col items-center justify-center text-center overflow-hidden">
-      {/* HIASAN BRICK (1 KANAN ATAS, 1 KIRI TENGAH, 1 KANAN BAWAH) */}
+      {/* BRICK DECORATION (1 TOP RIGHT, 1 MIDDLE LEFT, 1 BOTTOM RIGHT) */}
       <img
         src={BrickIlustration}
         alt=""
@@ -77,7 +44,7 @@ const UnderDevelopment = () => {
 
       {/* CONTENT CONTAINER */}
       <div className="relative z-10 flex flex-col items-center max-w-lg mx-auto">
-        {/* ILUSTRASI UTAMA */}
+        {/* MAIN ILUSTRATION */}
         <div className="mb-6">
           <img
             src={ConstructionIlustration}
@@ -86,7 +53,7 @@ const UnderDevelopment = () => {
           />
         </div>
 
-        {/* JUDUL DAN DESKRIPSI */}
+        {/* TITLE AND DESCRIPTION */}
         <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight mb-3">
           Fitur Dalam Pengembangan
         </h1>
@@ -95,9 +62,8 @@ const UnderDevelopment = () => {
           terbaik bagi Anda. Silakan kembali lagi secara berkala!
         </p>
 
-        {/* BUTTON NAVIGATION MENGGUNAKAN KOMPONEN BUTTON */}
+        {/* BUTTON NAVIGATION */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
-          {/* BUTTON KE BERANDA (KUNING SOLID) */}
           <Button
             onClick={handleGoHome}
             icon={<IconHome className="w-4 h-4" />}
@@ -106,7 +72,6 @@ const UnderDevelopment = () => {
             Ke Beranda
           </Button>
 
-          {/* BUTTON KEMBALI (KUNING OUTLINE/GHOST) */}
           <Button
             variant="outline"
             onClick={handleGoBack}

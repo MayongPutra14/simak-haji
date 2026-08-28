@@ -27,16 +27,23 @@ const Modal = ({
   buttonText = 'Lanjutkan',
   buttonColor = 'bg-blue-600 hover:bg-blue-700 text-white',
   onConfirm,
+  showCancelButton = false,
+  cancelButtonText = 'Batal',
+  onCancel,
 }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && isOpen) {
-        onClose();
+        if (onCancel) {
+          onCancel();
+        } else {
+          onClose();
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, onCancel]);
 
   if (!isOpen) return null;
 
@@ -47,10 +54,17 @@ const Modal = ({
     onClose();
   };
 
+  const handleCancelClick = () => {
+    if (onCancel) {
+      onCancel();
+    }
+    onClose();
+  };
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs transition-opacity animate-in fade-in duration-200"
-      onClick={onClose}
+      onClick={handleCancelClick}
     >
       <div
         className="relative w-full max-w-sm rounded-2xl bg-white p-6 text-center shadow-xl transition-all transform animate-in zoom-in-95 duration-200"
@@ -68,13 +82,27 @@ const Modal = ({
 
           <p className="mt-2 text-sm text-slate-600">{description}</p>
 
-          <button
-            type="button"
-            onClick={handleButtonClick}
-            className={`text-white mt-6 inline-flex justify-center rounded-xl px-6 py-2.5 text-sm font-medium shadow-xs focus:outline-hidden focus:ring-2 focus:ring-offset-2 transition-colors cursor-pointer ${buttonColor}`}
-          >
-            {buttonText}
-          </button>
+          <div className="mt-6 flex w-full gap-3 justify-center">
+            {showCancelButton && (
+              <button
+                type="button"
+                onClick={handleCancelClick}
+                className="w-full sm:w-auto inline-flex justify-center rounded-xl border border-slate-200 bg-white px-6 py-2.5 text-sm font-medium text-slate-700 shadow-xs hover:bg-slate-50 focus:outline-hidden focus:ring-2 focus:ring-offset-2 transition-colors cursor-pointer"
+              >
+                {cancelButtonText}
+              </button>
+            )}
+
+            <button
+              type="button"
+              onClick={handleButtonClick}
+              className={`inline-flex justify-center rounded-xl px-6 py-2.5 text-sm font-medium shadow-xs focus:outline-hidden focus:ring-2 focus:ring-offset-2 transition-colors cursor-pointer ${
+                showCancelButton ? 'w-full sm:w-auto' : ''
+              } ${buttonColor}`}
+            >
+              {buttonText}
+            </button>
+          </div>
         </div>
       </div>
     </div>
