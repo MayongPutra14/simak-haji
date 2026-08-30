@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { getAdminUsersData } from '../../utils/client/api';
+import { getAdminUsersData } from '../../utils/admin/adminAPI';
 
 export default function useAdminUsersData({ adminId } = {}) {
   const [usersData, setUsersData] = useState([]);
