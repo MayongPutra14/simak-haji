@@ -16,14 +16,6 @@ export const registrationSchema = z.object({
 });
 
 // STEP 2 PERSONAL
-const MAX_FILE_SIZE = 1 * 1024 * 1024;
-const ACCEPTED_IMAGE_TYPES = [
-  'image/jpeg',
-  'image/jpg',
-  'image/png',
-  'image/webp',
-];
-
 export const Step2PersonalSchema = z.object({
   fatherName: z
     .string()
@@ -164,6 +156,7 @@ export const districtOptions = [
   { label: 'Karawang Barat', value: 'KARAWANG BARAT' },
   { label: 'Karawang Timur', value: 'KARAWANG TIMUR' },
   { label: 'Klari', value: 'KLARI' },
+  { label: 'Kotabaru', value: 'KOTABARU' },
   { label: 'Kutawaluya', value: 'KUTAWALUYA' },
   { label: 'Lemahabang', value: 'LEMAHABANG' },
   { label: 'Majalaya', value: 'MAJALAYA' },
@@ -180,7 +173,6 @@ export const districtOptions = [
   { label: 'Tempuran', value: 'TEMPURAN' },
   { label: 'Tirtajaya', value: 'TIRTAJAYA' },
   { label: 'Tirtamulya', value: 'TIRTAMULYA' },
-  { label: 'Kotabaru', value: 'KOTABARU' },
 ];
 
 // STEP 3 BACKGROUND
@@ -212,13 +204,31 @@ export const jobOptions = [
   { label: 'Guru', value: 'Guru' },
   { label: 'Buruh Pabrik', value: 'Buruh Pabrik' },
   { label: 'Pedagang', value: 'Pedagang' },
+  { label: 'Belum bekerja', value: 'Belum Bekerja' },
 ];
 
 export const educationOptions = [
   // --- PENDIDIKAN DASAR & MENENGAH ---
   { label: 'SD', value: 'SD' },
-  { label: 'SLTP / SMP', value: 'SLTP' },
-  { label: 'SLTA / SMA / SMK', value: 'SLTA' },
+
+  {
+    label: 'Sekolah Lanjutan Tingkat Pertama',
+    value: 'Sekolah Lanjutan Tingkat Pertama',
+  },
+  {
+    label: 'Sekolah Menengah Pertama (SMP)',
+    value: 'Sekolah Menengah Pertama',
+  },
+  {
+    label: 'Sekolah Lanjutan Tingkat Atas (SLTA)',
+    value: 'Sekolah Lanjutan Tingkat Atas',
+  },
+  { label: 'Sekolah Menengah Atas (SMA)', value: 'Sekolah Menengah Atas' },
+  {
+    label: 'Sekolah Menengah Kejuruan (SMK)',
+    value: 'Sekolah Menengah Kejuruan',
+  },
+  { label: 'Madrasah Aliyah', value: 'Madrasah Aliyah' },
 
   // --- PENDIDIKAN TINGGI ---
   { label: 'Diploma (D1/D2/D3/D4)', value: 'Diploma' },
@@ -318,9 +328,6 @@ export const positiveTraitOptions = [
 ];
 
 export const healthConditionOptions = [
-  // --- KONDISI KESEHATAN UMUM ---
-  { label: 'Tidak Ada', value: 'Tidak Ada' },
-
   // --- RIWAYAT PENYAKIT & MEDIS ---
   { label: 'Diabetes', value: 'Diabetes' },
   { label: 'Gangguan Pernapasan', value: 'Gangguan Pernapasan' },
@@ -334,6 +341,9 @@ export const healthConditionOptions = [
   // --- KEBUTUHAN KHUSUS & PERAWATAN ---
   { label: 'Membutuhkan Kursi Roda', value: 'Membutuhkan Kursi Roda' },
   { label: 'Rutin Konsumsi Obat', value: 'Rutin Konsumsi Obat' },
+
+  // --- KONDISI KESEHATAN UMUM ---
+  { label: 'Tidak Ada', value: 'Tidak Ada' },
 ];
 
 // STEP 5 REFERENCE
@@ -351,23 +361,40 @@ export const Step5Reference = z.object({
   profileImage: z
     .any()
     .refine((value) => {
+      // 1. Check Data Existence
       if (!value) return false;
       if (typeof value === 'string') return value.trim().length > 0;
       if (value instanceof FileList) return value.length > 0;
       if (value instanceof File) return true;
       return false;
     }, 'Foto profil wajib diunggah')
+
     .refine((value) => {
+      // 2. Check File Size (Maximum 1 MB = 1,048,576 Bytes)
+      if (typeof value === 'string') return true; // Pass if it's a URL string from the DB
+
+      const file = value instanceof FileList ? value[0] : value;
+
+      // Fail if it's not a valid File instance
+      if (!(file instanceof File)) return false;
+
+      // Return true if size is <= 1MB
+      return file.size <= 1024 * 1024;
+    }, 'Ukuran gambar maksimal adalah 1 MB, silakan pilih gambar yang lebih kecil')
+
+    .refine((value) => {
+      // 3. Check File Format
       if (typeof value === 'string') return true;
       const file = value instanceof FileList ? value[0] : value;
-      if (!file) return true;
-      return file.size <= MAX_FILE_SIZE;
-    }, 'Ukuran gambar maksimal adalah 1MB, silakan kompres atau ganti gambar')
-    .refine((value) => {
-      if (typeof value === 'string') return true;
-      const file = value instanceof FileList ? value[0] : value;
-      if (!file) return true;
-      return ACCEPTED_IMAGE_TYPES.includes(file.type);
+      if (!(file instanceof File)) return false;
+
+      const ACCEPTED_TYPES = [
+        'image/png',
+        'image/jpeg',
+        'image/jpg',
+        'image/webp',
+      ];
+      return ACCEPTED_TYPES.includes(file.type);
     }, 'Format gambar tidak didukung. Gunakan PNG, JPEG, JPG, atau WEBP'),
 });
 

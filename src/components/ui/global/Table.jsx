@@ -110,8 +110,8 @@ export default function Table({
 
                     const stickyClass = col.isSticky
                       ? `sticky left-0 z-10 ${
-                          isEven ? 'bg-slate-50' : 'bg-white'
-                        } shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)]`
+                        isEven ? 'bg-slate-50' : 'bg-white'
+                      } shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)]`
                       : '';
 
                     return (

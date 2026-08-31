@@ -13,10 +13,26 @@ const Step6Review = ({
       );
     }
 
+    if (value instanceof File) {
+      const previewUrl = URL.createObjectURL(value);
+      return (
+        <div className="mt-1">
+          <img
+            src={previewUrl}
+            alt="Preview Foto Profile"
+            className="object-cover w-24 h-24 border border-gray-300 rounded-md shadow-sm"
+            onLoad={() => URL.revokeObjectURL(previewUrl)}
+          />
+        </div>
+      );
+    }
+
     // PERBAIKAN 1: Cek apakah nilai berupa string Base64 Gambar atau URL Gambar
     if (
       typeof value === 'string' &&
-      (value.startsWith('data:image/') || value.startsWith('http'))
+      (value.startsWith('data:image/') ||
+        value.startsWith('http') ||
+        value.startsWith('/'))
     ) {
       return (
         <div className="mt-1">
@@ -158,7 +174,7 @@ const Step6Review = ({
               <p className="text-xs font-semibold text-gray-500">
                 Nama Pendamping
               </p>
-              {renderValue(initialData.companionName)}
+              {renderValue(initialData.nama_mahram)}
             </div>
           </div>
         </aside>

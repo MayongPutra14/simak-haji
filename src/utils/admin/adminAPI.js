@@ -49,3 +49,28 @@ export const createAdminUsersData = async (formData) => {
     throw error;
   }
 };
+
+export const deleteAdminUserData = async (userId) => {
+  if (!userId) {
+    return null;
+  }
+
+  try {
+    const payload = {
+      action: 'delete_user',
+      user_id: userId,
+    };
+    const response = await api.post('admin_manage.php', payload);
+    if (
+      response.data?.status === 'failed' ||
+      response.data?.status === 'error'
+    ) {
+      throw new Error(response.data?.message || 'Gagal membuat akun baru');
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching users data:', error);
+    throw error;
+  }
+};

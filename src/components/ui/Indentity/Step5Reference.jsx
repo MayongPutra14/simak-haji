@@ -1,4 +1,4 @@
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm, useWatch, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import InputText from '../inputs/InputText';
 import InputRadio from '../inputs/InputRadio';
@@ -11,7 +11,6 @@ const Step5Reference = ({ onNext, onBack, initialData = {} }) => {
     register,
     handleSubmit,
     control,
-    setValue,
     getValues,
     formState: { errors },
   } = useForm({
@@ -20,7 +19,7 @@ const Step5Reference = ({ onNext, onBack, initialData = {} }) => {
       referenceName: initialData?.referenceName || '',
       referenceWhatsapp: initialData?.referenceWhatsapp || '',
       referenceOrigin: initialData?.referenceOrigin || '',
-      profileImage: initialData?.profileImage || '',
+      profileImage: initialData?.profileImage || null,
     },
   });
 
@@ -28,31 +27,6 @@ const Step5Reference = ({ onNext, onBack, initialData = {} }) => {
     control,
     name: 'referenceOrigin',
   });
-
-  const profileImageValue = useWatch({
-    control,
-    name: 'profileImage',
-  });
-
-  const fileToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  };
-
-  // IN YOUR FORM COMPONENT:
-  const handleProfileImageChange = async (event) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const base64 = await fileToBase64(file);
-
-      // SAVE TO REACT HOOK FORM
-      setValue('profileImage', base64, { shouldValidate: true });
-    }
-  };
 
   const handleOnSubmit = (data) => {
     onNext(data);
@@ -101,15 +75,26 @@ const Step5Reference = ({ onNext, onBack, initialData = {} }) => {
         {...register('referenceOrigin')}
       />
 
-      <InputImage
-        label="Foto Profile"
-        description="Silakan unggah foto Anda. Pastikan foto sopan dan ukuran file maksimal 1 MB."
-        required={true}
-        variant="underlined"
-        withCard={true}
-        value={profileImageValue}
-        onChange={handleProfileImageChange}
-        error={errors.profileImage?.message}
+      <Controller
+        name="profileImage"
+        control={control}
+        render={({ field: { onChange, onBlur, value, ref } }) => (
+          <InputImage
+            ref={ref}
+            label="Foto Profile"
+            description="Silakan unggah foto Anda. Pastikan foto sopan dan ukuran file maksimal 1 MB."
+            required={true}
+            variant="underlined"
+            withCard={true}
+            value={value}
+            onBlur={onBlur}
+            onChange={(e) => {
+              const file = e?.target?.files ? e.target.files[0] : e;
+              onChange(file || null);
+            }}
+            error={errors.profileImage}
+          />
+        )}
       />
 
       {/* BUTTON */}

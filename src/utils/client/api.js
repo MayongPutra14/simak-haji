@@ -17,17 +17,30 @@ export const api = axios.create({
 
 export const updateProfileIdentity = async (userId, formData) => {
   if (!formData)
-    throw new Error(
-      'Login session is not valid, please tyr againSesi login tidak valid, silahkan login kembali.',
-    );
+    throw new Error('Sesi login tidak valid, silahkan login kembali.');
 
-  const payload = {
-    user_id: userId,
-    ...formData,
-    is_completed: true,
-  };
+  // PREPARE MULTIPART FORM DATA
+  const payload = new FormData();
 
-  const response = await api.post('/update_profile.php', payload);
+  // ATTACH MANDATORY PARAMETERS
+  payload.append('user_id', userId);
+  payload.append('is_completed', 'true');
+
+  // APPEND FORM DATA FIELDS TO PAYLOAD
+  Object.keys(formData).forEach((key) => {
+    const value = formData[key];
+    if (value !== null && value !== undefined) {
+      payload.append(key, value);
+    }
+  });
+
+  // SEND MULTIPART REQUEST
+  const response = await api.post('/update_profile.php', payload, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
   if (response?.status === 'failed' || response?.status === 'error') {
     throw new Error(response.data?.message || 'Gagal memperbarui profile');
   }
@@ -49,7 +62,7 @@ export const getUserGlobalProfile = () => {
 
 export const getUserProfile = async (userId) => {
   try {
-    const response = await axios.post(`${BASE_URL}/get_profile.php`, {
+    const response = await api.post('/get_profile.php', {
       user_id: userId,
     });
 
