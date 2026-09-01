@@ -212,23 +212,10 @@ export const educationOptions = [
   { label: 'SD', value: 'SD' },
 
   {
-    label: 'Sekolah Lanjutan Tingkat Pertama',
-    value: 'Sekolah Lanjutan Tingkat Pertama',
-  },
-  {
-    label: 'Sekolah Menengah Pertama (SMP)',
+    label: 'SLTP / SMP',
     value: 'Sekolah Menengah Pertama',
   },
-  {
-    label: 'Sekolah Lanjutan Tingkat Atas (SLTA)',
-    value: 'Sekolah Lanjutan Tingkat Atas',
-  },
-  { label: 'Sekolah Menengah Atas (SMA)', value: 'Sekolah Menengah Atas' },
-  {
-    label: 'Sekolah Menengah Kejuruan (SMK)',
-    value: 'Sekolah Menengah Kejuruan',
-  },
-  { label: 'Madrasah Aliyah', value: 'Madrasah Aliyah' },
+  { label: 'SLTA / SMA / SMK / MA', value: 'Sekolah Menengah Atas' },
 
   // --- PENDIDIKAN TINGGI ---
   { label: 'Diploma (D1/D2/D3/D4)', value: 'Diploma' },
@@ -250,11 +237,11 @@ export const programOptions = [
 
 export const experienceOptions = [
   // --- SUDAH PERNAH ---
-  { label: 'Pernah Haji', value: 'Pernah Haji' },
-  { label: 'Pernah Umrah', value: 'Pernah Umrah' },
+  { label: 'Pernah Haji', value: 'pernah haji' },
+  { label: 'Pernah Umrah', value: 'pernah umrah' },
 
   // --- BELUM PERNAH ---
-  { label: 'Belum Pernah', value: 'Belum' },
+  { label: 'Belum Pernah', value: 'belum pernah' },
 ];
 
 export const companionOptions = [

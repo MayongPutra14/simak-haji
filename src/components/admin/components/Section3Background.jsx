@@ -69,15 +69,6 @@ export default function Section3Background() {
           error={errors.mahramName?.message}
           {...register('mahramName')}
         />
-
-        {/* MAHRAM NAME */}
-        <InputText
-          label="Hubungan Mahram"
-          placeholder="Istri"
-          required={true}
-          error={errors.education?.message}
-          {...register('education')}
-        />
       </div>
     </section>
   );

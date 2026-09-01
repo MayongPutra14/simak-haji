@@ -96,9 +96,13 @@ export default function ListUser({
 
     const result = await deleteUser(deleteTarget.id);
 
-    if (result.success) {
+    if (result.status === 'success') {
       setDeleteTarget(null);
       if (onRefresh) await onRefresh();
+
+      if (currentData.length === 1 && currentPage > 1) {
+        setCurrentPage((prev) => prev - 1);
+      }
     }
   };
 

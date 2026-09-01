@@ -20,28 +20,16 @@ const ACCEPTED_IMAGE_TYPES = [
   'image/webp',
 ];
 
-//  user account schema
-export const UserAccount = z.object({
-  porsionNumber: z
-    .string()
-    .min(1, 'Nomor porsi wajib diisi')
-    .regex(
-      /^[0-9]+$/,
-      'Input wajib berupa angka dan tidak boleh berisi karakter apapun',
-    ),
-  password: z
-    .string()
-    .min(1, 'Password wajib diisi')
-    .min(6, 'Password minimal 6 karakter'),
-  confirmPassword: z.string().min(1, 'Konfirmasi password wajib diisi'),
+// STEP 1 SCHEMA: ACCOUNT
+export const step1Schema = z.object({
+  nama_lengkap: z.string().min(1, 'Nama lengkap wajib diisi'),
+  nomor_porsi: z.string().min(1, 'Nomor porsi wajib diisi'),
+  whatsapp: z.string().min(1, 'Nomor WhatsApp wajib diisi'),
+  password: z.string().min(6, 'Password minimal 6 karakter'),
 });
 
-// persona data
-export const PersonalData = z.object({
-  userName: z
-    .string()
-    .min(1, 'Nama jamaah wajib diisi')
-    .min(3, 'Nama jamaah minimal 3 karakter'),
+// STEP 2 SCHEMA: PROFILE BIODATA
+export const step2Schema = z.object({
   fatherName: z
     .string()
     .min(1, 'Nama ayah kandung wajib diisi')
@@ -72,58 +60,40 @@ export const PersonalData = z.object({
       if (file instanceof File) return ACCEPTED_IMAGE_TYPES.includes(file.type);
       return true;
     }, 'Format file harus JPG, PNG, atau WEBP'),
-});
-
-// background
-export const Background = z.object({
   job: z.string().min(1, 'Pekerjaan wajib diisi'),
   education: z.string().nullable().optional(),
   depature: z.string().min(1, 'Program keberangkatan wajib diisi'),
   experience: z.string().min(1, 'Pengalaman wajib diisi'),
   companion: z.string().min(1, 'Pendamping wajib diisi'),
   mahramName: z.string().min(1, 'Nama mahram wajib diisi'),
-});
-
-// Health and SKill Schema
-export const HealthSkills = z.object({
   expertise: z.preprocess(
     convertStringToArray,
     z.array(z.string()).min(1, 'Masukkan minimal satu kemampuan yang dikuasai'),
   ),
-
   contribution: z.preprocess(
     convertStringToArray,
     z
       .array(z.string())
       .min(1, 'Masukkan minimal satu hal positif yang dikontribusikan'),
   ),
-
   health: z.preprocess(
     convertStringToArray,
     z
       .array(z.string())
       .min(1, 'Masukkan minimal satu kondisi kesehatan atau kebutuhan khusus'),
   ),
-});
-
-// reference
-export const Reference = z.object({
   referenceName: z.string().nullable().optional(),
   referencePhone: z.string().nullable().optional(),
   referenceOrigin: z.string().nullable().optional(),
 });
 
-// Hajj Data
-export const HajjData = z.object({
+// STEP 3 SCHEMA: BUREAUCRACY AND DOCUMENTS
+export const step3Schema = z.object({
   currPorsionPosition: z.string().nullable().optional(),
   currPorstionStatus: z.string().nullable().optional(),
   currPorsionPositionBackup: z.string().nullable().optional(),
   currPorstionStatusBackup: z.string().nullable().optional(),
   zone: z.string().min(1, 'Zona wajib diisi'),
-});
-
-// Status control process
-export const StatusControlProcess = z.object({
   googleFormStatus: z.string().nullable().optional(),
   photoStatus: z.string().nullable().optional(),
   spphStatus: z.string().nullable().optional(),
@@ -134,10 +104,6 @@ export const StatusControlProcess = z.object({
   paymentStatus: z.string().nullable().optional(),
   passport: z.string().nullable().optional(),
   visa: z.string().nullable().optional(),
-});
-
-// Placement
-export const Placement = z.object({
   plotNumber: z.string().nullable().optional(),
   batch: z.string().nullable().optional(),
   group: z.string().nullable().optional(),
@@ -324,18 +290,3 @@ export const zonaOptions = [
   { label: 'E', value: 'E' },
   { label: 'F', value: 'F' },
 ];
-
-export const CreateUserSchema = z
-  .object({})
-  .merge(UserAccount)
-  .merge(PersonalData)
-  .merge(Background)
-  .merge(HealthSkills)
-  .merge(Reference)
-  .merge(HajjData)
-  .merge(StatusControlProcess)
-  .merge(Placement)
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'Password dan Konfirmasi Password tidak cocok',
-    path: ['confirmPassword'],
-  });

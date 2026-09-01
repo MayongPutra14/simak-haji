@@ -13,7 +13,7 @@ export default function Header() {
 
   const encodedName = encodeURIComponent(profile.nama_lengkap);
   const uiAvatarUrl = `https://ui-avatars.com/api/?name=${encodedName}&background=random&color=fff&bold=true`;
-  const avatarSrc = profile.gambar || uiAvatarUrl;
+  const avatarSrc = profile.profile_image || uiAvatarUrl;
 
   const handleLogout = () => {
     logout();

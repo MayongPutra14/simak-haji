@@ -26,16 +26,7 @@ export default function Section2PersonalData() {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* FATHER NAME */}
         <InputText
-          label="Nama Lengkap Jamaah"
-          placeholder="Yanto Kuncoro"
-          required={true}
-          error={errors.userName?.message}
-          {...register('userName')}
-        />
-
-        {/* FATHER NAME */}
-        <InputText
-          label="Nama Ayah"
+          label="Nama Ayah Kandung"
           placeholder="Budi Purwanto"
           required={true}
           error={errors.fatherName?.message}

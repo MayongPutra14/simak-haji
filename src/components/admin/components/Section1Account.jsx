@@ -13,14 +13,33 @@ export default function Section1Account() {
         AKUN JAMAAH
       </h2>
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+        {/* USER NAME */}
+        <InputText
+          label="Nama Lengkap"
+          placeholder="Budi Susanto"
+          required={true}
+          error={errors.nama_lengkap?.message}
+          {...register('nama_lengkap')}
+        />
+
         {/* POSRSI NUMBER */}
         <InputNumber
           label="Nomor Porsi"
           placeholder="1000623881"
           required={true}
           maxLength={13}
-          error={errors.porsionNumber?.message}
-          {...register('porsionNumber')}
+          error={errors.nomor_porsi?.message}
+          {...register('nomor_porsi')}
+        />
+
+        {/* WHATSAPP NUMBER */}
+        <InputNumber
+          label="Nomor Whatsapp"
+          placeholder="1000623881"
+          required={true}
+          maxLength={13}
+          error={errors.whatsapp?.message}
+          {...register('whatsapp')}
         />
 
         {/* PASSWORD */}
@@ -33,13 +52,6 @@ export default function Section1Account() {
         />
 
         {/* CONFIRM PASSWORD */}
-        <InputText
-          label="Konfirmasi Password"
-          placeholder="✱✱✱✱✱✱"
-          required={true}
-          error={errors.confirmPassword?.message}
-          {...register('confirmPassword')}
-        />
       </div>
     </section>
   );

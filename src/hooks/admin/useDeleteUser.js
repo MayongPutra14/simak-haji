@@ -11,7 +11,6 @@ export default function useDeleteAdminUser() {
 
     try {
       const response = await deleteAdminUserData(userId);
-      setIsDeleting(false);
       return response;
     } catch (err) {
       const errorMessage =
