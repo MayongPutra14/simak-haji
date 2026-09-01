@@ -4,7 +4,7 @@ import Modal from '../../components/ui/global/Modal';
 import CreateUser from '../../components/admin/CreateUser';
 import TitlePage from '../../components/ui/global/TitlePage';
 import { bgImage } from '../../utils/bgImage';
-import { useUserManagement } from '../../hooks/admin/useUsermanagement';
+import { useUserManagement } from '../../hooks/admin/useUserManagement';
 import {
   IoCloseOutline as IconClose,
   IoCheckmark as IconCheck,
