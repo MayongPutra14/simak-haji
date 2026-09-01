@@ -16,7 +16,7 @@ const TitlePage = ({
   gradientClass = 'from-sea-green-800 to-sea-green-500/30',
 }) => {
   return (
-    <header className="relative w-full overflow-hidden h-50 rounded-b-3xl md:h-75">
+    <header className="relative w-full overflow-hidden rounded-b-3xl md:h-75">
       {/* THIRD CONTAINER: BACKGROUND IMAGE */}
       <div
         className={`absolute inset-0 bg-center bg-no-repeat bg-cover ${isMirror ? '-scale-x-100' : 'scale-x-100'}`}

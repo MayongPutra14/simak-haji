@@ -11,12 +11,17 @@ const IdentityForm = ({ onSubmit, isSubmitting = false, userId }) => {
   const { currentStep, setCurrentStep, formData, setFormData } =
     useFormDraft(userId);
 
+  // REMOVE SEPARATE FILE STATE (const [fileState, setFileState] = useState(null))
   const handleNext = (stepData) => {
+    // UPDATE GLOBAL FORM DATA STATE WITH NEW STEP DATA
     setFormData((prev) => {
       const updatedData = { ...prev, ...stepData };
 
+      // TRIGGER FINAL SUBMIT WHEN ON LAST STEP (STEP 5 / REVIEW STEP)
       if (currentStep === 5) {
-        if (onSubmit) onSubmit(updatedData);
+        if (onSubmit) {
+          onSubmit(updatedData); // send merged full data including profileImage File object
+        }
       }
       return updatedData;
     });

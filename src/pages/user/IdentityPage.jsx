@@ -63,11 +63,47 @@ const IdentityPage = () => {
     }));
   };
 
+  const CLOUD_NAME = 'llp0te3a';
+  const UPLOAD_PRESET = 'simak_preset';
+  const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+
   const handleOnSubmit = async (formData) => {
     setIsLoading(true);
 
     try {
-      await updateProfileIdentity(userId, formData);
+      let imageUrl = formData.profileImage;
+
+      // IF PROFILE IMAGE IS AN INSTANCE OF FILE, UPLOAD TO CLOUDINARY FIRST
+      if (formData.profileImage instanceof File) {
+        const cloudinaryForm = new FormData();
+        cloudinaryForm.append('file', formData.profileImage);
+        cloudinaryForm.append('upload_preset', UPLOAD_PRESET);
+
+        const cloudRes = await fetch(UPLOAD_URL, {
+          method: 'POST',
+          body: cloudinaryForm,
+        });
+
+        const cloudData = await cloudRes.json();
+
+        if (!cloudRes.ok || !cloudData.secure_url) {
+          throw new Error(
+            cloudData?.error?.message || 'Gagal mengunggah foto profil.',
+          );
+        }
+
+        // ASSIGN CLOUDINARY SECURE URL
+        imageUrl = cloudData.secure_url;
+      }
+
+      // PREPARE FINAL JSON PAYLOAD FOR BACKEND API
+      const finalPayload = {
+        ...formData,
+        profileImage: imageUrl, // converted from file object to string url
+      };
+
+      // EXECUTE BACKEND PROFILE UPDATE API
+      await updateProfileIdentity(userId, finalPayload);
 
       completeIdentity();
       localStorage.removeItem(`identity_form_draft_${userId || 'guest'}`);

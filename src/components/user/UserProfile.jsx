@@ -1,18 +1,55 @@
 import { IoShield } from 'react-icons/io5';
 
 export default function UserProfile({ profileData, isLoading = false }) {
+  // SHOW SKELETON LOADER WHILE FETCHING DATA
   if (isLoading) {
     return <UserProfileSkeleton />;
   }
 
+  // FALLBACK FOR EMPTY PROFILE DATA
   const profile = profileData || {};
+
+  // RESOLVE IMAGE SOURCE OR PROVIDER FALLBACK AVATAR
+  const avatarUrl =
+    profile.gambar ||
+    `https://ui-avatars.com/api/?name=${encodeURIComponent(
+      profile.nama_lengkap || 'User',
+    )}&background=0D9488&color=fff`;
+
+  // MAP FIELD VALUES WITH FALLBACK FOR REFERRAL DATA
+  const referenceName = profile.referensi_nama || profile.referenceName;
+  const referenceWhatsapp = profile.referensi_wa || profile.referenceWhatsapp;
+  const referenceOrigin = profile.referensi_asal || profile.referenceOrigin;
+  const role = profile.role === 'user' ? 'Jamaah' : 'Admin';
 
   return (
     <>
-      <div>
+      <div className="space-y-6">
+        {/* HEADER SECTION: AVATAR AND MAIN IDENTIFIER */}
+        <div className="flex flex-col items-center justify-center p-6 bg-white border border-gray-200 rounded-2xl md:gap-6">
+          <img
+            src={avatarUrl}
+            alt={profile.nama_lengkap || 'Foto Profil'}
+            className="w-24 h-24  md:w-32 md:h-32 rounded-full object-cover border-4 border-sea-green-100 shadow-md shrink-0"
+          />
+          <div className="mt-4 text-center md:mt-0 space-y-1">
+            <h2 className="text-xl font-bold text-gray-800">
+              {profile.nama_lengkap || '-'}
+            </h2>
+            <p className="text-xl font-medium text-sea-green-600">
+              {profile.nomor_porsi || '-'}
+            </p>
+            <div className="flex flex-wrap justify-center  gap-2 pt-1">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-semibold bg-sea-green-100 text-sea-green-700 border border-sea-green-200">
+                {role}
+              </span>
+            </div>
+          </div>
+        </div>
+
         {/* LIST DATA USER */}
         <div className="space-y-6">
-          {/* CATEGORY 1: DEPATURE */}
+          {/* CATEGORY 1: DEPARTURE */}
           <SectionBlock title="INFORMASI KEBERANGKATAN">
             <div className="grid grid-cols-1 gap-3 pl-4 sm:grid-cols-2">
               <InfoRow label="Program Keberangkatan" value={profile.program} />
@@ -25,11 +62,14 @@ export default function UserProfile({ profileData, isLoading = false }) {
             </div>
           </SectionBlock>
 
-          {/* CATEGORY 2: PERONAL DATA*/}
+          {/* CATEGORY 2: PERSONAL DATA */}
           <SectionBlock title="DATA DIRI UTAMA">
             <div className="grid grid-cols-1 gap-3 pl-4 sm:grid-cols-2">
+              <InfoRow label="Nama Lengkap" value={profile.nama_lengkap} />
+              <InfoRow label="Nomor WhatsApp" value={profile.whatsapp} />
               <InfoRow label="Jenis Kelamin" value={profile.gender} />
               <InfoRow label="Nama Ayah Kandung" value={profile.fatherName} />
+              <InfoRow label="Nama Mahram" value={profile.nama_mahram} />
               <InfoRow
                 label="Tempat / Kota Kelahiran"
                 value={profile.birthPlace}
@@ -48,6 +88,7 @@ export default function UserProfile({ profileData, isLoading = false }) {
               />
               <InfoRow label="Desa / Kelurahan" value={profile.village} />
               <InfoRow label="Kecamatan" value={profile.subDistrict} />
+              <InfoRow label="Zona Wilayah" value={profile.zona} />
             </div>
           </SectionBlock>
 
@@ -83,17 +124,14 @@ export default function UserProfile({ profileData, isLoading = false }) {
           {/* CATEGORY 7: REFERENCE */}
           <SectionBlock title="INFORMASI REFERENSI" isLast>
             <div className="grid grid-cols-1 gap-3 pl-4 sm:grid-cols-2">
-              <InfoRow
-                label="Nama Lengkap Referensi"
-                value={profile.referenceName}
-              />
+              <InfoRow label="Nama Lengkap Referensi" value={referenceName} />
               <InfoRow
                 label="Nomor Whatsapp Referensi"
-                value={profile.referenceWhatsapp}
+                value={referenceWhatsapp}
               />
               <InfoRow
                 label="Asal Referensi"
-                value={profile.referenceOrigin}
+                value={referenceOrigin}
                 className="sm:col-span-2"
               />
             </div>
@@ -101,7 +139,7 @@ export default function UserProfile({ profileData, isLoading = false }) {
         </div>
       </div>
 
-      {/* WARNING BOX  */}
+      {/* WARNING BOX */}
       <div className="flex items-start max-w-md gap-3 p-4 mx-4 mt-10 border shadow-sm bg-amber-50 rounded-xl border-amber-200/80 text-amber-900 md:mx-auto">
         <IoShield className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
         <div className="text-xs leading-relaxed">

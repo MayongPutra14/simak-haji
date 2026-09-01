@@ -13,7 +13,7 @@ export default function Header() {
 
   const encodedName = encodeURIComponent(profile.nama_lengkap);
   const uiAvatarUrl = `https://ui-avatars.com/api/?name=${encodedName}&background=random&color=fff&bold=true`;
-  const avatarSrc = profile.avatar || uiAvatarUrl;
+  const avatarSrc = profile.profile_image || uiAvatarUrl;
 
   const handleLogout = () => {
     logout();
@@ -49,16 +49,12 @@ export default function Header() {
 
         {/* RIGHT SIDE: BADGE ROLE & TOMBOL LOGOUT */}
         <div className="flex items-center gap-1">
-          <span className="text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-sm bg-sea-green-700/70 text-white/90 border border-sea-green-700">
-            {profile.role}
-          </span>
-
           <button
             onClick={handleLogout}
             className="flex items-center gap-0.5 px-3 py-1.5 text-xs font-medium text-white bg-red-600 hover:bg-red-800 rounded-lg transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 cursor-pointer md:hidden"
           >
-            Keluar
             <IconLogout />
+            Keluar
           </button>
         </div>
       </div>

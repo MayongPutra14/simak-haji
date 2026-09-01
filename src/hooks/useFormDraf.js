@@ -33,15 +33,27 @@ const useFormDraft = (userId) => {
 
   // AUTOMATIC SAVING DATA TO LOCAL STORAGE WHENEVER DATA CHANGE
   useEffect(() => {
-    // Don't save when the form is still blank.
+    // skip saving process if form state is empty at step 1
     if (Object.keys(formState).length === 0 && currentStep === 1) return;
+
     try {
+      // CREATE SHALLOW COPY TO PREVENT MUTATING REACT STATE
+      const cleanDataToSave = { ...formState };
+
+      // SANITIZE FILE OBJECTS FROM STORAGE PAYLOAD
+      Object.keys(cleanDataToSave).forEach((key) => {
+        if (cleanDataToSave[key] instanceof File) {
+          delete cleanDataToSave[key]; // remove file reference from storage payload only
+        }
+      });
+
       const payload = {
-        data: formState,
+        data: cleanDataToSave,
         currentStep,
         timestamp: Date.now(),
       };
 
+      // PERSIST SANITIZED DATA TO LOCAL STORAGE
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
     } catch (error) {
       console.error('Failed to save data into localstorage:', error);

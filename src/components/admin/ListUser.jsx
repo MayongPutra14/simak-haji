@@ -1,7 +1,6 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import Table from '../ui/global/Table';
 import {
-  MdOutlineDeleteOutline as IconDelete,
   MdWallet as IconWallet,
   MdAdd as IconAdd,
   MdOutlineArrowDropDown as IconFilter,
@@ -14,6 +13,7 @@ import { Button } from '../ui/global/Button';
 import StatisticContainer from '../ui/global/StatisticContainer';
 import Modal from '../ui/global/Modal';
 import { ListAdminUsersColumns } from '../../features/admin/ListAdminUsersColumns';
+import useDeleteAdminUser from '../../hooks/admin/useDeleteUser';
 
 // SKELETON TABLE
 function SkeletonTable() {
@@ -42,30 +42,34 @@ export default function ListUser({
   users = [],
   isLoading = false,
   error = null,
+  onRefresh,
 }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('Semua Status');
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteTarget, setDeleteTarget] = useState(null);
-  const [localUsers, setLocalUsers] = useState(users);
 
-  useEffect(() => {
-    setLocalUsers(users);
-  }, [users]);
+  // OPTIMIZATION: ELIMINATE LOCALUSERS STATE AND DERIVE DATA DIRECTLY FROM USERS PROP
+  const { deleteUser, isDeleting, deleteError, setDeleteError } =
+    useDeleteAdminUser();
 
   const itemsPerPage = 10;
 
-  // RESET PAGINATION WHEN search/filter CHANGES
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery, statusFilter]);
+  // HANDLER FOR SEARCH INPUT CHANGE WITH PAGE RESET
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1); // RESET CURRENT PAGE ON USER INPUT EVENT INSTEAD OF USEEFFECT
+  };
 
-  const handleSearchChange = (e) => setSearchQuery(e.target.value);
-  const handleFilterChange = (e) => setStatusFilter(e.target.value);
+  // HANDLER FOR FILTER STATUS CHANGE WITH PAGE RESET
+  const handleFilterChange = (e) => {
+    setStatusFilter(e.target.value);
+    setCurrentPage(1); // RESET CURRENT PAGE ON USER INPUT EVENT INSTEAD OF USEEFFECT
+  };
 
-  // filter data
+  // FILTER USERS DATA DERIVED DIRECTLY FROM PROPS
   const filteredUsers = useMemo(() => {
-    return localUsers.filter((user) => {
+    return users.filter((user) => {
       const matchesSearch =
         user.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         user.portionNumber?.includes(searchQuery);
@@ -75,7 +79,7 @@ export default function ListUser({
 
       return matchesSearch && matchesStatus;
     });
-  }, [localUsers, searchQuery, statusFilter]);
+  }, [users, searchQuery, statusFilter]);
 
   // CALCULATION FOR PAGINATION
   const totalItems = filteredUsers.length;
@@ -87,41 +91,58 @@ export default function ListUser({
   }, [filteredUsers, currentPage]);
 
   // HANDLER DELETE USER
-  const confirmDelete = () => {
-    if (deleteTarget) {
-      setLocalUsers((prev) => prev.filter((u) => u.id !== deleteTarget.id));
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+
+    const result = await deleteUser(deleteTarget.id);
+
+    if (result.status === 'success') {
       setDeleteTarget(null);
+      if (onRefresh) await onRefresh();
+
+      if (currentData.length === 1 && currentPage > 1) {
+        setCurrentPage((prev) => prev - 1);
+      }
     }
   };
 
-  // HANDLE CLEAR SAEARCH/FILTER
+  const handleCloseModal = () => {
+    if (isDeleting) return;
+    setDeleteTarget(null);
+    setDeleteError(null);
+  };
+
+  // HANDLE CLEAR SEARCH AND FILTER WITH PAGE RESET
   const handleClearSearch = () => {
     setSearchQuery('');
     setStatusFilter('Semua Status');
+    setCurrentPage(1); // RESET PAGE DIRECTLY ON CLEAR EVENT
   };
 
+  // COLUMNS DEFINITION WITH INCLUDED DEPENDENCIES
   const columns = useMemo(
     () =>
       ListAdminUsersColumns({
-        onDelete: (user) => setDeleteTarget(user),
+        onDelete: (user) => {
+          setDeleteTarget(user);
+          setDeleteError(null);
+        },
       }),
-    [],
+    [setDeleteError], // INCLUDED SETDELETEERROR TO RESOLVE ESLINT WARNING
   );
 
   return (
     <div className="min-h-screen bg-white w-[95%] md:w-[98%] mx-auto p-4 my-4 rounded-xl shadow-md">
       <div className="space-y-6">
-        {/* FILTER, ADD NEW JAMAAH, ADN SEARCH BAR*/}
+        {/* FILTER, ADD NEW JAMAAH, AND SEARCH BAR */}
         <section className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center flex-1 max-w-2xl">
-            {/* SEACRH INPUT */}
             <SearcInput
               placeHolder="Cari jamaah..."
               searchQuery={searchQuery}
               onChange={handleSearchChange}
             />
 
-            {/* FILTER STATUS */}
             <div className="relative min-w-35">
               <select
                 value={statusFilter}
@@ -138,7 +159,6 @@ export default function ListUser({
             </div>
           </div>
 
-          {/* BUTTON ADD JAMAAH */}
           <Button
             icon={<IconAdd />}
             className="sm:w-auto px-4 py-2"
@@ -146,7 +166,6 @@ export default function ListUser({
             type="button"
             to="/admin/users/create"
           >
-            {' '}
             Tambah Jamaah
           </Button>
         </section>
@@ -155,7 +174,7 @@ export default function ListUser({
         <section className="grid grid-cols-2 gap-4 sm:max-w-md">
           <StatisticContainer
             label="Total Pengguna"
-            value={users.length.toLocaleString('id-ID')}
+            value={users.length.toLocaleString('id-ID')} // Menggunakan localUsers.length agar statistik terupdate
             icon={IconPeople}
             bgClass="bg-emerald-300 border-emerald-200"
             shadowColorClass="hover:shadow-emerald-200/80"
@@ -183,12 +202,10 @@ export default function ListUser({
           {isLoading ? (
             <SkeletonTable />
           ) : error ? (
-            /* Error State */
             <div className="p-12 text-center text-rose-600 space-y-2">
               <p className="font-semibold">{error}</p>
             </div>
-          ) : localUsers.length === 0 ? (
-            /* Empty State Utama */
+          ) : users.length === 0 ? (
             <div className="p-12 flex flex-col items-center text-center space-y-4">
               <div className="space-y-1">
                 <h3 className="text-base font-semibold text-slate-900">
@@ -203,7 +220,6 @@ export default function ListUser({
               </Button>
             </div>
           ) : currentData.length === 0 ? (
-            /* Search Empty State */
             <div className="p-12 text-center space-y-4">
               <div className="space-y-1">
                 <h3 className="text-base font-semibold text-slate-900">
@@ -306,7 +322,7 @@ export default function ListUser({
       {deleteTarget && (
         <Modal
           isOpen={Boolean(deleteTarget)}
-          onClose={() => setDeleteTarget(null)}
+          onClose={handleCloseModal}
           icon={<IconWarning className="w-6 h-6" />}
           iconBgColor="bg-galliano-100"
           iconColor="text-galliano-600"
@@ -318,11 +334,18 @@ export default function ListUser({
                 {deleteTarget?.name}
               </span>
               ? Data yang dihapus akan hilang permanen.
+              {/* Alert jika terjadi error dari Backend */}
+              {deleteError && (
+                <span className="block mt-2 p-2 bg-rose-50 text-rose-600 rounded-lg text-xs font-normal border border-rose-200">
+                  {deleteError}
+                </span>
+              )}
             </>
           }
-          buttonText="Hapus"
-          buttonColor="bg-galliano-600 hover:bg-galliano-700 text-white"
+          buttonText={isDeleting ? 'Menghapus...' : 'Hapus'}
+          buttonColor="bg-galliano-600 hover:bg-galliano-700 text-white disabled:opacity-50 cursor-pointer"
           onConfirm={confirmDelete}
+          isLoading={isDeleting} // Pastikan komponen Modal mendukung state loading ini
           showCancelButton={true}
           cancelButtonText="Batal"
         />

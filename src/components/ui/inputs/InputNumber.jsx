@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InputText = React.forwardRef(
+const InputNumber = React.forwardRef(
   (
     {
       label,
@@ -13,17 +13,19 @@ const InputText = React.forwardRef(
       readOnly = false,
       containerClassName = '',
       className = '',
+      maxLength, // limit the max digits (e.g., 10 for porsi, 13 for phone)
+      onChange,
       ...props
     },
     ref,
   ) => {
     const errorMessage = typeof error === 'string' ? error : error?.message;
 
-    // Base Style untuk Input
+    // BASE INPUT STYLES
     const baseInputStyles =
       'w-full text-sm md:text-base focus:outline-none transition-colors duration-200';
 
-    // Pilihan Variasi Input
+    // INPUT VARIANT OPTIONS
     const variantStyles = {
       outlined: `px-3 py-2 border rounded-md placeholder:text-slate-400 ${
         errorMessage
@@ -37,10 +39,26 @@ const InputText = React.forwardRef(
       }`,
     };
 
-    // Container Wrapper (Dengan atau Tanpa Card)
+    const readOnlyStyles = readOnly
+      ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
+      : '';
+
     const wrapperStyles = withCard
       ? 'w-full bg-white p-5 rounded-lg border border-gray-200 shadow-sm flex flex-col gap-2'
       : 'w-full flex flex-col gap-1.5';
+
+    // HANDLER TO ALLOW ONLY 0-9 NUMERIC DIGITS
+    const handleChange = (e) => {
+      // remove all non-numeric characters
+      const onlyNums = e.target.value.replace(/[^0-9]/g, '');
+
+      // update event value synthetically
+      e.target.value = onlyNums;
+
+      if (onChange) {
+        onChange(e);
+      }
+    };
 
     return (
       <div className={`${wrapperStyles} ${containerClassName}`}>
@@ -64,10 +82,14 @@ const InputText = React.forwardRef(
           <input
             ref={ref}
             type="text"
+            inputMode="numeric" // trigger numeric keypad on mobile devices
+            pattern="[0-9]*" // ensure mobile keyboard compatibility for iOS/Android
+            maxLength={maxLength}
             placeholder={placeholder}
             autoComplete="off"
             readOnly={readOnly}
-            className={`${baseInputStyles} ${variantStyles[variant]} ${className}`}
+            onChange={handleChange}
+            className={`${baseInputStyles} ${variantStyles[variant]} ${readOnlyStyles} ${className}`}
             {...props}
           />
           {errorMessage && (
@@ -79,6 +101,6 @@ const InputText = React.forwardRef(
   },
 );
 
-InputText.displayName = 'InputText';
+InputNumber.displayName = 'InputNumber';
 
-export default InputText;
+export default InputNumber;

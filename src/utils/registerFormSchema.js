@@ -16,14 +16,6 @@ export const registrationSchema = z.object({
 });
 
 // STEP 2 PERSONAL
-const MAX_FILE_SIZE = 1 * 1024 * 1024;
-const ACCEPTED_IMAGE_TYPES = [
-  'image/jpeg',
-  'image/jpg',
-  'image/png',
-  'image/webp',
-];
-
 export const Step2PersonalSchema = z.object({
   fatherName: z
     .string()
@@ -49,123 +41,105 @@ export const gender = [
 ];
 
 export const cityOptions = [
-  // --- ACEH ---
-  { label: 'Banda Aceh', value: 'Banda Aceh' },
-  { label: 'Langsa', value: 'Langsa' },
-  { label: 'Lhokseumawe', value: 'Lhokseumawe' },
-  { label: 'Sabang', value: 'Sabang' },
-  { label: 'Subulussalam', value: 'Subulussalam' },
-  // --- SUMATERA UTARA ---
-  { label: 'Binjai', value: 'Binjai' },
-  { label: 'Gunungsitoli', value: 'Gunungsitoli' },
-  { label: 'Medan', value: 'Medan' },
-  { label: 'Padangsidimpuan', value: 'Padangsidimpuan' },
-  { label: 'Pematangsiantar', value: 'Pematangsiantar' },
-  { label: 'Sibolga', value: 'Sibolga' },
-  { label: 'Tanjungbalai', value: 'Tanjungbalai' },
-  { label: 'Tebing Tinggi', value: 'Tebing Tinggi' },
-  // --- SUMATERA BARAT ---
-  { label: 'Bukittinggi', value: 'Bukittinggi' },
-  { label: 'Padang', value: 'Padang' },
-  { label: 'Padang Panjang', value: 'Padang Panjang' },
-  { label: 'Pariaman', value: 'Pariaman' },
-  { label: 'Payakumbuh', value: 'Payakumbuh' },
-  { label: 'Sawahlunto', value: 'Sawahlunto' },
-  { label: 'Solok', value: 'Solok' },
-  // --- RIAU ---
-  { label: 'Dumai', value: 'Dumai' },
-  { label: 'Pekanbaru', value: 'Pekanbaru' },
-  // --- KEPULAUAN RIAU ---
-  { label: 'Batam', value: 'Batam' },
-  { label: 'Tanjungpinang', value: 'Tanjungpinang' },
-  // --- JAMBI ---
-  { label: 'Jambi', value: 'Jambi' },
-  { label: 'Sungaipenuh', value: 'Sungaipenuh' },
-  // --- SUMATERA SELATAN ---
-  { label: 'Lubuklinggau', value: 'Lubuklinggau' },
-  { label: 'Pagar Alam', value: 'Pagar Alam' },
-  { label: 'Palembang', value: 'Palembang' },
-  { label: 'Prabumulih', value: 'Prabumulih' },
-  // --- BANGKA BELITUNG & BENGKULU ---
-  { label: 'Pangkalpinang', value: 'Pangkalpinang' },
-  { label: 'Bengkulu', value: 'Bengkulu' },
-  // --- LAMPUNG ---
-  { label: 'Bandar Lampung', value: 'Bandar Lampung' },
-  { label: 'Metro', value: 'Metro' },
-  // --- DKI JAKARTA ---
-  { label: 'Jakarta Barat', value: 'Jakarta Barat' },
-  { label: 'Jakarta Pusat', value: 'Jakarta Pusat' },
-  { label: 'Jakarta Selatan', value: 'Jakarta Selatan' },
-  { label: 'Jakarta Timur', value: 'Jakarta Timur' },
-  { label: 'Jakarta Utara', value: 'Jakarta Utara' },
-  // --- JAWA BARAT ---
-  { label: 'Bandung', value: 'Bandung' },
-  { label: 'Banjar', value: 'Banjar' },
-  { label: 'Bekasi', value: 'Bekasi' },
-  { label: 'Bogor', value: 'Bogor' },
-  { label: 'Cimahi', value: 'Cimahi' },
-  { label: 'Cirebon', value: 'Cirebon' },
-  { label: 'Depok', value: 'Depok' },
-  { label: 'Sukabumi', value: 'Sukabumi' },
-  { label: 'Tasikmalaya', value: 'Tasikmalaya' },
-  { label: 'Karawang', value: 'Karawang' },
-  // --- BANTEN ---
-  { label: 'Cilegon', value: 'Cilegon' },
-  { label: 'Serang', value: 'Serang' },
-  { label: 'Tangerang', value: 'Tangerang' },
-  { label: 'Tangerang Selatan', value: 'Tangerang Selatan' },
-  // --- JAWA TENGAH & DIY ---
-  { label: 'Magelang', value: 'Magelang' },
-  { label: 'Pekalongan', value: 'Pekalongan' },
-  { label: 'Salatiga', value: 'Salatiga' },
-  { label: 'Semarang', value: 'Semarang' },
-  { label: 'Surakarta', value: 'Surakarta' },
-  { label: 'Tegal', value: 'Tegal' },
-  { label: 'Yogyakarta', value: 'Yogyakarta' },
-  // --- JAWA TIMUR ---
-  { label: 'Batu', value: 'Batu' },
-  { label: 'Blitar', value: 'Blitar' },
-  { label: 'Kediri', value: 'Kediri' },
-  { label: 'Madiun', value: 'Madiun' },
-  { label: 'Malang', value: 'Malang' },
-  { label: 'Mojokerto', value: 'Mojokerto' },
-  { label: 'Pasuruan', value: 'Pasuruan' },
-  { label: 'Probolinggo', value: 'Probolinggo' },
-  { label: 'Surabaya', value: 'Surabaya' },
-  // --- BALI & NUSA TENGGARA ---
-  { label: 'Denpasar', value: 'Denpasar' },
-  { label: 'Bima', value: 'Bima' },
-  { label: 'Mataram', value: 'Mataram' },
-  { label: 'Kupang', value: 'Kupang' },
-  // --- KALIMANTAN ---
-  { label: 'Pontianak', value: 'Pontianak' },
-  { label: 'Singkawang', value: 'Singkawang' },
-  { label: 'Palangka Raya', value: 'Palangka Raya' },
-  { label: 'Banjarbaru', value: 'Banjarbaru' },
-  { label: 'Banjarmasin', value: 'Banjarmasin' },
-  { label: 'Balikpapan', value: 'Balikpapan' },
-  { label: 'Bontang', value: 'Bontang' },
-  { label: 'Samarinda', value: 'Samarinda' },
-  { label: 'Tarakan', value: 'Tarakan' },
-  // --- SULAWESI ---
-  { label: 'Bitung', value: 'Bitung' },
-  { label: 'Kotamobagu', value: 'Kotamobagu' },
-  { label: 'Manado', value: 'Manado' },
-  { label: 'Tomohon', value: 'Tomohon' },
-  { label: 'Palu', value: 'Palu' },
-  { label: 'Makassar', value: 'Makassar' },
-  { label: 'Palopo', value: 'Palopo' },
-  { label: 'Parepare', value: 'Parepare' },
-  { label: 'Bau-Bau', value: 'Bau-Bau' },
-  { label: 'Kendari', value: 'Kendari' },
-  { label: 'Gorontalo', value: 'Gorontalo' },
-  // --- MALUKU & PAPUA ---
-  { label: 'Ambon', value: 'Ambon' },
-  { label: 'Tual', value: 'Tual' },
-  { label: 'Ternate', value: 'Ternate' },
-  { label: 'Tidore Kepulauan', value: 'Tidore Kepulauan' },
-  { label: 'Jayapura', value: 'Jayapura' },
-  { label: 'Sorong', value: 'Sorong' },
+  { label: 'Ambon', value: 'ambon' },
+  { label: 'Balikpapan', value: 'balikpapan' },
+  { label: 'Banda Aceh', value: 'banda aceh' },
+  { label: 'Bandar Lampung', value: 'bandar lampung' },
+  { label: 'Bandung', value: 'bandung' },
+  { label: 'Banjar', value: 'banjar' },
+  { label: 'Banjarbaru', value: 'banjarbaru' },
+  { label: 'Banjarmasin', value: 'banjarmasin' },
+  { label: 'Batam', value: 'batam' },
+  { label: 'Batu', value: 'batu' },
+  { label: 'Bau-Bau', value: 'bau-bau' },
+  { label: 'Bekasi', value: 'bekasi' },
+  { label: 'Bengkulu', value: 'bengkulu' },
+  { label: 'Bima', value: 'bima' },
+  { label: 'Binjai', value: 'binjai' },
+  { label: 'Bitung', value: 'bitung' },
+  { label: 'Blitar', value: 'blitar' },
+  { label: 'Bogor', value: 'bogor' },
+  { label: 'Bontang', value: 'bontang' },
+  { label: 'Bukittinggi', value: 'bukittinggi' },
+  { label: 'Cilegon', value: 'cilegon' },
+  { label: 'Cimahi', value: 'cimahi' },
+  { label: 'Cirebon', value: 'cirebon' },
+  { label: 'Denpasar', value: 'denpasar' },
+  { label: 'Depok', value: 'depok' },
+  { label: 'Dumai', value: 'dumai' },
+  { label: 'Gorontalo', value: 'gorontalo' },
+  { label: 'Gunungsitoli', value: 'gunungsitoli' },
+  { label: 'Jakarta Barat', value: 'jakarta barat' },
+  { label: 'Jakarta Pusat', value: 'jakarta pusat' },
+  { label: 'Jakarta Selatan', value: 'jakarta selatan' },
+  { label: 'Jakarta Timur', value: 'jakarta timur' },
+  { label: 'Jakarta Utara', value: 'jakarta utara' },
+  { label: 'Jambi', value: 'jambi' },
+  { label: 'Jayapura', value: 'jayapura' },
+  { label: 'Karawang', value: 'karawang' },
+  { label: 'Kediri', value: 'kediri' },
+  { label: 'Kendari', value: 'kendari' },
+  { label: 'Kotamobagu', value: 'kotamobagu' },
+  { label: 'Kupang', value: 'kupang' },
+  { label: 'Langsa', value: 'langsa' },
+  { label: 'Lhokseumawe', value: 'lhokseumawe' },
+  { label: 'Lubuklinggau', value: 'lubuklinggau' },
+  { label: 'Madiun', value: 'madiun' },
+  { label: 'Magelang', value: 'magelang' },
+  { label: 'Makassar', value: 'makassar' },
+  { label: 'Malang', value: 'malang' },
+  { label: 'Manado', value: 'manado' },
+  { label: 'Mataram', value: 'mataram' },
+  { label: 'Medan', value: 'medan' },
+  { label: 'Metro', value: 'metro' },
+  { label: 'Mojokerto', value: 'mojokerto' },
+  { label: 'Padang', value: 'padang' },
+  { label: 'Padang Panjang', value: 'padang panjang' },
+  { label: 'Padangsidimpuan', value: 'padangsidimpuan' },
+  { label: 'Pagar Alam', value: 'pagar alam' },
+  { label: 'Palangka Raya', value: 'palangka raya' },
+  { label: 'Palembang', value: 'palembang' },
+  { label: 'Palopo', value: 'palopo' },
+  { label: 'Palu', value: 'palu' },
+  { label: 'Pangkalpinang', value: 'pangkalpinang' },
+  { label: 'Parepare', value: 'parepare' },
+  { label: 'Pariaman', value: 'pariaman' },
+  { label: 'Pasuruan', value: 'pasuruan' },
+  { label: 'Payakumbuh', value: 'payakumbuh' },
+  { label: 'Pekalongan', value: 'pekalongan' },
+  { label: 'Pekanbaru', value: 'pekanbaru' },
+  { label: 'Pematangsiantar', value: 'pematangsiantar' },
+  { label: 'Pontianak', value: 'pontianak' },
+  { label: 'Prabumulih', value: 'prabumulih' },
+  { label: 'Probolinggo', value: 'probolinggo' },
+  { label: 'Sabang', value: 'sabang' },
+  { label: 'Salatiga', value: 'salatiga' },
+  { label: 'Samarinda', value: 'samarinda' },
+  { label: 'Sawahlunto', value: 'sawahlunto' },
+  { label: 'Semarang', value: 'semarang' },
+  { label: 'Serang', value: 'serang' },
+  { label: 'Sibolga', value: 'sibolga' },
+  { label: 'Singkawang', value: 'singkawang' },
+  { label: 'Solok', value: 'solok' },
+  { label: 'Sorong', value: 'sorong' },
+  { label: 'Subulussalam', value: 'subulussalam' },
+  { label: 'Sukabumi', value: 'sukabumi' },
+  { label: 'Sungaipenuh', value: 'sungaipenuh' },
+  { label: 'Surabaya', value: 'surabaya' },
+  { label: 'Surakarta', value: 'surakarta' },
+  { label: 'Tangerang', value: 'tangerang' },
+  { label: 'Tangerang Selatan', value: 'tangerang selatan' },
+  { label: 'Tanjungbalai', value: 'tanjungbalai' },
+  { label: 'Tanjungpinang', value: 'tanjungpinang' },
+  { label: 'Tarakan', value: 'tarakan' },
+  { label: 'Tasikmalaya', value: 'tasikmalaya' },
+  { label: 'Tebing Tinggi', value: 'tebing tinggi' },
+  { label: 'Tegal', value: 'tegal' },
+  { label: 'Ternate', value: 'ternate' },
+  { label: 'Tidore Kepulauan', value: 'tidore kepulauan' },
+  { label: 'Tomohon', value: 'tomohon' },
+  { label: 'Tual', value: 'tual' },
+  { label: 'Yogyakarta', value: 'yogyakarta' },
 ];
 
 export const districtOptions = [
@@ -182,6 +156,7 @@ export const districtOptions = [
   { label: 'Karawang Barat', value: 'KARAWANG BARAT' },
   { label: 'Karawang Timur', value: 'KARAWANG TIMUR' },
   { label: 'Klari', value: 'KLARI' },
+  { label: 'Kotabaru', value: 'KOTABARU' },
   { label: 'Kutawaluya', value: 'KUTAWALUYA' },
   { label: 'Lemahabang', value: 'LEMAHABANG' },
   { label: 'Majalaya', value: 'MAJALAYA' },
@@ -198,7 +173,6 @@ export const districtOptions = [
   { label: 'Tempuran', value: 'TEMPURAN' },
   { label: 'Tirtajaya', value: 'TIRTAJAYA' },
   { label: 'Tirtamulya', value: 'TIRTAMULYA' },
-  { label: 'Kotabaru', value: 'KOTABARU' },
 ];
 
 // STEP 3 BACKGROUND
@@ -230,13 +204,18 @@ export const jobOptions = [
   { label: 'Guru', value: 'Guru' },
   { label: 'Buruh Pabrik', value: 'Buruh Pabrik' },
   { label: 'Pedagang', value: 'Pedagang' },
+  { label: 'Belum bekerja', value: 'Belum Bekerja' },
 ];
 
 export const educationOptions = [
   // --- PENDIDIKAN DASAR & MENENGAH ---
   { label: 'SD', value: 'SD' },
-  { label: 'SLTP / SMP', value: 'SLTP' },
-  { label: 'SLTA / SMA / SMK', value: 'SLTA' },
+
+  {
+    label: 'SLTP / SMP',
+    value: 'Sekolah Menengah Pertama',
+  },
+  { label: 'SLTA / SMA / SMK / MA', value: 'Sekolah Menengah Atas' },
 
   // --- PENDIDIKAN TINGGI ---
   { label: 'Diploma (D1/D2/D3/D4)', value: 'Diploma' },
@@ -258,11 +237,11 @@ export const programOptions = [
 
 export const experienceOptions = [
   // --- SUDAH PERNAH ---
-  { label: 'Pernah Haji', value: 'Pernah Haji' },
-  { label: 'Pernah Umrah', value: 'Pernah Umrah' },
+  { label: 'Pernah Haji', value: 'pernah haji' },
+  { label: 'Pernah Umrah', value: 'pernah umrah' },
 
   // --- BELUM PERNAH ---
-  { label: 'Belum Pernah', value: 'Belum' },
+  { label: 'Belum Pernah', value: 'belum pernah' },
 ];
 
 export const companionOptions = [
@@ -336,9 +315,6 @@ export const positiveTraitOptions = [
 ];
 
 export const healthConditionOptions = [
-  // --- KONDISI KESEHATAN UMUM ---
-  { label: 'Tidak Ada', value: 'Tidak Ada' },
-
   // --- RIWAYAT PENYAKIT & MEDIS ---
   { label: 'Diabetes', value: 'Diabetes' },
   { label: 'Gangguan Pernapasan', value: 'Gangguan Pernapasan' },
@@ -352,6 +328,9 @@ export const healthConditionOptions = [
   // --- KEBUTUHAN KHUSUS & PERAWATAN ---
   { label: 'Membutuhkan Kursi Roda', value: 'Membutuhkan Kursi Roda' },
   { label: 'Rutin Konsumsi Obat', value: 'Rutin Konsumsi Obat' },
+
+  // --- KONDISI KESEHATAN UMUM ---
+  { label: 'Tidak Ada', value: 'Tidak Ada' },
 ];
 
 // STEP 5 REFERENCE
@@ -369,23 +348,40 @@ export const Step5Reference = z.object({
   profileImage: z
     .any()
     .refine((value) => {
+      // 1. Check Data Existence
       if (!value) return false;
       if (typeof value === 'string') return value.trim().length > 0;
       if (value instanceof FileList) return value.length > 0;
       if (value instanceof File) return true;
       return false;
     }, 'Foto profil wajib diunggah')
+
     .refine((value) => {
+      // 2. Check File Size (Maximum 1 MB = 1,048,576 Bytes)
+      if (typeof value === 'string') return true; // Pass if it's a URL string from the DB
+
+      const file = value instanceof FileList ? value[0] : value;
+
+      // Fail if it's not a valid File instance
+      if (!(file instanceof File)) return false;
+
+      // Return true if size is <= 1MB
+      return file.size <= 1024 * 1024;
+    }, 'Ukuran gambar maksimal adalah 1 MB, silakan pilih gambar yang lebih kecil')
+
+    .refine((value) => {
+      // 3. Check File Format
       if (typeof value === 'string') return true;
       const file = value instanceof FileList ? value[0] : value;
-      if (!file) return true;
-      return file.size <= MAX_FILE_SIZE;
-    }, 'Ukuran gambar maksimal adalah 1MB, silakan kompres atau ganti gambar')
-    .refine((value) => {
-      if (typeof value === 'string') return true;
-      const file = value instanceof FileList ? value[0] : value;
-      if (!file) return true;
-      return ACCEPTED_IMAGE_TYPES.includes(file.type);
+      if (!(file instanceof File)) return false;
+
+      const ACCEPTED_TYPES = [
+        'image/png',
+        'image/jpeg',
+        'image/jpg',
+        'image/webp',
+      ];
+      return ACCEPTED_TYPES.includes(file.type);
     }, 'Format gambar tidak didukung. Gunakan PNG, JPEG, JPG, atau WEBP'),
 });
 

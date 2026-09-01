@@ -11,8 +11,6 @@ const InputImage = React.forwardRef(
       onBlur,
       name,
       value,
-      maxSizeMB = 1,
-      onSizeError,
       variant = 'outlined',
       withCard = false,
       containerClassName = '',
@@ -75,17 +73,6 @@ const InputImage = React.forwardRef(
       const file = files?.[0];
 
       if (file) {
-        const maxSizeBytes = maxSizeMB * 1024 * 1024;
-        if (file.size > maxSizeBytes) {
-          if (onSizeError) {
-            onSizeError(`Ukuran file melebihi batas maksimum ${maxSizeMB}MB`);
-          }
-          event.target.value = ''; // RESET INPUT VALUE
-          setPreviewUrl(null);
-          setFileName('');
-          return;
-        }
-
         // DIRECTLY SET PREVIEW STATE TO GUARANTEE IMMEDIATE UI RENDER
         const localUrl = URL.createObjectURL(file);
         setPreviewUrl(localUrl);
@@ -149,7 +136,7 @@ const InputImage = React.forwardRef(
                 type="file"
                 name={name}
                 accept="image/png, image/jpeg, image/jpg, image/webp"
-                className="hidden"
+                className="sr-only"
                 onChange={handleFileChange}
                 onBlur={onBlur}
                 {...props}
