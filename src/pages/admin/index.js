@@ -3,7 +3,7 @@ import AdminLayout from '../../layouts/AdminLayout';
 import CreateUserPage from './users/CreateUserPage';
 import ListUsersPage from './users/ListUsersPage';
 import UserDetailPage from './users/UserProfileDetailPage';
-import UserEditPage from './users/USerEditPage';
+import UserEditPage from './users/UserEditPage';
 
 export {
   AdminHome,
