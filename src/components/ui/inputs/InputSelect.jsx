@@ -4,6 +4,7 @@ const InputSelect = React.forwardRef(
   (
     {
       label,
+      isLabelFade = false,
       description,
       required = false,
       options = [],
@@ -19,11 +20,11 @@ const InputSelect = React.forwardRef(
   ) => {
     const errorMessage = typeof error === 'string' ? error : error?.message;
 
-    // BASE STYLE
-    const baseSelectStyles =
-      'w-full text-sm md:text-base text-slate-700 cursor-pointer focus:outline-none transition-colors duration-200';
+    // normal STYLE
+    const normalSelectStyles =
+      'w-full text-sm md:text-normal text-slate-700 cursor-pointer focus:outline-none transition-colors duration-200';
 
-    // VARIANT
+    // VARIANT INPUT
     const variantStyles = {
       outlined: `px-3 py-2 border rounded-md bg-white ${
         errorMessage
@@ -35,36 +36,60 @@ const InputSelect = React.forwardRef(
           ? 'border-red-500 focus:border-red-600'
           : 'border-gray-300 focus:border-sea-green-600'
       }`,
+      editProfile: `w-full px-3 py-2  font-normal text-slate-700 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sea-green-500 focus:bg-white transition-all ${
+        errorMessage
+          ? 'border-red-500 focus:border-red-600'
+          : 'border-gray-300 focus:border-sea-green-600'
+      }`,
+      // VARIANT BARU: STATUS
+      status: `w-full px-2.5 py-1.5 text-xs placeholder:font-normal font-semibold text-slate-700 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 ${
+        errorMessage
+          ? 'border-red-500 focus:border-red-600'
+          : 'border-slate-300 focus:border-teal-500'
+      }`,
     };
 
-    // Container Wrapper (with or without card)
+    // PENGATURAN LABEL
+    // Jika varian 'status', otomatis gunakan label kecil/fade kecuali di-override
+    const labelFade =
+      isLabelFade || variant === 'status'
+        ? 'text-xs font-semibold text-slate-400 flex items-center gap-1'
+        : 'text-sm md:text-normal font-semibold text-slate-700';
+
+    // CONTAINER WRAPPER
+    // Menyesuaikan tampilan card jika varian 'status' digunakan bersama withCard
+    let cardStyle = 'bg-white p-5 rounded-lg border border-gray-200 shadow-sm';
+    if (variant === 'status') {
+      cardStyle = 'p-3 rounded-2xl bg-slate-50 border border-slate-200/80';
+    }
+
     const wrapperStyles = withCard
-      ? 'w-full bg-white p-5 rounded-lg border border-gray-200 shadow-sm flex flex-col gap-2'
+      ? `w-full ${cardStyle} flex flex-col gap-1`
       : 'w-full flex flex-col gap-1.5';
 
     return (
       <div className={`${wrapperStyles} ${containerClassName}`}>
         {/* HEADER QUESTION: LABEL + REQUIRED(*) */}
         {label && (
-          <label className="text-sm md:text-base font-semibold text-slate-700">
+          <label className={labelFade}>
             {label}
-            {required && <span className="text-red-500 ml-1">*</span>}
+            {required && <span className="ml-1 text-red-500">*</span>}
           </label>
         )}
 
         {/* DESCRIPTION QUESTION */}
         {description && (
-          <p className="text-xs md:text-sm text-slate-500 -mt-1">
+          <p className="-mt-1 text-xs md:text-sm text-slate-500">
             {description}
           </p>
         )}
 
         {/* SELECT: DROPDOWN */}
-        <div className={withCard ? 'mt-1' : ''}>
+        <div className={withCard && variant !== 'status' ? 'mt-1' : ''}>
           <select
             ref={ref}
             defaultValue=""
-            className={`${baseSelectStyles} ${variantStyles[variant]} ${className}`}
+            className={`${normalSelectStyles} ${variantStyles[variant]} ${className}`}
             {...props}
           >
             {/* PLACEHOLDER / DEFAULT OPTION */}

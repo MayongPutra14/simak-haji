@@ -1,3 +1,4 @@
+import { SkeletonScheduleUserMenu } from '../ui/global/skeletons/index';
 const getAttendanceStatus = (status, isAttended) => {
   if (isAttended === 1) {
     return {
@@ -23,19 +24,7 @@ const EventCard = ({ event, isLoading = false }) => {
   // SKELETON LOADING
 
   if (isLoading) {
-    return (
-      <div className="w-full max-w-md p-5 mx-auto transition-all bg-white border border-gray-200 shadow-sm rounded-xl animate-pulse">
-        {/* SKELETOn TITLE */}
-        <div className="w-3/4 mb-3 rounded-md h-7 bg-slate-200" />
-        <div className="w-full pb-3 border-b border-gray-100" />
-
-        {/* SKELETON STATUS */}
-        <div className="flex items-center justify-between mt-4">
-          <div className="h-4 rounded-md bg-slate-200 w-28" />
-          <div className="w-24 rounded-full h-7 bg-slate-200" />
-        </div>
-      </div>
-    );
+    return <SkeletonScheduleUserMenu />;
   }
 
   // SHOW DATA

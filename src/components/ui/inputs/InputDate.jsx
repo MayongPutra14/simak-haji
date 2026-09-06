@@ -4,6 +4,7 @@ const InputDate = React.forwardRef(
   (
     {
       label,
+      isLabelFade = false,
       description,
       required = false,
       error,
@@ -18,9 +19,9 @@ const InputDate = React.forwardRef(
     // ERROR MESSAGE CHECKING
     const errorMessage = typeof error === 'string' ? error : error?.message;
 
-    // BASE STYLES FOR INPUT DATE
-    const baseInputStyles =
-      'w-full text-sm md:text-base text-slate-700 cursor-pointer accent-sea-green-600 focus:outline-none transition-colors duration-200 scheme-light [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60 [&::-webkit-calendar-picker-indicator]:hover:opacity-100';
+    // normal STYLES FOR INPUT DATE
+    const normalInputStyles =
+      'w-full text-sm md:text-normal text-slate-700 cursor-pointer accent-sea-green-600 focus:outline-none transition-colors duration-200 scheme-light [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60 [&::-webkit-calendar-picker-indicator]:hover:opacity-100';
 
     // VARIANT STYLES SELECTION
     const variantStyles = {
@@ -34,7 +35,16 @@ const InputDate = React.forwardRef(
           ? 'border-red-500 focus:border-red-600'
           : 'border-gray-300 focus:border-sea-green-600'
       }`,
+      editProfile: `w-full px-3 py-2 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-all ${
+        errorMessage
+          ? 'border-red-500 focus:border-red-600'
+          : 'border-gray-300 focus:border-sea-green-600'
+      }`,
     };
+
+    const labelFade = isLabelFade
+      ? 'text-xs font-semibold text-slate-400 flex items-center gap-1'
+      : 'text-sm md:text-normal font-semibold text-slate-700';
 
     // CONTAINER WRAPPER STYLES (WITH OR WITHOUT CARD)
     const wrapperStyles = withCard
@@ -45,7 +55,7 @@ const InputDate = React.forwardRef(
       <div className={`${wrapperStyles} ${containerClassName}`}>
         {/* HEADER QUESTION: LABEL + REQUIRED(*) */}
         {label && (
-          <label className="text-sm font-semibold md:text-base text-slate-700">
+          <label className={labelFade}>
             {label}
             {required && <span className="ml-1 text-red-500">*</span>}
           </label>
@@ -63,7 +73,7 @@ const InputDate = React.forwardRef(
           <input
             ref={ref}
             type="date"
-            className={`${baseInputStyles} ${variantStyles[variant]} ${className}`}
+            className={`${normalInputStyles} ${variantStyles[variant]} ${className}`}
             {...props}
           />
 

@@ -5,9 +5,9 @@ import {
   Step4HealthSkills,
   Step5Reference,
   Step6Review,
-} from '../Indentity/indexFile.js';
+} from '../../user/indentity/indexFile';
 
-const IdentityForm = ({ onSubmit, isSubmitting = false, userId }) => {
+const IdentityForm = ({ userId, onSubmit, onLogut, isSubmitting = false }) => {
   const { currentStep, setCurrentStep, formData, setFormData } =
     useFormDraft(userId);
 
@@ -70,7 +70,11 @@ const IdentityForm = ({ onSubmit, isSubmitting = false, userId }) => {
 
       {/* CONDITIONAL RENDERING */}
       {currentStep === 1 && (
-        <Step2Personal onNext={handleNext} initialData={formData} />
+        <Step2Personal
+          onNext={handleNext}
+          initialData={formData}
+          onLogout={onLogut}
+        />
       )}
       {currentStep === 2 && (
         <Step3Background

@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { InputLogin as InputRegistration } from '../inputs/InputLogin.jsx';
+import { InputLogin as InputRegistration } from '../inputs/index';
 import { registrationSchema } from '../../../utils/registerFormSchema.js';
-import { Button } from '../global/Button.jsx';
+import Button from '../global/Button.jsx';
 import { MdOutlinePermIdentity as IconPerson } from 'react-icons/md';
 import {
   LuIdCard as IconIdCard,
@@ -26,7 +26,7 @@ const RegisterForm = ({ onSubmit }) => {
     <div className="w-[90%] max-w-md mx-auto">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col justify-center gap-4 bg-white p-6 rounded-2xl"
+        className="flex flex-col justify-center gap-4 p-6 bg-white rounded-2xl"
       >
         {/* INPUT NAME */}
         <InputRegistration
@@ -69,17 +69,17 @@ const RegisterForm = ({ onSubmit }) => {
         />
 
         {/* SHOW PASSWORD CHECKBOX */}
-        <div className="flex items-center gap-2 -mt-1 mb-4">
+        <div className="flex items-center gap-2 mb-4 -mt-1">
           <input
             type="checkbox"
             id="showPassword"
             checked={showPassword}
             onChange={(event) => setShowPassword(event.target.checked)}
-            className="w-4 h-4 accent-sea-green-700 rounded cursor-pointer"
+            className="w-4 h-4 rounded cursor-pointer accent-sea-green-700"
           />
           <label
             htmlFor="showPassword"
-            className="text-sm text-slate-600 cursor-pointer select-none"
+            className="text-sm cursor-pointer select-none text-slate-600"
           >
             Tampilkan Password
           </label>
@@ -91,11 +91,11 @@ const RegisterForm = ({ onSubmit }) => {
         </Button>
 
         {/* LINK TO LOGIN */}
-        <div className="mt-6 text-center text-sm text-gray-600">
+        <div className="mt-6 text-sm text-center text-gray-600">
           Sudah punya akun?{' '}
           <Link
             to="/login"
-            className="text-sea-green-600 font-semibold underline"
+            className="font-semibold underline text-sea-green-600"
           >
             masuk
           </Link>

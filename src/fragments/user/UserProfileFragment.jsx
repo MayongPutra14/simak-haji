@@ -1,5 +1,5 @@
+import ProfileDetail from '../../components/ui/global/ProfileDetail';
 import TitlePage from '../../components/ui/global/TitlePage';
-import UserProfile from '../../components/user/UserProfile';
 import useProfileUser from '../../hooks/useProfileUSer';
 
 const UserProfileFragment = ({ user }) => {
@@ -13,7 +13,7 @@ const UserProfileFragment = ({ user }) => {
         isMirror
       />
 
-      <UserProfile profileData={profileData} isLoading={isLoading} />
+      <ProfileDetail data={profileData} isLoading={isLoading} />
     </>
   );
 };

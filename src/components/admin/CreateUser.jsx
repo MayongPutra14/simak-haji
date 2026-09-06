@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router';
 import { useForm, FormProvider } from 'react-hook-form';
-import { Button } from '../ui/global/Button';
+import Button from '../ui/global/Button';
 import {
   Section1Account,
   Section2PersonalData,
@@ -11,7 +10,7 @@ import {
   Section6HajjData,
   Section7ControlProcess,
   Section8Placement,
-} from './components/index';
+} from './components/identity/index';
 
 import {
   step1Schema,
@@ -27,9 +26,8 @@ const CreateUser = ({
   onStep1Submit,
   onStep2Submit,
   onStep3Submit,
+  onCancel,
 }) => {
-  const navigate = useNavigate();
-
   const currentSchema = useMemo(() => {
     if (currentStep === 1) return step1Schema;
     if (currentStep === 2) return step2Schema;
@@ -69,14 +67,14 @@ const CreateUser = ({
       currPorsionPositionBackup: '',
       currPorstionStatusBackup: '',
       zone: '',
-      googleFormStatus: '',
-      photoStatus: '',
-      spphStatus: '',
-      mutationStatus: '',
-      biometricStatus: '',
-      puskesmasStatus: '',
-      mcuStatus: '',
-      paymentStatus: '',
+      googleFormStatus: 'lengkap',
+      photoStatus: 'lengkap',
+      spphStatus: 'menunggu',
+      mutationStatus: 'menunggu',
+      biometricStatus: 'menunggu',
+      puskesmasStatus: 'menunggu',
+      mcuStatus: 'menunggu',
+      paymentStatus: 'menunggu',
       passport: '',
       visa: '',
       plotNumber: '',
@@ -87,7 +85,7 @@ const CreateUser = ({
   });
 
   const handleBack = () => {
-    navigate(-1);
+    if (onCancel) onCancel();
   };
 
   // HANDLE FORM SUBMIT ACCORDING TO CURRENT ACTIVE STEP
@@ -175,7 +173,7 @@ const CreateUser = ({
           {/* SUBMIT BUTTON */}
           <div className="flex justify-end gap-4 pt-4">
             <Button
-              type="kembali"
+              type="button"
               variant="primary"
               onClick={handleBack}
               disabled={isLoading}

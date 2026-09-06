@@ -5,7 +5,7 @@ import {
 import { FaRegEdit as IconEdit } from 'react-icons/fa';
 import ButtonsActionTable from '../../components/ui/global/ButtonsActionTable';
 
-export const ListAdminUsersColumns = ({ onDelete }) => [
+export const ListAdminUsersColumns = ({ onDelete, onViewDetail, onEdit }) => [
   {
     key: 'name',
     header: 'Nama User',
@@ -20,7 +20,7 @@ export const ListAdminUsersColumns = ({ onDelete }) => [
           <img
             src={avatarSrc}
             alt={user.name}
-            className="w-10 h-10 rounded-full object-cover shrink-0 border border-slate-200"
+            className="object-cover w-10 h-10 border rounded-full shrink-0 border-slate-200"
           />
           <span className="font-base text-slate-900">{user.name}</span>
         </div>
@@ -64,12 +64,14 @@ export const ListAdminUsersColumns = ({ onDelete }) => [
         <ButtonsActionTable
           variant="default"
           title="Lihat detail"
+          onClick={() => onViewDetail(user)}
           icon={<IconView className="w-5 h-5" />}
         />
 
         <ButtonsActionTable
           variant="teal"
           title="Edit data"
+          onClick={() => onEdit(user)}
           icon={<IconEdit className="w-4 h-4" />}
         />
 

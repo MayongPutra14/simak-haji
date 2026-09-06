@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export const InputCheckbox = React.forwardRef(
+const InputCheckbox = React.forwardRef(
   (
     {
       label,
@@ -117,18 +117,18 @@ export const InputCheckbox = React.forwardRef(
     };
 
     return (
-      <div className="w-full bg-white p-5 rounded-lg border border-gray-200 shadow-sm flex flex-col gap-3">
+      <div className="flex flex-col w-full gap-3 p-5 bg-white border border-gray-200 rounded-lg shadow-sm">
         {/* HEADER QUERTION: LABEL + REQUIRED(*) */}
         {label && (
-          <label className="text-sm md:text-base font-semibold text-slate-800">
+          <label className="text-sm font-semibold md:text-base text-slate-800">
             {label}
-            {required && <span className="text-red-500 ml-1">*</span>}
+            {required && <span className="ml-1 text-red-500">*</span>}
           </label>
         )}
 
         {/* DESCRIPTION OPTIONAL */}
         {description && (
-          <p className="text-xs md:text-sm text-slate-500 -mt-1">
+          <p className="-mt-1 text-xs md:text-sm text-slate-500">
             {description}
           </p>
         )}
@@ -142,7 +142,7 @@ export const InputCheckbox = React.forwardRef(
             return (
               <label
                 key={index}
-                className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors"
+                className="flex items-center gap-3 p-2 transition-colors rounded-lg cursor-pointer hover:bg-slate-50"
               >
                 <input
                   ref={ref}
@@ -152,7 +152,7 @@ export const InputCheckbox = React.forwardRef(
                   checked={isChecked}
                   onBlur={onBlur}
                   onChange={handleOptionChange}
-                  className="w-4 h-4 md:w-5 md:h-5 text-sea-green-600 accent-sea-green-600 rounded border-slate-300 focus:ring-sea-green-500 cursor-pointer"
+                  className="w-4 h-4 rounded cursor-pointer md:w-5 md:h-5 text-sea-green-600 accent-sea-green-600 border-slate-300 focus:ring-sea-green-500"
                   {...props}
                 />
                 <span className="text-sm md:text-base text-slate-700">
@@ -165,7 +165,7 @@ export const InputCheckbox = React.forwardRef(
 
         {/* OTHER OPTION(yang lain) */}
         {hasOtherOption && (
-          <label className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+          <label className="flex items-center gap-3 p-2 transition-colors rounded-lg cursor-pointer hover:bg-slate-50">
             <input
               ref={ref}
               type="checkbox"
@@ -173,7 +173,7 @@ export const InputCheckbox = React.forwardRef(
               checked={isOtherChecked}
               onBlur={onBlur}
               onChange={handleOtherToggle}
-              className="w-4 h-4 md:w-5 md:h-5 text-sea-green-600 accent-sea-green-600 rounded border-slate-300 focus:ring-sea-green-600 cursor-pointer"
+              className="w-4 h-4 rounded cursor-pointer md:w-5 md:h-5 text-sea-green-600 accent-sea-green-600 border-slate-300 focus:ring-sea-green-600"
               {...props}
             />
             <span className="text-sm md:text-base text-slate-700 shrink-0">
@@ -203,3 +203,5 @@ export const InputCheckbox = React.forwardRef(
 );
 
 InputCheckbox.displayName = 'InputCheckbox';
+
+export default InputCheckbox;
