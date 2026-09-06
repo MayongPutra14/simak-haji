@@ -4,6 +4,8 @@ const InputText = React.forwardRef(
   (
     {
       label,
+      isLabelGreen = false,
+      isLabelFade = false,
       description,
       required = false,
       placeholder = 'Jawaban Anda',
@@ -19,9 +21,9 @@ const InputText = React.forwardRef(
   ) => {
     const errorMessage = typeof error === 'string' ? error : error?.message;
 
-    // Base Style untuk Input
-    const baseInputStyles =
-      'w-full text-sm md:text-base focus:outline-none transition-colors duration-200';
+    // normal Style untuk Input
+    const normalInputStyles =
+      'w-full text-sm md:text-normal focus:outline-none transition-colors duration-200';
 
     // Pilihan Variasi Input
     const variantStyles = {
@@ -35,7 +37,20 @@ const InputText = React.forwardRef(
           ? 'border-red-500 focus:border-red-600'
           : 'border-gray-300 focus:border-sea-green-600'
       }`,
+      green: `w-full mt-1 px-3 py-1.5 text-sm placeholder:text-teal-300/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 ${errorMessage ? 'border-red-500 focus:border-red-600' : 'bg-teal-950/80 border border-teal-600/40 '}`,
+      editProfile: `w-full px-3 py-2 text-sm text-slate-700  placeholder:font-medium placeholder:text-slate-700/30 placeholder:text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sea-green-500 focus:bg-white transition-all ${
+        errorMessage
+          ? 'border-red-500 focus:border-red-600'
+          : 'border-gray-300 focus:border-sea-green-600'
+      }`,
     };
+
+    // Variant label green, default adn fade
+    const labelSytle = isLabelGreen
+      ? 'text-xs text-teal-200 font-medium'
+      : isLabelFade
+        ? 'text-xs font-semibold text-slate-400 flex items-center gap-1'
+        : 'text-sm font-semibold md:text-normal text-slate-700';
 
     // Container Wrapper (Dengan atau Tanpa Card)
     const wrapperStyles = withCard
@@ -46,7 +61,7 @@ const InputText = React.forwardRef(
       <div className={`${wrapperStyles} ${containerClassName}`}>
         {/* HEADER QUESTION: LABEL + REQUIRED(*) */}
         {label && (
-          <label className="text-sm font-semibold md:text-base text-slate-700">
+          <label className={labelSytle}>
             {label}
             {required && <span className="ml-1 text-red-500">*</span>}
           </label>
@@ -67,7 +82,7 @@ const InputText = React.forwardRef(
             placeholder={placeholder}
             autoComplete="off"
             readOnly={readOnly}
-            className={`${baseInputStyles} ${variantStyles[variant]} ${className}`}
+            className={`${normalInputStyles} ${variantStyles[variant]} ${className}`}
             {...props}
           />
           {errorMessage && (

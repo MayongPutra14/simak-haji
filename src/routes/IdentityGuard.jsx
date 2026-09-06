@@ -6,7 +6,7 @@ export const RequiredCompletedIdentity = () => {
   if (!user) return <Navigate to={'/login'} replace />;
 
   const isProfileComplete =
-    user.is_completed === 0 || user.is_completed === false;
+    user.isCompleted === 0 || user.isCompleted === false;
 
   if (user.role === 'user' && isProfileComplete) {
     return <Navigate to={'/user/form'} replace />;
@@ -20,8 +20,7 @@ export const RequiredInCompletedIdentity = () => {
 
   if (!user) return <Navigate to={'/login'} replace />;
 
-  const isProfileComplete =
-    user.is_completed === 1 || user.is_completed === true;
+  const isProfileComplete = user.isCompleted === 1 || user.isCompleted === true;
 
   if (user.role === 'user' && isProfileComplete) {
     return <Navigate to={'/user/home'} replace />;

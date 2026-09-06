@@ -32,7 +32,7 @@ export default function AuthProvider({ children }) {
   const completeIdentity = useCallback(() => {
     setUser((prevUser) => {
       if (!prevUser) return null;
-      const updatedUser = { ...prevUser, is_completed: 1 };
+      const updatedUser = { ...prevUser, isCompleted: true };
       localStorage.setItem('user_data', JSON.stringify(updatedUser));
       return updatedUser;
     });

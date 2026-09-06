@@ -1,42 +1,21 @@
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router';
 import Table from '../ui/global/Table';
+import SearcInput from '../ui/inputs/SeacrhInput';
+import Button from '../ui/global/Button';
+import StatisticContainer from '../ui/global/StatisticContainer';
+import Modal from '../ui/global/Modal';
+import useDeleteUser from '../../hooks/admin/user/useDeleteUser';
+import { ListAdminUsersColumns } from '../../features/admin/ListAdminUsersColumns';
+import { SkeletonTableAdminUsers } from '../ui/global/skeletons/index';
+import { HiStatusOnline as IconOnline } from 'react-icons/hi';
 import {
-  MdWallet as IconWallet,
   MdAdd as IconAdd,
   MdOutlineArrowDropDown as IconFilter,
   MdOutlineNavigateNext as IconNav,
   MdPeople as IconPeople,
 } from 'react-icons/md';
 import { IoWarningOutline as IconWarning } from 'react-icons/io5';
-import SearcInput from '../ui/global/SeacrhInput';
-import { Button } from '../ui/global/Button';
-import StatisticContainer from '../ui/global/StatisticContainer';
-import Modal from '../ui/global/Modal';
-import { ListAdminUsersColumns } from '../../features/admin/ListAdminUsersColumns';
-import useDeleteAdminUser from '../../hooks/admin/useDeleteUser';
-
-// SKELETON TABLE
-function SkeletonTable() {
-  return (
-    <div className="animate-pulse">
-      {[...Array(5)].map((_, idx) => (
-        <div
-          key={idx}
-          className="flex items-center justify-between p-4 border-b border-slate-100"
-        >
-          <div className="flex items-center space-x-3 w-1/4">
-            <div className="w-16 h-10 bg-slate-200 rounded-full" />
-            <div className="h-4 bg-slate-200 rounded w-2/3" />
-          </div>
-          <div className="h-4 bg-slate-200 rounded w-1/6 hidden sm:block" />
-          <div className="h-4 bg-slate-200 rounded w-1/6 hidden sm:block" />
-          <div className="h-6 bg-slate-200 rounded-full w-16" />
-          <div className="h-8 bg-slate-200 rounded w-20" />
-        </div>
-      ))}
-    </div>
-  );
-}
 
 export default function ListUser({
   users = [],
@@ -48,10 +27,11 @@ export default function ListUser({
   const [statusFilter, setStatusFilter] = useState('Semua Status');
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteTarget, setDeleteTarget] = useState(null);
+  const navigate = useNavigate();
 
   // OPTIMIZATION: ELIMINATE LOCALUSERS STATE AND DERIVE DATA DIRECTLY FROM USERS PROP
   const { deleteUser, isDeleting, deleteError, setDeleteError } =
-    useDeleteAdminUser();
+    useDeleteUser();
 
   const itemsPerPage = 10;
 
@@ -127,8 +107,14 @@ export default function ListUser({
           setDeleteTarget(user);
           setDeleteError(null);
         },
+        onViewDetail: (user) => {
+          navigate(`/admin/users/detail/${user.id}`);
+        },
+        onEdit: (user) => {
+          navigate(`/admin/users/edit/${user.id}`);
+        },
       }),
-    [setDeleteError], // INCLUDED SETDELETEERROR TO RESOLVE ESLINT WARNING
+    [setDeleteError, navigate], // INCLUDED SETDELETEERROR TO RESOLVE ESLINT WARNING
   );
 
   return (
@@ -136,7 +122,7 @@ export default function ListUser({
       <div className="space-y-6">
         {/* FILTER, ADD NEW JAMAAH, AND SEARCH BAR */}
         <section className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center flex-1 max-w-2xl">
+          <div className="flex flex-col items-stretch flex-1 max-w-2xl gap-3 sm:flex-row sm:items-center">
             <SearcInput
               placeHolder="Cari jamaah..."
               searchQuery={searchQuery}
@@ -147,13 +133,13 @@ export default function ListUser({
               <select
                 value={statusFilter}
                 onChange={handleFilterChange}
-                className="w-full appearance-none bg-white border border-slate-200 rounded-lg pl-3 pr-8 py-2 text-sm text-slate-700 cursor-pointer focus:outline-none focus:border-sea-green-600 focus:ring-1 focus:ring-teal-600"
+                className="w-full py-2 pl-3 pr-8 text-sm bg-white border rounded-lg appearance-none cursor-pointer border-slate-200 text-slate-700 focus:outline-none focus:border-sea-green-600 focus:ring-1 focus:ring-teal-600"
               >
                 <option value="Semua Status">Semua Status</option>
                 <option value="Aktif">Aktif</option>
                 <option value="Alumni">Alumni</option>
               </select>
-              <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-slate-400">
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none text-slate-400">
                 <IconFilter className="w-5 h-5" />
               </div>
             </div>
@@ -161,7 +147,7 @@ export default function ListUser({
 
           <Button
             icon={<IconAdd />}
-            className="sm:w-auto px-4 py-2"
+            className="px-4 py-2 sm:w-auto"
             variant="primary"
             type="button"
             to="/admin/users/create"
@@ -185,9 +171,9 @@ export default function ListUser({
           />
 
           <StatisticContainer
-            label="Total Infaq"
-            value="Rp 12.500.000"
-            icon={IconWallet}
+            label="Total Jamaah Aktif"
+            value={users.filter((user) => user.status === 'Aktif').length}
+            icon={IconOnline}
             bgClass="bg-gradient-to-br from-sea-green-600 to-teal-800 border-transparent"
             shadowColorClass="hover:shadow-teal-600/40"
             textColorClass="text-white"
@@ -198,15 +184,15 @@ export default function ListUser({
         </section>
 
         {/* TABLE */}
-        <section className="bg-white rounded-xl border-none shadow-xs overflow-hidden">
+        <section className="overflow-hidden bg-white border-none shadow-xs rounded-xl">
           {isLoading ? (
-            <SkeletonTable />
+            <SkeletonTableAdminUsers />
           ) : error ? (
-            <div className="p-12 text-center text-rose-600 space-y-2">
+            <div className="p-12 space-y-2 text-center text-rose-600">
               <p className="font-semibold">{error}</p>
             </div>
           ) : users.length === 0 ? (
-            <div className="p-12 flex flex-col items-center text-center space-y-4">
+            <div className="flex flex-col items-center p-12 space-y-4 text-center">
               <div className="space-y-1">
                 <h3 className="text-base font-semibold text-slate-900">
                   Belum ada pengguna
@@ -220,7 +206,7 @@ export default function ListUser({
               </Button>
             </div>
           ) : currentData.length === 0 ? (
-            <div className="p-12 text-center space-y-4">
+            <div className="p-12 space-y-4 text-center">
               <div className="space-y-1">
                 <h3 className="text-base font-semibold text-slate-900">
                   Pengguna tidak ditemukan
@@ -250,7 +236,7 @@ export default function ListUser({
 
           {/* PAGINATION FOOTER */}
           {currentData.length > 0 && (
-            <footer className="px-4 py-3 border-t border-slate-100 flex items-center justify-between bg-white text-xs text-slate-500">
+            <footer className="flex items-center justify-between px-4 py-3 text-xs bg-white border-t border-slate-100 text-slate-500">
               <div className="hidden sm:block">
                 Menampilkan{' '}
                 <span className="font-medium text-slate-700">
@@ -267,7 +253,7 @@ export default function ListUser({
                 pengguna
               </div>
 
-              <div className="sm:hidden font-medium text-slate-600">
+              <div className="font-medium sm:hidden text-slate-600">
                 {currentPage} / {totalPages}
               </div>
 
@@ -283,7 +269,7 @@ export default function ListUser({
                   Previous
                 </Button>
 
-                <div className="hidden sm:flex items-center gap-1">
+                <div className="items-center hidden gap-1 sm:flex">
                   {[...Array(totalPages)].map((_, i) => {
                     const pageNum = i + 1;
                     return (
@@ -292,7 +278,7 @@ export default function ListUser({
                         variant="navigation"
                         onClick={() => setCurrentPage(pageNum)}
                         isActive={currentPage === pageNum}
-                        className="min-w-7 h-7 text-xs"
+                        className="text-xs min-w-7 h-7"
                       >
                         {pageNum}
                       </Button>
@@ -336,7 +322,7 @@ export default function ListUser({
               ? Data yang dihapus akan hilang permanen.
               {/* Alert jika terjadi error dari Backend */}
               {deleteError && (
-                <span className="block mt-2 p-2 bg-rose-50 text-rose-600 rounded-lg text-xs font-normal border border-rose-200">
+                <span className="block p-2 mt-2 text-xs font-normal border rounded-lg bg-rose-50 text-rose-600 border-rose-200">
                   {deleteError}
                 </span>
               )}

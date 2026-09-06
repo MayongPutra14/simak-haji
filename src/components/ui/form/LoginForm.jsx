@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'react-router';
-import { InputLogin } from '../inputs/InputLogin.jsx';
+import { InputLogin } from '../inputs/index';
 import { loginSchema } from '../../../utils/loginSchema.js';
-import { Button } from '../global/Button.jsx';
+import Button from '../global/Button.jsx';
 import { LuIdCard as IconIdCard, LuLock as IconLock } from 'react-icons/lu';
 
 const LoginForm = ({ onSubmit }) => {
@@ -42,17 +42,17 @@ const LoginForm = ({ onSubmit }) => {
       />
 
       {/* TOGGLE PASSWORD */}
-      <div className="flex items-center gap-2 -mt-1 mb-4">
+      <div className="flex items-center gap-2 mb-4 -mt-1">
         <input
           type="checkbox"
           id="showPassword"
           checked={showPassword}
           onChange={(event) => setShowPassword(event.target.checked)}
-          className="w-4 h-4 accent-sea-green-700 rounded cursor-pointer"
+          className="w-4 h-4 rounded cursor-pointer accent-sea-green-700"
         />
         <label
           htmlFor="showPassword"
-          className="text-sm text-slate-600 cursor-pointer select-none"
+          className="text-sm cursor-pointer select-none text-slate-600"
         >
           Tampilkan Password
         </label>
@@ -63,11 +63,11 @@ const LoginForm = ({ onSubmit }) => {
       </Button>
 
       {/* LINK TO REGISTER */}
-      <div className="mt-6 text-center text-sm text-gray-600">
+      <div className="mt-6 text-sm text-center text-gray-600">
         Belum punya akun?{' '}
         <Link
           to="/register"
-          className="text-sea-green-600 font-semibold underline"
+          className="font-semibold underline text-sea-green-600"
         >
           Daftar Sekarang
         </Link>

@@ -4,6 +4,7 @@ const InputNumber = React.forwardRef(
   (
     {
       label,
+      isLabelFade = false,
       description,
       required = false,
       placeholder = 'Jawaban Anda',
@@ -21,9 +22,9 @@ const InputNumber = React.forwardRef(
   ) => {
     const errorMessage = typeof error === 'string' ? error : error?.message;
 
-    // BASE INPUT STYLES
-    const baseInputStyles =
-      'w-full text-sm md:text-base focus:outline-none transition-colors duration-200';
+    // normal INPUT STYLES
+    const normalInputStyles =
+      'w-full text-sm md:text-normal focus:outline-none transition-colors duration-200';
 
     // INPUT VARIANT OPTIONS
     const variantStyles = {
@@ -37,7 +38,16 @@ const InputNumber = React.forwardRef(
           ? 'border-red-500 focus:border-red-600'
           : 'border-gray-300 focus:border-sea-green-600'
       }`,
+      editProfile: `w-full px-3 py-2 text-sm text-slate-700  placeholder:font-medium placeholder:text-slate-700/30 placeholder:text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sea-green-500 focus:bg-white transition-all ${
+        errorMessage
+          ? 'border-red-500 focus:border-red-600'
+          : 'border-gray-300 focus:border-sea-green-600'
+      }`,
     };
+
+    const labelStyle = isLabelFade
+      ? 'text-xs font-semibold text-slate-400 flex items-center gap-1'
+      : 'text-sm font-semibold md:text-normal text-slate-700';
 
     const readOnlyStyles = readOnly
       ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
@@ -64,7 +74,7 @@ const InputNumber = React.forwardRef(
       <div className={`${wrapperStyles} ${containerClassName}`}>
         {/* HEADER QUESTION: LABEL + REQUIRED(*) */}
         {label && (
-          <label className="text-sm font-semibold md:text-base text-slate-700">
+          <label className={labelStyle}>
             {label}
             {required && <span className="ml-1 text-red-500">*</span>}
           </label>
@@ -89,7 +99,7 @@ const InputNumber = React.forwardRef(
             autoComplete="off"
             readOnly={readOnly}
             onChange={handleChange}
-            className={`${baseInputStyles} ${variantStyles[variant]} ${readOnlyStyles} ${className}`}
+            className={`${normalInputStyles} ${variantStyles[variant]} ${readOnlyStyles} ${className}`}
             {...props}
           />
           {errorMessage && (

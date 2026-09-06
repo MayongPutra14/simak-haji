@@ -1,9 +1,10 @@
 import { Link } from 'react-router';
 
-export const Button = ({
+export default function Button({
   children,
   type = 'button',
   icon: Icon,
+  fontColor = 'text-white',
   variant = 'primary',
   isLoading = false,
   disabled = false,
@@ -12,14 +13,13 @@ export const Button = ({
   onClick,
   to,
   ...props
-}) => {
+}) {
   // STYLE VARIANT
   const baseStyle =
     'rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 disabled:cursor-not-allowed cursor-pointer';
 
   const variants = {
-    primary:
-      'py-2.5 px-4 bg-sea-green-600 hover:bg-sea-green-700 text-white disabled:bg-gray-400',
+    primary: `py-2.5 px-4 bg-sea-green-600 hover:bg-sea-green-700 ${fontColor} disabled:bg-gray-400`,
     secondary:
       'py-2.5 px-4bg-slate-900 hover:bg-slate-800 text-white disabled:bg-gray-400',
     outline:
@@ -81,4 +81,4 @@ export const Button = ({
       {content}
     </button>
   );
-};
+}

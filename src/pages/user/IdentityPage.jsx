@@ -10,7 +10,7 @@ import {
 } from 'react-icons/io5';
 
 const IdentityPage = () => {
-  const { user, completeIdentity } = useAuth();
+  const { user, logout, completeIdentity } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -128,6 +128,7 @@ const IdentityPage = () => {
         onSubmit={handleOnSubmit}
         isLoading={isLoading}
         userId={userId}
+        onLogout={logout}
       />
 
       <Modal

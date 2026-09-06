@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import { Button } from './Button';
+import Button from './Button';
 import BrickIlustration from '../../../assets/images/brick.webp';
 import ConstructionIlustration from '../../../assets/images/construction.webp';
 import {

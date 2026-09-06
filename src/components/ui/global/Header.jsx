@@ -11,9 +11,9 @@ export default function Header() {
   const { user, logout } = useAuth();
   const profile = user || DEFAULT_PROFILE;
 
-  const encodedName = encodeURIComponent(profile.nama_lengkap);
+  const encodedName = encodeURIComponent(profile.fullName);
   const uiAvatarUrl = `https://ui-avatars.com/api/?name=${encodedName}&background=random&color=fff&bold=true`;
-  const avatarSrc = profile.profile_image || uiAvatarUrl;
+  const avatarSrc = profile.profileImage || uiAvatarUrl;
 
   const handleLogout = () => {
     logout();
@@ -28,7 +28,7 @@ export default function Header() {
           <div className="relative shrink-0">
             <img
               src={avatarSrc}
-              alt={profile.nama_lengkap}
+              alt={profile.fullName}
               className="object-cover w-10 h-10 rounded-full shadow-sm ring-2 ring-sea-green-700 md:w-12 md:h-12"
             />
             <span
@@ -42,7 +42,7 @@ export default function Header() {
               Assalamualaikum,
             </span>
             <h1 className="font-medium leading-tight tracking-tight text-white truncate max-w-45 sm:max-w-60">
-              {profile.nama_lengkap}
+              {profile.fullName}
             </h1>
           </div>
         </div>

@@ -1,19 +1,13 @@
-import { Button } from '../ui/global/Button';
+import Button from '../ui/global/Button';
 import formatWaktuIndonesia from '../../utils/dateConversion';
-
+import { SkeletonScheduleUserDashboard } from '../ui/global/skeletons/index';
 export const EventDashboard = ({
   eventData,
   isLoading = false,
   onActionClick,
 }) => {
   if (isLoading) {
-    return (
-      <div className="w-[95%] max-w-md mx-auto mt-6 p-6 bg-white rounded-3xl border border-slate-100 shadow-sm animate-pulse">
-        <div className="w-1/2 h-6 mb-4 rounded bg-slate-200"></div>
-        <div className="w-3/4 h-4 mb-3 rounded bg-slate-200"></div>
-        <div className="w-2/3 h-4 rounded bg-slate-200"></div>
-      </div>
-    );
+    return <SkeletonScheduleUserDashboard />;
   }
 
   if (!eventData) {

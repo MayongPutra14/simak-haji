@@ -1,7 +1,7 @@
 import IdentityForm from '../../components/ui/form/IdentityForm';
 import HeaderGuideline from '../../components/ui/global/HeaderGuideline';
 
-const IdentityFormFragment = ({ userId, onSubmit, isLoading }) => {
+const IdentityFormFragment = ({ userId, onSubmit, onLogout, isLoading }) => {
   return (
     <div>
       <HeaderGuideline />
@@ -10,6 +10,7 @@ const IdentityFormFragment = ({ userId, onSubmit, isLoading }) => {
         onSubmit={onSubmit}
         isSubmitting={isLoading}
         userId={userId}
+        onLogut={onLogout}
       />
     </div>
   );

@@ -7,10 +7,10 @@ export default function AdminLayout() {
     <div className="flex flex-col min-h-screen md:flex-row">
       <Navigation role="admin" />
 
-      <div className="flex flex-col flex-1 transition-all duration-300 md:pl-64">
+      <div className="flex flex-col flex-1 transition-all duration-300 md:pl-55 bg-red-100">
         <Header />
 
-        <main className="container flex-1 pt-0 pb-20 mx-auto bg-sea-green-50">
+        <main className=" w-full flex-1 pt-0 pb-20 mx-auto bg-sea-green-50">
           <Outlet />
         </main>
       </div>

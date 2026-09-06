@@ -1,18 +1,18 @@
 import React from 'react';
 
-export const InputLogin = React.forwardRef(
+const InputLogin = React.forwardRef(
   ({ label, placeholder, error, type = 'text', leftIcon, ...props }, ref) => {
     return (
       <div className="flex flex-col gap-1.5 w-full">
         {label && (
-          <label className="font-medium text-slate-900 cursor-pointer">
+          <label className="font-medium cursor-pointer text-slate-900">
             {label}
           </label>
         )}
         <div className="relative w-full">
           {/* ICON LEFT */}
           {leftIcon && (
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
               {leftIcon}
             </div>
           )}
@@ -28,10 +28,12 @@ export const InputLogin = React.forwardRef(
           />
         </div>
         {/* ERROR MESSAGE */}
-        {error && <p className="text-xs text-red-500 font-medium">{error}</p>}
+        {error && <p className="text-xs font-medium text-red-500">{error}</p>}
       </div>
     );
   },
 );
 
 InputLogin.displayName = 'InputLogin';
+
+export default InputLogin;

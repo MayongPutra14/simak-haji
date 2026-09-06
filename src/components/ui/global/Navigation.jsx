@@ -9,7 +9,7 @@ export default function Navigation({ role = 'user' }) {
     <>
       {/* DESKTOP SIDEBAR (md size ke atas) */}
       <aside
-        className="fixed top-0 bottom-0 left-0 z-40 flex-col justify-between hidden w-64 min-h-screen p-4 border-r shadow-2xl md:flex bg-sea-green-900 border-sea-green-800/80"
+        className="fixed top-0 bottom-0 left-0 z-40 flex-col justify-between hidden w-55 min-h-screen p-4 border-r shadow-2xl md:flex bg-sea-green-900 border-sea-green-800/80"
         aria-label="Desktop Navigation"
       >
         <div>
@@ -65,10 +65,11 @@ export default function Navigation({ role = 'user' }) {
 function SidebarNavItem({ item }) {
   const { path, label, IconOutline, IconFill } = item;
 
+  const isExact = path === '/admin/home' || path === '/user/home';
   return (
     <NavLink
       to={path}
-      end
+      end={isExact}
       className={({ isActive }) => `
         flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 text-sm font-base
         ${
@@ -120,11 +121,12 @@ function LogoutNavItem() {
  */
 function StandardNavItem({ item }) {
   const { path, label, IconOutline, IconFill } = item;
+  const isExact = path === '/admin/home' || path === '/user/home';
 
   return (
     <NavLink
       to={path}
-      end
+      end={isExact}
       className={({ isActive }) => `
         group relative flex flex-col items-center justify-center min-w-14 px-2 py-3 rounded-xl
         transition-all duration-200 ease-in-out select-none cursor-pointer

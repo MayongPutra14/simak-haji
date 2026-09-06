@@ -252,10 +252,13 @@ export const districtOptions = [
 ];
 
 export const educationOptions = [
+  { label: 'Tidak Sekolah / Belum Sekolah', value: 'Tidak Sekolah' },
+  { label: 'Tidak Lulus SD', value: 'Tidak lulus sd' },
+
   // --- PENDIDIKAN DASAR & MENENGAH ---
-  { label: 'SD', value: 'SD' },
-  { label: 'SLTP / SMP', value: 'SLTP' },
-  { label: 'SLTA / SMA / SMK', value: 'SLTA' },
+  { label: 'SD / MI', value: 'SD' },
+  { label: 'SMP / Mts (SLTP)', value: 'SLTP' },
+  { label: ' SMA / SMK / MA (SLTA)', value: 'SLTA' },
 
   // --- PENDIDIKAN TINGGI ---
   { label: 'Diploma (D1/D2/D3/D4)', value: 'Diploma' },
@@ -271,15 +274,15 @@ export const statusPortionOptions = [
 ];
 
 export const statusControlProcessOptions = [
-  { label: 'Lengkap', value: 'lengkap' },
   { label: 'Menunggu', value: 'menunggu' },
+  { label: 'Lengkap', value: 'lengkap' },
   { label: 'Gagal', value: 'gagal' },
 ];
 
 export const statusHajiUmrahOptions = [
-  { label: 'Pernah Haji', value: 'pernah haji' },
-  { label: 'Pernah Umrah', value: 'pernah umrah' },
-  { label: 'Belum Pernah', value: 'belum pernah' },
+  { label: 'Pernah Haji', value: 'pernah_haji' },
+  { label: 'Pernah Umrah', value: 'pernah_umrah' },
+  { label: 'Belum Pernah', value: 'belum_pernah' },
 ];
 
 export const zonaOptions = [
@@ -290,3 +293,53 @@ export const zonaOptions = [
   { label: 'E', value: 'E' },
   { label: 'F', value: 'F' },
 ];
+
+export const UpdateUserSchema = z.object({
+  fullName: z.string().nullable().optional(),
+  portionNumber: z.string().nullable().optional(),
+  whatsapp: z.string().nullable().optional(),
+  fatherName: z.string().nullable().optional(),
+  birthDate: z.string().nullable().optional(),
+  gender: z.string().nullable().optional(),
+  birthPlace: z.string().nullable().optional(),
+  address: z.string().nullable().optional(),
+  subDistrict: z.string().nullable().optional(),
+  village: z.string().nullable().optional(),
+  profileImage: z.string().nullable().optional(),
+  job: z.string().nullable().optional(),
+  education: z.string().nullable().optional(),
+
+  depature: z.string().nullable().optional(),
+  experience: z.string().nullable().optional(),
+  health: z.string().nullable().optional(),
+  expertise: z.string().nullable().optional(),
+  contribution: z.string().nullable().optional(),
+
+  companion: z.string().nullable().optional(),
+  mahramName: z.string().nullable().optional(),
+  referenceName: z.string().nullable().optional(),
+  referencePhone: z.string().nullable().optional(),
+  referenceOrigin: z.string().nullable().optional(),
+
+  currPorsionPosition: z.string().nullable().optional(),
+  currPorstionStatus: z.string().nullable().optional(),
+  currPorsionPositionBackup: z.string().nullable().optional(),
+  currPorstionStatusBackup: z.string().nullable().optional(),
+
+  zone: z.string().nullable().optional(),
+  plotNumber: z.string().nullable().optional(),
+  batch: z.string().nullable().optional(),
+  group: z.string().nullable().optional(),
+  team: z.string().nullable().optional(),
+
+  googleFormStatus: z.string().nullable().optional(),
+  photoStatus: z.string().nullable().optional(),
+  spphStatus: z.string().nullable().optional(),
+  mutationStatus: z.string().nullable().optional(),
+  biometricStatus: z.string().nullable().optional(),
+  puskesmasStatus: z.string().nullable().optional(),
+  mcuStatus: z.string().nullable().optional(),
+  paymentStatus: z.string().nullable().optional(),
+  passport: z.string().nullable().optional(),
+  visa: z.string().nullable().optional(),
+});
