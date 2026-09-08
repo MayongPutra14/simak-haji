@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getDashboardEvent } from './eventDashboardAPI';
+// import { getDashboardEvent } from './eventDashboardAPI';
+import { getScheduleDashboard } from '../../utils/user/api';
 
 export const useDashboardEvent = (userId) => {
   const [eventData, setEventData] = useState(null);
@@ -16,7 +17,7 @@ export const useDashboardEvent = (userId) => {
       setError(null);
 
       try {
-        const response = await getDashboardEvent(userId);
+        const response = await getScheduleDashboard(userId);
         if (isSubscribed && response?.status === 'success') {
           setEventData(response.data);
         }

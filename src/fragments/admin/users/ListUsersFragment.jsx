@@ -1,6 +1,6 @@
 import ListUser from '../../../components/admin/ListUser.jsx';
 import TitlePage from '../../../components/ui/global/TitlePage.jsx';
-import { bgImage } from '../../../utils/bgImage.js';
+import { bgImage } from '../../../utils/helpers/bgImage.js';
 import useAdminUsersData from '../../../hooks/admin/user/useGetUsers';
 
 const ListUsersFragment = ({ user }) => {

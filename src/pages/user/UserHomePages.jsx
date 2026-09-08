@@ -7,7 +7,7 @@ const UserHomePage = () => {
   if (!user) return null;
 
   return (
-    <section className="w-full bg-sea-green-50">
+    <section >
       <UserHomeFragment user={user} />
     </section>
   );

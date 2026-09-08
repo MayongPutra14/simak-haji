@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchPraySchedules } from '../../utils/client/islamicAPI';
+import { fetchPraySchedules } from '../../utils/helpers/islamicAPI';
 
 export const usePrayTimes = (
   provinsi = 'JAWA BARAT',

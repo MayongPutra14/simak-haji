@@ -87,7 +87,7 @@ const Modal = ({
               <button
                 type="button"
                 onClick={handleCancelClick}
-                className="w-full sm:w-auto inline-flex justify-center rounded-xl border border-slate-200 bg-white px-6 py-2.5 text-sm font-medium text-slate-700 shadow-xs hover:bg-slate-50 focus:outline-hidden focus:ring-2 focus:ring-offset-2 transition-colors cursor-pointer"
+                className="w-full sm:w-auto inline-flex justify-center items-center rounded-xl border border-slate-200 bg-white px-6 py-2.5 text-sm font-medium text-slate-700 shadow-xs hover:bg-slate-50 focus:outline-hidden focus:ring-2 focus:ring-offset-2 transition-colors cursor-pointer"
               >
                 {cancelButtonText}
               </button>

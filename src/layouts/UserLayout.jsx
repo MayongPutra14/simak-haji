@@ -4,16 +4,16 @@ import Navigation from '../components/ui/global/Navigation';
 
 export default function UserLayout() {
   return (
-    <div className="flex flex-col min-h-screen md:flex-row">
+    <article className="flex flex-col min-h-screen md:flex-row">
       <Navigation role="user" />
 
-      <div className="flex flex-col flex-1 transition-all duration-300 md:pl-64">
+      <div className="flex flex-col flex-1 transition-all duration-300 md:pl-55">
         <Header />
 
-        <main className="container flex-1 pt-0 pb-20 mx-auto">
+        <div className="w-full flex-1 pt-0 pb-20  min-h-screen bg-sea-green-50">
           <Outlet />
-        </main>
+        </div>
       </div>
-    </div>
+    </article>
   );
 }

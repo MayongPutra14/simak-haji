@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { InputLogin as InputRegistration } from '../inputs/index';
-import { registrationSchema } from '../../../utils/registerFormSchema.js';
+import { registrationSchema } from '../../../utils/helpers/registerFormSchema';
 import Button from '../global/Button.jsx';
 import { MdOutlinePermIdentity as IconPerson } from 'react-icons/md';
 import {

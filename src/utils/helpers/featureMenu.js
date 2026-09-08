@@ -4,7 +4,7 @@ import {
   TasbihIcon,
   DuaIcon,
   SavingIcon,
-} from '../components/ui/global/MenuIcon';
+} from '../../components/ui/global/MenuIcon';
 
 import {
   IoQrCodeOutline as IconQr,

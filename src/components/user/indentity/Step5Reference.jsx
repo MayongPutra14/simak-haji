@@ -2,7 +2,7 @@ import { useForm, useWatch, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { InputText, InputRadio, InputImage } from '../../ui/inputs/index';
 import Button from '../../ui/global/Button';
-import * as RegistrationForm from '../../../utils/registerFormSchema';
+import * as RegistrationForm from '../../../utils/helpers/registerFormSchema';
 
 const Step5Reference = ({ onNext, onBack, initialData = {} }) => {
   const {

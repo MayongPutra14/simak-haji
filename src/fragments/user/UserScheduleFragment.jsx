@@ -1,6 +1,6 @@
 import TitlePage from '../../components/ui/global/TitlePage';
 import EventCard from '../../components/user/EventCard';
-import useSchedulesEvent from '../../hooks/useSchedules';
+import useSchedulesEvent from '../../hooks/user/useSchedules';
 
 const UserScheduleFragment = ({ user }) => {
   const { schedulesData, isLoading } = useSchedulesEvent(user?.id);

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import getFeatureItems from '../../../utils/featureMenu';
+import getFeatureItems from '../../../utils/helpers/featureMenu';
 
 export default function FeatureHubContainer({ role = 'user', onOpenMore }) {
   const navigate = useNavigate();

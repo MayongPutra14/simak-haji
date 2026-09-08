@@ -73,6 +73,25 @@ export const getUserProfile = async (userId) => {
   }
 };
 
+export const getScheduleDashboard = async (userId) => {
+  if (!userId) throw new Error('User ID tidak ditemukan');
+  try {
+    const response = await api.post('get_dashboard_event.php', {
+      user_id: userId,
+    });
+
+    if (response.status === 'error' || response.status === 'failed') {
+      throw new Error('Terjadi error ketika mengambil data acara');
+    }
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message || 'Terjadi kesalahan jaringan.', {
+      cause: error,
+    });
+  }
+};
+
 export const getSchedules = async (userId) => {
   try {
     const response = await axios.post(`${BASE_URL}/get_jadwal.php`, {
