@@ -10,7 +10,7 @@ export default function UserLayout() {
       <div className="flex flex-col flex-1 transition-all duration-300 md:pl-55">
         <Header />
 
-        <div className="w-full flex-1 pt-0 pb-20  min-h-screen bg-sea-green-50">
+        <div className="w-full flex-1 pt-0 pb-20  min-h-screen bg-slate-50">
           <Outlet />
         </div>
       </div>

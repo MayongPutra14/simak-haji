@@ -1,6 +1,21 @@
 import Button from '../ui/global/Button';
-import formatWaktuIndonesia from '../../utils/helpers/dateConversion';
 import { SkeletonScheduleUserDashboard } from '../ui/global/skeletons/index';
+import NotFoundData from '../ui/global/NotFoundData';
+import {
+  formatDateIndonesia,
+  formatTimeIndonesia,
+} from '../../utils/helpers/dateConversion';
+import {
+  getButtonLabel,
+  getStatusConfig,
+} from '../../utils/helpers/statusInEnvent';
+import {
+  IoTimeOutline as IconClock,
+  IoCalendarClearOutline as IconCalendar,
+  IoLocationOutline as IconLocation,
+  IoPersonOutline as IconPerson,
+  IoLayersOutline as IconCategory,
+} from 'react-icons/io5';
 
 export const EventDashboard = ({
   eventData,
@@ -19,50 +34,30 @@ export const EventDashboard = ({
             Agenda Terdekat
           </h2>
         </div>
-        <div className="w-full p-6 text-sm text-center bg-white border shadow-sm rounded-3xl border-slate-100 text-slate-500">
-          Belum ada agenda terdekat saat ini.
-        </div>
+        <NotFoundData message="Belum ada agenda terdekat." />
       </div>
     );
   }
 
-  const indonesianTime = formatWaktuIndonesia(eventData.eventTime);
   // FALLBACK IF API DOES NOT RESPONSE
   const {
     eventName = 'Nama Event Tidak Tersedia',
-    eventTime = indonesianTime,
+    eventDescription = 'Hadiri sesi ini untuk panduan lengkap dan update informasi haji Anda',
     venue = 'Aula Utama',
     speaker = 'Panitia',
     eventType = 'Umum',
-    status = 'upcoming', // default jika kosong
+    status = 'upcoming',
     isAttended = 0,
   } = eventData;
 
-  const formatedTime = formatWaktuIndonesia(eventTime);
+  const eventDate = formatDateIndonesia(eventData.eventTime);
+  const eventTime = formatTimeIndonesia(eventData.eventTime);
+  const eventLocation = venue;
   const eventCapitalized =
     eventType.charAt(0).toUpperCase() + eventType.slice(1);
 
   // status event configuration
-  const getStatusConfig = () => {
-    const currentStatus = status.toLowerCase();
-    if (currentStatus === 'live')
-      return {
-        label: 'Live',
-        color: 'bg-yellow-100 text-yellow-700 animate-pulse duration-300',
-      };
-    if (currentStatus === 'completed')
-      return { label: 'Selesai', color: 'bg-green-100 text-green-700' };
-    return { label: 'Belum Dimulai', color: 'bg-red-100 text-red-700' };
-  };
-
-  const statusConfig = getStatusConfig();
-
-  const getButtonLabel = () => {
-    if (status.toLowerCase() === 'live' && isAttended === 0) {
-      return 'Absen via QR';
-    }
-    return 'Materi Bacaan';
-  };
+  const statusConfig = getStatusConfig(status);
 
   return (
     <div className="w-[95%] md:w-[98%] mt-6 mx-auto flex flex-col pb-6">
@@ -75,7 +70,7 @@ export const EventDashboard = ({
       <div className="flex flex-wrap gap-4">
         <div className="relative flex flex-col w-full gap-4 p-5 bg-white border shadow-sm md:max-w-md rounded-3xl border-slate-100">
           {/* BADGE STATUS */}
-          <div className="absolute flex flex-col items-end gap-2 top-5 right-5">
+          <div className=" flex flex-col items-end gap-2">
             <span
               className={`px-3 py-1 text-xs font-semibold rounded-full ${statusConfig.color}`}
             >
@@ -88,29 +83,39 @@ export const EventDashboard = ({
             )}
           </div>
 
-          <div className="pb-3 pr-24 border-b border-slate-100">
-            <h3 className="text-xl font-semibold text-slate-800">
+          <div className="border-l-4 border-sea-green-400 p-4 ">
+            <h2 className="pb-3 text-2xl font-semibold  text-slate-700">
               {eventName}
-            </h3>
+            </h2>
+            <p className="text-sm text-slate-600/70">{eventDescription}</p>
           </div>
 
-          <div className="flex flex-col gap-1 pb-3 border-b border-slate-100">
-            <span className="text-base font-normal text-slate-400">
-              Waktu & Tempat
-            </span>
-            <p className="font-semibold text-md text-slate-700">
-              {formatedTime}
-            </p>
-            <p className="font-semibold text-md text-slate-700">{venue}</p>
-          </div>
-
-          <div className="flex flex-col gap-1 pb-3 border-b border-slate-100">
-            <span className="text-base font-normal text-slate-400">
-              Jenis & Pembicara
-            </span>
-            <p className="font-semibold text-md text-slate-700">
-              {eventCapitalized} - {speaker}
-            </p>
+          {/* DETAIL ATTENDANCE STATUS */}
+          <div className="flex flex-col space-y-4 mt-4">
+            <div className="flex gap-2 items-center">
+              <IconCalendar className="w-6 h-6 text-slate-600" />
+              <p className="text-sm font-medium text-slate-800">{eventDate}</p>
+            </div>
+            <div className="flex gap-2 items-center">
+              <IconClock className="w-6 h-6 text-slate-600" />
+              <p className="text-sm font-medium text-slate-800">{eventTime}</p>
+            </div>
+            <div className="flex gap-2 items-center">
+              <IconLocation className="w-6 h-6 text-slate-600" />
+              <p className="text-sm font-medium text-slate-800">
+                {eventLocation}
+              </p>
+            </div>
+            <div className="flex gap-2 items-center">
+              <IconCategory className="w-6 h-6 text-slate-600" />
+              <p className="text-sm font-medium text-slate-800">
+                {eventCapitalized}
+              </p>
+            </div>
+            <div className="flex gap-2 items-center">
+              <IconPerson className="w-6 h-6 text-slate-600" />
+              <p className="text-sm font-medium text-slate-800">{speaker}</p>
+            </div>
           </div>
 
           <div className="pt-1">
@@ -119,7 +124,7 @@ export const EventDashboard = ({
               onClick={onActionClick}
               className="w-full"
             >
-              {getButtonLabel()}
+              {getButtonLabel(status, isAttended)}
             </Button>
           </div>
         </div>

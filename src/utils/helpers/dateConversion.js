@@ -1,6 +1,5 @@
-export default function formatWaktuIndonesia(dateString) {
-  if (!dateString) return 'Waktu belum ditentukan';
-
+export function formatDateIndonesia(dateString) {
+  if (!dateString) return 'Tanggal belum ditentukan';
   const dateObj = new Date(dateString.replace(' ', 'T'));
   if (isNaN(dateObj)) return dateString;
 
@@ -9,8 +8,18 @@ export default function formatWaktuIndonesia(dateString) {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
+  }).format(dateObj);
+}
+
+export function formatTimeIndonesia(dateString) {
+  if (!dateString) return 'Waktu belum ditentukan';
+  const dateObj = new Date(dateString.replace(' ', 'T'));
+  if (isNaN(dateObj)) return dateString;
+
+  return new Intl.DateTimeFormat('id-ID', {
     hour: '2-digit',
     minute: '2-digit',
+    hour12: false,
     timeZoneName: 'short',
   }).format(dateObj);
 }

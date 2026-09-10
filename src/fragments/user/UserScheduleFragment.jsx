@@ -1,15 +1,18 @@
+import NotFoundData from '../../components/ui/global/NotFoundData';
 import TitlePage from '../../components/ui/global/TitlePage';
 import EventCard from '../../components/user/EventCard';
 import useSchedulesEvent from '../../hooks/user/useSchedules';
+import dummySchedules from '../../utils/helpers/dummySchedules.json';
 
 const UserScheduleFragment = ({ user }) => {
-  const { schedulesData, isLoading } = useSchedulesEvent(user?.id);
-
+  // const { schedulesData, isLoading } = useSchedulesEvent(user?.id);
+  const schedulesData = dummySchedules.data;
+  const isLoading = false;
   return (
     <>
       <TitlePage />
 
-      <div className="flex flex-col w-full max-w-2xl gap-4 p-4 mx-auto">
+      <div className="flex flex-wrap justify-ceter gap-4 p-4 ">
         {isLoading ? (
           Array.from({ length: 3 }).map((_, index) => (
             <EventCard key={`skeleton-${index}`} isLoading={true} />
@@ -17,9 +20,7 @@ const UserScheduleFragment = ({ user }) => {
         ) : schedulesData && schedulesData.length > 0 ? (
           schedulesData.map((item) => <EventCard key={item.id} event={item} />)
         ) : (
-          <p className="text-center text-slate-500">
-            Tidak ada jadwal tersedia.
-          </p>
+          <NotFoundData message="Tidak ada jadwal yang tersedia" />
         )}
       </div>
     </>

@@ -93,14 +93,15 @@ export const getScheduleDashboard = async (userId) => {
 };
 
 export const getSchedules = async (userId) => {
+  if (!userId) throw new Error('User ID tidak ditemukan');
   try {
-    const response = await axios.post(`${BASE_URL}/get_jadwal.php`, {
+    const response = await api.post('get_jadwal.php', {
       user_id: userId,
     });
 
     return response.data;
   } catch (error) {
     console.error('Error fetching schedules:', error);
-    return null;
+    throw new Error('Gagal mengambil jadwal', { cause: error });
   }
 };
