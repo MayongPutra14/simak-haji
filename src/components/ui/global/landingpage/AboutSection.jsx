@@ -1,6 +1,6 @@
 import Button from '../Button';
-import doc20262 from '../../../../assets/images/doc-front-masjid-2026-2.webp';
-import doc2025 from '../../../../assets/images/doc-front-kabah-2025.webp';
+import doc20262 from '../../../../assets/images/activities/doc-front-masjid-2026-2.webp';
+import doc2025 from '../../../../assets/images/activities/doc-front-kabah-2025.webp';
 import { FaArrowRightLong as IconArrowRight } from 'react-icons/fa6';
 import {
   FaQuoteRight as IconQuote,
