@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import Button from './Button';
-import BrickIlustration from '../../../assets/images/brick.webp';
-import ConstructionIlustration from '../../../assets/images/construction.webp';
+import BrickIlustration from '../../../assets/images/decorations/brick.webp';
+import ConstructionIlustration from '../../../assets/images/decorations/construction.webp';
 import {
   IoArrowBackOutline as IconBack,
   IoHomeOutline as IconHome,

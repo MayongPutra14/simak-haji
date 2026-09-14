@@ -102,6 +102,14 @@ const Navbar = () => {
                 Testimoni
               </a>
             </li>
+            <li>
+              <a
+                href="#testimoni"
+                className="font-medium text-white transition-colors duration-200 rounded-sm hover:text-sea-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-600"
+              >
+                FAQ
+              </a>
+            </li>
           </ul>
 
           {/* Right side: Login Button (Desktop) */}
@@ -255,6 +263,15 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Testimoni
+              </a>
+            </li>
+            <li>
+              <a
+                href="#testimoni"
+                className="block px-4 py-3 text-base font-medium text-white transition-colors rounded-lg hover:bg-white/50 hover:text-white"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                FAQ
               </a>
             </li>
           </ul>
