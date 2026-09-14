@@ -1,4 +1,4 @@
-import BackgroundHero from '../../../../assets/images/BackgroundHero.jpg';
+import BackgroundHero from '../../../../assets/images/BackgroundHero.webp';
 import Button from '../Button';
 import {
   FaWhatsapp as IconWhatsapp,
