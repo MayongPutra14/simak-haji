@@ -7,6 +7,7 @@ import InputRadio from './InputRadio';
 import InputSelect from './InputSelect';
 import InputText from './InputText';
 import SearchInput from './SeacrhInput';
+import InputTime from './InputTime';
 
 export {
   InputCheckbox,
@@ -18,4 +19,5 @@ export {
   InputSelect,
   InputText,
   SearchInput,
+  InputTime,
 };

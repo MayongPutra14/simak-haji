@@ -1,6 +1,6 @@
 import ProfileDetail from '../../../components/ui/global/ProfileDetail';
 import TitlePage from '../../../components/ui/global/TitlePage';
-import { bgImage } from '../../../utils/bgImage';
+import { bgImage } from '../../../utils/helpers/bgImage';
 
 export default function UserDetailFragment({ data, isLoading }) {
   return (

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import IdentityFormFragment from '../../fragments/user/IndentityFormFragment';
 import Modal from '../../components/ui/global/Modal';
 import { useAuth } from '../../features/auth/useAuth';
-import { updateProfileIdentity } from '../../utils/client/api';
+import { updateProfileIdentity } from '../../utils/user/api';
 import {
   IoCloseOutline as IconClose,
   IoCheckmark as IconCheck,
@@ -123,7 +123,7 @@ const IdentityPage = () => {
   };
 
   return (
-    <section className="bg-sea-green-800 pb-12 pt-4 min-h-screen">
+    <section className="min-h-screen pt-4 pb-12 bg-sea-green-800">
       <IdentityFormFragment
         onSubmit={handleOnSubmit}
         isLoading={isLoading}

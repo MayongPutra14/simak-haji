@@ -1,6 +1,6 @@
 import ProfileDetail from '../../components/ui/global/ProfileDetail';
 import TitlePage from '../../components/ui/global/TitlePage';
-import useProfileUser from '../../hooks/useProfileUSer';
+import useProfileUser from '../../hooks/user/useProfileUSer';
 
 const UserProfileFragment = ({ user }) => {
   const { profileData, isLoading } = useProfileUser(user?.id);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://simak-api.vercel.app/api';
+const BASE_URL = 'https://simak-api.my.id/api';
 
 export const api = axios.create({
   baseURL: BASE_URL,

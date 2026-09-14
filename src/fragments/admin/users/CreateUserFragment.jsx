@@ -4,7 +4,7 @@ import { useUserManagement } from '../../../hooks/admin/user/useUserManagement';
 import TitlePage from '../../../components/ui/global/TitlePage';
 import CreateUser from '../../../components/admin/CreateUser';
 import Modal from '../../../components/ui/global/Modal';
-import { bgImage } from '../../../utils/bgImage';
+import { bgImage } from '../../../utils/helpers/bgImage';
 import {
   createUserSession,
   getUserSession,

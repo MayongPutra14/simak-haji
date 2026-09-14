@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import useUpdateUser from '../../../hooks/admin/user/useEdiUser';
 import EditUser from '../../../components/admin/EditUser';
 import TitlePage from '../../../components/ui/global/TitlePage';
-import { bgImage } from '../../../utils/bgImage';
+import { bgImage } from '../../../utils/helpers/bgImage';
 
 const CLOUD_NAME = 'llp0te3a';
 const UPLOAD_PRESET = 'simak_preset';

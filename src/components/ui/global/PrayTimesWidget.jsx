@@ -1,5 +1,5 @@
 import { IoLocationOutline } from 'react-icons/io5';
-import { bgImage } from '../../../utils/bgImage';
+import { bgImage } from '../../../utils/helpers/bgImage';
 import { usePrayTimes } from '../../../hooks/global/usePrayTimes';
 
 export default function PrayTimesWidget() {
@@ -41,7 +41,7 @@ export default function PrayTimesWidget() {
         {/* HEADER WIDGET */}
         <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/15">
           <div className="flex items-center gap-1.5 text-xs font-medium text-emerald-200 md:text-lg">
-            <span className='flex items-center gap-1'>
+            <span className="flex items-center gap-1">
               <IoLocationOutline /> Kab. Karawang
             </span>
           </div>

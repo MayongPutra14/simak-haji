@@ -1,14 +1,16 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../features/auth/useAuth';
 import LoginFormFragment from '../fragments/LoginFormFragment';
 import Modal from '../components/ui/global/Modal';
 import { IoCloseOutline as IconClose } from 'react-icons/io5';
+import { useLogin } from '../hooks/user/useLogin'; // Import hook baru
 
-const LoginPage = () => {
+export default function LoginPage() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login: authLogin } = useAuth();
+  const { mutateLogin } = useLogin();
+
   const [modal, setModal] = useState({
     isOpen: false,
     title: '',
@@ -43,23 +45,12 @@ const LoginPage = () => {
 
   const handleLogin = async (data) => {
     try {
-      const formData = new FormData();
-      formData.append('nomor_porsi', data.porsiNumber);
-      formData.append('password', data.password);
-
-      const response = await axios.post(
-        'https://simak-api.vercel.app/api/login.php',
-        formData,
-      );
-
-      const result = Array.isArray(response.data)
-        ? response.data[0]
-        : response.data;
+      const result = await mutateLogin(data);
 
       if (result && result.status === 'success') {
         const userData = result.data;
 
-        login(userData);
+        authLogin(userData);
 
         if (userData.role === 'admin') {
           navigate('/admin/home');
@@ -94,6 +85,4 @@ const LoginPage = () => {
       />
     </section>
   );
-};
-
-export default LoginPage;
+}

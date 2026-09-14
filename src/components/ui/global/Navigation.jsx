@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from 'react-router';
 import { IoLogOutOutline } from 'react-icons/io5';
-import getNavItems from '../../../utils/navbar';
+import getNavItems from '../../../utils/helpers/navbar';
 import SimakLogo from '../../../assets/images/simak-logo.webp';
 export default function Navigation({ role = 'user' }) {
   const navItems = getNavItems(role);
@@ -9,7 +9,7 @@ export default function Navigation({ role = 'user' }) {
     <>
       {/* DESKTOP SIDEBAR (md size ke atas) */}
       <aside
-        className="fixed top-0 bottom-0 left-0 z-40 flex-col justify-between hidden w-55 min-h-screen p-4 border-r shadow-2xl md:flex bg-sea-green-900 border-sea-green-800/80"
+        className="fixed top-0 bottom-0 left-0 z-40 flex-col justify-between hidden min-h-screen p-4 border-r shadow-2xl w-55 md:flex bg-sea-green-900 border-sea-green-800/80"
         aria-label="Desktop Navigation"
       >
         <div>

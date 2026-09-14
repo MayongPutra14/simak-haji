@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getSchedules } from '../utils/client/api';
+import { getSchedules } from '../../utils/user/api';
 
 const useSchedulesEvent = (userId) => {
   const [schedulesData, setSchedulesData] = useState(null);
