@@ -1,0 +1,70 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "id": 1,
+      "nama_event": "Manasik Haji Akbar",
+      "tempat": "Asrama Haji Pondok Gede",
+      "pembicara": "KH. Abdullah",
+      "jenis_event": "umum",
+      "zona_target": null,
+      "waktu_event": "2026-09-01 08:00:00",
+      "waktu_selesai_event": "2026-09-01 10:00:00",
+      "latitude": -6.28456,
+      "longitude": 106.90123,
+      "radius": 150
+    },
+    {
+      "id": 2,
+      "nama_event": "Pembekalan Kesehatan & Fisik Jemaah",
+      "tempat": "Gedung Serbaguna Asrama Haji",
+      "pembicara": "dr. Siti Aminah, Sp.PD",
+      "jenis_event": "umum",
+      "zona_target": null,
+      "waktu_event": "2026-09-12 13:00:00",
+      "waktu_selesai_event": "2026-09-12 15:00:00",
+      "latitude": -6.28456,
+      "longitude": 106.90123,
+      "radius": 200
+    },
+    {
+      "id": 3,
+      "nama_event": "Bimbingan Manasik Haji Kloter 1",
+      "tempat": "Masjid Agung Al-Barkah Bekasi",
+      "pembicara": "Ustadz H. Ahmad Fauzi, Lc",
+      "jenis_event": "khusus",
+      "zona_target": "Kloter 1",
+      "waktu_event": "2026-09-15 08:00:00",
+      "waktu_selesai_event": "2026-09-15 11:30:00",
+      "latitude": -6.23492,
+      "longitude": 106.99241,
+      "radius": 100
+    },
+    {
+      "id": 4,
+      "nama_event": "Sosialisasi Regulasi Haji Terbaru",
+      "tempat": "Online via Zoom Meeting",
+      "pembicara": "Direktorat Jenderal PHU",
+      "jenis_event": "umum",
+      "zona_target": null,
+      "waktu_event": "2026-09-18 19:30:00",
+      "waktu_selesai_event": "2026-09-18 21:00:00",
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "radius": 0
+    },
+    {
+      "id": 5,
+      "nama_event": "Pelepasan & Doa Bersama Keberangkatan",
+      "tempat": "Aula Utama Embarkasi Jakarta",
+      "pembicara": "KH. Maimun Zubair Jr.",
+      "jenis_event": "umum",
+      "zona_target": "VIP Lounge",
+      "waktu_event": "2026-09-20 06:00:00",
+      "waktu_selesai_event": "2026-09-20 08:30:00",
+      "latitude": -6.2851,
+      "longitude": 106.9025,
+      "radius": 150
+    }
+  ]
+}

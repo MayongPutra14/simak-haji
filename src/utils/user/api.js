@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://simak-api.vercel.app/api';
+const BASE_URL = 'https://simak-api.my.id/api/';
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -9,11 +9,23 @@ export const api = axios.create({
   },
 });
 
-/**
- * update profile/user identity
- * @param {string|number} userId
- * @param {Object} formData
- */
+export const loginApi = async (user) => {
+  const formData = new FormData();
+  formData.append('nomor_porsi', user.porsiNumber);
+  formData.append('password', user.password);
+
+  const response = await api.post('login.php', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
+  const result = Array.isArray(response.data)
+    ? response.data[0]
+    : response.data;
+
+  return result;
+};
 
 export const updateProfileIdentity = async (userId, formData) => {
   if (!formData)
@@ -35,7 +47,7 @@ export const updateProfileIdentity = async (userId, formData) => {
   });
 
   // SEND MULTIPART REQUEST
-  const response = await api.post('/update_profile.php', payload, {
+  const response = await api.post('update_profile.php', payload, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -62,7 +74,7 @@ export const getUserGlobalProfile = () => {
 
 export const getUserProfile = async (userId) => {
   try {
-    const response = await api.post('/get_profile.php', {
+    const response = await api.post('get_profile.php', {
       user_id: userId,
     });
 

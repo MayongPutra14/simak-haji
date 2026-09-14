@@ -39,8 +39,6 @@ export default function AppRoutes() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/jadwal" element={<UserSchedulePage />} />
-      <Route path="/jadwal-dashboard" element={<UserHomePage />} />
 
       {/* ADMIN ROUTES */}
       <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
