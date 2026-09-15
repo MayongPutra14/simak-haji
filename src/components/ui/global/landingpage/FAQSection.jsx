@@ -77,7 +77,7 @@ function FAQSection() {
   };
 
   return (
-    <section className="w-full bg-white py-16 md:py-24">
+    <section className="w-full bg-slate-50 py-16 md:py-24">
       <div className="mx-auto w-[95%] md:w-[98%] max-w-3xl">
         <header className="mb-12 text-center">
           <div class="text-center max-w-3xl mx-auto mb-14 md:mb-16">

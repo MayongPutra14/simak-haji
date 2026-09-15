@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
+import { GrGallery as IconGallery } from 'react-icons/gr';
 import BackgroundGlass from '../../../../assets/images/activities/dokumentasi-group-2026-3.webp';
 import TwoPeople from '../../../../assets/images/activities/Gunung-SIMAKjpg.webp';
 import Huzaifah from '../../../../assets/images/activities/huzaifah.webp';
@@ -81,7 +82,8 @@ export default function GallerySection() {
     <section className="w-full bg-sea-green-950 py-16 md:py-24 overflow-hidden">
       <div className="mx-auto w-[95%] md:w-[98%] max-w-7xl">
         <header className="mb-10 text-center flex flex-col items-center">
-          <span className="text-galliano-500 text-xs md:text-sm font-semibold tracking-widest uppercase mb-3">
+          <span className="inline-flex items-center gap-2 px-3.5 py-3 text-xs md:text-sm rounded-full bg-galliano-100 text-galliano-800   uppercase tracking-wider  font-semibold mb-4">
+            <IconGallery className="w-4 h-4" />
             DOKUMENTASI SIMAK
           </span>
           <h2 className="text-3xl md:text-4xl font-medium text-sea-green-50 mb-4">
