@@ -1,3 +1,6 @@
+import { motion } from 'framer-motion';
+import Counter from './Counter';
+import * as motionFrames from '../../../../utils/helpers/motion';
 import {
   IoPeopleOutline as IconPeople,
   IoTimeOutline as IconTime,
@@ -9,22 +12,26 @@ const StatisticsSection = () => {
   const statistics = [
     {
       label: 'Total Jamaah',
-      value: '1.000+',
+      value: 1000,
+      suffix: '+',
       icon: <IconPeople className="w-8 h-8 sm:w-10 sm:h-10" />,
     },
     {
       label: 'Total Keberangkatan',
-      value: '5',
+      value: 5,
+      suffix: '',
       icon: <IconPlane className="w-8 h-8 sm:w-10 sm:h-10" />,
     },
     {
       label: 'Total Rombongan',
-      value: '27',
+      value: 27,
+      suffix: '',
       icon: <IconGroup className="w-8 h-8 sm:w-10 sm:h-10" />,
     },
     {
       label: 'Tahun Berkhidmat',
-      value: '5 Tahun',
+      value: 5,
+      suffix: ' Tahun',
       icon: <IconTime className="w-8 h-8 sm:w-10 sm:h-10" />,
     },
   ];
@@ -32,7 +39,6 @@ const StatisticsSection = () => {
   return (
     <section className="w-full py-16 bg-sea-green-950 sm:py-24">
       <div className="px-6 mx-auto max-w-7xl sm:px-8 lg:px-12">
-        {/* Semantic accessibility header */}
         <header className="sr-only">
           <h2>Statistik SIMAK</h2>
           <p>
@@ -41,9 +47,15 @@ const StatisticsSection = () => {
           </p>
         </header>
 
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        {/* CONTENT */}
+        <motion.ul
+          variants={motionFrames.outerContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {statistics.map((stat, index) => {
-            // Generate tailored borders based on the index to achieve the requested "+" layout on tablet and column dividers on desktop
             let dividerClasses =
               'flex flex-col items-center justify-center text-center p-8 sm:p-10 lg:p-12 border-white/15 transition-colors duration-300 hover:bg-white/5 ';
 
@@ -60,7 +72,11 @@ const StatisticsSection = () => {
             }
 
             return (
-              <li key={index} className={dividerClasses}>
+              <motion.li
+                key={index}
+                variants={motionFrames.innerItemVariants}
+                className={dividerClasses}
+              >
                 <div
                   className="mb-4 text-sea-green-400 sm:mb-5"
                   aria-hidden="true"
@@ -71,12 +87,14 @@ const StatisticsSection = () => {
                   {stat.label}
                 </p>
                 <p className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-                  {stat.value}
+                  {/* 4. Panggil komponen Counter di sini */}
+                  <Counter to={stat.value} duration={2.5} delay={0.5} />
+                  {stat.suffix}
                 </p>
-              </li>
+              </motion.li>
             );
           })}
-        </ul>
+        </motion.ul>
       </div>
     </section>
   );

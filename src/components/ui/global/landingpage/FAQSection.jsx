@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { motion } from 'motion/react';
+import * as motionFrames from '../../../../utils/helpers/motion';
 import {
   IoChevronDownOutline as IconDropdownOpen,
   IoChevronUpOutline as IconDropdownClose,
@@ -77,24 +79,42 @@ function FAQSection() {
   };
 
   return (
-    <section className="w-full bg-slate-50 py-16 md:py-24">
+    <section className="w-full py-16 bg-slate-50 md:py-24">
       <div className="mx-auto w-[95%] md:w-[98%] max-w-3xl">
         <header className="mb-12 text-center">
-          <div class="text-center max-w-3xl mx-auto mb-14 md:mb-16">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sea-green-100 text-sea-green-800  font-semibold mb-3">
+          <div className="max-w-3xl mx-auto text-center mb-14 md:mb-16">
+            <motion.div
+              variants={motionFrames.fadeInvariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sea-green-100 text-sea-green-800  font-semibold mb-3"
+            >
               <IconQuestion
-                class="w-4 h-4 text-[15px] text-sea-green-700"
+                className="w-4 h-4 text-[15px] text-sea-green-700"
                 data-icon="help_outline"
               />
               <span>Tanya Jawab</span>
-            </div>
-            <h2 class="md:text-4xl text-2xl text-slate-800 font-bold tracking-tight mb-3">
+            </motion.div>
+            <motion.h2
+              variants={motionFrames.innerItemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              className="mb-3 text-2xl font-bold tracking-tight md:text-4xl text-slate-800"
+            >
               Frequently Asked Questions (FAQ)
-            </h2>
-            <p class="text-md text-slate-700/50 md:font-xl leading-relaxed">
+            </motion.h2>
+            <motion.p
+              variants={motionFrames.innerItemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              className="leading-relaxed text-md text-slate-700/50 md:font-xl"
+            >
               Jawaban atas pertanyaan umum seputar program, keanggotaan, dan
               kegiatan Silaturahmi Haji Mandiri Karawang.
-            </p>
+            </motion.p>
           </div>
         </header>
 
@@ -104,32 +124,29 @@ function FAQSection() {
             const elementId = `faq-answer-${index}`;
 
             return (
-              <div key={index} className="border-b border-slate-300/50">
+              <motion.div
+                variants={motionFrames.innerItemVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                key={index}
+                className="border-b border-slate-300/50"
+              >
                 <button
                   type="button"
                   aria-expanded={isOpen}
                   aria-controls={elementId}
                   onClick={() => handleToggle(index)}
-                  className="group flex w-full items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-500 focus-visible:ring-offset-2 rounded-sm"
+                  className="flex items-center justify-between w-full py-5 text-left rounded-sm group focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-500 focus-visible:ring-offset-2"
                 >
-                  <span className="pr-6 text-base md:text-lg font-normal text-sea-green-950 group-hover:text-sea-green-700 transition-colors">
+                  <span className="pr-6 text-base font-normal transition-colors md:text-lg text-sea-green-950 group-hover:text-sea-green-700">
                     {item.question}
                   </span>
-                  <span className="shrink-0 text-sea-green-600 transition-transform duration-200 group-hover:text-galliano-500">
+                  <span className="transition-transform duration-200 shrink-0 text-sea-green-600 group-hover:text-galliano-500">
                     {isOpen ? (
-                      <IconDropdownClose
-                        as
-                        conDropdownClose
-                        size={20}
-                        aria-hidden="true"
-                      />
+                      <IconDropdownClose size={20} aria-hidden="true" />
                     ) : (
-                      <IconDropdownOpen
-                        as
-                        conDropdownOpen
-                        size={20}
-                        aria-hidden="true"
-                      />
+                      <IconDropdownOpen size={20} aria-hidden="true" />
                     )}
                   </span>
                 </button>
@@ -143,12 +160,12 @@ function FAQSection() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="text-slate-600 text-sm md:text-base leading-relaxed pr-6 md:pr-12">
+                    <p className="pr-6 text-sm leading-relaxed text-slate-600 md:text-base md:pr-12">
                       {item.answer}
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

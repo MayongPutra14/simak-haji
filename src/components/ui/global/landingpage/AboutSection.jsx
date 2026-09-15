@@ -1,6 +1,8 @@
 import Button from '../Button';
 import doc20262 from '../../../../assets/images/activities/doc-front-masjid-2026-2.webp';
 import doc2025 from '../../../../assets/images/activities/doc-front-kabah-2025.webp';
+import { motion } from 'motion/react';
+import * as motionFrames from '../../../../utils/helpers/motion';
 import { FaArrowRightLong as IconArrowRight } from 'react-icons/fa6';
 import {
   FaQuoteRight as IconQuote,
@@ -36,17 +38,38 @@ export default function AboutSection() {
       id="tentang"
     >
       <div className="px-6 mx-auto space-y-24 max-w-7xl md:space-y-32">
-        {/* <!-- Row 1 (Introduction): Text Left, Image Right --> */}
+        {/*  Row 1 (Introduction): Text Left, Image Right  */}
         <div className="grid items-center grid-cols-1 gap-10 md:grid-cols-2 md:gap-16">
           <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sea-green-100 text-sea-green-800   uppercase tracking-wider  font-semibold mb-4">
+            {/* EYEBROW */}
+            <motion.div
+              variants={motionFrames.fadeInvariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sea-green-100 text-sea-green-800   uppercase tracking-wider  font-semibold mb-4"
+            >
               <IconGroup className="w-6 h-6" data-icon="groups" />
               <span>Tentang SIMAK</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-800 leading-[1.15] tracking-tight mb-6">
+            </motion.div>
+            {/* TITLE */}
+            <motion.h2
+              variants={motionFrames.innerItemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-800 leading-[1.15] tracking-tight mb-6"
+            >
               Bersama Mempersiapkan Jamaah yang Mandiri
-            </h2>
-            <div className="space-y-4 text-base leading-relaxed text-slate-600 sm:text-lg">
+            </motion.h2>
+            {/* DESCRIPTION */}
+            <motion.div
+              variants={motionFrames.outerItemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="space-y-4 text-base leading-relaxed text-slate-600 sm:text-lg"
+            >
               <p>
                 SIMAK hadir dari visi bersama untuk membangun komunitas jamaah
                 haji yang solid, saling mendukung, dan mandiri. Kami percaya
@@ -54,24 +77,44 @@ export default function AboutSection() {
                 melainkan perjalanan spiritual yang harus dipersiapkan dengan
                 ilmu dan kebersamaan.
               </p>
-            </div>
-            <div className="p-5 mt-6 bg-white border border-l-4 shadow-sm rounded-2xl border-sea-green-100 border-l-sea-green-600">
+            </motion.div>
+            {/* QUOTE */}
+            <motion.div
+              variants={motionFrames.outerItemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="p-5 mt-6 bg-white border border-l-4 shadow-sm rounded-2xl border-sea-green-100 border-l-sea-green-600"
+            >
               <p className="italic leading-relaxed text-sea-green-900">
                 "Dengan persiapan, pengetahuan, dan kebersamaan, perjalanan
                 menuju kemandirian dalam ibadah haji dapat dipersiapkan dengan
                 lebih baik."
               </p>
-            </div>
+            </motion.div>
           </div>
+
+          {/* IMAGE */}
           <div className="relative">
             <div className="relative overflow-hidden bg-white border shadow-lg rounded-2xl border-sea-green-100">
-              <img
+              <motion.img
+                variants={motionFrames.imageBlurVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
                 alt="Indonesian Muslim community gathering for Hajj preparation and learning workshop, group of prospective Indonesian pilgrims sitting together in a discussion circle, warm natural indoor community mosque setting, documentary photography style, realistic, respectful, authentic Indonesian people smiling and discussing"
                 className="object-cover object-center w-full h-85 md:h-105"
                 src={doc2025}
               />
             </div>
-            <div className="mt-3 flex items-center justify-between text-[12px]  text-sea-green-800 px-2">
+            {/* ARCHIEVE */}
+            <motion.div
+              variants={motionFrames.outerItemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="mt-3 flex items-center justify-between text-[12px]  text-sea-green-800 px-2"
+            >
               <span className="flex items-center gap-1.5 font-medium">
                 <IconArchive
                   className="material-symbols-outlined  md:text-[16px] text-sea-green-600"
@@ -79,21 +122,34 @@ export default function AboutSection() {
                 />
                 Dokumentasi SIMAK Angkatan 2025
               </span>
-            </div>
+            </motion.div>
           </div>
         </div>
 
-        {/* <!-- Row 2 (The Beginning / Awal Perjalanan): Reversed Zig-Zag (Image Left, Narrative Right) --> */}
+        {/*  Row 2 (The Beginning / Awal Perjalanan): Reversed Zig-Zag (Image Left, Narrative Right)  */}
         <div className="grid items-center grid-cols-1 gap-10 md:grid-cols-2 md:gap-16">
+          {/* IMAGE & ARCHIVE */}
           <div className="relative order-2 md:order-1">
+            {/* IMAGE */}
             <div className="relative overflow-hidden bg-white border shadow-lg rounded-2xl border-sea-green-100">
-              <img
+              <motion.img
+                variants={motionFrames.imageBlurVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
                 src={doc20262}
                 alt="Documentary photo of Indonesian prospective Hajj pilgrims in white ihram or modest Islamic attire during manasik haji practical training simulation, authentic outdoor mosque courtyard setting in Indonesia, community solidarity and focus, real documentary candid style"
                 className="object-cover object-center w-full h-85 md:h-105"
               />
             </div>
-            <div className="mt-3 flex items-center justify-between  text-[12px]  text-sea-green-800 px-2">
+            {/* ARCHIVE */}
+            <motion.div
+              variants={motionFrames.outerItemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="mt-3 flex items-center justify-between  text-[12px]  text-sea-green-800 px-2"
+            >
               <span className="flex items-center gap-1.5 font-medium">
                 <IconArchive
                   className="material-symbols-outlined text-[16px] text-sea-green-600"
@@ -101,20 +157,39 @@ export default function AboutSection() {
                 />
                 Dokumentasi SIMAK angkatan 2026
               </span>
-            </div>
+            </motion.div>
           </div>
+          {/* TITLE, DESCRIPTION, AND QUOTE */}
           <div className="order-1 max-w-xl md:order-2">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-galliano-100 text-galliano-800   uppercase tracking-wider  font-semibold mb-4">
+            <motion.div
+              variants={motionFrames.outerItemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-galliano-100 text-galliano-800   uppercase tracking-wider  font-semibold mb-4"
+            >
               <IconHistory
                 className="w-6 h-6 text-[15px] "
                 data-icon="history_edu"
               />
               <span>Awal Perjalanan</span>
-            </div>
-            <h3 className="mb-6 text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl text-slate-800">
+            </motion.div>
+            <motion.h2
+              variants={motionFrames.outerItemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-800 leading-[1.15] tracking-tight mb-6"
+            >
               Berawal dari Niat yang Sama
-            </h3>
-            <div className="space-y-6 text-base leading-relaxed text-slate-600 sm:text-lg">
+            </motion.h2>
+            <motion.div
+              variants={motionFrames.outerItemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="space-y-6 text-base leading-relaxed text-slate-600 sm:text-lg"
+            >
               <p>
                 SIMAK dibentuk dari visi dan misi yang sama untuk saling
                 membantu antarsesama jamaah, tanpa niat eksploitasi komersial.
@@ -122,9 +197,15 @@ export default function AboutSection() {
                 <strong>Rabu, 17 November 2021</strong>, diinisiasi oleh calon
                 jamaah haji angkatan 2020.
               </p>
-            </div>
+            </motion.div>
 
-            <blockquote className="relative p-6 mt-6 overflow-hidden text-white shadow-md rounded-2xl bg-sea-green-900">
+            <motion.blockquote
+              variants={motionFrames.outerItemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="relative p-6 mt-6 overflow-hidden text-white shadow-md rounded-2xl bg-sea-green-900"
+            >
               <div className="relative z-10 flex items-start gap-3">
                 <IconQuote
                   data-icon="format_quote"
@@ -142,31 +223,61 @@ export default function AboutSection() {
                   </p>
                 </div>
               </div>
-            </blockquote>
+            </motion.blockquote>
           </div>
         </div>
 
-        {/* <!-- Row 3 (Our Purpose & Core Values / 4 Key Principles) --> */}
+        {/*  Row 3 (Our Purpose & Core Values / 4 Key Principles)  */}
         <div>
+          {/* TITLE */}
           <div className="max-w-3xl mb-12 text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sea-green-100 text-sea-green-800   uppercase tracking-wider font-semibold mb-3">
+            <motion.div
+              variants={motionFrames.outerItemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sea-green-100 text-sea-green-800   uppercase tracking-wider font-semibold mb-3"
+            >
               <IconAwesome
                 className="w-6 h-6 text-[15px] "
                 data-icon="auto_awesome"
               />
               <span>Tujuan &amp; Nilai Dasar</span>
-            </div>
-            <h3 className="mb-8 text-2xl font-bold sm:text-3xl text-slate-800 sm:mb-10">
+            </motion.div>
+
+            <motion.h2
+              variants={motionFrames.outerItemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-800 leading-[1.15] tracking-tight mb-6"
+            >
               Nilai & Tujuan Kami
-            </h3>
-            <p className="space-y-6 text-base leading-relaxed text-slate-600 sm:text-lg">
+            </motion.h2>
+
+            <motion.p
+              variants={motionFrames.outerItemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="space-y-6 text-base leading-relaxed text-slate-600 sm:text-lg"
+            >
               Pedoman utama yang menjadi landasan gerak setiap relawan dan
               jamaah dalam membangun kesiapan utuh lahir dan batin.
-            </p>
+            </motion.p>
           </div>
+
+          {/* PRINCIPLES CARD */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {/* <!-- Principle 01 --> */}
-            <div className="flex flex-col justify-between transition-all duration-300 bg-white border shadow-sm p-7 rounded-2xl border-sea-green-100 hover:shadow-md hover:-translate-y-1">
+            {/*  Principle 01  */}
+            <motion.div
+              variants={motionFrames.slideInVariants}
+              initial="hidden"
+              whileHover={{ y: -4 }}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="flex flex-col justify-between bg-white border shadow-sm p-7 rounded-2xl border-sea-green-100 hover:shadow-md hover:-translate-y-1"
+            >
               <div>
                 <div className="flex items-center justify-between mb-5">
                   <span className="text-xl font-extrabold text-galliano-500">
@@ -194,9 +305,16 @@ export default function AboutSection() {
                 />
                 Ukhuwah Islamiyah
               </div>
-            </div>
-            {/* <!-- Principle 02 --> */}
-            <div className="flex flex-col justify-between transition-all duration-300 bg-white border shadow-sm p-7 rounded-2xl border-sea-green-100 hover:shadow-md hover:-translate-y-1">
+            </motion.div>
+            {/*  Principle 02  */}
+            <motion.div
+              variants={motionFrames.slideInVariants}
+              initial="hidden"
+              whileHover={{ y: -4 }}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="flex flex-col justify-between bg-white border shadow-sm p-7 rounded-2xl border-sea-green-100 hover:shadow-md hover:-translate-y-1"
+            >
               <div>
                 <div className="flex items-center justify-between mb-5">
                   <span className="text-xl font-extrabold text-galliano-500">
@@ -224,9 +342,16 @@ export default function AboutSection() {
                 />
                 Literasi Manasik Syar'i
               </div>
-            </div>
-            {/* <!-- Principle 03 --> */}
-            <div className="flex flex-col justify-between transition-all duration-300 bg-white border shadow-sm p-7 rounded-2xl border-sea-green-100 hover:shadow-md hover:-translate-y-1">
+            </motion.div>
+            {/*  Principle 03  */}
+            <motion.div
+              variants={motionFrames.slideInVariants}
+              initial="hidden"
+              whileHover={{ y: -4 }}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="flex flex-col justify-between bg-white border shadow-sm p-7 rounded-2xl border-sea-green-100 hover:shadow-md hover:-translate-y-1"
+            >
               <div>
                 <div className="flex items-center justify-between mb-5">
                   <span className="text-xl font-extrabold text-galliano-500">
@@ -254,9 +379,16 @@ export default function AboutSection() {
                 />
                 Kemandirian Tawaf &amp; Sa'i
               </div>
-            </div>
-            {/* <!-- Principle 04 --> */}
-            <div className="flex flex-col justify-between transition-all duration-300 bg-white border shadow-sm p-7 rounded-2xl border-sea-green-100 hover:shadow-md hover:-translate-y-1">
+            </motion.div>
+            {/*  Principle 04  */}
+            <motion.div
+              variants={motionFrames.slideInVariants}
+              initial="hidden"
+              whileHover={{ y: -4 }}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="flex flex-col justify-between bg-white border shadow-sm p-7 rounded-2xl border-sea-green-100 hover:shadow-md hover:-translate-y-1"
+            >
               <div>
                 <div className="flex items-center justify-between mb-5">
                   <span className="text-xl font-extrabold text-galliano-500">
@@ -284,12 +416,18 @@ export default function AboutSection() {
                 />
                 Transparan &amp; Efisien
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
-        {/* <!-- Final Restrained Community CTA Area --> */}
-        <div className="relative p-8 overflow-hidden text-white border shadow-xl rounded-3xl bg-sea-green-900 md:p-14 border-sea-green-800">
+        {/*  Final Restrained Community CTA Area  */}
+        <motion.div
+          variants={motionFrames.blurVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="relative p-8 overflow-hidden text-white border shadow-xl rounded-3xl bg-sea-green-900 md:p-14 border-sea-green-800"
+        >
           <div className="relative z-10 max-w-2xl text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[12px] text-sea-green-100 border border-white/15   font-semibold mb-5">
               <IconFavorite
@@ -327,7 +465,7 @@ export default function AboutSection() {
               </Button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

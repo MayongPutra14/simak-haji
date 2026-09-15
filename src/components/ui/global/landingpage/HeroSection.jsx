@@ -1,5 +1,7 @@
 import BackgroundHero from '../../../../assets/images/decorations/BackgroundHero.webp';
 import Button from '../Button';
+import { motion } from 'motion/react';
+import * as motionFrame from '../../../../utils/helpers/motion';
 import {
   FaWhatsapp as IconWhatsapp,
   FaExternalLinkAlt as IconExternalLink,
@@ -23,7 +25,12 @@ const HeroSection = () => {
     );
   };
   return (
-    <section className="relative w-full min-h-svh flex items-center overflow-hidden bg-[#022c22]">
+    <motion.section
+      variants={motionFrame.outerContainerVariants}
+      initial="hidden"
+      animate="visible"
+      className="relative w-full min-h-svh flex items-center overflow-hidden bg-[#022c22]"
+    >
       {/*
         Background Image
         Using a semantic <img> tag with proper alt text for accessibility.
@@ -61,32 +68,57 @@ const HeroSection = () => {
       <div className="relative z-10 w-full px-6 mx-auto max-w-7xl sm:px-8 lg:px-12 py-28 sm:py-32 lg:py-36">
         <div className="max-w-3xl">
           {/* Badge / Eyebrow */}
-          <div className="inline-flex items-center px-4 py-1.5 mb-8 rounded-full border border-white/20 bg-white/5 backdrop-blur-md shadow-sm">
+          <motion.div
+            variants={motionFrame.fadeInvariants}
+            className="inline-flex items-center px-4 py-1.5 mb-8 rounded-full border border-white/20 bg-white/5 backdrop-blur-md shadow-sm"
+          >
             <span className="flex items-center gap-2 text-[8px] md:text-xs font-medium sm:text-sm text-white/90 letter-spacing-wider">
               <IconVolunteer className="w-4 h-4" />
               Sebuah Gerakan Sosial & Komunitas Peduli Haji
             </span>
-          </div>
+          </motion.div>
 
           {/* Primary Heading */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.15] tracking-tight">
-            <span className="block mb-2">Beribadah Haji</span>
+          <motion.h1
+            variants={motionFrame.outerContainerVariants}
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.15] tracking-tight"
+          >
+            <motion.span
+              variants={motionFrame.innerItemVariants}
+              className="block mb-2"
+            >
+              Beribadah Haji
+            </motion.span>
             {/* Visual emphasis on "Tenang dan Nyaman" using a lighter sea-green accent for high contrast */}
-            <span className="block mb-2 font-semibold text-transparent bg-linear-to-r from-galliano-600 to-galliano-400 bg-clip-text">
+            <motion.span
+              variants={motionFrame.innerItemVariants}
+              className="block pb-1 mb-2 font-semibold text-transparent bg-linear-to-r from-galliano-600 to-galliano-400 bg-clip-text"
+            >
               Tenang dan Nyaman
-            </span>
-            <span className="block">Bersama SIMAK</span>
-          </h1>
+            </motion.span>
+            <motion.span
+              variants={motionFrame.innerItemVariants}
+              className="block"
+            >
+              Bersama SIMAK
+            </motion.span>
+          </motion.h1>
 
           {/* Supporting Description */}
-          <p className="max-w-2xl mt-6 font-light leading-relaxed text-md sm:text-xl text-white/80">
+          <motion.p
+            variants={motionFrame.innerItemVariants}
+            className="max-w-2xl mt-6 font-light leading-relaxed text-md sm:text-xl text-white/80"
+          >
             SIMAK hadir dari hati yang bergerak untuk membantu sesama. Komunitas
             nirlaba yang mendampingi jamaah melalui pelatihan ibadah haji
             mandiri yang terstruktur, jujur, dan amanah.
-          </p>
+          </motion.p>
 
           {/* Call to Action Group */}
-          <div className="flex flex-col items-stretch gap-4 mt-8 sm:flex-row sm:items-center sm:gap-5">
+          <motion.div
+            variants={motionFrame.innerItemVariants}
+            className="flex flex-col items-stretch gap-4 mt-8 sm:flex-row sm:items-center sm:gap-5"
+          >
             {/* Primary CTA */}
             <Button
               to="/register"
@@ -104,10 +136,17 @@ const HeroSection = () => {
               Konsultasi Gratis
               <IconWhatsapp className="w-5 h-5" />
             </Button>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 gap-4 pt-6 mt-6 border-t border-white/15 sm:grid-cols-3 text-white/85">
-            <div className="flex items-center gap-2.5">
+          {/* BEDGE */}
+          <motion.div
+            variants={motionFrame.outerItemVariants}
+            className="grid grid-cols-1 gap-4 pt-6 mt-6 border-t border-white/15 sm:grid-cols-3 text-white/85"
+          >
+            <motion.div
+              variants={motionFrame.bedgeVariants}
+              className="flex items-center gap-2.5"
+            >
               <div className="flex items-center justify-center border rounded-lg w-7 h-7 bg-sea-green-800/80 border-white/10 text-primary-fixed shrink-0">
                 <span
                   className="material-symbols-outlined text-[16px]"
@@ -119,8 +158,12 @@ const HeroSection = () => {
               <span className="leading-snug font-label-md text-label-md">
                 100% Nirlaba &amp; Tanpa Biaya Tambahan
               </span>
-            </div>
-            <div className="flex items-center gap-2.5">
+            </motion.div>
+
+            <motion.div
+              variants={motionFrame.bedgeVariants}
+              className="flex items-center gap-2.5"
+            >
               <div className="flex items-center justify-center border rounded-lg w-7 h-7 bg-sea-green-800/80 border-white/10 text-primary-fixed shrink-0">
                 <span
                   className="material-symbols-outlined text-[16px]"
@@ -132,8 +175,12 @@ const HeroSection = () => {
               <span className="leading-snug font-label-md text-label-md">
                 Bimbingan Manasik Terstruktur
               </span>
-            </div>
-            <div className="flex items-center gap-2.5">
+            </motion.div>
+
+            <motion.div
+              variants={motionFrame.bedgeVariants}
+              className="flex items-center gap-2.5"
+            >
               <div className="flex items-center justify-center border rounded-lg w-7 h-7 bg-sea-green-800/80 border-white/10 text-primary-fixed shrink-0">
                 <span
                   className="material-symbols-outlined text-[16px]"
@@ -145,11 +192,12 @@ const HeroSection = () => {
               <span className="leading-snug font-label-md text-label-md">
                 Komunitas Jamaah Mandiri
               </span>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
-      <div class="custom-shape-divider-bottom-1789437268">
+      {/* DEVIDER */}
+      <div className="custom-shape-divider-bottom-1789437268">
         <svg
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
@@ -158,11 +206,11 @@ const HeroSection = () => {
         >
           <path
             d="M1200,0H0V120H281.94C572.9,116.24,602.45,3.86,602.45,3.86h0S632,116.24,923,120h277Z"
-            class="shape-fill"
+            className="shape-fill"
           ></path>
         </svg>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
