@@ -81,7 +81,10 @@ export default function GallerySection() {
   }, [nextSlide, isHovered]);
 
   return (
-    <section className="w-full py-16 overflow-hidden bg-sea-green-950 md:py-24">
+    <section
+      id="gallery"
+      className="w-full py-16 overflow-hidden bg-sea-green-950 md:py-24"
+    >
       <div className="mx-auto w-[95%] md:w-[98%] max-w-7xl">
         <header className="flex flex-col items-center mb-10 text-center">
           {/* EYEBROW */}

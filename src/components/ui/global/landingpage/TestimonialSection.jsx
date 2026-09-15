@@ -44,7 +44,7 @@ const testimonials = [
 export default function TestimonialSection() {
   return (
     // Section uses slate-50 to cleanly contrast the white cards
-    <section className="py-16 overflow-hidden bg-slate-50">
+    <section id="testimoni" className="py-16 overflow-hidden bg-slate-50">
       {/* Width managed to 95% on mobile, 98% on desktop */}
       <div className="w-[95%] md:w-[98%] mx-auto max-w-7xl">
         {/* Semantic header with subtle eyebrow and clean typography[cite: 1] */}
