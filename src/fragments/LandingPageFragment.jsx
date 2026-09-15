@@ -5,6 +5,7 @@ import GallerySection from '../components/ui/global/landingpage/GallerySection';
 import HeroSection from '../components/ui/global/landingpage/HeroSection';
 import Navbar from '../components/ui/global/landingpage/Navbar';
 import StatisticsSection from '../components/ui/global/landingpage/StatisticSection';
+import TestimonialSection from '../components/ui/global/landingpage/TestimonialSection';
 
 export default function LandingPageFragment() {
   return (
@@ -13,8 +14,9 @@ export default function LandingPageFragment() {
       <HeroSection />
       <AboutSection />
       <StatisticsSection />
-      <FAQSection />
+      <TestimonialSection />
       <GallerySection />
+      <FAQSection />
       <FooterSection />
     </>
   );
