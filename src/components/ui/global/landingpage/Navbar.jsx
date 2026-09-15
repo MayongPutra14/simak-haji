@@ -1,3 +1,5 @@
+import { motion } from 'motion/react';
+import * as motionFrames from '../../.././../utils/helpers/motion';
 import { useState, useRef, useEffect } from 'react';
 import LogoSimak from '../../../../assets/images/simak-logo.webp';
 import {
@@ -22,9 +24,12 @@ const Navbar = () => {
   return (
     <>
       <header className="fixed left-0 right-0 z-40 flex justify-center w-full font-sans pointer-events-none top-4">
-        <nav
+        <motion.nav
+          variants={motionFrames.blurVariants}
+          initial="hidden"
+          animate="visible"
           aria-label="Main navigation"
-          className="pointer-events-auto w-[95%] lg:w-[70%] bg-sea-green-800 backdrop-blur-md rounded-xl border border-sea-green-100/40 shadow-sm px-5 py-3 lg:px-8 lg:py-4 flex items-center justify-between transition-all duration-300"
+          className="pointer-events-auto w-[95%] lg:w-[85%] bg-sea-green-800 backdrop-blur-md rounded-xl border border-sea-green-100/40 shadow-sm px-5 py-3 lg:px-8 lg:py-4 flex items-center justify-between transition-all duration-300"
         >
           {/* Left side: Brand */}
           <a
@@ -107,6 +112,14 @@ const Navbar = () => {
                 href="#testimoni"
                 className="font-medium text-white transition-colors duration-200 rounded-sm hover:text-sea-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-600"
               >
+                Dokumentasi
+              </a>
+            </li>
+            <li>
+              <a
+                href="#testimoni"
+                className="font-medium text-white transition-colors duration-200 rounded-sm hover:text-sea-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-600"
+              >
                 FAQ
               </a>
             </li>
@@ -150,7 +163,7 @@ const Navbar = () => {
               />
             </div>
           </button>
-        </nav>
+        </motion.nav>
       </header>
 
       {/* Mobile Drawer Overlay */}
@@ -263,6 +276,15 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Testimoni
+              </a>
+            </li>
+            <li>
+              <a
+                href="#testimoni"
+                className="block px-4 py-3 text-base font-medium text-white transition-colors rounded-lg hover:bg-white/50 hover:text-white"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Dokumentasi
               </a>
             </li>
             <li>

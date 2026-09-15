@@ -1,3 +1,5 @@
+import { motion } from 'motion/react';
+import * as motionFrames from '../../../../utils/helpers/motion';
 import {
   FaQuoteLeft as IconQuote,
   FaRegComments as IconMessage,
@@ -42,22 +44,43 @@ const testimonials = [
 export default function TestimonialSection() {
   return (
     // Section uses slate-50 to cleanly contrast the white cards
-    <section className="bg-slate-50 py-16 overflow-hidden">
+    <section className="py-16 overflow-hidden bg-slate-50">
       {/* Width managed to 95% on mobile, 98% on desktop */}
       <div className="w-[95%] md:w-[98%] mx-auto max-w-7xl">
         {/* Semantic header with subtle eyebrow and clean typography[cite: 1] */}
-        <header className="mb-12 text-center flex flex-col items-center ">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sea-green-100 text-sea-green-800   uppercase tracking-wider font-semibold mb-3">
+        <header className="flex flex-col items-center mb-12 text-center ">
+          {/* EYEBROW */}
+          <motion.span
+            variants={motionFrames.fadeInvariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sea-green-100 text-sea-green-800   uppercase tracking-wider font-semibold mb-3"
+          >
             <IconMessage className="w-6 h-6" />
             Testimoni Jamaah
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-800">
+          </motion.span>
+          {/* TITLE */}
+          <motion.h2
+            variants={motionFrames.innerItemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="text-3xl font-bold md:text-4xl text-slate-800"
+          >
             Apa Kata Jamaah Kami
-          </h2>
-          <p className="text-slate-700/50 mt-3 max-w-2xl">
+          </motion.h2>
+          {/* DESCRIPTION */}
+          <motion.p
+            variants={motionFrames.innerItemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="max-w-2xl mt-3 text-slate-700/50"
+          >
             Pengalaman nyata dari mereka yang telah mempercayakan perjalanan
             spiritualnya bersama komunitas SIMAK.
-          </p>
+          </motion.p>
         </header>
 
         {/*
@@ -65,7 +88,7 @@ export default function TestimonialSection() {
           Uses CSS keyframes for a slow, continuous queue without controls.
           Respects prefers-reduced-motion for accessibility.[cite: 1]
         */}
-        <div className="md:hidden relative flex overflow-x-hidden w-full">
+        <div className="relative flex w-full overflow-x-hidden md:hidden">
           {/* We duplicate the array to allow a seamless 50% translation loop */}
           <div className="flex w-max animate-[marquee_40s_linear_infinite] motion-reduce:animate-none space-x-6 pb-4">
             {[...testimonials, ...testimonials].map((item, idx) => (
@@ -78,16 +101,30 @@ export default function TestimonialSection() {
           DESKTOP VIEW: Bento / Asymmetric Layout
           Grid layout presenting 1 large featured card and several smaller cards[cite: 1].
         */}
-        <div className="hidden md:grid md:grid-cols-12 gap-6">
-          <div className="col-span-8 flex flex-col gap-6">
-            <TestimonialCard data={testimonials[0]} isLarge />
-            <TestimonialCard data={testimonials[3]} />
+        <motion.div
+          variants={motionFrames.innerContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="hidden gap-6 md:grid md:grid-cols-12"
+        >
+          <div className="flex flex-col col-span-8 gap-6">
+            <motion.div variants={motionFrames.innerItemVariants}>
+              <TestimonialCard data={testimonials[0]} isLarge />
+            </motion.div>
+            <motion.div variants={motionFrames.innerItemVariants}>
+              <TestimonialCard data={testimonials[3]} />
+            </motion.div>
           </div>
-          <div className="col-span-4 flex flex-col gap-6">
-            <TestimonialCard data={testimonials[1]} />
-            <TestimonialCard data={testimonials[2]} />
+          <div className="flex flex-col col-span-4 gap-6">
+            <motion.div variants={motionFrames.innerItemVariants}>
+              <TestimonialCard data={testimonials[1]} />
+            </motion.div>
+            <motion.div variants={motionFrames.innerItemVariants}>
+              <TestimonialCard data={testimonials[2]} />
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Inline styles for the continuous mobile marquee to avoid external CSS requirements */}
@@ -136,7 +173,7 @@ function TestimonialCard({ data, isLarge = false, isMobile = false }) {
       <footer className="flex items-center gap-4 mt-auto">
         {/* Initial-based avatar using Sea Green colors[cite: 1] */}
         <div
-          className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-sea-green-50 text-sea-green-800 flex items-center justify-center font-semibold text-sm md:text-base shrink-0"
+          className="flex items-center justify-center text-sm font-semibold rounded-full w-11 h-11 md:w-12 md:h-12 bg-sea-green-50 text-sea-green-800 md:text-base shrink-0"
           aria-hidden="true"
         >
           {data.initials}
