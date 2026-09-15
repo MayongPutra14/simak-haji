@@ -26,6 +26,7 @@ const HeroSection = () => {
   };
   return (
     <motion.section
+      id="home"
       variants={motionFrame.outerContainerVariants}
       initial="hidden"
       animate="visible"

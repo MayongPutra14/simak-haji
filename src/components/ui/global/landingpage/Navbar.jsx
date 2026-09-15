@@ -21,6 +21,18 @@ const Navbar = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  const scrollToSection = (e, id) => {
+    e.preventDefault();
+
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
   return (
     <>
       <header className="fixed left-0 right-0 z-40 flex justify-center w-full font-sans pointer-events-none top-4">
@@ -52,8 +64,18 @@ const Navbar = () => {
           <ul className="items-center hidden gap-10 lg:flex">
             <li>
               <a
+                href="#home"
+                onClick={(e) => scrollToSection(e, 'home')}
+                className="font-medium text-white transition-colors duration-200 rounded-sm hover:text-white/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-600"
+              >
+                Beranda
+              </a>
+            </li>
+            <li>
+              <a
                 href="#tentang"
-                className="font-medium text-white transition-colors duration-200 rounded-sm hover:text-sea-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-600"
+                onClick={(e) => scrollToSection(e, 'tentang')}
+                className="font-medium text-white transition-colors duration-200 rounded-sm hover:text-white/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-600"
               >
                 Tentang
               </a>
@@ -64,7 +86,7 @@ const Navbar = () => {
               <button
                 aria-haspopup="true"
                 aria-expanded="false"
-                className="flex items-center gap-1.5 text-white group-hover:text-sea-green-600 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-600 rounded-sm py-2"
+                className="flex items-center gap-1.5 text-white group-hover:text-white/50 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-600 rounded-sm py-2"
               >
                 Fitur
                 <IconDropdown />
@@ -74,7 +96,7 @@ const Navbar = () => {
               <ul className="absolute invisible w-48 py-2 mt-1 transition-all duration-200 ease-out -translate-x-1/2 border rounded-lg shadow-sm opacity-0 left-1/2 top-full bg-sea-green-800 border-sea-green-100 group-hover:opacity-100 group-hover:visible">
                 <li>
                   <a
-                    href="#al-quran"
+                    href="/maintenance"
                     className="block px-5 py-2 text-sm text-white transition-colors duration-200 hover:bg-sea-green-600 hover:text-white-600"
                   >
                     Al-Quran
@@ -82,7 +104,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <a
-                    href="#hadith"
+                    href="/maintenance"
                     className="block px-5 py-2 text-sm text-white transition-colors duration-200 hover:bg-sea-green-600 hover:text-white-600"
                   >
                     Hadith
@@ -90,7 +112,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <a
-                    href="#doa"
+                    href="/maintenance"
                     className="block px-5 py-2 text-sm text-white transition-colors duration-200 hover:bg-sea-green-600 hover:text-white-600"
                   >
                     Do'a
@@ -102,23 +124,26 @@ const Navbar = () => {
             <li>
               <a
                 href="#testimoni"
-                className="font-medium text-white transition-colors duration-200 rounded-sm hover:text-sea-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-600"
+                onClick={(e) => scrollToSection(e, 'testimoni')}
+                className="font-medium text-white transition-colors duration-200 rounded-sm hover:text-white/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-600"
               >
                 Testimoni
               </a>
             </li>
             <li>
               <a
-                href="#testimoni"
-                className="font-medium text-white transition-colors duration-200 rounded-sm hover:text-sea-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-600"
+                href="#gallery"
+                onClick={(e) => scrollToSection(e, 'gallery')}
+                className="font-medium text-white transition-colors duration-200 rounded-sm hover:text-white/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-600"
               >
                 Dokumentasi
               </a>
             </li>
             <li>
               <a
-                href="#testimoni"
-                className="font-medium text-white transition-colors duration-200 rounded-sm hover:text-sea-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-600"
+                href="#faq"
+                onClick={(e) => scrollToSection(e, 'faq')}
+                className="font-medium text-white transition-colors duration-200 rounded-sm hover:text-white/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-600"
               >
                 FAQ
               </a>
@@ -207,6 +232,15 @@ const Navbar = () => {
           <ul className="flex flex-col gap-2">
             <li>
               <a
+                href="#home"
+                className="block px-4 py-3 text-base font-medium text-white transition-colors rounded-lg hover:bg-white/50 hover:text-white"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Beranda
+              </a>
+            </li>
+            <li>
+              <a
                 href="#tentang"
                 className="block px-4 py-3 text-base font-medium text-white transition-colors rounded-lg hover:bg-white/50 hover:text-white"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -240,7 +274,7 @@ const Navbar = () => {
                 <ul className="flex flex-col gap-1 pl-8 pr-4 ml-6 border-l-2 border-sea-green-100">
                   <li>
                     <a
-                      href="#al-quran"
+                      href="/maintenance"
                       className="block px-4 py-3 text-base font-medium text-white transition-colors rounded-lg hover:bg-white/50 hover:text-white"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
@@ -249,7 +283,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <a
-                      href="#hadith"
+                      href="/maintenance"
                       className="block px-4 py-3 text-base font-medium text-white transition-colors rounded-lg hover:bg-white/50 hover:text-white "
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
@@ -258,7 +292,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <a
-                      href="#doa"
+                      href="/maintenance"
                       className="block px-4 py-3 text-base font-medium text-white transition-colors rounded-lg hover:bg-white/50 hover:text-white"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
@@ -280,7 +314,7 @@ const Navbar = () => {
             </li>
             <li>
               <a
-                href="#testimoni"
+                href="#gallery"
                 className="block px-4 py-3 text-base font-medium text-white transition-colors rounded-lg hover:bg-white/50 hover:text-white"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -289,7 +323,7 @@ const Navbar = () => {
             </li>
             <li>
               <a
-                href="#testimoni"
+                href="#faq"
                 className="block px-4 py-3 text-base font-medium text-white transition-colors rounded-lg hover:bg-white/50 hover:text-white"
                 onClick={() => setIsMobileMenuOpen(false)}
               >

@@ -37,7 +37,7 @@ const StatisticsSection = () => {
   ];
 
   return (
-    <section className="w-full py-16 bg-sea-green-950 sm:py-24">
+    <section id="statistik" className="w-full py-16 bg-sea-green-950 sm:py-24">
       <div className="px-6 mx-auto max-w-7xl sm:px-8 lg:px-12">
         <header className="sr-only">
           <h2>Statistik SIMAK</h2>
