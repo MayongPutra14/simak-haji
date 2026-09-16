@@ -25,8 +25,15 @@ export const step1Schema = z.object({
   nama_lengkap: z.string().min(1, 'Nama lengkap wajib diisi'),
   nomor_porsi: z.string().min(1, 'Nomor porsi wajib diisi'),
   whatsapp: z.string().min(1, 'Nomor WhatsApp wajib diisi'),
+  role: z.string().min(1, 'Role Wajib diisi'),
   password: z.string().min(6, 'Password minimal 6 karakter'),
 });
+
+export const roleOptions = [
+  { label: 'Jamaah', value: 'user' },
+  { label: 'Pembimbing', value: 'pembimbing' },
+  { label: 'Admin', value: 'admin' },
+];
 
 // STEP 2 SCHEMA: PROFILE BIODATA
 export const step2Schema = z.object({

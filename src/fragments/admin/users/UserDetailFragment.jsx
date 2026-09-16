@@ -1,3 +1,4 @@
+import BackButton from '../../../components/ui/global/BackButton';
 import ProfileDetail from '../../../components/ui/global/ProfileDetail';
 import TitlePage from '../../../components/ui/global/TitlePage';
 import { bgImage } from '../../../utils/helpers/bgImage';
@@ -13,6 +14,7 @@ export default function UserDetailFragment({ data, isLoading }) {
       />
 
       <ProfileDetail data={data} isLoading={isLoading} />
+      <BackButton />
     </>
   );
 }

@@ -2,6 +2,7 @@ import {
   SkeletonProfileImage,
   SkeletonCardProfileDetail,
 } from '../global/skeletons/index';
+
 // Helper Component: Display Key and Value with Fallback Handling
 const DetailField = ({ label, value }) => {
   const isEmpty =
@@ -122,7 +123,7 @@ export default function ProfileDetail({ data, isLoading = false }) {
   const user = data || {};
 
   return (
-    <div className="w-[95%] md:w-[98%] mx-auto py-6 space-y-5 font-sans">
+    <div className=" w-[95%] md:w-[98%] mx-auto py-6 space-y-5 font-sans">
       {/* Main Profile (Hero Bento Card) */}
       <div className="relative flex flex-col items-center gap-6 p-6 overflow-hidden text-white border shadow-xl bg-linear-to-r from-sea-green-900 via-sea-green-800 to-emerald-900 rounded-3xl lg:p-8 border-sea-green-700 md:flex-row md:items-start">
         {/* Decorative Background Accent */}
@@ -132,7 +133,7 @@ export default function ProfileDetail({ data, isLoading = false }) {
         <div className="relative group">
           <img
             src={
-              user.profileImage ||
+              user.PhotoUrl ||
               'https://i.pinimg.com/736x/11/46/dc/1146dc1a7b950533b67192e623c339ce.jpg'
             }
             alt={user.fullName || 'User Avatar'}
@@ -159,7 +160,7 @@ export default function ProfileDetail({ data, isLoading = false }) {
                 Nomor Porsi Utama
               </p>
               <p className="text-lg font-bold text-sea-green-300">
-                {user.porsiNumber || (
+                {user.portionNumber || (
                   <span className="text-sm italic font-light text-slate-400">
                     Belum ada
                   </span>

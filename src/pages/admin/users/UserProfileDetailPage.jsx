@@ -2,7 +2,6 @@ import { useParams, useNavigate } from 'react-router';
 import UserDetailFragment from '../../../fragments/admin/users/UserDetailFragment';
 import useGetUserDetail from '../../../hooks/admin/user/useGetUserDetail';
 import Button from '../../../components/ui/global/Button';
-// import Modal from '../../../components/ui/global/Modal';
 
 export default function UserDetailPage() {
   const navigate = useNavigate();

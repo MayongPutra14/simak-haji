@@ -19,8 +19,8 @@ const useGetUserDetail = (userId) => {
 
       try {
         const response = await getUserDetail(userId);
-        if (isSubscribed && response?.status === 'success') {
-          setUserData(response.data);
+        if (isSubscribed && response) {
+          setUserData(response);
         }
       } catch (error) {
         if (isSubscribed) {
