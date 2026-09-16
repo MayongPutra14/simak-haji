@@ -6,7 +6,7 @@ import {
 
 export default function FooterSection() {
   return (
-    <footer className="relative mt-12 overflow-hidden text-white border-t bg-sea-green-950 border-sea-green-800">
+    <footer className="relative  overflow-hidden text-white border-t bg-sea-green-950 border-sea-green-800">
       <div className="w-[95%] sm:w-[98%] max-w-7xl mx-auto pt-16 pb-12 px-6 sm:px-8">
         <div className="grid items-start grid-cols-1 gap-10 md:grid-cols-3 md:gap-12">
           {/*  Column 1: Organization Identity  */}
