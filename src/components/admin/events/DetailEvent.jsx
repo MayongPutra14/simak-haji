@@ -41,11 +41,11 @@ export default function DetailEvent() {
   const eventDate = formatDateIndonesia(eventData.waktu_event);
   // date formatting helper fallback
   return (
-    <div className="min-h-screen p-4 space-y-6 bg-slate-50 md:p-6">
+    <div className="min-h-screen pt-4 w-[95%] mx-auto space-y-6 bg-slate-50 md:w-[98%]">
       {/* MAIN CONTENT GRID WITH 2 COLUMNS */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {/* LEFT COLUMN (2/3 WIDTH) */}
-        <div className="space-y-6 lg:col-span-2">
+        <div className="space-y-4 lg:col-span-2">
           {/* MAIN INFORMATION CARD */}
           <div className="p-6 space-y-4 bg-white border shadow-xs rounded-xl border-slate-100">
             <h2 className="pl-3 text-2xl font-semibold border-l-4 text-slate-700 border-l-sea-green-300">

@@ -117,6 +117,29 @@ export default function ListUser({
     [setDeleteError, navigate], // INCLUDED SETDELETEERROR TO RESOLVE ESLINT WARNING
   );
 
+  const getPaginationPages = (currentPage, totalPages) => {
+    const pages = [];
+
+    for (let i = 1; i <= totalPages; i++) {
+      if (
+        i === 1 ||
+        i === totalPages ||
+        (i >= currentPage - 1 && i <= currentPage + 1)
+      ) {
+        pages.push(i);
+      } else if (
+        pages[pages.length - 1] !== '...' &&
+        (i < currentPage - 1 || i > currentPage + 1)
+      ) {
+        pages.push('...');
+      }
+    }
+
+    return pages;
+  };
+
+  const paginationPages = getPaginationPages(currentPage, totalPages);
+
   return (
     <div className="min-h-screen bg-white w-[95%] md:w-[98%] mx-auto p-4 my-4 rounded-xl shadow-md">
       <div className="space-y-6">
@@ -270,17 +293,27 @@ export default function ListUser({
                 </Button>
 
                 <div className="items-center hidden gap-1 sm:flex">
-                  {[...Array(totalPages)].map((_, i) => {
-                    const pageNum = i + 1;
+                  {paginationPages.map((page, index) => {
+                    if (page === '...') {
+                      return (
+                        <span
+                          key={`ellipsis-${index}`}
+                          className="px-2 text-xs text-gray-500"
+                        >
+                          ...
+                        </span>
+                      );
+                    }
+
                     return (
                       <Button
-                        key={pageNum}
+                        key={page}
                         variant="navigation"
-                        onClick={() => setCurrentPage(pageNum)}
-                        isActive={currentPage === pageNum}
+                        onClick={() => setCurrentPage(page)}
+                        isActive={currentPage === page}
                         className="text-xs min-w-7 h-7"
                       >
-                        {pageNum}
+                        {page}
                       </Button>
                     );
                   })}

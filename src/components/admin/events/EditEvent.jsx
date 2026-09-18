@@ -28,8 +28,6 @@ export default function EditEvent({
 
   const onSubmitForm = (data) => {
     if (onSave) {
-      // Anda bisa melakukan formatting data terlebih dahulu di sini jika diperlukan
-      // sebelum melemparnya kembali ke parent component
       onSave(data);
     }
   };

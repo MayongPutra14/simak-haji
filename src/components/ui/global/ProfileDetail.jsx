@@ -1,4 +1,8 @@
 import {
+  formatTanggalIndonesia,
+  hitungUmur,
+} from '../../../utils/helpers/ageHelper';
+import {
   SkeletonProfileImage,
   SkeletonCardProfileDetail,
 } from '../global/skeletons/index';
@@ -125,25 +129,30 @@ export default function ProfileDetail({ data, isLoading = false }) {
   return (
     <div className=" w-[95%] md:w-[98%] mx-auto py-6 space-y-5 font-sans">
       {/* Main Profile (Hero Bento Card) */}
-      <div className="relative flex flex-col items-center gap-6 p-6 overflow-hidden text-white border shadow-xl bg-linear-to-r from-sea-green-900 via-sea-green-800 to-emerald-900 rounded-3xl lg:p-8 border-sea-green-700 md:flex-row md:items-start">
+      <div className="relative flex flex-col items-center gap-6 p-6 overflow-hidden text-white border shadow-xl bg-linear-to-r from-sea-green-900 via-sea-green-800 to-emerald-900 rounded-3xl lg:p-8 border-sea-green-700 md:flex-row md:items-center">
+        {/* Perubahan: md:items-start diubah ke md:items-center agar teks di kanan sejajar di tengah secara vertikal dengan foto 3x4 yang tinggi */}
+
         {/* Decorative Background Accent */}
         <div className="absolute w-48 h-48 rounded-full pointer-events-none -right-10 -bottom-10 bg-sea-green-600/20 blur-2xl"></div>
 
         {/* User Avatar */}
-        <div className="relative group">
+        <div className="relative group shrink-0">
+          {/* Perubahan: Ditambahkan `shrink-0` agar bingkai avatar tidak tertekan/gepeng oleh teks di sebelahnya */}
           <img
             src={
               user.PhotoUrl ||
               'https://i.pinimg.com/736x/11/46/dc/1146dc1a7b950533b67192e623c339ce.jpg'
             }
             alt={user.fullName || 'User Avatar'}
-            className="object-cover border-4 shadow-md w-28 h-28 lg:w-32 lg:h-32 rounded-2xl border-sea-green-400/30"
+            className="object-cover border-4 shadow-md w-24 aspect-3/4 lg:w-36 rounded-2xl border-sea-green-400/30"
           />
+
           <span className="absolute w-4 h-4 border-2 rounded-full bottom-2 right-2 bg-sea-green-400 border-sea-green-900"></span>
         </div>
 
         {/* Highlighted Main Info */}
-        <div className="flex-1 space-y-2 text-center md:text-left">
+        <div className="flex-1 space-y-2 text-center md:text-left z-10">
+          {/* Perubahan: Ditambahkan `z-10` agar teks berada di atas lapisan dekorasi blur */}
           <div className="inline-block px-3 py-1 mb-1 text-xs font-medium border rounded-full bg-sea-green-700/50 text-sea-green-200 border-sea-green-500/30">
             Profil Jamaah
           </div>
@@ -196,11 +205,19 @@ export default function ProfileDetail({ data, isLoading = false }) {
               <DetailField label="Nama Ayah Kandung" value={user.fatherName} />
               <DetailField label="Jenis Kelamin" value={user.gender} />
               <DetailField label="Tempat Lahir" value={user.birthPlace} />
-              <DetailField label="Tanggal Lahir" value={user.birthDate} />
+              <DetailField
+                label="Tanggal Lahir"
+                value={formatTanggalIndonesia(user.birthDate)}
+              />
+              <DetailField
+                label="Usia"
+                value={`${hitungUmur(user.birthDate)} Tahun`}
+              />
               <DetailField label="Perkejaan" value={user.job} />
               <DetailField label="Pedidikan" value={user.education} />
               <DetailField label="Kecamatan" value={user.subDistrict} />
-              <DetailField label="Desa" value={user.village} />
+              <DetailField label="Desa / Kelurahan" value={user.village} />
+              <DetailField label="Nomor Whatsapp" value={user.whatsapp} />
               <div className="sm:col-span-2">
                 <DetailField label="Alamat" value={user.address} />
               </div>

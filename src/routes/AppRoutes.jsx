@@ -22,6 +22,10 @@ import {
   ListUsersPage,
   UserDetailPage,
   UserEditPage,
+  CreateEventPage,
+  ListEventsPage,
+  DetailEventPage,
+  EditEventPage,
 } from '../pages/admin/index';
 
 // USER
@@ -53,6 +57,14 @@ export default function AppRoutes() {
             <Route path="detail/:userId" element={<UserDetailPage />} />
             <Route path="edit/:userId" element={<UserEditPage />} />
           </Route>
+
+          {/* CRUD EVENT */}
+          <Route path="schedules">
+            <Route index element={<ListEventsPage />} />
+            <Route path="create" element={<CreateEventPage />} />
+            <Route path="detail/:scheduleId" element={<DetailEventPage />} />
+            <Route path="edit/:scheduleId" element={<EditEventPage />} />
+          </Route>
         </Route>
       </Route>
 
@@ -64,7 +76,7 @@ export default function AppRoutes() {
 
             <Route path="home" element={<UserHomePage />} />
             <Route path="profile" element={<UserProfilePage />} />
-            <Route path="jadwal" element={<UserSchedulePage />} />
+            <Route path="schedules" element={<UserSchedulePage />} />
           </Route>
         </Route>
 
