@@ -1,10 +1,12 @@
 import { bgImage } from '../../../utils/helpers/bgImage';
 import TitlePage from '../../../components/ui/global/TitlePage';
 import DetailEvent from '../../../components/admin/events/DetailEvent';
+import BackButton from '../../../components/ui/global/BackButton';
 
 export default function DetailEventFragment() {
   return (
     <>
+      <BackButton />
       <TitlePage
         bgImage={bgImage.bgNabawi}
         title="Detail Informasi Acara"

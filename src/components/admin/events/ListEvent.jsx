@@ -110,10 +110,10 @@ export default function ListEvents({
           setDeleteError(null);
         },
         onViewDetail: (event) => {
-          navigate(`/admin/events/detail/${event.id}`);
+          navigate(`/admin/schedules/detail/${event.id}`);
         },
         onEdit: (event) => {
-          navigate(`/admin/events/edit/${event.id}`);
+          navigate(`/admin/schedules/edit/${event.id}`);
         },
       }),
     [setDeleteError, navigate],
@@ -152,7 +152,7 @@ export default function ListEvents({
             className="px-4 py-2 sm:w-auto"
             variant="primary"
             type="button"
-            to="/admin/events/create"
+            to="/admin/schedules/create"
           >
             Tambah Acara
           </Button>
@@ -207,7 +207,7 @@ export default function ListEvents({
                 type="button"
                 variant="primary"
                 icon={<IconAdd />}
-                to="/admin/events/create"
+                to="/admin/schedules/create"
               >
                 Tambah Acara
               </Button>

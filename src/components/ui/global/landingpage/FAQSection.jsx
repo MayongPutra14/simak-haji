@@ -79,7 +79,7 @@ function FAQSection() {
   };
 
   return (
-    <section id="faq" className="w-full py-16 bg-slate-50 md:py-24">
+    <section id="faq" className="w-full py-32 bg-slate-50 md:py-40">
       <div className="mx-auto w-[95%] md:w-[98%] max-w-3xl">
         <header className="mb-12 text-center">
           <div className="max-w-3xl mx-auto text-center mb-14 md:mb-16">

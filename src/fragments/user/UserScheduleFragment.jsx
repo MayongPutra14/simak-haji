@@ -2,12 +2,10 @@ import NotFoundData from '../../components/ui/global/NotFoundData';
 import TitlePage from '../../components/ui/global/TitlePage';
 import EventCard from '../../components/user/EventCard';
 import useSchedulesEvent from '../../hooks/user/useSchedules';
-import dummySchedules from '../../utils/helpers/dummySchedules.json';
 
 const UserScheduleFragment = ({ user }) => {
-  // const { schedulesData, isLoading } = useSchedulesEvent(user?.id);
-  const schedulesData = dummySchedules.data;
-  const isLoading = false;
+  const { schedulesData, isLoading } = useSchedulesEvent(user?.id);
+
   return (
     <>
       <TitlePage />

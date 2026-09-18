@@ -1,8 +1,14 @@
+import { useNavigate } from 'react-router';
 import EditEvent from '../../../components/admin/events/EditEvent';
 import { bgImage } from '../../../utils/helpers/bgImage';
 import TitlePage from '../../../components/ui/global/TitlePage';
 
 export default function EditEventFragment() {
+  const navigate = useNavigate();
+
+  const handleCancel = () => {
+    navigate('/admin/schedules');
+  };
   return (
     <>
       <TitlePage
@@ -12,7 +18,7 @@ export default function EditEventFragment() {
         isMirror={true}
       />
 
-      <EditEvent />
+      <EditEvent onCancel={handleCancel} />
     </>
   );
 }
