@@ -67,7 +67,7 @@ export default function UserEditFragment() {
   };
 
   const handleCancel = () => {
-    navigate('/admin/users');
+    navigate(-1);
   };
 
   return (

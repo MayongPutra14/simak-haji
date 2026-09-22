@@ -33,7 +33,7 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
       : undefined,
   });
 
-  const [_previewImage, setPreviewImage] = useState('');
+  const [previewImage, setPreviewImage] = useState('');
   const [rawImageFile, setRawImageFile] = useState(null);
 
   //  Handler for profile image
@@ -116,6 +116,7 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
         <div className="relative group">
           <img
             src={
+              previewImage||
               initialData?.PhotoUrl ||
               'https://i.pinimg.com/736x/11/46/dc/1146dc1a7b950533b67192e623c339ce.jpg'
             }
