@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 import Table from '../ui/global/Table';
 import SearcInput from '../ui/inputs/SeacrhInput';
 import Button from '../ui/global/Button';
@@ -23,28 +23,41 @@ export default function ListUser({
   error = null,
   onRefresh,
 }) {
+  // STATE MANAGEMENT
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('Semua Status');
-  const [currentPage, setCurrentPage] = useState(1);
   const [deleteTarget, setDeleteTarget] = useState(null);
+
+  // ROUTING & URL PARAMS
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  // GET CURRENT PAGE FROM URL (Defaults to 1 if not present)
+  const currentPage = Number(searchParams.get('page')) || 1;
+  const itemsPerPage = 10;
 
   // OPTIMIZATION: ELIMINATE LOCALUSERS STATE AND DERIVE DATA DIRECTLY FROM USERS PROP
   const { deleteUser, isDeleting, deleteError, setDeleteError } =
     useDeleteUser();
 
-  const itemsPerPage = 10;
+  // URL PARAMS HELPER
+  const setPageInUrl = (newPage) => {
+    setSearchParams((prevParams) => {
+      prevParams.set('page', newPage);
+      return prevParams;
+    });
+  };
 
   // HANDLER FOR SEARCH INPUT CHANGE WITH PAGE RESET
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-    setCurrentPage(1); // RESET CURRENT PAGE ON USER INPUT EVENT INSTEAD OF USEEFFECT
+    setPageInUrl(1); // RESET CURRENT PAGE ON USER INPUT EVENT INSTEAD OF USEEFFECT
   };
 
   // HANDLER FOR FILTER STATUS CHANGE WITH PAGE RESET
   const handleFilterChange = (e) => {
     setStatusFilter(e.target.value);
-    setCurrentPage(1); // RESET CURRENT PAGE ON USER INPUT EVENT INSTEAD OF USEEFFECT
+    setPageInUrl(1); // RESET CURRENT PAGE ON USER INPUT EVENT INSTEAD OF USEEFFECT
   };
 
   // FILTER USERS DATA DERIVED DIRECTLY FROM PROPS
@@ -81,7 +94,7 @@ export default function ListUser({
       if (onRefresh) await onRefresh();
 
       if (currentData.length === 1 && currentPage > 1) {
-        setCurrentPage((prev) => prev - 1);
+        setPageInUrl((prev) => prev - 1);
       }
     }
   };
@@ -96,7 +109,7 @@ export default function ListUser({
   const handleClearSearch = () => {
     setSearchQuery('');
     setStatusFilter('Semua Status');
-    setCurrentPage(1); // RESET PAGE DIRECTLY ON CLEAR EVENT
+    setPageInUrl(1); // RESET PAGE DIRECTLY ON CLEAR EVENT
   };
 
   // COLUMNS DEFINITION WITH INCLUDED DEPENDENCIES
@@ -258,6 +271,7 @@ export default function ListUser({
           )}
 
           {/* PAGINATION FOOTER */}
+          {/* PAGINATION FOOTER */}
           {currentData.length > 0 && (
             <footer className="flex items-center justify-between px-4 py-3 text-xs bg-white border-t border-slate-100 text-slate-500">
               <div className="hidden sm:block">
@@ -281,17 +295,20 @@ export default function ListUser({
               </div>
 
               <div className="flex items-center gap-1">
+                {/* PREVIOUS PAGE BUTTON */}
                 <Button
                   aria-label="Halaman sebelumnya"
                   variant="navigation"
                   className="p-1.5"
                   disabled={currentPage === 1}
-                  onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                  // UPDATE: Calculate the previous page using the currentPage variable
+                  onClick={() => setPageInUrl(Math.max(currentPage - 1, 1))}
                 >
                   <IconNav className="w-4 h-4 rotate-180" />
                   Previous
                 </Button>
 
+                {/* PAGINATION NUMBERS */}
                 <div className="items-center hidden gap-1 sm:flex">
                   {paginationPages.map((page, index) => {
                     if (page === '...') {
@@ -309,7 +326,8 @@ export default function ListUser({
                       <Button
                         key={page}
                         variant="navigation"
-                        onClick={() => setCurrentPage(page)}
+                        // UPDATE: Pass the target page directly to the URL helper
+                        onClick={() => setPageInUrl(page)}
                         isActive={currentPage === page}
                         className="text-xs min-w-7 h-7"
                       >
@@ -319,13 +337,15 @@ export default function ListUser({
                   })}
                 </div>
 
+                {/* NEXT PAGE BUTTON */}
                 <Button
                   aria-label="Halaman berikutnya"
                   variant="navigation"
                   className="p-1.5"
                   disabled={currentPage === totalPages}
+                  // UPDATE: Calculate the next page using the currentPage variable
                   onClick={() =>
-                    setCurrentPage((p) => Math.min(p + 1, totalPages))
+                    setPageInUrl(Math.min(currentPage + 1, totalPages))
                   }
                 >
                   Next
