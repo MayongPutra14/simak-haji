@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://simak-api.my.id/api';
+const BASE_URL = 'http://localhost/simak_api/api/';
+// const BASE_URL = 'https://simak-api.my.id/api';
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -162,3 +163,74 @@ export const updateUserProfile = async (userId, formData) => {
   }
 };
 
+export const createEventAPI = async (payload) => {
+  if (!payload) return null;
+
+  try {
+    const finalPayload = {
+      action: 'create_event',
+      ...payload,
+    };
+
+    console.table(finalPayload);
+
+    const response = await api.post('admin_manage.php', finalPayload);
+    if (
+      response.data?.status === 'failed' ||
+      response.data?.status === 'error'
+    ) {
+      throw new Error(response.data?.message || 'Gagal membuat event baru');
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Error creating event:', error);
+    throw error;
+  }
+};
+
+export const getEventsAPI = async () => {
+  try {
+    const response = await api.post('admin_manage.php', {
+      action: 'get_events',
+    });
+
+    if (
+      response.data?.status === 'failed' ||
+      response.data?.status === 'error'
+    ) {
+      throw new Error(response.data?.message || 'Gagal mengambil data acara');
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Errror Occurred wWhen Fecthing Event Data');
+    throw error;
+  }
+};
+
+export const getEventDetailAPI = async (eventId) => {
+  if (!eventId) return null;
+
+  try {
+    const response = await api.post('admin_manage.php', {
+      event_id: eventId,
+      action: 'get_event_detail',
+    });
+
+    if (
+      response.data?.status === 'failed' ||
+      response.data?.status === 'error'
+    ) {
+      throw new Error(response.data?.message || 'Event tidak di temukan');
+    }
+
+    console.log('response from api');
+    console.log(response.data);
+
+    return response.data;
+  } catch (error) {
+    console.error('Error occured when fetchin event data');
+    throw error;
+  }
+};

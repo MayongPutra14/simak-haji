@@ -1,18 +1,10 @@
 import ProfileDetail from '../../components/ui/global/ProfileDetail';
-import TitlePage from '../../components/ui/global/TitlePage';
 import useProfileUser from '../../hooks/user/useProfileUSer';
 
 const UserProfileFragment = ({ user }) => {
   const { profileData, isLoading } = useProfileUser(user?.id);
   return (
     <>
-      <TitlePage
-        title="Profile Jamaah"
-        subtitle="Lihat detail identitasmu dan pastikan semua data yang telah dikirim serta kontak sudah sesuai."
-        bgImage="https://i.pinimg.com/736x/16/ed/47/16ed476ff53c6b0d07f84e7c3e68407e.jpg"
-        isMirror
-      />
-
       <ProfileDetail data={profileData} isLoading={isLoading} />
     </>
   );

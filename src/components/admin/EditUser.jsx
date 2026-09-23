@@ -121,7 +121,7 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
               'https://i.pinimg.com/736x/11/46/dc/1146dc1a7b950533b67192e623c339ce.jpg'
             }
             alt="Profile Preview"
-            className="object-cover border-4 shadow-md w-28 h-28 lg:w-32 lg:h-32 rounded-2xl border-teal-400/30"
+            className="object-cover border-4 shadow-md w-24 aspect-3/4 lg:w-36 rounded-2xl border-teal-400/30"
           />
           <label
             htmlFor="profileImageInput"

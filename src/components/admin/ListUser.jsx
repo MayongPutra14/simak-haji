@@ -271,7 +271,6 @@ export default function ListUser({
           )}
 
           {/* PAGINATION FOOTER */}
-          {/* PAGINATION FOOTER */}
           {currentData.length > 0 && (
             <footer className="flex items-center justify-between px-4 py-3 text-xs bg-white border-t border-slate-100 text-slate-500">
               <div className="hidden sm:block">
