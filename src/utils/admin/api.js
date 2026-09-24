@@ -214,7 +214,7 @@ export const getEventDetailAPI = async (eventId) => {
 
   try {
     const response = await api.post('admin_manage.php', {
-      event_id: eventId,
+      event_id: Number(eventId),
       action: 'get_event_detail',
     });
 

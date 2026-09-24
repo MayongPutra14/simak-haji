@@ -283,7 +283,6 @@ export const statusPortionOptions = [
 export const statusControlProcessOptions = [
   { label: 'Menunggu', value: 'menunggu' },
   { label: 'Lengkap', value: 'lengkap' },
-  { label: 'Gagal', value: 'gagal' },
 ];
 
 export const statusHajiUmrahOptions = [
@@ -350,3 +349,14 @@ export const UpdateUserSchema = z.object({
   passport: z.string().nullable().optional(),
   visa: z.string().nullable().optional(),
 });
+
+// Konfimasi password didahalam user profile
+export const updatePasswordSchemas = z
+  .object({
+    newPassword: z.string().min(8, 'Password baru minimal harus 8 karakter'),
+    confirmPassword: z.string().min(1, 'Konfirmasi password harus diisi'),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: 'Konfirmasi password tidak cocok dengan password baru',
+    path: ['confirmPassword'],
+  });

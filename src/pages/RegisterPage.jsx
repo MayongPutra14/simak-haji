@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import axios from 'axios';
 import RegisterFormFragment from '../fragments/RegisterFragment';
 import Modal from '../components/ui/global/Modal';
+import { useRegister } from '../hooks/global/useRegister';
 import {
   IoCloseOutline as IconClose,
   IoCheckmark as IconCheck,
@@ -10,7 +10,7 @@ import {
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-
+  const { register } = useRegister();
   const [modal, setModal] = useState({
     isOpen: false,
     title: '',
@@ -57,31 +57,15 @@ const RegisterPage = () => {
   };
 
   const handleRegister = async (data) => {
-    try {
-      const formData = new FormData();
-      formData.append('nama', data.name);
-      formData.append('nomor_porsi', data.porsiNumber);
-      formData.append('whatsapp', data.whatsappNumber);
-      formData.append('password', data.password);
+    const response = await register(data);
 
-      const response = await axios.post(
-        'https://simak-api.vercel.app/api/register.php',
-        formData,
-      );
-
-      if (response.data.status === 'success') {
-        showSuccessModal();
-      } else {
-        showErrorModal(response.message);
-      }
-    } catch (error) {
-      console.error('Error from registration:', error);
-      showErrorModal(
-        error.response?.message ||
-          'Gagal terhubung ke server. Pastikan koneksi Anda stabil',
-      );
+    if (response.status === 'success') {
+      showSuccessModal();
+    } else {
+      showErrorModal(response.message);
     }
   };
+
   return (
     <section className="bg-sea-green-800 min-h-screen flex flex-col justify-center pb-12 pt-4">
       <RegisterFormFragment onSubmit={handleRegister} />

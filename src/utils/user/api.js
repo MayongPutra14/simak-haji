@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://simak-api.my.id/api/';
+// const BASE_URL = 'https://simak-api.my.id/api/';
+const BASE_URL = 'http://localhost/simak_api/api/';
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -10,21 +11,65 @@ export const api = axios.create({
 });
 
 export const loginApi = async (user) => {
-  const formData = new FormData();
-  formData.append('nomor_porsi', user.porsiNumber);
-  formData.append('password', user.password);
+  try {
+    const payload = {
+      nomor_porsi: user.porsiNumber,
+      password: user.password,
+    };
 
-  const response = await api.post('login.php', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+    const response = await api.post('login.php', payload);
+    return response.data;
+  } catch (error) {
+    return {
+      status: 'failed',
+      message: error.response?.data?.message || 'Login gagal.',
+    };
+  }
+};
 
-  const result = Array.isArray(response.data)
-    ? response.data[0]
-    : response.data;
+export const registerAPI = async (data) => {
+  if (!data)
+    return {
+      status: 'failed',
+      message: 'Mohon untuk mengisi data terlebih dahulu',
+    };
 
-  return result;
+  try {
+    const bodyPayload = {
+      nama: data.name,
+      nomor_porsi: data.porsiNumber,
+      whatsapp: data.whatsappNumber,
+      password: data.password,
+    };
+
+    const response = await api.post('register.php', bodyPayload);
+    if (
+      response.data?.status === 'failed' ||
+      response.data?.status === 'error'
+    ) {
+      return {
+        status: 'failed',
+        message:
+          response.data?.message ||
+          'Pendaftaran akun gagal, silahkan coba lagi',
+      };
+    }
+
+    return {
+      status: 'success',
+      message: response.data?.message || 'Akun berhasil dibuat.',
+    };
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      'Terjadi kesalahan pada server.';
+
+    return {
+      status: 'error',
+      message: errorMessage,
+    };
+  }
 };
 
 export const updateProfileIdentity = async (userId, formData) => {
@@ -115,5 +160,50 @@ export const getSchedules = async (userId) => {
   } catch (error) {
     console.error('Error fetching schedules:', error);
     throw new Error('Gagal mengambil jadwal', { cause: error });
+  }
+};
+
+export const updatePasswordAPI = async (userId, newPassword) => {
+  if (!userId || !newPassword) {
+    return {
+      status: 'failed',
+      message: 'ID user atau password baru tidak boleh kosong.',
+    };
+  }
+
+  try {
+    const bodyPayload = {
+      user_id: userId,
+      newPassword: newPassword,
+    };
+
+    const response = await api.post(
+      'user.php?action=update-password',
+      bodyPayload,
+    );
+    if (
+      response.data?.status === 'failed' ||
+      response.data?.status === 'error'
+    ) {
+      return {
+        status: 'failed',
+        message: response.data?.message || 'Gagal memperbarui password.',
+      };
+    }
+
+    return {
+      status: 'success',
+      message: response.data?.message || 'Password berhasil diperbarui.',
+    };
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      'Terjadi kesalahan pada server.';
+
+    return {
+      status: 'error',
+      message: errorMessage,
+    };
   }
 };
