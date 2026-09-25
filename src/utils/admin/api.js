@@ -69,7 +69,6 @@ export const updateProfile = async (userId, payload) => {
   if (!userId || !payload) return null;
   try {
     const bodyPayload = {
-      usr_id: String(userId),
       user_id: String(userId),
       ...payload,
     };
@@ -95,7 +94,7 @@ export const updateDocuments = async (userId, payload) => {
     const bodyPayload = {
       user_id: userId,
       action: 'update_dokumen',
-      is_completed: 1,
+      isCompleted: 1,
       ...payload,
     };
 
@@ -225,12 +224,46 @@ export const getEventDetailAPI = async (eventId) => {
       throw new Error(response.data?.message || 'Event tidak di temukan');
     }
 
-    console.log('response from api');
-    console.log(response.data);
-
     return response.data;
   } catch (error) {
     console.error('Error occured when fetchin event data');
     throw error;
+  }
+};
+
+export const updateQuotaProvince = async (payload) => {
+  if (!payload)
+    return {
+      status: 'failed',
+      message: 'Jumlah kuota tidak ada, pastikan anda meberikan nilainya',
+    };
+
+  try {
+    const bodyPayload = {
+      action: 'update_kuota',
+      ...payload,
+    };
+
+    const response = await api.post('admin.php', bodyPayload);
+    if (
+      response.data?.status === 'failed' ||
+      response.data?.status === 'error'
+    ) {
+      return {
+        status: 'failed',
+        message: response.data?.message || 'Update kuota provinsi gagal',
+      };
+    }
+
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message | 'Terjadi kesalahan pada server';
+
+    return {
+      status: 'error',
+      message: errorMessage,
+    };
   }
 };

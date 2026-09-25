@@ -352,6 +352,7 @@ export const UpdateUserSchema = z.object({
 
 // Konfimasi password didahalam user profile
 export const updatePasswordSchemas = z
+
   .object({
     newPassword: z.string().min(8, 'Password baru minimal harus 8 karakter'),
     confirmPassword: z.string().min(1, 'Konfirmasi password harus diisi'),

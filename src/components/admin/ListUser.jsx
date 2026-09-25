@@ -16,6 +16,7 @@ import {
   MdPeople as IconPeople,
 } from 'react-icons/md';
 import { IoWarningOutline as IconWarning } from 'react-icons/io5';
+import { UpdateQuotaSection } from '../ui/inputs/UpdateQuotaProvince';
 
 export default function ListUser({
   users = [],
@@ -191,6 +192,9 @@ export default function ListUser({
             Tambah Jamaah
           </Button>
         </section>
+
+        {/* UPDATE NEW PROVINCE QUOTA */}
+        <UpdateQuotaSection onRefresh={onRefresh} />
 
         {/* BASIC STATISTIC */}
         <section className="grid grid-cols-2 gap-4 sm:max-w-md">

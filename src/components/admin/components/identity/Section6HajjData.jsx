@@ -30,26 +30,26 @@ export default function Section6HajjData() {
           placeholder="-- Pilih Status Porsi --"
           options={CreateUserSchema.statusPortionOptions}
           error={errors.currPorsionStatus?.message}
-          {...register('currPorsionStatus')}
+          {...register('currPortionStatus')}
         />
 
         {/* BACKUP PORTION POSITION */}
-        <InputNumber
+        {/* <InputNumber
           label="Porsi Cadangan"
           placeholder="33457"
           maxLength={10}
           error={errors.currPortionPositionBackup?.message}
           {...register('currPortionPositionBackup')}
-        />
+        /> */}
 
         {/* BACKUP STATUS PORTION */}
-        <InputSelect
+        {/* <InputSelect
           label="Status Porsi Cadangan"
           placeholder="-- Pilih Status Porsi --"
           options={CreateUserSchema.statusPortionOptions}
           error={errors.currPortionStatusBackup?.message}
           {...register('currPortionStatusBackup')}
-        />
+        /> */}
 
         {/* ZONA */}
         <InputSelect

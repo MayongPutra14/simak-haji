@@ -51,3 +51,11 @@ export const getButtonLabel = (status, isAttended) => {
   }
   return 'Materi Bacaan';
 };
+
+export const getDocumentStatus = (value) => {
+  if (value?.trim().length > 0 && value?.toLowerCase() !== 'menunggu') {
+    return 'Lengkap';
+  }
+
+  return 'Menunggu';
+};

@@ -27,8 +27,6 @@ export default function UpdatePasswordCard({ userId, logout }) {
 
   const handleOnSUbmit = async (data) => {
     const response = await updatePassword(userId, data.newPassword);
-    console.log('Ini adalah data dari Update password');
-    console.table(response);
 
     if (response.status === 'success') {
       alert(response.message);

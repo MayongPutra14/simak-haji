@@ -1,14 +1,18 @@
-export const titleCase = (teks) => {
-  if (!teks) return '';
+export const titleCase = (text) => {
+  if (!text) return '';
 
-  return teks
+  const cleanText = text.toLowerCase().replace(/_/g, ' ');
+
+  if (cleanText === 'pernah umrah') {
+    return 'Pernah umrah';
+  }
+
+  return cleanText
     .toLowerCase()
+    .replace(/_/g, ' ')
     .split(' ')
     .map((kata) => {
-      // 1. Kapitalkan huruf pertama dari kata tersebut
       const kataKapital = kata.charAt(0).toUpperCase() + kata.slice(1);
-
-      // 2. Tangani huruf setelah tanda titik (untuk gelar seperti S.Pd., M.Si.)
       return kataKapital.replace(/\.[a-z]/g, (match) => match.toUpperCase());
     })
     .join(' ');

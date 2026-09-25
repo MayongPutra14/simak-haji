@@ -21,7 +21,7 @@ export default function Button({
   const variants = {
     primary: `py-2.5 px-4 bg-sea-green-600 hover:bg-sea-green-700 ${fontColor} disabled:bg-gray-400`,
     secondary:
-      'py-2.5 px-4bg-slate-900 hover:bg-slate-800 text-white disabled:bg-gray-400',
+      'py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white disabled:bg-gray-400',
     outline:
       'py-2.5 px-4 border border-sea-green-600 text-sea-green-600 hover:bg-sea-green-50 disabled:border-gray-300 disabled:text-gray-400',
     navigation: isActive

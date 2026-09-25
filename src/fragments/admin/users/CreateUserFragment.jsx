@@ -146,6 +146,8 @@ const CreateUserFragment = () => {
         profileImage: imageUrl,
       };
 
+      console.log('Ini adalah data dari updateProfile proses pembuatan akun');
+      console.table(finalPayload);
       // pass created user id and payload to step 2 api
       await updateProfile(createdUserId, finalPayload);
 
@@ -167,6 +169,8 @@ const CreateUserFragment = () => {
   // STEP 3 HANDLER: UPDATE BUREAUCRACY & DOCUMENTS
   const handleStep3Submit = async (data) => {
     try {
+      console.log('Ini adalah data dari updateDocuments proses pembuatan akun');
+      console.table(data);
       // send final step bureaucracy payload
       await updateDocuments(createdUserId, data);
       showSuccessModal(

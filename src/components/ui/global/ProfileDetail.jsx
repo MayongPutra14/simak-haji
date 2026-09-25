@@ -4,6 +4,8 @@ import { DragDropProvider } from '@dnd-kit/react';
 import { SortableCard } from './SortableCard';
 import UpdatePasswordCard from '../inputs/UpdatePasswordCard';
 import { titleCase } from '../../../utils/helpers/TitleCase';
+import { useAuth } from '../../../features/auth/useAuth';
+import { getDocumentStatus } from '../../../utils/helpers/status';
 import {
   formatTanggalIndonesia,
   hitungUmur,
@@ -12,7 +14,6 @@ import {
   SkeletonProfileImage,
   SkeletonCardProfileDetail,
 } from '../global/skeletons/index';
-import { useAuth } from '../../../features/auth/useAuth';
 
 // Helper Component: Display Key and Value with Fallback Handling
 const DetailField = ({ label, value }) => {
@@ -61,7 +62,7 @@ const StatusBadge = ({ label, status }) => {
     lengkap: 'bg-emerald-100 text-emerald-800 border-emerald-200',
 
     // Biru (Proses)
-    menunggu: 'bg-blue-100 text-blue-800 border-blue-300',
+    menunggu: 'bg-rose-100 text-rose-800 border-rose-200',
 
     // Merah (Gagal/Batal)
     gagal: 'bg-rose-100 text-rose-800 border-rose-200',
@@ -70,7 +71,7 @@ const StatusBadge = ({ label, status }) => {
   // 2. Fallback jika status tidak ditemukan di daftar (Default: Amber/Kuning)
   const defaultStyle = 'bg-amber-100 text-amber-800 border-amber-200';
 
-  const currentStyle = statusStyles[status] || defaultStyle;
+  const currentStyle = statusStyles[status?.toLowerCase()] || defaultStyle;
 
   return (
     <div className="flex flex-col gap-1 p-2.5 rounded-xl bg-slate-50 border border-slate-100">
@@ -92,7 +93,8 @@ const StatusBadge = ({ label, status }) => {
 
 // Main Component: UserProfileDetail
 export default function ProfileDetail({ data, isLoading = false }) {
-  const { user: userId, logout } = useAuth();
+  const { user: userData, logout } = useAuth();
+  const role = userData.role === 'user';
 
   // Fallback default empty object if data is null/undefined
   const user = useMemo(() => data || {}, [data]);
@@ -116,9 +118,12 @@ export default function ProfileDetail({ data, isLoading = false }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
                 <DetailField
                   label="Nama Ayah Kandung"
-                  value={user.fatherName}
+                  value={titleCase(user.fatherName)}
                 />
-                <DetailField label="Jenis Kelamin" value={user.gender} />
+                <DetailField
+                  label="Jenis Kelamin"
+                  value={titleCase(user.gender)}
+                />
                 <DetailField label="Tempat Lahir" value={user.birthPlace} />
                 <DetailField
                   label="Tanggal Lahir"
@@ -128,10 +133,19 @@ export default function ProfileDetail({ data, isLoading = false }) {
                   label="Usia"
                   value={`${hitungUmur(user.birthDate)} Tahun`}
                 />
-                <DetailField label="Perkejaan" value={user.job} />
-                <DetailField label="Pedidikan" value={user.education} />
-                <DetailField label="Kecamatan" value={user.subDistrict} />
-                <DetailField label="Desa / Kelurahan" value={user.village} />
+                <DetailField label="Perkejaan" value={titleCase(user.job)} />
+                <DetailField
+                  label="Pedidikan"
+                  value={titleCase(user.education)}
+                />
+                <DetailField
+                  label="Kecamatan"
+                  value={titleCase(user.subDistrict)}
+                />
+                <DetailField
+                  label="Desa / Kelurahan"
+                  value={titleCase(user.village)}
+                />
                 <DetailField label="Nomor Whatsapp" value={user.whatsapp} />
                 <div className="sm:col-span-2">
                   <DetailField label="Alamat" value={user.address} />
@@ -199,26 +213,41 @@ export default function ProfileDetail({ data, isLoading = false }) {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               <StatusBadge
                 label="Status Google Form"
-                status={user.googleFormStatus}
+                status={getDocumentStatus(user.googleFormStatus)}
               />
-              <StatusBadge label="Status Foto" status={user.photoStatus} />
-              <StatusBadge label="Status SPPH" status={user.spphStatus} />
-              <StatusBadge label="Status Mutasi" status={user.mutationStatus} />
+              <StatusBadge
+                label="Status Foto"
+                status={getDocumentStatus(user.photoStatus)}
+              />
+              <StatusBadge
+                label="Status SPPH"
+                status={getDocumentStatus(user.spphStatus)}
+              />
+              <StatusBadge
+                label="Status Mutasi"
+                status={getDocumentStatus(user.mutationStatus)}
+              />
               <StatusBadge
                 label="Status Biometrik"
-                status={user.biometricStatus}
+                status={getDocumentStatus(user.biometricStatus)}
               />
               <StatusBadge
                 label="Status Puskesmas"
-                status={user.puskesmasStatus}
+                status={getDocumentStatus(user.puskesmasStatus)}
               />
-              <StatusBadge label="Status MCU" status={user.mcuStatus} />
+              <StatusBadge
+                label="Status MCU"
+                status={getDocumentStatus(user.mcuStatus)}
+              />
               <StatusBadge
                 label="Status Pelunasan"
-                status={user.paymentStatus}
+                status={getDocumentStatus(user.paymentStatus)}
               />
-              <StatusBadge label="passport" status={user.passport} />
-              <StatusBadge label="visa" status={user.visa} />
+              <StatusBadge
+                label="passport"
+                status={getDocumentStatus(user.passport)}
+              />
+              <StatusBadge label="visa" status={getDocumentStatus(user.visa)} />
             </div>
           </div>
         ),
@@ -236,16 +265,25 @@ export default function ProfileDetail({ data, isLoading = false }) {
               </h2>
             </div>
             <div className="space-y-3">
-              <DetailField label="Pendaping" value={user.companion} />
-              <DetailField label="Nama Mahram" value={user.mahramName} />
-              <DetailField label="Nama Referensi" value={user.referenceName} />
+              <DetailField
+                label="Pendaping"
+                value={titleCase(user.companion)}
+              />
+              <DetailField
+                label="Nama Mahram"
+                value={titleCase(user.mahramName)}
+              />
+              <DetailField
+                label="Nama Referensi"
+                value={titleCase(user.referenceName)}
+              />
               <DetailField
                 label="Nomor Whatsapp Referensi"
                 value={user.referencePhone}
               />
               <DetailField
                 label="Asal Referensi"
-                value={user.referenceOrigin}
+                value={titleCase(user.referenceOrigin)}
               />
             </div>
           </div>
@@ -266,14 +304,17 @@ export default function ProfileDetail({ data, isLoading = false }) {
             <div className="space-y-3">
               <DetailField
                 label="Program Keberangkatan"
-                value={user.departure}
+                value={titleCase(user.departure)}
               />
-              <DetailField label="Pengalaman Haji" value={user.experience} />
-              <DetailField label="Kesehatan" value={user.health} />
-              <DetailField label="Keahlian" value={user.expertise} />
+              <DetailField
+                label="Pengalaman Haji"
+                value={titleCase(user.experience)}
+              />
+              <DetailField label="Kesehatan" value={titleCase(user.health)} />
+              <DetailField label="Keahlian" value={titleCase(user.expertise)} />
               <DetailField
                 label="Kemampuan Kontribusi"
-                value={user.contribution}
+                value={titleCase(user.contribution)}
               />
             </div>
           </div>
@@ -300,7 +341,7 @@ export default function ProfileDetail({ data, isLoading = false }) {
   });
 
   useEffect(() => {
-    setCards((prevCards) => {
+    setCards((_prevCards) => {
       const savedOrder = localStorage.getItem('profile_cards_order');
       const orderIds = savedOrder
         ? JSON.parse(savedOrder)
@@ -478,9 +519,11 @@ export default function ProfileDetail({ data, isLoading = false }) {
       </DragDropProvider>
 
       {/* CHANGE PASSWORD SECTION */}
-      <div>
-        <UpdatePasswordCard userId={userId.id} logout={logout} />
-      </div>
+      {role && (
+        <div>
+          <UpdatePasswordCard userId={userData.id} logout={logout} />
+        </div>
+      )}
     </div>
   );
 }

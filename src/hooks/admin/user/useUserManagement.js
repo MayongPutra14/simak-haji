@@ -22,9 +22,7 @@ export const useUserManagement = () => {
   };
 
   const createBasicAccount = (formData) => {
-    console.log('data form createBasicAccount');
-    console.table(formData);
-    executeRequest(api.createBasicAccount, formData);
+    return executeRequest(api.createBasicAccount, formData);
   };
 
   const updateProfile = (userId, payload) => {
