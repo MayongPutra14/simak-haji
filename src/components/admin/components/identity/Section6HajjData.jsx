@@ -18,7 +18,7 @@ export default function Section6HajjData() {
         {/* PORTION POSITION(current position) */}
         <InputNumber
           label="Posisi Porsi Saat Ini"
-          placeholder="2051"
+          placeholder="27890"
           maxLength={10}
           error={errors.portionNumber?.message}
           {...register('portionNumber')}
@@ -27,28 +27,10 @@ export default function Section6HajjData() {
         {/* STATUS PORTION */}
         <InputSelect
           label="Status Porsi Saat Ini"
-          placeholder="-- Pilih Status Porsi --"
-          options={CreateUserSchema.statusPortionOptions}
+          placeholder="-- Pilih Tahun --"
+          options={CreateUserSchema.generateYearOptions(6, 85)}
           error={errors.currPorsionStatus?.message}
-          {...register('currPorsionStatus')}
-        />
-
-        {/* BACKUP PORTION POSITION */}
-        <InputNumber
-          label="Porsi Cadangan"
-          placeholder="33457"
-          maxLength={10}
-          error={errors.currPortionPositionBackup?.message}
-          {...register('currPortionPositionBackup')}
-        />
-
-        {/* BACKUP STATUS PORTION */}
-        <InputSelect
-          label="Status Porsi Cadangan"
-          placeholder="-- Pilih Status Porsi --"
-          options={CreateUserSchema.statusPortionOptions}
-          error={errors.currPortionStatusBackup?.message}
-          {...register('currPortionStatusBackup')}
+          {...register('currPortionStatus')}
         />
 
         {/* ZONA */}

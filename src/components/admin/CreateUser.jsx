@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import Button from '../ui/global/Button';
+import { WarningAlert } from '../ui/global/GiudelineForm';
 import {
   Section1Account,
   Section2PersonalData,
@@ -52,7 +53,7 @@ const CreateUser = ({
       profileImage: '',
       job: '',
       education: '',
-      depature: '',
+      departure: '',
       experience: '',
       companion: '',
       mahramName: '',
@@ -62,13 +63,11 @@ const CreateUser = ({
       referenceName: '',
       referencePhone: '',
       referenceOrigin: '',
-      currPorsionPosition: '',
-      currPorstionStatus: '',
-      currPorsionPositionBackup: '',
-      currPorstionStatusBackup: '',
+      currPortionPosition: '',
+      currPortionStatus: '',
       zone: '',
-      googleFormStatus: 'lengkap',
-      photoStatus: 'lengkap',
+      googleFormStatus: 'ok',
+      photoStatus: 'ok',
       spphStatus: 'menunggu',
       mutationStatus: 'menunggu',
       biometricStatus: 'menunggu',
@@ -76,7 +75,9 @@ const CreateUser = ({
       mcuStatus: 'menunggu',
       paymentStatus: 'menunggu',
       passport: '',
+      statusPassport: 'menunggu',
       visa: '',
+      statusVisa: 'menunggu',
       plotNumber: '',
       batch: '',
       group: '',
@@ -154,6 +155,7 @@ const CreateUser = ({
           {/* STEP 2: RENDER SECTION 2 TO 5 */}
           {currentStep === 2 && (
             <>
+              <WarningAlert />
               <Section2PersonalData />
               <Section3Background />
               <Section4HealthSkill />

@@ -12,8 +12,8 @@ export default function Table({
   onRowClick,
 }) {
   return (
-    <div className="overflow-x-auto w-full rounded-xl border border-slate-200/80 shadow-xs">
-      <table className="w-full text-left border-collapse">
+    <div className="overflow-x-auto w-full min-w-0 rounded-xl border border-slate-200/80 shadow-xs">
+      <table className="w-full min-w-max text-left border-collapse">
         {/* HEADER TABLE */}
         <thead>
           <tr

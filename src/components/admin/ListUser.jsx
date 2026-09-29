@@ -1,21 +1,30 @@
 import { useState, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
 import Table from '../ui/global/Table';
-import SearcInput from '../ui/inputs/SeacrhInput';
 import Button from '../ui/global/Button';
 import StatisticContainer from '../ui/global/StatisticContainer';
 import Modal from '../ui/global/Modal';
 import useDeleteUser from '../../hooks/admin/user/useDeleteUser';
 import { ListAdminUsersColumns } from '../../features/admin/ListAdminUsersColumns';
 import { SkeletonTableAdminUsers } from '../ui/global/skeletons/index';
-import { HiStatusOnline as IconOnline } from 'react-icons/hi';
+import { UpdateQuotaSection } from '../ui/inputs/UpdateQuotaProvince';
+import { useUserFilters } from '../../hooks/admin/user/useUsersFilter';
+import InlineFilterBar from './components/InlineFilterBar';
+import { UserStatisticsSection } from './components/statistics/UserStatisticSection';
+import { calculateDocumentCompletenessSummary } from '../../utils/helpers/statsCalculators';
+import { SearchInput } from '../ui/inputs';
+import {
+  IoWarningOutline as IconWarning,
+  IoLocation as IconLocation,
+  IoDocument as IconDocument,
+} from 'react-icons/io5';
 import {
   MdAdd as IconAdd,
-  MdOutlineArrowDropDown as IconFilter,
   MdOutlineNavigateNext as IconNav,
   MdPeople as IconPeople,
+  MdTimelapse as IconTimeLapes,
 } from 'react-icons/md';
-import { IoWarningOutline as IconWarning } from 'react-icons/io5';
+import { calculateUniqueZone } from '../../utils/helpers/statsCalculators';
 
 export default function ListUser({
   users = [],
@@ -23,23 +32,14 @@ export default function ListUser({
   error = null,
   onRefresh,
 }) {
-  // STATE MANAGEMENT
-  const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState('Semua Status');
   const [deleteTarget, setDeleteTarget] = useState(null);
-
-  // ROUTING & URL PARAMS
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  // GET CURRENT PAGE FROM URL (Defaults to 1 if not present)
-  const currentPage = Number(searchParams.get('page')) || 1;
-  const itemsPerPage = 10;
-
-  // OPTIMIZATION: ELIMINATE LOCALUSERS STATE AND DERIVE DATA DIRECTLY FROM USERS PROP
   const { deleteUser, isDeleting, deleteError, setDeleteError } =
     useDeleteUser();
-
+  const currentPage = Number(searchParams.get('page')) || 1;
+  const itemsPerPage = 10;
   // URL PARAMS HELPER
   const setPageInUrl = (newPage) => {
     setSearchParams((prevParams) => {
@@ -48,31 +48,22 @@ export default function ListUser({
     });
   };
 
-  // HANDLER FOR SEARCH INPUT CHANGE WITH PAGE RESET
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-    setPageInUrl(1); // RESET CURRENT PAGE ON USER INPUT EVENT INSTEAD OF USEEFFECT
-  };
-
-  // HANDLER FOR FILTER STATUS CHANGE WITH PAGE RESET
-  const handleFilterChange = (e) => {
-    setStatusFilter(e.target.value);
-    setPageInUrl(1); // RESET CURRENT PAGE ON USER INPUT EVENT INSTEAD OF USEEFFECT
-  };
-
-  // FILTER USERS DATA DERIVED DIRECTLY FROM PROPS
-  const filteredUsers = useMemo(() => {
-    return users.filter((user) => {
-      const matchesSearch =
-        user.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        user.portionNumber?.includes(searchQuery);
-
-      const matchesStatus =
-        statusFilter === 'Semua Status' || user.status === statusFilter;
-
-      return matchesSearch && matchesStatus;
-    });
-  }, [users, searchQuery, statusFilter]);
+  // CALLING CUSTOM HOOK FILTER
+  const {
+    searchQuery,
+    zoneFilter,
+    yearFilter,
+    uniqueZones,
+    uniqueYears,
+    filteredUsers,
+    docFilters,
+    isFilterActive,
+    handleDocFilterChange,
+    handleSearchChange,
+    handleZoneChange,
+    handleYearChange,
+    handleClearFilters,
+  } = useUserFilters(users, () => setPageInUrl(1));
 
   // CALCULATION FOR PAGINATION
   const totalItems = filteredUsers.length;
@@ -83,7 +74,12 @@ export default function ListUser({
     return filteredUsers.slice(start, start + itemsPerPage);
   }, [filteredUsers, currentPage]);
 
-  // HANDLER DELETE USER
+  const docSummary = useMemo(
+    () => calculateDocumentCompletenessSummary(users),
+    [users],
+  );
+
+  // HANDLER DELETE USER (Tetap dipertahankan)
   const confirmDelete = async () => {
     if (!deleteTarget) return;
 
@@ -105,14 +101,7 @@ export default function ListUser({
     setDeleteError(null);
   };
 
-  // HANDLE CLEAR SEARCH AND FILTER WITH PAGE RESET
-  const handleClearSearch = () => {
-    setSearchQuery('');
-    setStatusFilter('Semua Status');
-    setPageInUrl(1); // RESET PAGE DIRECTLY ON CLEAR EVENT
-  };
-
-  // COLUMNS DEFINITION WITH INCLUDED DEPENDENCIES
+  // COLUMNS DEFINITION
   const columns = useMemo(
     () =>
       ListAdminUsersColumns({
@@ -127,12 +116,11 @@ export default function ListUser({
           navigate(`/admin/users/edit/${user.id}`);
         },
       }),
-    [setDeleteError, navigate], // INCLUDED SETDELETEERROR TO RESOLVE ESLINT WARNING
+    [setDeleteError, navigate],
   );
 
   const getPaginationPages = (currentPage, totalPages) => {
     const pages = [];
-
     for (let i = 1; i <= totalPages; i++) {
       if (
         i === 1 ||
@@ -147,56 +135,41 @@ export default function ListUser({
         pages.push('...');
       }
     }
-
     return pages;
   };
 
   const paginationPages = getPaginationPages(currentPage, totalPages);
-
   return (
-    <div className="min-h-screen bg-white w-[95%] md:w-[98%] mx-auto p-4 my-4 rounded-xl shadow-md">
-      <div className="space-y-6">
-        {/* FILTER, ADD NEW JAMAAH, AND SEARCH BAR */}
-        <section className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col items-stretch flex-1 max-w-2xl gap-3 sm:flex-row sm:items-center">
-            <SearcInput
-              placeHolder="Cari jamaah..."
+    <div className="min-h-screen">
+      <div className="space-y-6 w-[95%] md:w-[98%] mx-auto p-4 my-4 shadow-md rounded-xl">
+        {/* HEADER AREA: Inline Filter & Button Add */}
+        <section className="flex flex-col w-full gap-3 md:flex-row md:items-center md:justify-between">
+          <div className="w-full md:w-[70%]">
+            <SearchInput
+              placeHolder="Cari nama atau no. porsi..."
               searchQuery={searchQuery}
-              onChange={handleSearchChange}
+              onChange={(e) => handleSearchChange(e.target.value)}
             />
-
-            <div className="relative min-w-35">
-              <select
-                value={statusFilter}
-                onChange={handleFilterChange}
-                className="w-full py-2 pl-3 pr-8 text-sm bg-white border rounded-lg appearance-none cursor-pointer border-slate-200 text-slate-700 focus:outline-none focus:border-sea-green-600 focus:ring-1 focus:ring-teal-600"
-              >
-                <option value="Semua Status">Semua Status</option>
-                <option value="Aktif">Aktif</option>
-                <option value="Alumni">Alumni</option>
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none text-slate-400">
-                <IconFilter className="w-5 h-5" />
-              </div>
-            </div>
           </div>
 
           <Button
-            icon={<IconAdd />}
-            className="px-4 py-2 sm:w-auto"
+            className="flex items-center justify-center w-full gap-2 px-4 py-2 md:w-auto shrink-0"
             variant="primary"
-            type="button"
             to="/admin/users/create"
           >
-            Tambah Jamaah
+            <IconAdd className="w-5 h-5" />
+            <span>Tambah Jamaah</span>
           </Button>
         </section>
 
+        {/* UPDATE NEW PROVINCE QUOTA */}
+        <UpdateQuotaSection onRefresh={onRefresh} />
+
         {/* BASIC STATISTIC */}
-        <section className="grid grid-cols-2 gap-4 sm:max-w-md">
+        <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
           <StatisticContainer
-            label="Total Pengguna"
-            value={users.length.toLocaleString('id-ID')} // Menggunakan localUsers.length agar statistik terupdate
+            label="Total Jamaah"
+            value={users.length.toLocaleString('id-ID')}
             icon={IconPeople}
             bgClass="bg-emerald-300 border-emerald-200"
             shadowColorClass="hover:shadow-emerald-200/80"
@@ -207,20 +180,60 @@ export default function ListUser({
           />
 
           <StatisticContainer
-            label="Total Jamaah Aktif"
-            value={users.filter((user) => user.status === 'Aktif').length}
-            icon={IconOnline}
-            bgClass="bg-gradient-to-br from-sea-green-600 to-teal-800 border-transparent"
-            shadowColorClass="hover:shadow-teal-600/40"
+            label="Total Zona Aktif"
+            value={calculateUniqueZone(users)}
+            icon={IconLocation}
+            bgClass="bg-gradient-to-br from-orange-400 to-amber-500 border-transparent"
+            shadowColorClass="hover:shadow-orange-600/40"
             textColorClass="text-white"
-            labelColorClass="text-teal-100"
+            labelColorClass="text-white"
+            iconColorClass="text-white"
+            iconBgClass="bg-white/20 backdrop-blur-xs"
+          />
+
+          <StatisticContainer
+            label="Dokumen Lengkap"
+            value={`${docSummary.completePercentage}%`}
+            icon={IconDocument}
+            bgClass="bg-gradient-to-br from-blue-500 to-sky-600 border-transparent"
+            shadowColorClass="hover:shadow-blue-600/40"
+            textColorClass="text-white"
+            labelColorClass="text-white"
+            iconColorClass="text-white"
+            iconBgClass="bg-white/20 backdrop-blur-xs"
+          />
+
+          <StatisticContainer
+            label="Belum Lengkap"
+            value={`${docSummary.incompletePercentage}%`}
+            icon={IconTimeLapes}
+            bgClass="bg-gradient-to-br from-pink-500 to-rose-600 border-transparent"
+            shadowColorClass="hover:shadow-pink-600/40"
+            textColorClass="text-white"
+            labelColorClass="text-white"
             iconColorClass="text-white"
             iconBgClass="bg-white/20 backdrop-blur-xs"
           />
         </section>
 
+        {/* INLINE FILTERS BAR */}
+        <section className="w-full">
+          <InlineFilterBar
+            zoneFilter={zoneFilter}
+            onZoneChange={handleZoneChange}
+            yearFilter={yearFilter}
+            onYearChange={handleYearChange}
+            docFilters={docFilters}
+            onDocFilterChange={handleDocFilterChange}
+            uniqueZones={uniqueZones}
+            uniqueYears={uniqueYears}
+            isFilterActive={isFilterActive}
+            onClear={handleClearFilters}
+          />
+        </section>
+
         {/* TABLE */}
-        <section className="overflow-hidden bg-white border-none shadow-xs rounded-xl">
+        <section className="w-full min-w-0 overflow-hidden bg-white border-none shadow-xs rounded-xl">
           {isLoading ? (
             <SkeletonTableAdminUsers />
           ) : error ? (
@@ -253,10 +266,10 @@ export default function ListUser({
               </div>
               <button
                 type="button"
-                onClick={handleClearSearch}
+                onClick={handleClearFilters}
                 className="inline-flex items-center px-3 py-1.5 border border-slate-300 text-slate-700 bg-white hover:bg-slate-50 font-medium text-sm rounded-lg transition-colors cursor-pointer"
               >
-                Bersihkan pencarian
+                Bersihkan Filter & Pencarian
               </button>
             </div>
           ) : (
@@ -270,7 +283,6 @@ export default function ListUser({
             />
           )}
 
-          {/* PAGINATION FOOTER */}
           {/* PAGINATION FOOTER */}
           {currentData.length > 0 && (
             <footer className="flex items-center justify-between px-4 py-3 text-xs bg-white border-t border-slate-100 text-slate-500">
@@ -357,6 +369,14 @@ export default function ListUser({
         </section>
       </div>
 
+      {/* CHARTS */}
+      <div className="space-y-6 w-[95%] md:w-[98%] mx-auto p-4 mt-16 shadow-md rounded-xl">
+        <h2 className="pb-2 text-2xl font-bold border-b-2 w-fit border-b-slate-700 text-slate-700">
+          Statistik Administrasi
+        </h2>
+        <UserStatisticsSection users={users} />
+      </div>
+
       {/* DELETE MODAL */}
       {deleteTarget && (
         <Modal
@@ -373,7 +393,6 @@ export default function ListUser({
                 {deleteTarget?.name}
               </span>
               ? Data yang dihapus akan hilang permanen.
-              {/* Alert jika terjadi error dari Backend */}
               {deleteError && (
                 <span className="block p-2 mt-2 text-xs font-normal border rounded-lg bg-rose-50 text-rose-600 border-rose-200">
                   {deleteError}
@@ -384,7 +403,7 @@ export default function ListUser({
           buttonText={isDeleting ? 'Menghapus...' : 'Hapus'}
           buttonColor="bg-galliano-600 hover:bg-galliano-700 text-white disabled:opacity-50 cursor-pointer"
           onConfirm={confirmDelete}
-          isLoading={isDeleting} // Pastikan komponen Modal mendukung state loading ini
+          isLoading={isDeleting}
           showCancelButton={true}
           cancelButtonText="Batal"
         />

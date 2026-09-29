@@ -4,25 +4,26 @@ import {
 } from 'react-icons/md';
 import { FaRegEdit as IconEdit } from 'react-icons/fa';
 import ButtonsActionTable from '../../components/ui/global/ButtonsActionTable';
+import { StatusCellBedge } from '../../components/ui/global/StatusBedge';
 
 export const ListAdminUsersColumns = ({ onDelete, onViewDetail, onEdit }) => [
   {
-    key: 'name',
-    header: 'Nama User',
+    key: 'fullName',
+    header: 'Nama Jamaah',
     isSticky: true,
     render: (user) => {
-      const encodedName = encodeURIComponent(user.name);
+      const encodedName = encodeURIComponent(user.fullName);
       const avatarFallback = `https://ui-avatars.com/api/?name=${encodedName}&background=random&color=fff&bold=false`;
-      const avatarSrc = user.avatar || avatarFallback;
+      const avatarSrc = user.photoUrl || avatarFallback;
 
       return (
         <div className="flex items-center gap-3 min-w-32">
           <img
             src={avatarSrc}
-            alt={user.name}
+            alt={user.fullName}
             className="object-cover w-10 h-10 border rounded-full shrink-0 border-slate-200"
           />
-          <span className="font-base text-slate-900">{user.name}</span>
+          <span className="font-base text-slate-900">{user.fullName}</span>
         </div>
       );
     },
@@ -31,28 +32,89 @@ export const ListAdminUsersColumns = ({ onDelete, onViewDetail, onEdit }) => [
     key: 'portionNumber',
     header: 'Nomor Porsi',
     className: 'text-slate-600 whitespace-nowrap',
+    align: 'center',
   },
   {
-    key: 'phone',
-    header: 'Nomor Telepon',
+    key: 'zone',
+    header: 'Zona Wilayah',
     className: 'text-slate-600 whitespace-nowrap',
+    align: 'center',
   },
   {
-    key: 'status',
-    header: 'Status',
-    className: 'whitespace-nowrap',
-    render: (user) =>
-      user.status === 'Aktif' ? (
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200/60">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-          Aktif
-        </span>
-      ) : (
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 border border-slate-200/60">
-          <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-          Alumni
-        </span>
-      ),
+    key: 'statusPortion',
+    header: 'Status Porsi',
+    className: 'text-slate-600 whitespace-nowrap',
+    align: 'center',
+  },
+  {
+    key: 'statusGoogleForm',
+    header: 'G-Form',
+    className: 'text-slate-600 whitespace-nowrap',
+    align: 'center',
+    render: (user) => StatusCellBedge(user.statusGoogleForm),
+  },
+  {
+    key: 'statusPhoto',
+    header: 'Photo',
+    className: 'text-slate-600 whitespace-nowrap',
+    align: 'center',
+    render: (user) => StatusCellBedge(user.statusPhoto)
+  },
+  {
+    key: 'statusSpph',
+    header: 'SPPH',
+    className: 'text-slate-600 whitespace-nowrap',
+    align: 'center',
+    render: (user) => StatusCellBedge(user.statusSpph)
+  },
+  {
+    key: 'statusMutasi',
+    header: 'Mutasi',
+    className: 'text-slate-600 whitespace-nowrap',
+    align: 'center',
+    render: (user) => StatusCellBedge(user.statusMutasi)
+  },
+  {
+    key: 'statusBiometrik',
+    header: 'Biometrik',
+    className: 'text-slate-600 whitespace-nowrap',
+    align: 'center',
+    render: (user) => StatusCellBedge(user.statusBiometrik)
+  },
+  {
+    key: 'statusPuskesmas',
+    header: 'Puskesmas',
+    className: 'text-slate-600 whitespace-nowrap',
+    align: 'center',
+    render: (user) => StatusCellBedge(user.statusPuskesmas)
+  },
+  {
+    key: 'statusMCU',
+    header: 'MCU',
+    className: 'text-slate-600 whitespace-nowrap',
+    align: 'center',
+    render: (user) => StatusCellBedge(user.statusMCU)
+  },
+  {
+    key: 'statusPelunasan',
+    header: 'Pelunasan',
+    className: 'text-slate-600 whitespace-nowrap',
+    align: 'center',
+    render: (user) => StatusCellBedge(user.statusPelunasan)
+  },
+  {
+    key: 'statusPassport',
+    header: 'Passport',
+    className: 'text-slate-600 whitespace-nowrap',
+    align: 'center',
+    render: (user) => StatusCellBedge(user.statusPassport)
+  },
+  {
+    key: 'statusVisa',
+    header: 'Visa',
+    className: 'text-slate-600 whitespace-nowrap',
+    align: 'center',
+    render: (user) => StatusCellBedge(user.statusVisa)
   },
   {
     key: 'actions',

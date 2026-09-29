@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router';
 import { useAuth } from '../../../features/auth/useAuth';
 import { MdLogout as IconLogout } from 'react-icons/md';
+import { titleCase } from '../../../utils/helpers/TitleCase';
 const DEFAULT_PROFILE = {
   nama_lengkap: 'Guest User',
   role: 'guest',
@@ -13,7 +14,7 @@ export default function Header() {
 
   const encodedName = encodeURIComponent(profile.fullName);
   const uiAvatarUrl = `https://ui-avatars.com/api/?name=${encodedName}&background=random&color=fff&bold=true`;
-  const avatarSrc = profile.PhotoUrl || uiAvatarUrl;
+  const avatarSrc = profile.photoUrl || uiAvatarUrl;
 
   const handleLogout = () => {
     logout();
@@ -42,7 +43,7 @@ export default function Header() {
               Assalamualaikum,
             </span>
             <h1 className="font-medium leading-tight tracking-tight text-white truncate max-w-45 sm:max-w-60">
-              {profile.fullName}
+              {titleCase(profile.fullName)}
             </h1>
           </div>
         </div>

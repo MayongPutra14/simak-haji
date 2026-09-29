@@ -21,8 +21,9 @@ export const useUserManagement = () => {
     }
   };
 
-  const createBasicAccount = (formData) =>
-    executeRequest(api.createBasicAccount, formData);
+  const createBasicAccount = (formData) => {
+    return executeRequest(api.createBasicAccount, formData);
+  };
 
   const updateProfile = (userId, payload) => {
     if (!userId) {

@@ -1,8 +1,5 @@
 import ListUser from '../../../components/admin/ListUser.jsx';
-import TitlePage from '../../../components/ui/global/TitlePage.jsx';
-import { bgImage } from '../../../utils/helpers/bgImage.js';
 import useAdminUsersData from '../../../hooks/admin/user/useGetUsers';
-
 const ListUsersFragment = ({ user }) => {
   const { usersData, isLoading, error, refetch } = useAdminUsersData({
     adminId: user?.id,
@@ -10,13 +7,6 @@ const ListUsersFragment = ({ user }) => {
 
   return (
     <>
-      <TitlePage
-        title="Manajemen Pengguna"
-        subtitle="Lihat dan pantau seluruh daftar pengguna yang terdaftar di dalam sistem"
-        bgImage={bgImage.bgIstiqlal}
-        gradientClass="from-sea-green-800 via-sea-green-800/90 to-sea-green-500/75"
-      />
-
       <ListUser
         users={usersData}
         isLoading={isLoading}

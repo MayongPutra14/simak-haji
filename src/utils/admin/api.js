@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// const BASE_URL = 'http://localhost/simak_api/api/';
 const BASE_URL = 'https://simak-api.my.id/api';
 
 export const api = axios.create({
@@ -11,8 +12,8 @@ export const api = axios.create({
 
 export const getAdminUsersData = async () => {
   try {
-    const response = await api.post('admin_manage.php', {
-      action: 'get_users',
+    const response = await api.post('admin.php', {
+      action: 'get_users_list',
     });
 
     if (!response.data) {
@@ -49,6 +50,7 @@ export const createBasicAccount = async (formData) => {
       action: 'create_user',
       ...formData,
     };
+
     const response = await api.post('admin_manage.php', payload);
     if (
       response.data?.status === 'failed' ||
@@ -68,7 +70,6 @@ export const updateProfile = async (userId, payload) => {
   if (!userId || !payload) return null;
   try {
     const bodyPayload = {
-      usr_id: String(userId),
       user_id: String(userId),
       ...payload,
     };
@@ -94,7 +95,7 @@ export const updateDocuments = async (userId, payload) => {
     const bodyPayload = {
       user_id: userId,
       action: 'update_dokumen',
-      is_completed: 1,
+      isCompleted: 1,
       ...payload,
     };
 
@@ -162,3 +163,106 @@ export const updateUserProfile = async (userId, formData) => {
   }
 };
 
+export const createEventAPI = async (payload) => {
+  if (!payload) return null;
+
+  try {
+    const finalPayload = {
+      action: 'create_event',
+      ...payload,
+    };
+
+    const response = await api.post('admin_manage.php', finalPayload);
+    if (
+      response.data?.status === 'failed' ||
+      response.data?.status === 'error'
+    ) {
+      throw new Error(response.data?.message || 'Gagal membuat event baru');
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Error creating event:', error);
+    throw error;
+  }
+};
+
+export const getEventsAPI = async () => {
+  try {
+    const response = await api.post('admin_manage.php', {
+      action: 'get_events',
+    });
+
+    if (
+      response.data?.status === 'failed' ||
+      response.data?.status === 'error'
+    ) {
+      throw new Error(response.data?.message || 'Gagal mengambil data acara');
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Errror Occurred wWhen Fecthing Event Data');
+    throw error;
+  }
+};
+
+export const getEventDetailAPI = async (eventId) => {
+  if (!eventId) return null;
+
+  try {
+    const response = await api.post('admin_manage.php', {
+      event_id: Number(eventId),
+      action: 'get_event_detail',
+    });
+
+    if (
+      response.data?.status === 'failed' ||
+      response.data?.status === 'error'
+    ) {
+      throw new Error(response.data?.message || 'Event tidak di temukan');
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Error occured when fetchin event data');
+    throw error;
+  }
+};
+
+export const updateQuotaProvince = async (payload) => {
+  if (!payload)
+    return {
+      status: 'failed',
+      message: 'Jumlah kuota tidak ada, pastikan anda meberikan nilainya',
+    };
+
+  try {
+    const bodyPayload = {
+      action: 'update_kuota',
+      ...payload,
+    };
+
+    const response = await api.post('admin.php', bodyPayload);
+    if (
+      response.data?.status === 'failed' ||
+      response.data?.status === 'error'
+    ) {
+      return {
+        status: 'failed',
+        message: response.data?.message || 'Update kuota provinsi gagal',
+      };
+    }
+
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message | 'Terjadi kesalahan pada server';
+
+    return {
+      status: 'error',
+      message: errorMessage,
+    };
+  }
+};

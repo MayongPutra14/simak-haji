@@ -1,5 +1,6 @@
 import AdminHome from './Home';
 import AdminLayout from '../../layouts/AdminLayout';
+import AdminProfilePage from './AdminProfilePage';
 import CreateUserPage from './users/CreateUserPage';
 import ListUsersPage from './users/ListUsersPage';
 import UserDetailPage from './users/UserProfileDetailPage';
@@ -12,6 +13,7 @@ import EditEventPage from './events/EditEventPage';
 export {
   AdminHome,
   AdminLayout,
+  AdminProfilePage,
   CreateUserPage,
   ListUsersPage,
   UserDetailPage,
