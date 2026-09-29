@@ -2,7 +2,7 @@ import SimakLogo from '../../../assets/images/simak-logo.webp';
 
 const LogoSimak = ({ title, subtitle }) => {
   return (
-    <div className="flex items-center justify-center py-8 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-center py-6 sm:px-6 lg:px-8">
       <header className="w-full text-center">
         {/* Logo */}
         <img
