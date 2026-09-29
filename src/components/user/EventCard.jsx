@@ -6,7 +6,7 @@ import {
 import {
   getAttendanceStatus,
   getEventStatus,
-} from '../../utils/helpers/statusInEnvent';
+} from '../../utils/helpers/status';
 import {
   IoTimeOutline as IconClock,
   IoCalendarClearOutline as IconCalendar,

@@ -4,36 +4,43 @@ import {
 } from 'react-icons/md';
 import { FaRegEdit as IconEdit } from 'react-icons/fa';
 import ButtonsActionTable from '../../components/ui/global/ButtonsActionTable';
+import { formatDateIndonesia } from '../../utils/helpers/dateConversion';
 
 export const ListAdminEventColumns = ({ onDelete, onViewDetail, onEdit }) => [
   {
-    key: 'nama_event',
+    key: 'eventName',
     header: 'Nama Event',
     isSticky: true,
     render: (event) => (
       <div className="flex items-center gap-3 min-w-32">
-        <span className="font-medium text-slate-900">{event.nama_event}</span>
+        <span className="font-medium text-slate-900">{event.eventName}</span>
       </div>
     ),
   },
   {
-    key: 'tempat',
+    key: 'venue',
     header: 'Lokasi / Tempat',
     className: 'text-slate-600 whitespace-nowrap',
-    render: (event) => event.tempat || '-',
+    render: (event) => event.venue || '-',
   },
   {
-    key: 'pembicara',
+    key: 'speaker',
     header: 'Pembicara',
     className: 'text-slate-600 whitespace-nowrap',
-    render: (event) => event.pembicara || '-',
+    render: (event) => event.speaker || '-',
   },
   {
-    key: 'jenis_event',
+    key: 'date',
+    header: 'Tanggal',
+    className: 'text-slate-600 whitespace-nowrap',
+    render: (event) => formatDateIndonesia(event.eventTime) || '-',
+  },
+  {
+    key: 'eventType',
     header: 'Jenis Event',
     className: 'whitespace-nowrap',
     render: (event) =>
-      event.jenis_event === 'umum' ? (
+      event.eventType === 'umum' ? (
         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200/60">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
           Umum

@@ -9,7 +9,7 @@ import {
   InputSelect,
 } from '../../ui/inputs/index';
 
-export default function CreateEvent() {
+export default function CreateEvent({ onSubmit }) {
   const {
     register,
     handleSubmit,
@@ -19,10 +19,9 @@ export default function CreateEvent() {
     resolver: zodResolver(EventSchemas.EventSchema),
   });
 
-  const handleOnSubmit = () => {};
   return (
     <div className="w-[95%] md:w-[98%]  p-6 mx-auto mt-5 bg-white border shadow-sm md:p-8 rounded-xl border-slate-200">
-      <form onSubmit={handleSubmit(handleOnSubmit)} className="space-y-10">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
         <div className="space-y-4">
           <h2 className="bg-sea-green-50 text-sea-green-700 px-4 py-2.5 rounded-lg font-semibold text-md md:text-xl">
             Informasi Acara
@@ -40,8 +39,8 @@ export default function CreateEvent() {
             <InputText
               label="Deskripsi Acara"
               placeholder=" Pembahasan tata cara ihram, fiqih wanita saat haji, dan tips menjaga kesehatan."
-              error={errors.eventName?.message}
-              {...register('eventName')}
+              error={errors.description?.message}
+              {...register('description')}
             />
 
             {/* LOCATION */}
@@ -52,12 +51,12 @@ export default function CreateEvent() {
               {...register('venue')}
             />
 
-            {/* LOCATION */}
+            {/* SPEAKER */}
             <InputText
               label="Pembicara"
               placeholder="Masjid Agung Karawang"
-              error={errors.venue?.message}
-              {...register('venue')}
+              error={errors.speaker?.message}
+              {...register('speaker')}
             />
 
             {/* EVENT CATEGORY */}
