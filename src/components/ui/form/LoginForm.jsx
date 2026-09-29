@@ -7,7 +7,7 @@ import { loginSchema } from '../../../utils/helpers/loginSchema';
 import Button from '../global/Button.jsx';
 import { LuIdCard as IconIdCard, LuLock as IconLock } from 'react-icons/lu';
 
-const LoginForm = ({ onSubmit }) => {
+export default function LoginForm({ onSubmit }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -21,13 +21,13 @@ const LoginForm = ({ onSubmit }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-center gap-4 bg-white w-[90%] max-w-md mx-auto p-6 rounded-2xl"
+      className="flex flex-col justify-center gap-4 bg-slate-900/40 backdrop-blur-xl border border-white/20 p-6 sm:p-8 rounded-3xl shadow-2xl shadow-black/50 w-full max-w-md mx-auto"
     >
       <InputLogin
         label="Nomor Porsi"
         type="number"
         placeholder="1000623881"
-        leftIcon={<IconIdCard />}
+        leftIcon={<IconIdCard className="text-emerald-300" />}
         error={errors.porsiNumber?.message}
         {...register('porsiNumber')}
       />
@@ -36,44 +36,47 @@ const LoginForm = ({ onSubmit }) => {
         label="Password"
         type={showPassword ? 'text' : 'password'}
         placeholder="✱✱✱✱✱✱"
-        leftIcon={<IconLock />}
+        leftIcon={<IconLock className="text-emerald-300" />}
         error={errors.password?.message}
         {...register('password')}
       />
 
       {/* TOGGLE PASSWORD */}
-      <div className="flex items-center gap-2 mb-4 -mt-1">
+      <div className="flex items-center gap-2.5 my-1">
         <input
           type="checkbox"
           id="showPassword"
           checked={showPassword}
           onChange={(event) => setShowPassword(event.target.checked)}
-          className="w-4 h-4 rounded cursor-pointer accent-sea-green-700"
+          className="w-4 h-4 rounded cursor-pointer accent-emerald-500 bg-white/20 border-white/30 focus:ring-2 focus:ring-emerald-400 focus:ring-offset-0"
         />
         <label
           htmlFor="showPassword"
-          className="text-sm cursor-pointer select-none text-slate-600"
+          className="text-sm cursor-pointer select-none text-slate-200 hover:text-white transition-colors"
         >
           Tampilkan Password
         </label>
       </div>
 
-      <Button type="submit" variant="primary" isLoading={isSubmitting}>
+      <Button
+        type="submit"
+        variant="primary"
+        isLoading={isSubmitting}
+        className="w-full mt-2 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl shadow-lg shadow-emerald-950/50 transition-all duration-200 active:scale-[0.98]"
+      >
         {isSubmitting ? 'Mengecek...' : 'Masuk'}
       </Button>
 
       {/* LINK TO REGISTER */}
-      <div className="mt-6 text-sm text-center text-gray-600">
+      <div className="mt-4 text-sm text-center text-slate-300">
         Belum punya akun?{' '}
         <Link
           to="/register"
-          className="font-semibold underline text-sea-green-600"
+          className="font-semibold text-emerald-400 hover:text-emerald-300 underline underline-offset-4 transition-colors"
         >
           Daftar Sekarang
         </Link>
       </div>
     </form>
   );
-};
-
-export default LoginForm;
+}

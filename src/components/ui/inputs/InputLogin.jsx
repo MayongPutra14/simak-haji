@@ -5,7 +5,7 @@ const InputLogin = React.forwardRef(
     return (
       <div className="flex flex-col gap-1.5 w-full">
         {label && (
-          <label className="font-medium cursor-pointer text-slate-900">
+          <label className="font-medium cursor-pointer text-white">
             {label}
           </label>
         )}
@@ -23,7 +23,7 @@ const InputLogin = React.forwardRef(
             type={type}
             placeholder={placeholder}
             autoComplete="off"
-            className={`w-full  py-2 border rounded-lg outline-none transition-colors duration-200 placeholder:text-slate-300 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${leftIcon ? 'pl-8' : 'pl-3'} ${error ? 'border-red-500 focus:border-red-600' : 'border-gray-500 focus:ring-2 focus:ring-sea-green-700'}`}
+            className={`w-full  py-2 border rounded-lg outline-none transition-colors duration-200 text-white placeholder:text-slate-300 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${leftIcon ? 'pl-8' : 'pl-3'} ${error ? 'border-red-500 focus:border-red-600' : 'border-gray-500 focus:ring-2 focus:ring-sea-green-700'}`}
             {...props}
           />
         </div>
