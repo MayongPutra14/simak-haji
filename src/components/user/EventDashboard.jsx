@@ -5,10 +5,7 @@ import {
   formatDateIndonesia,
   formatTimeIndonesia,
 } from '../../utils/helpers/dateConversion';
-import {
-  getButtonLabel,
-  getStatusConfig,
-} from '../../utils/helpers/statusInEnvent';
+import { getButtonLabel, getStatusConfig } from '../../utils/helpers/status';
 import {
   IoTimeOutline as IconClock,
   IoCalendarClearOutline as IconCalendar,

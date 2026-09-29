@@ -2,7 +2,7 @@ import TitlePage from '../../../components/ui/global/TitlePage';
 import { bgImage } from '../../../utils/helpers/bgImage';
 import CreateEvent from '../../../components/admin/events/CreateEvent';
 
-export default function CreateEventFragment() {
+export default function CreateEventFragment({ onSubmit }) {
   return (
     <>
       <TitlePage
@@ -11,7 +11,7 @@ export default function CreateEventFragment() {
         bgImage={bgImage.bgIstiqlal}
       />
 
-      <CreateEvent />
+      <CreateEvent onSubmit={onSubmit} />
     </>
   );
 }

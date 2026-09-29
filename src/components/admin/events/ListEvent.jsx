@@ -14,6 +14,7 @@ import {
   MdOutlineArrowDropDown as IconFilter,
   MdOutlineNavigateNext as IconNav,
   MdPeople as IconPeople,
+  MdOutlineFolderSpecial as IconSpecial,
 } from 'react-icons/md';
 import { IoWarningOutline as IconWarning } from 'react-icons/io5';
 
@@ -50,14 +51,14 @@ export default function ListEvents({
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
       const matchesSearch =
-        event.nama_event?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        event.tempat?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        event.pembicara?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        event.eventName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        event.venue?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        event.speaker?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         String(event.id || '').includes(searchQuery);
 
       const matchesJenis =
         jenisFilter === 'Semua Jenis' ||
-        event.jenis_event?.toLowerCase() === jenisFilter.toLowerCase();
+        event.eventType?.toLowerCase() === jenisFilter.toLowerCase();
 
       return matchesSearch && matchesJenis;
     });
@@ -159,7 +160,7 @@ export default function ListEvents({
         </section>
 
         {/* BASIC STATISTIC */}
-        <section className="grid grid-cols-2 gap-4 sm:max-w-md">
+        <section className="grid grid-cols-3 gap-4 ">
           <StatisticContainer
             label="Total Event"
             value={events.length.toLocaleString('id-ID')}
@@ -174,12 +175,24 @@ export default function ListEvents({
 
           <StatisticContainer
             label="Event Umum"
-            value={events.filter((e) => e.jenis_event === 'umum').length}
+            value={events.filter((e) => e.eventType === 'umum').length}
             icon={IconOnline}
             bgClass="bg-gradient-to-br from-sea-green-600 to-teal-800 border-transparent"
             shadowColorClass="hover:shadow-teal-600/40"
             textColorClass="text-white"
             labelColorClass="text-teal-100"
+            iconColorClass="text-white"
+            iconBgClass="bg-white/20 backdrop-blur-xs"
+          />
+
+          <StatisticContainer
+            label="Event Khusus"
+            value={events.filter((e) => e.eventType === 'zona').length}
+            icon={IconSpecial}
+            bgClass="bg-gradient-to-br from-violet-600 to-indigo-800 transition-all duration-300 hover:brightness-110"
+            shadowColorClass="hover:shadow-violet-600/40"
+            textColorClass="text-white"
+            labelColorClass="text-violet-200"
             iconColorClass="text-white"
             iconBgClass="bg-white/20 backdrop-blur-xs"
           />

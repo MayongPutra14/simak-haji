@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { useParams } from 'react-router';
 import { MdOutlineDriveFileRenameOutline as IconName } from 'react-icons/md';
 import {
   formatDateIndonesia,
@@ -19,26 +17,19 @@ import {
 } from 'react-icons/io5';
 
 // run this component with dummy event detail data
-export default function DetailEvent() {
-  const { id } = useParams();
+export default function DetailEvent({ eventData, isLoading }) {
+  if (isLoading) {
+    return <p>Memuat detail acara...</p>; // Atau gunakan Spinner/Skeleton
+  }
 
-  // dummy event detail data structure based on your json format
-  const [eventData] = useState({
-    id: id || 1,
-    nama_event: 'Manasik Haji Akbar',
-    tempat: 'Asrama Haji Pondok Gede',
-    pembicara: 'KH. Abdullah',
-    jenis_event: 'umum',
-    zona_target: null,
-    waktu_event: '2026-09-01 08:00:00',
-    latitude: -6.28456,
-    longitude: 106.90123,
-    radius: 150,
-  });
+  // 2. Cegah error jika data belum ada/null
+  if (!eventData) {
+    return <p>Data event tidak ditemukan.</p>;
+  }
 
   // date and time formatting helpers
-  const eventTime = formatTimeIndonesia(eventData.waktu_event);
-  const eventDate = formatDateIndonesia(eventData.waktu_event);
+  const eventTime = formatTimeIndonesia(eventData.eventTime);
+  const eventDate = formatDateIndonesia(eventData.eventTime);
   // date formatting helper fallback
   return (
     <div className="min-h-screen pt-4 w-[95%] mx-auto space-y-6 bg-slate-50 md:w-[98%]">

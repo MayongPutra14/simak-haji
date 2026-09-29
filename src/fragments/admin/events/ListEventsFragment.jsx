@@ -1,10 +1,8 @@
 import ListEvents from '../../../components/admin/events/ListEvent';
 import TitlePage from '../../../components/ui/global/TitlePage';
 import { bgImage } from '../../../utils/helpers/bgImage';
-import dummyAdminEvent from '../../../utils/helpers/dummyAdminEvent.json';
 
-export default function ListEventsFragment() {
-  const dummyData = dummyAdminEvent.data;
+export default function ListEventsFragment({ events }) {
   return (
     <>
       <TitlePage
@@ -14,7 +12,7 @@ export default function ListEventsFragment() {
         isMirror={true}
       />
 
-      <ListEvents events={dummyData} />
+      <ListEvents events={events} />
     </>
   );
 }

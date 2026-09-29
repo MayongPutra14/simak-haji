@@ -3,7 +3,7 @@ import TitlePage from '../../../components/ui/global/TitlePage';
 import DetailEvent from '../../../components/admin/events/DetailEvent';
 import BackButton from '../../../components/ui/global/BackButton';
 
-export default function DetailEventFragment() {
+export default function DetailEventFragment({ eventData, isLoading }) {
   return (
     <>
       <BackButton />
@@ -13,7 +13,7 @@ export default function DetailEventFragment() {
         subtitle="Menampilkan nama program, jadwal pelaksanaan, serta titik pemetaan lokasi kegiatan seminar atau pelatihan Haji untuk kebutuhan monitoring admin."
       />
 
-      <DetailEvent />
+      <DetailEvent eventData={eventData} isLoading={isLoading} />
     </>
   );
 }
