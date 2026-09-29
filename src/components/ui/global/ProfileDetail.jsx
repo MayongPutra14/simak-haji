@@ -3,7 +3,7 @@ import { move } from '@dnd-kit/helpers';
 import { DragDropProvider } from '@dnd-kit/react';
 import { SortableCard } from './SortableCard';
 import UpdatePasswordCard from '../inputs/UpdatePasswordCard';
-import { titleCase } from '../../../utils/helpers/TitleCase';
+import { titleCase } from '../../../utils/helpers/titleCase';
 import { useAuth } from '../../../features/auth/useAuth';
 import { getDocumentStatus } from '../../../utils/helpers/status';
 import { StatusBadge } from './StatusBedge';
