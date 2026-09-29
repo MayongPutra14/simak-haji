@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import * as UpdateUserSchema from '../../utils/admin/createUserSchema';
 import { MdCameraAlt as IconCamera } from 'react-icons/md';
 import Button from '../ui/global/Button';
@@ -8,12 +8,14 @@ import {
   InputNumber,
   InputSelect,
   InputDate,
+  InputSearchSelect,
 } from '../ui/inputs/index';
 
 export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     values: initialData
@@ -116,8 +118,8 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
         <div className="relative group">
           <img
             src={
-              previewImage||
-              initialData?.PhotoUrl ||
+              previewImage ||
+              initialData?.photoUrl ||
               'https://i.pinimg.com/736x/11/46/dc/1146dc1a7b950533b67192e623c339ce.jpg'
             }
             alt="Profile Preview"
@@ -146,6 +148,7 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
 
         {/* Hero Card Inputs: name & Main Portion */}
         <div className="flex-1 w-full space-y-3">
+          {/* FULL NAME */}
           <div>
             <InputText
               label="Nama Lengkap Jamaah"
@@ -157,6 +160,7 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
             />
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {/* MAIN PORTION NUMBER */}
             <div>
               <InputText
                 label="Nomor Porsi Utama"
@@ -167,14 +171,37 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
                 {...register('portionNumber')}
               />
             </div>
+            {/* PORTION STATUS */}
             <div>
               <InputText
-                label="Status Porsi Utama"
+                label="Status Porsi"
                 isLabelGreen={true}
                 variant="green"
-                placeholder="2026"
-                error={errors.currPorsionPosition?.message}
-                {...register('currPorsionPosition')}
+                placeholder="2027"
+                error={errors.currPortionStatus?.message}
+                {...register('currPortionStatus')}
+              />
+            </div>
+            {/* PASSPORT */}
+            <div>
+              <InputText
+                label="Passport"
+                isLabelGreen={true}
+                variant="green"
+                placeholder="XI34523532"
+                error={errors.passport?.message}
+                {...register('passport')}
+              />
+            </div>
+            {/* VISA */}
+            <div>
+              <InputText
+                label="Visa"
+                isLabelGreen={true}
+                variant="green"
+                placeholder="TI32145135"
+                error={errors.visa?.message}
+                {...register('visa')}
               />
             </div>
           </div>
@@ -203,14 +230,23 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
             />
 
             {/* BIRTH PLACE */}
-            <InputSelect
-              label="Tempat/Kota Kelahiran"
-              isLabelFade={true}
-              placeholder="-- Pilih Kota --"
-              variant="editProfile"
-              options={UpdateUserSchema.cityOptions}
-              error={errors.birthPlace?.message}
-              {...register('birthPlace')}
+            <Controller
+              name="birthPlace"
+              control={control}
+              rules={{ required: 'Tempat lahir wajib di isi' }}
+              render={({ field: { onChange, value, ref } }) => (
+                <InputSearchSelect
+                  label="Tempat Kelahiran"
+                  isLabelFade={true}
+                  placeholder="- Ketik atau pilih kota -"
+                  variant="editProfile"
+                  options={UpdateUserSchema.cityOptions}
+                  error={errors.birthPlace?.message}
+                  value={value}
+                  onChange={onChange}
+                  selectRef={ref}
+                />
+              )}
             />
 
             {/* BIRTH DATE */}
@@ -284,24 +320,14 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
             </h2>
           </div>
           <div className="grid grid-cols-1 space-y-3 sm:grid-cols-3 gap-x-3">
-            {/* STATUS PORTION BACK UP */}
-            <InputNumber
-              label="Nomor Porsi Cadangan"
-              isLabelFade={true}
-              variant="editProfile"
-              placeholder="33457"
-              error={errors.currPorsionPositionBackup?.message}
-              {...register('currPorsionPositionBackup')}
-            />
-
-            {/* STATUS PORTION BACK UP */}
+            {/* PLOT NUMBER BACK UP */}
             <InputText
-              label="Status Porsi Cadangan"
+              label="Posisi Porsi Saat Ini"
               isLabelFade={true}
               variant="editProfile"
-              placeholder="Cadangan 1"
-              error={errors.currPorstionStatusBackup?.message}
-              {...register('currPorstionStatusBackup')}
+              placeholder="D15"
+              error={errors.currPortionPosition?.message}
+              {...register('currPortionPosition')}
             />
 
             {/* ZONE */}
@@ -315,7 +341,7 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
               {...register('zone')}
             />
 
-            {/* STATUS PORTION BACK UP */}
+            {/* PLOT NUMBER BACK UP */}
             <InputText
               label="Nomor PLOT"
               isLabelFade={true}
@@ -469,8 +495,8 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
               placeholder=""
               withCard={true}
               options={UpdateUserSchema.statusControlProcessOptions}
-              error={errors.passport?.message}
-              {...register('passport')}
+              error={errors.statusPassport?.message}
+              {...register('statusPassport')}
             />
 
             {/* VISA */}
@@ -481,8 +507,8 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
               placeholder=""
               withCard={true}
               options={UpdateUserSchema.statusControlProcessOptions}
-              error={errors.visa?.message}
-              {...register('visa')}
+              error={errors.statusVisa?.message}
+              {...register('statusVisa')}
             />
           </div>
         </div>
@@ -565,14 +591,14 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
             </h2>
           </div>
           <div className="space-y-3 ">
-            {/* DEAPATURE PROGRAM */}
+            {/* DEPARTURE PROGRAM */}
             <InputText
               label="Program Keberangkatan"
               isLabelFade={true}
               variant="editProfile"
               placeholder="Reguler"
-              error={errors.depature?.message}
-              {...register('depature')}
+              error={errors.departure?.message}
+              {...register('departure')}
             />
 
             {/* EXPERIENCE */}

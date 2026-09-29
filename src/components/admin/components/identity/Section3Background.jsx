@@ -33,13 +33,13 @@ export default function Section3Background() {
           {...register('education')}
         />
 
-        {/* DEPATURE PROGRAM */}
+        {/* DEPARTURE PROGRAM */}
         <InputText
           label="Program Keberangkatan"
           placeholder="Reguler"
           required={true}
-          error={errors.depature?.message}
-          {...register('depature')}
+          error={errors.departure?.message}
+          {...register('departure')}
         />
 
         {/* HAJJ EXPERIENCE */}
@@ -52,7 +52,7 @@ export default function Section3Background() {
           {...register('experience')}
         />
 
-        {/* DEPATURE PROGRAM */}
+        {/* COMPANION PROGRAM */}
         <InputText
           label="Berangkat Bersama Siapa"
           placeholder="Saudara Kandung"

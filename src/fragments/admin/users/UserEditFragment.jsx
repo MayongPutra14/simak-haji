@@ -2,8 +2,6 @@ import { useNavigate, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import useEditUser from '../../../hooks/admin/user/useEdiUser';
 import EditUser from '../../../components/admin/EditUser';
-import TitlePage from '../../../components/ui/global/TitlePage';
-import { bgImage } from '../../../utils/helpers/bgImage';
 import Modal from '../../../components/ui/global/Modal';
 import { IoCloseOutline as IconClose } from 'react-icons/io5';
 
@@ -72,13 +70,6 @@ export default function UserEditFragment() {
 
   return (
     <>
-      <TitlePage
-        bgImage={bgImage.bgIstiqlal}
-        title="Perbarui Profil Jamaah"
-        subtitle="Mohon periksa kembali seluruh data yang telah dimasukkan. Pastikan nama, nomor porsi, dan informasi lainnya sudah sesuai dengan paspor atau SPPH untuk menghindari kesalahan saat proses keberangkatan."
-        gradientClass="from-sea-green-800 via-sea-green-800/90 to-sea-green-500/75"
-      />
-
       <EditUser
         initialData={initialData}
         onSave={handleSave}

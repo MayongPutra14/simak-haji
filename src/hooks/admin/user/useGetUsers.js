@@ -13,15 +13,7 @@ export default function useAdminUsersData({ adminId } = {}) {
     try {
       const response = await getAdminUsersData();
       if (response?.status === 'success') {
-        const formattedData = (response.data || []).map((user) => ({
-          id: user.id,
-          avatar: user.PhotoUrl,
-          name: user.fullName,
-          portionNumber: user.portionNumber,
-          phone: user.PhoneNumber,
-          status: user.status === 'aktif' ? 'Aktif' : 'Alumni',
-        }));
-        setUsersData(formattedData);
+        setUsersData(response.data);
       }
     } catch (err) {
       setError(err?.message || 'Gagal mengambil data jamaah');
@@ -44,15 +36,7 @@ export default function useAdminUsersData({ adminId } = {}) {
         const response = await getAdminUsersData();
         // ONLY UPDATE WHEN USER STILL ACTIVE (subscribed)
         if (isSubscribed && response?.status === 'success') {
-          const formattedData = (response.data || []).map((user) => ({
-            id: user.id,
-            avatar: user.PhotoUrl,
-            name: user.fullName,
-            portionNumber: user.portionNumber,
-            phone: user.PhoneNumber,
-            status: user.status === 'aktif' ? 'Aktif' : 'Alumni',
-          }));
-          setUsersData(formattedData);
+          setUsersData(response.data);
         }
       } catch (err) {
         if (isSubscribed) {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost/simak_api/api/';
-// const BASE_URL = 'https://simak-api.my.id/api';
+// const BASE_URL = 'http://localhost/simak_api/api/';
+const BASE_URL = 'https://simak-api.my.id/api';
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -12,8 +12,8 @@ export const api = axios.create({
 
 export const getAdminUsersData = async () => {
   try {
-    const response = await api.post('admin_manage.php', {
-      action: 'get_users',
+    const response = await api.post('admin.php', {
+      action: 'get_users_list',
     });
 
     if (!response.data) {
@@ -50,6 +50,7 @@ export const createBasicAccount = async (formData) => {
       action: 'create_user',
       ...formData,
     };
+
     const response = await api.post('admin_manage.php', payload);
     if (
       response.data?.status === 'failed' ||
@@ -170,8 +171,6 @@ export const createEventAPI = async (payload) => {
       action: 'create_event',
       ...payload,
     };
-
-    console.table(finalPayload);
 
     const response = await api.post('admin_manage.php', finalPayload);
     if (

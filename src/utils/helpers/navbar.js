@@ -39,7 +39,7 @@ export default function getNavItems(role) {
     profile: {
       id: 'profile',
       label: 'Profil',
-      path: role === 'admin' ? '/maintenance' : '/user/profile',
+      path: role === 'admin' ? '/admin/profile' : '/user/profile',
       IconOutline: IconPersonOutline,
       IconFill: IconPersonFill,
     },

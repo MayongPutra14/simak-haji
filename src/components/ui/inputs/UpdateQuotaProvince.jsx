@@ -4,6 +4,7 @@ import Button from '../global/Button';
 import { InputNumber } from '.';
 import { updateQuotaProvince } from '../../../utils/admin/api';
 import Modal from '../global/Modal';
+import { MdUpdate as IconUpdate } from 'react-icons/md';
 import {
   IoCloseOutline as IconClose,
   IoCheckmark as IconCheck,
@@ -85,7 +86,7 @@ export const UpdateQuotaSection = ({ onRefresh }) => {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-3 sm:justify-start"
       >
-        <div className="md:w-[50%]">
+        <div className="md:max-w-md">
           <InputNumber
             label="Update Kuota Haji "
             placeholder="27890"
@@ -101,9 +102,10 @@ export const UpdateQuotaSection = ({ onRefresh }) => {
           type="submit"
           variant="secondary"
           isLoading={isSubmitting}
-          className="md:w-[50%]"
+          className="flex items-center md:max-w-md"
         >
-          Update
+          <IconUpdate className="w-5 h-5 " />
+          Update Kuota
         </Button>
       </form>
 

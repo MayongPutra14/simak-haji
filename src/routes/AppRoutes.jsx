@@ -15,13 +15,15 @@ import {
 
 // ADMIN
 import {
-  // USER MANAGEMENT
   AdminHome,
   AdminLayout,
+  AdminProfilePage,
+  // USER MANAGEMENT
   CreateUserPage,
   ListUsersPage,
   UserDetailPage,
   UserEditPage,
+  // EVENT MANAGEMENT
   CreateEventPage,
   ListEventsPage,
   DetailEventPage,
@@ -49,6 +51,7 @@ export default function AppRoutes() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="home" replace />} />
           <Route path="home" element={<AdminHome />} />
+          <Route path="profile" element={<AdminProfilePage />} />
 
           {/* CRUD USER */}
           <Route path="users">
