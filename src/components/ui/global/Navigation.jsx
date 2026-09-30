@@ -21,7 +21,7 @@ export default function Navigation({ role = 'user' }) {
               className="object-contain w-10 h-10 shrink-0"
             />
             <div>
-              <h1 className="text-base font-bold leading-tight text-white">
+              <h1 className=" font-bold leading-tight text-white">
                 {role === 'admin' ? 'SIMAK Admin' : 'SIMAK Jamaah'}
               </h1>
             </div>
@@ -71,7 +71,7 @@ function SidebarNavItem({ item }) {
       to={path}
       end={isExact}
       className={({ isActive }) => `
-        flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 text-sm font-base
+        flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 text-sm 
         ${
     isActive
       ? 'bg-linear-to-r from-sea-green-600 to-sea-green-400 text-white shadow-lg shadow-sea-green-950/50 scale-[1.02]'
@@ -108,7 +108,7 @@ function LogoutNavItem() {
   return (
     <button
       onClick={handleLogout}
-      className="flex items-center w-full gap-3 px-4 py-3 text-sm text-left text-red-400 transition-all duration-200 cursor-pointer font-base rounded-xl hover:bg-red-500/10 hover:text-red-300 active:bg-linear-to-r active:from-red-600 active:to-red-500 active:text-white group"
+      className="flex items-center w-full gap-3 px-4 py-3 text-sm text-left text-red-400 transition-all duration-200 cursor-pointer  rounded-xl hover:bg-red-500/10 hover:text-red-300 active:bg-linear-to-r active:from-red-600 active:to-red-500 active:text-white group"
     >
       <IoLogOutOutline className="w-5 h-5 text-red-400 transition-colors group-active:text-white" />
       <span>Keluar</span>
@@ -150,7 +150,7 @@ function StandardNavItem({ item }) {
               className={`text-[11px] tracking-tight mt-0.5 leading-tight ${
                 isActive
                   ? 'font-medium text-white'
-                  : 'font-base text-sea-green-300'
+                  : ' text-sea-green-300'
               }`}
             >
               {label}
