@@ -164,26 +164,59 @@ export const updateUserProfile = async (userId, formData) => {
 };
 
 export const createEventAPI = async (payload) => {
-  if (!payload) return null;
+  if (!payload)
+    return {
+      status: 'failed',
+      message:
+        'Tidak dapat membuat event, pastikan data event terisi dengan baik.',
+    };
 
   try {
-    const finalPayload = {
-      action: 'create_event',
-      ...payload,
-    };
+    let finalPayload;
+
+    // IF PAYLOAD IS formData (THERE IS A FILE)
+    if (payload instanceof FormData) {
+      finalPayload = payload;
+      // ADD ACTION
+      if (!finalPayload.has('action')) {
+        finalPayload.append('action', 'create_event');
+      }
+    } else {
+      // FALLBACK IF DATA IS JSON
+      finalPayload = {
+        action: 'create_event',
+        ...payload,
+      };
+    }
+
+    console.log(
+      '=============== THIS IS DATA FROM CREATE EVENT API ===================',
+    );
+    console.table(finalPayload);
 
     const response = await api.post('admin_manage.php', finalPayload);
     if (
       response.data?.status === 'failed' ||
       response.data?.status === 'error'
     ) {
-      throw new Error(response.data?.message || 'Gagal membuat event baru');
+      return {
+        status: 'failed',
+        message:
+          response.data?.message || 'Gagal membaut event. Silahkan coba lagi',
+      };
     }
 
     return response.data;
   } catch (error) {
-    console.error('Error creating event:', error);
-    throw error;
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      'Terjadi kesalahan pada server';
+
+    return {
+      status: 'error',
+      message: errorMessage,
+    };
   }
 };
 

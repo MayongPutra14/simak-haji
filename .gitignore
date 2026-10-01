@@ -29,3 +29,4 @@ zoba.js
 *.env
 db.json
 api_docs
+!example.env
