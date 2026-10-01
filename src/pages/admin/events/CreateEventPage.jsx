@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import CreateEventFragment from '../../../fragments/admin/events/CreateEventFragment';
 import Modal from '../../../components/ui/global/Modal';
-// import { useEventManagement } from '../../../hooks/admin/event/useEventManagement';
+import { useCreateEvent } from '../../../hooks/admin/event/useCreateEvent';
 import {
   IoCloseOutline as IconClose,
   IoCheckmark as IconCheck,
@@ -10,7 +10,7 @@ import {
 
 export default function CreateEventPage() {
   const navigate = useNavigate();
-  // const { executeCreateEvent } = useEventManagement();
+  const { executeCreateEvent } = useCreateEvent();
   const [modal, setModal] = useState({
     isOpen: false,
     title: '',
@@ -56,28 +56,62 @@ export default function CreateEventPage() {
   };
 
   const handleOnSubmit = async (formData) => {
-    const formattedDateTime = `${formData.eventDate} ${formData.eventTime}:00`;
+    const payload = new FormData();
 
-    const payload = {
-      action: 'create_event',
-      nama_event: formData.eventName,
-      deskripsi_event: formData.description,
-      tempat: formData.venue,
-      pembicara: formData.speaker,
-      jenis_event: formData.eventCategory,
-      zona_target:
-        formData.eventCategory === 'umum' ? null : formData.targetZone,
-      waktu_event: formattedDateTime,
-      latitude: parseFloat(formData.latitude),
-      longitude: parseFloat(formData.longitude),
-      radius: parseInt(formData.radius, 10),
-    };
+    payload.append(
+      'nama_event',
+      formData.eventName || formData.nama_event || '',
+    );
+    payload.append(
+      'deskripsi_event',
+      formData.description || formData.deskripsi_event || '',
+    );
+    payload.append('tempat', formData.venue || formData.tempat || '');
+    payload.append('pembicara', formData.speaker || formData.pembicara || '');
+    payload.append(
+      'jenis_event',
+      formData.eventCategory || formData.jenis_event || 'umum',
+    );
+
+    const category = formData.eventCategory || formData.jenis_event;
+    if (category === 'zona') {
+      payload.append(
+        'zona_target',
+        formData.targetZone || formData.zona_target || '',
+      );
+    } else {
+      payload.append('zona_target', '');
+    }
+
+    // Mapping DATE & TIME
+    const datePart = formData.eventDate || '';
+    const timePart = formData.eventTime || '';
+
+    let formattedWaktuEvent = '';
+    if (datePart && timePart) {
+      // Tambahkan detik (:00) agar sesuai format datetime MySQL
+      formattedWaktuEvent = `${datePart} ${timePart}:00`;
+    } else if (datePart) {
+      formattedWaktuEvent = `${datePart} 00:00:00`;
+    }
+
+    payload.append('waktu_event', formattedWaktuEvent);
+
+    payload.append('latitude', parseFloat(formData.latitude));
+    payload.append('longitude', parseFloat(formData.longitude));
+    payload.append('radius', parseInt(formData.radius, 10) || 100);
+
+    if (formData.eventMaterial && formData.eventMaterial.length > 0) {
+      // FILE FROM FileList HTML BASIC INPUT
+      const file = formData.eventMaterial[0];
+      payload.append('materi_file', file);
+    }
 
     const result = await executeCreateEvent(payload);
-    if (result.success) {
-      showSuccessModal();
+    if (result.status === 'success' || result.success) {
+      showSuccessModal(result.message || 'Event berhasil ditambahkan!');
     } else {
-      showErrorModal();
+      showErrorModal(result.message || 'Gagal menambahkan event.');
     }
   };
 

@@ -160,7 +160,7 @@ export default function ListEvents({
         </section>
 
         {/* BASIC STATISTIC */}
-        <section className="grid grid-cols-3 gap-4 ">
+        <section className="grid grid-cols-2 gap-4 md:grid-cols-4 ">
           <StatisticContainer
             label="Total Event"
             value={events.length.toLocaleString('id-ID')}
@@ -177,10 +177,10 @@ export default function ListEvents({
             label="Event Umum"
             value={events.filter((e) => e.eventType === 'umum').length}
             icon={IconOnline}
-            bgClass="bg-gradient-to-br from-sea-green-600 to-teal-800 border-transparent"
+            bgClass="bg-gradient-to-br from-orange-400 to-amber-500 border-transparent"
             shadowColorClass="hover:shadow-teal-600/40"
             textColorClass="text-white"
-            labelColorClass="text-teal-100"
+            labelColorClass="text-white"
             iconColorClass="text-white"
             iconBgClass="bg-white/20 backdrop-blur-xs"
           />
@@ -189,7 +189,7 @@ export default function ListEvents({
             label="Event Khusus"
             value={events.filter((e) => e.eventType === 'zona').length}
             icon={IconSpecial}
-            bgClass="bg-gradient-to-br from-violet-600 to-indigo-800 transition-all duration-300 hover:brightness-110"
+            bgClass="bg-gradient-to-br from-blue-500 to-sky-600 border-transparent"
             shadowColorClass="hover:shadow-violet-600/40"
             textColorClass="text-white"
             labelColorClass="text-violet-200"

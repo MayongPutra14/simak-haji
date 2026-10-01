@@ -12,8 +12,10 @@ export const ListAdminEventColumns = ({ onDelete, onViewDetail, onEdit }) => [
     header: 'Nama Event',
     isSticky: true,
     render: (event) => (
-      <div className="flex items-center gap-3 min-w-32">
-        <span className="font-medium text-slate-900">{event.eventName}</span>
+      <div className="max-w-28 md:max-w-60 flex items-center gap-3">
+        <span className="text-sm/7 text-slate-900 wrap-break-word  whitespace-normal">
+          {event.eventName}
+        </span>
       </div>
     ),
   },
