@@ -37,7 +37,7 @@ const InputFile = React.forwardRef(
     // ERROR MESSAGE CHECKING
     const errorMessage = typeof error === 'string' ? error : error?.message;
 
-    // HELPER UNTUK MENENTUKAN IKON REACT-ICONS BERDASARKAN EKSTENSI/TIPE FILE
+    // HELPER FOR SELECT REACT ICON BASE ON FLE TYPE
     const getFileIcon = (typeOrName) => {
       const lower = typeOrName?.toLowerCase() || '';
       if (lower.includes('pdf')) {
@@ -59,7 +59,7 @@ const InputFile = React.forwardRef(
       return <FaFileAlt className="w-6 h-6 text-slate-500" />;
     };
 
-    // SYNC FILE ATAU URL SAAT VALUE BERUBAH
+    // SYNC FILE ATAU URL WHEN VALUE CHANGE
     useEffect(() => {
       let objectUrl = null;
 
@@ -184,20 +184,20 @@ const InputFile = React.forwardRef(
               />
             </label>
 
-            <span className="text-sm text-slate-600 truncate max-w-xs">
+            <span className="max-w-xs text-sm truncate text-slate-600">
               {fileName || 'Belum ada file yang dipilih'}
             </span>
           </div>
 
           {/* FILE INFO / PREVIEW CARD JIKA FILE TERPILIH */}
           {fileName && (
-            <div className="flex items-center justify-between p-3 border rounded-lg border-slate-200 bg-slate-50 max-w-md">
+            <div className="flex items-center justify-between max-w-md p-3 border rounded-lg border-slate-200 bg-slate-50">
               <div className="flex items-center gap-3 overflow-hidden">
                 <div className="p-2 bg-white border rounded-md shadow-xs border-slate-100 shrink-0">
                   {getFileIcon(fileType || fileName)}
                 </div>
                 <div className="flex flex-col truncate">
-                  <span className="text-sm font-medium text-slate-700 truncate">
+                  <span className="text-sm font-medium truncate text-slate-700">
                     {fileName}
                   </span>
                   <span className="text-xs text-slate-400">
@@ -214,7 +214,7 @@ const InputFile = React.forwardRef(
                   href={previewUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 text-slate-500 hover:text-blue-600 hover:bg-white rounded-md transition-colors"
+                  className="p-2 transition-colors rounded-md text-slate-500 hover:text-blue-600 hover:bg-white"
                   title="Pratinjau File"
                 >
                   <FaEye className="w-4 h-4" />

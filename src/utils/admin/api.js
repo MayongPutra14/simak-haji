@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-// const BASE_URL = 'http://localhost/simak_api/api/';
-const BASE_URL = 'https://simak-api.my.id/api';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -138,131 +137,6 @@ export const deleteAdminUserData = async (userId) => {
   }
 };
 
-export const updateUserProfile = async (userId, formData) => {
-  if (!userId || !formData) return null;
-
-  try {
-    const bodyPayload = {
-      user_id: userId,
-      action: 'edit_users',
-      ...formData,
-    };
-
-    const response = await api.post('admin_manage.php', bodyPayload);
-    if (
-      response.data?.status === 'failed' ||
-      response.data?.status === 'error'
-    ) {
-      throw new Error(response.data?.message || 'Gagal update profil jamaah');
-    }
-
-    return response.data;
-  } catch (error) {
-    console.error('Error updating users data:', error);
-    throw error;
-  }
-};
-
-export const createEventAPI = async (payload) => {
-  if (!payload)
-    return {
-      status: 'failed',
-      message:
-        'Tidak dapat membuat event, pastikan data event terisi dengan baik.',
-    };
-
-  try {
-    let finalPayload;
-
-    // IF PAYLOAD IS formData (THERE IS A FILE)
-    if (payload instanceof FormData) {
-      finalPayload = payload;
-      // ADD ACTION
-      if (!finalPayload.has('action')) {
-        finalPayload.append('action', 'create_event');
-      }
-    } else {
-      // FALLBACK IF DATA IS JSON
-      finalPayload = {
-        action: 'create_event',
-        ...payload,
-      };
-    }
-
-    console.log(
-      '=============== THIS IS DATA FROM CREATE EVENT API ===================',
-    );
-    console.table(finalPayload);
-
-    const response = await api.post('admin_manage.php', finalPayload);
-    if (
-      response.data?.status === 'failed' ||
-      response.data?.status === 'error'
-    ) {
-      return {
-        status: 'failed',
-        message:
-          response.data?.message || 'Gagal membaut event. Silahkan coba lagi',
-      };
-    }
-
-    return response.data;
-  } catch (error) {
-    const errorMessage =
-      error.response?.data?.message ||
-      error.message ||
-      'Terjadi kesalahan pada server';
-
-    return {
-      status: 'error',
-      message: errorMessage,
-    };
-  }
-};
-
-export const getEventsAPI = async () => {
-  try {
-    const response = await api.post('admin_manage.php', {
-      action: 'get_events',
-    });
-
-    if (
-      response.data?.status === 'failed' ||
-      response.data?.status === 'error'
-    ) {
-      throw new Error(response.data?.message || 'Gagal mengambil data acara');
-    }
-
-    return response.data;
-  } catch (error) {
-    console.error('Errror Occurred wWhen Fecthing Event Data');
-    throw error;
-  }
-};
-
-export const getEventDetailAPI = async (eventId) => {
-  if (!eventId) return null;
-
-  try {
-    const response = await api.post('admin_manage.php', {
-      event_id: Number(eventId),
-      action: 'get_event_detail',
-    });
-
-    if (
-      response.data?.status === 'failed' ||
-      response.data?.status === 'error'
-    ) {
-      throw new Error(response.data?.message || 'Event tidak di temukan');
-    }
-
-    return response.data;
-  } catch (error) {
-    console.error('Error occured when fetchin event data');
-    throw error;
-  }
-};
-
 export const updateQuotaProvince = async (payload) => {
   if (!payload)
     return {
@@ -298,4 +172,125 @@ export const updateQuotaProvince = async (payload) => {
       message: errorMessage,
     };
   }
+};
+
+export const updateUserProfile = async (userId, formData) => {
+  if (!userId || !formData) return null;
+
+  try {
+    const bodyPayload = {
+      user_id: userId,
+      action: 'edit_users',
+      ...formData,
+    };
+
+    const response = await api.post('admin_manage.php', bodyPayload);
+    if (
+      response.data?.status === 'failed' ||
+      response.data?.status === 'error'
+    ) {
+      throw new Error(response.data?.message || 'Gagal update profil jamaah');
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Error updating users data:', error);
+    throw error;
+  }
+};
+
+export const createEventAPI = async (payload) => {
+  if (!payload)
+    return {
+      status: 'failed',
+      message:
+        'Tidak dapat membuat event, pastikan data event terisi dengan baik.',
+    };
+
+  try {
+    let finalPayload;
+    let config = {};
+
+    if (payload instanceof FormData) {
+      finalPayload = payload;
+      if (!finalPayload.has('action')) {
+        finalPayload.append('action', 'create_event');
+      }
+
+      // Overwrite Header Content-Type agar Axios/Browser otomatis menyusun Multipart Boundary
+      config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+    } else {
+      finalPayload = {
+        action: 'create_event',
+        ...payload,
+      };
+    }
+
+    const response = await api.post('admin.php', finalPayload, config);
+
+    if (
+      response.data?.status === 'failed' ||
+      response.data?.status === 'error'
+    ) {
+      return {
+        status: 'failed',
+        message:
+          response.data?.message || 'Gagal membuat event. Silahkan coba lagi',
+      };
+    }
+
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      'Terjadi kesalahan pada server';
+
+    return {
+      status: 'error',
+      message: errorMessage,
+    };
+  }
+};
+
+export const getEventsAPI = async () => {
+  const response = await api.post('admin.php', {
+    action: 'get_events',
+  });
+
+  return response.data;
+};
+
+export const getEventDetailAPI = async (eventId) => {
+  if (!eventId)
+    return {
+      status: 'failed',
+      message: 'Id event tidak ditemukan',
+    };
+
+  const response = await api.post('admin.php', {
+    id: Number(eventId),
+    action: 'get_event_detail',
+  });
+
+  return response.data;
+};
+
+export const deleteEventAPI = async (eventId) => {
+  if (!eventId)
+    return {
+      status: 'failed',
+      message: 'Id evebt tidak ditemukan',
+    };
+
+  const response = await api.post('admin.php', {
+    id: Number(eventId),
+    action: 'delete_event',
+  });
+
+  return response.data;
 };

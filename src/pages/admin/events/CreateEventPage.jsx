@@ -44,7 +44,7 @@ export default function CreateEventPage() {
       iconBgColor: 'bg-sea-green-100',
       iconColor: 'text-sea-green-400',
       buttonColor: 'bg-sea-green-500 hover:bg-sea-green-700 text-white',
-      onConfirm: () => navigate('/admin/schedules'),
+      onConfirm: () => navigate('/admin/events'),
     });
   };
 
@@ -86,25 +86,34 @@ export default function CreateEventPage() {
     // Mapping DATE & TIME
     const datePart = formData.eventDate || '';
     const timePart = formData.eventTime || '';
-
     let formattedWaktuEvent = '';
+
     if (datePart && timePart) {
-      // Tambahkan detik (:00) agar sesuai format datetime MySQL
       formattedWaktuEvent = `${datePart} ${timePart}:00`;
     } else if (datePart) {
       formattedWaktuEvent = `${datePart} 00:00:00`;
     }
 
     payload.append('waktu_event', formattedWaktuEvent);
-
-    payload.append('latitude', parseFloat(formData.latitude));
-    payload.append('longitude', parseFloat(formData.longitude));
+    payload.append('latitude', parseFloat(formData.latitude) || 0);
+    payload.append('longitude', parseFloat(formData.longitude) || 0);
     payload.append('radius', parseInt(formData.radius, 10) || 100);
 
-    if (formData.eventMaterial && formData.eventMaterial.length > 0) {
-      // FILE FROM FileList HTML BASIC INPUT
-      const file = formData.eventMaterial[0];
-      payload.append('materi_file', file);
+    if (formData.eventMaterial) {
+      const rawFile = formData.eventMaterial;
+      let fileToUpload = null;
+
+      if (rawFile instanceof FileList && rawFile.length > 0) {
+        fileToUpload = rawFile[0];
+      } else if (rawFile instanceof File) {
+        fileToUpload = rawFile;
+      } else if (Array.isArray(rawFile) && rawFile[0] instanceof File) {
+        fileToUpload = rawFile[0];
+      }
+
+      if (fileToUpload) {
+        payload.append('materi_file', fileToUpload);
+      }
     }
 
     const result = await executeCreateEvent(payload);

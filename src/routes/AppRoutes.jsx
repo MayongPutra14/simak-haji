@@ -62,11 +62,11 @@ export default function AppRoutes() {
           </Route>
 
           {/* CRUD EVENT */}
-          <Route path="schedules">
+          <Route path="events">
             <Route index element={<ListEventsPage />} />
             <Route path="create" element={<CreateEventPage />} />
-            <Route path="detail/:scheduleId" element={<DetailEventPage />} />
-            <Route path="edit/:scheduleId" element={<EditEventPage />} />
+            <Route path="detail/:eventId" element={<DetailEventPage />} />
+            <Route path="edit/:eventId" element={<EditEventPage />} />
           </Route>
         </Route>
       </Route>

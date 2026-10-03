@@ -25,7 +25,7 @@ export default function getNavItems(role) {
     schedule: {
       id: 'schedule',
       label: 'Jadwal',
-      path: role === 'admin' ? '/admin/schedules' : '/user/schedules',
+      path: role === 'admin' ? '/admin/events' : '/user/schedules',
       IconOutline: IconCalendarOutline,
       IconFill: IconCalendarFill,
     },

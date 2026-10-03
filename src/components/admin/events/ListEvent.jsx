@@ -1,68 +1,103 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router';
 import Table from '../../ui/global/Table';
 import SearcInput from '../../ui/inputs/SeacrhInput';
 import Button from '../../ui/global/Button';
 import StatisticContainer from '../../ui/global/StatisticContainer';
 import Modal from '../../ui/global/Modal';
-import useDeleteUser from '../../../hooks/admin/user/useDeleteUser';
 import { ListAdminEventColumns } from '../../../features/admin/ListAdminEventColumns';
 import { SkeletonTableAdminUsers } from '../../ui/global/skeletons/index';
 import { HiStatusOnline as IconOnline } from 'react-icons/hi';
 import {
   MdAdd as IconAdd,
-  MdOutlineArrowDropDown as IconFilter,
   MdOutlineNavigateNext as IconNav,
   MdPeople as IconPeople,
   MdOutlineFolderSpecial as IconSpecial,
 } from 'react-icons/md';
 import { IoWarningOutline as IconWarning } from 'react-icons/io5';
+import { calculateUniqueZone } from '../../../utils/helpers/statsCalculators';
+import {
+  useEventFilters,
+  MONTH_OPTIONS,
+  TYPE_OPTIONS,
+  STATUS_OPTIONS,
+} from '../../../hooks/admin/event/useEventFilters';
+import InlineFilterBar from '../components/InlineFilterBar';
 
 export default function ListEvents({
   events = [],
   isLoading = false,
   error = null,
-  onRefresh,
+  onDelete,
 }) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [jenisFilter, setJenisFilter] = useState('Semua Jenis');
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteTarget, setDeleteTarget] = useState(null);
-  const navigate = useNavigate();
-
-  const { deleteUser, isDeleting, deleteError, setDeleteError } =
-    useDeleteUser();
+  const [localDeleteError, setLocalDeleteError] = useState(null);
 
   const itemsPerPage = 10;
 
-  // HANDLER FOR SEARCH INPUT CHANGE
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-    setCurrentPage(1);
-  };
+  // Function reset page
+  const handleResetPage = useCallback(() => setCurrentPage(1), []);
 
-  // HANDLER FOR FILTER CHANGE
-  const handleFilterChange = (e) => {
-    setJenisFilter(e.target.value);
-    setCurrentPage(1);
-  };
+  // Custom Hook Filter
+  const {
+    searchQuery,
+    monthFilter,
+    typeFilter,
+    zoneFilter,
+    statusFilter,
+    uniqueZones,
+    filteredEvents,
+    isFilterActive,
+    handleSearchChange,
+    handleMonthChange,
+    handleTypeChange,
+    handleZoneChange,
+    handleStatusChange,
+    handleClearFilters,
+  } = useEventFilters(events, handleResetPage);
 
-  // FILTER EVENTS DATA
-  const filteredEvents = useMemo(() => {
-    return events.filter((event) => {
-      const matchesSearch =
-        event.eventName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        event.venue?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        event.speaker?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        String(event.id || '').includes(searchQuery);
-
-      const matchesJenis =
-        jenisFilter === 'Semua Jenis' ||
-        event.eventType?.toLowerCase() === jenisFilter.toLowerCase();
-
-      return matchesSearch && matchesJenis;
-    });
-  }, [events, searchQuery, jenisFilter]);
+  // Generic Configuration InlineFilterBar.jsx
+  const filterConfigs = useMemo(
+    () => [
+      {
+        key: 'month',
+        value: monthFilter,
+        onChange: handleMonthChange,
+        options: MONTH_OPTIONS,
+      },
+      {
+        key: 'type',
+        value: typeFilter,
+        onChange: handleTypeChange,
+        options: TYPE_OPTIONS,
+      },
+      {
+        key: 'zone',
+        value: zoneFilter,
+        onChange: handleZoneChange,
+        options: uniqueZones.map((z) => ({ value: z, label: `Zona: ${z}` })),
+      },
+      {
+        key: 'status',
+        value: statusFilter,
+        onChange: handleStatusChange,
+        options: STATUS_OPTIONS,
+      },
+    ],
+    [
+      monthFilter,
+      typeFilter,
+      zoneFilter,
+      statusFilter,
+      uniqueZones,
+      handleMonthChange,
+      handleTypeChange,
+      handleZoneChange,
+      handleStatusChange,
+    ],
+  );
 
   // CALCULATION FOR PAGINATION
   const totalItems = filteredEvents.length;
@@ -71,35 +106,30 @@ export default function ListEvents({
   const currentData = useMemo(() => {
     const start = (currentPage - 1) * itemsPerPage;
     return filteredEvents.slice(start, start + itemsPerPage);
-  }, [filteredEvents, currentPage]);
+  }, [filteredEvents, currentPage, itemsPerPage]);
 
   // HANDLER DELETE EVENT
   const confirmDelete = async () => {
-    if (!deleteTarget) return;
+    if (!deleteTarget || !onDelete) return;
 
-    const result = await deleteUser(deleteTarget.id);
+    setLocalDeleteError(null);
+    const result = await onDelete(deleteTarget.id);
 
     if (result.status === 'success') {
       setDeleteTarget(null);
-      if (onRefresh) await onRefresh();
 
       if (currentData.length === 1 && currentPage > 1) {
         setCurrentPage((prev) => prev - 1);
       }
+    } else {
+      setLocalDeleteError(result?.message || 'Gagal menghapus event');
     }
   };
 
   const handleCloseModal = () => {
-    if (isDeleting) return;
+    if (isLoading) return;
     setDeleteTarget(null);
-    setDeleteError(null);
-  };
-
-  // CLEAR SEARCH AND FILTER
-  const handleClearSearch = () => {
-    setSearchQuery('');
-    setJenisFilter('Semua Jenis');
-    setCurrentPage(1);
+    setLocalDeleteError(null);
   };
 
   // COLUMNS DEFINITION
@@ -108,53 +138,39 @@ export default function ListEvents({
       ListAdminEventColumns({
         onDelete: (event) => {
           setDeleteTarget(event);
-          setDeleteError(null);
+          setLocalDeleteError(null);
         },
         onViewDetail: (event) => {
-          navigate(`/admin/schedules/detail/${event.id}`);
+          navigate(`/admin/events/detail/${event.id}`);
         },
         onEdit: (event) => {
-          navigate(`/admin/schedules/edit/${event.id}`);
+          navigate(`/admin/events/edit/${event.id}`);
         },
       }),
-    [setDeleteError, navigate],
+    [navigate],
   );
 
   return (
-    <div className="min-h-screen bg-white w-[95%] md:w-[98%] mx-auto p-4 my-4 rounded-xl shadow-md">
-      <div className="space-y-6">
-        {/* FILTER, SEARCH BAR, DAN TOMBOL TAMBAH */}
+    <div className="min-h-screen bg-white">
+      <div className="space-y-6 w-[95%] md:w-[98%] mx-auto p-4 my-4 rounded-xl shadow-md">
+        {/* HEADER AREA: Inline Filter & Button Add */}
         <section className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col items-stretch flex-1 max-w-2xl gap-3 sm:flex-row sm:items-center">
+          {/* SEARCH INPUT */}
+          <div className="w-full md:w-[70%]">
             <SearcInput
               placeHolder="Cari event, lokasi, pembicara..."
               searchQuery={searchQuery}
-              onChange={handleSearchChange}
+              onChange={(e) => handleSearchChange(e.target.value)}
             />
-
-            <div className="relative min-w-35">
-              <select
-                value={jenisFilter}
-                onChange={handleFilterChange}
-                className="w-full py-2 pl-3 pr-8 text-sm bg-white border rounded-lg appearance-none cursor-pointer border-slate-200 text-slate-700 focus:outline-none focus:border-sea-green-600 focus:ring-1 focus:ring-teal-600"
-              >
-                <option value="Semua Jenis">Semua Jenis</option>
-                <option value="umum">Umum</option>
-                <option value="khusus">Khusus</option>
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none text-slate-400">
-                <IconFilter className="w-5 h-5" />
-              </div>
-            </div>
           </div>
 
+          {/* BUTTON ADD NEW EVENT */}
           <Button
-            icon={<IconAdd />}
-            className="px-4 py-2 sm:w-auto"
+            className="flex items-center justify-center w-full gap-2 px-4 py-2 md:w-auto shrink-0"
             variant="primary"
-            type="button"
-            to="/admin/schedules/create"
+            to="/admin/events/create"
           >
+            <IconAdd className="w-5 h-5" />
             Tambah Acara
           </Button>
         </section>
@@ -174,11 +190,23 @@ export default function ListEvents({
           />
 
           <StatisticContainer
-            label="Event Umum"
-            value={events.filter((e) => e.eventType === 'umum').length}
+            label="Total Zona Aktif"
             icon={IconOnline}
+            value={calculateUniqueZone(events)}
             bgClass="bg-gradient-to-br from-orange-400 to-amber-500 border-transparent"
-            shadowColorClass="hover:shadow-teal-600/40"
+            shadowColorClass="hover:shadow-orange-600/40"
+            textColorClass="text-white"
+            labelColorClass="text-white"
+            iconColorClass="text-white"
+            iconBgClass="bg-white/20 backdrop-blur-xs"
+          />
+
+          <StatisticContainer
+            label="Event Umum"
+            value={events.filter((e) => e.type === 'umum').length}
+            icon={IconSpecial}
+            bgClass="bg-gradient-to-br from-blue-500 to-sky-600 border-transparent"
+            shadowColorClass="hover:shadow-blue-600/40"
             textColorClass="text-white"
             labelColorClass="text-white"
             iconColorClass="text-white"
@@ -187,18 +215,26 @@ export default function ListEvents({
 
           <StatisticContainer
             label="Event Khusus"
-            value={events.filter((e) => e.eventType === 'zona').length}
+            value={events.filter((e) => e.type === 'khusus').length}
             icon={IconSpecial}
-            bgClass="bg-gradient-to-br from-blue-500 to-sky-600 border-transparent"
-            shadowColorClass="hover:shadow-violet-600/40"
+            bgClass="bg-gradient-to-br from-pink-500 to-rose-600 border-transparent"
+            shadowColorClass="hover:shadow-pink-600/40"
             textColorClass="text-white"
-            labelColorClass="text-violet-200"
+            labelColorClass="text-white"
             iconColorClass="text-white"
             iconBgClass="bg-white/20 backdrop-blur-xs"
           />
         </section>
 
-        {/* TABLE SECTION */}
+        <section className="w-full">
+          <InlineFilterBar
+            filters={filterConfigs}
+            isFilterActive={isFilterActive}
+            onClear={handleClearFilters}
+          />
+        </section>
+
+        {/* TABLE */}
         <section className="overflow-hidden bg-white border-none shadow-xs rounded-xl">
           {isLoading ? (
             <SkeletonTableAdminUsers />
@@ -220,7 +256,7 @@ export default function ListEvents({
                 type="button"
                 variant="primary"
                 icon={<IconAdd />}
-                to="/admin/schedules/create"
+                to="/admin/events/create"
               >
                 Tambah Acara
               </Button>
@@ -238,10 +274,10 @@ export default function ListEvents({
               </div>
               <button
                 type="button"
-                onClick={handleClearSearch}
+                onClick={handleClearFilters}
                 className="inline-flex items-center px-3 py-1.5 border border-slate-300 text-slate-700 bg-white hover:bg-slate-50 font-medium text-sm rounded-lg transition-colors cursor-pointer"
               >
-                Bersihkan pencarian
+                Bersihkan Filter & Pencarian
               </button>
             </div>
           ) : (
@@ -341,17 +377,17 @@ export default function ListEvents({
                 {deleteTarget?.nama_event}
               </span>
               ? Data yang dihapus akan hilang permanen.
-              {deleteError && (
+              {localDeleteError && (
                 <span className="block p-2 mt-2 text-xs font-normal border rounded-lg bg-rose-50 text-rose-600 border-rose-200">
-                  {deleteError}
+                  {localDeleteError}
                 </span>
               )}
             </>
           }
-          buttonText={isDeleting ? 'Menghapus...' : 'Hapus'}
+          buttonText={isLoading ? 'Menghapus...' : 'Hapus'}
           buttonColor="bg-galliano-600 hover:bg-galliano-700 text-white disabled:opacity-50 cursor-pointer"
           onConfirm={confirmDelete}
-          isLoading={isDeleting}
+          isLoading={isLoading}
           showCancelButton={true}
           cancelButtonText="Batal"
         />

@@ -6,7 +6,13 @@ import {
 import {
   SkeletonCardProfileDetail,
   SkeletonProfileImage,
-} from './SkeletonProfileDetail';
+  EventInfoSkeleton,
+  EventTimeSkeleton,
+  EventMaterialSkeleton,
+  EventMapSkeleton,
+  EventQrCodeSkeleton,
+  EventParametersSkeleton,
+} from './SkeletonLoading';
 
 export {
   SkeletonCardProfileDetail,
@@ -14,4 +20,10 @@ export {
   SkeletonScheduleUserDashboard,
   SkeletonScheduleUserMenu,
   SkeletonTableAdminUsers,
+  EventInfoSkeleton,
+  EventTimeSkeleton,
+  EventMaterialSkeleton,
+  EventMapSkeleton,
+  EventQrCodeSkeleton,
+  EventParametersSkeleton,
 };
