@@ -38,76 +38,72 @@ export const DetailField = ({ label, value }) => {
 };
 
 // Helper Component: Status Badge
+/**
+ * Universal Badge Component for Status (Events or Documents)
+ * @param {string} [label] - Optional text label above the badge (renders a card layout if provided)
+ * @param {string} status - The status value from the backend (e.g., completed, upcoming, live, complete, pending, etc.)
+ * @param {boolean} [isLabelFade=true] - Determines whether the label is styled with a faded appearance (defaults to true)
+ */
+
 export const StatusBadge = ({ label, isLabelFade = true, status }) => {
-  // 1. Pemetaan warna sesuai nilai status
+  if (!status) {
+    return label ? (
+      <div className="flex flex-col gap-1 p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+        <span
+          className={
+            isLabelFade
+              ? 'text-xs font-semibold text-slate-400'
+              : 'text-xs font-medium text-slate-400'
+          }
+        >
+          {label}
+        </span>
+        <span className="text-xs font-normal text-slate-300">-</span>
+      </div>
+    ) : (
+      <span className="text-xs font-normal text-slate-300">-</span>
+    );
+  }
+
+  const normalized = String(status).toLowerCase().trim();
+
+  // Pemetaan warna universal (Event & Dokumen)
   const statusStyles = {
-    // Hijau
-    ok: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+    // Event Category
+    selesai: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    mendatang: 'bg-rose-50 text-rose-700 border-rose-200',
+    live: 'bg-amber-50 text-amber-700 border-amber-200',
 
-    // Biru (Proses)
-    menunggu: 'bg-rose-100 text-rose-800 border-rose-200',
-
-    // Merah (Gagal/Batal)
-    gagal: 'bg-rose-100 text-rose-800 border-rose-200',
+    // Document Completeness
+    lengkap: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    ok: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    menunggu: 'bg-rose-50 text-rose-700 border-rose-200',
+    proses: 'bg-amber-50 text-amber-700 border-amber-200',
   };
 
-  // 2. Fallback jika status tidak ditemukan di daftar (Default: Amber/Kuning)
-  const defaultStyle = 'bg-amber-100 text-amber-800 border-amber-200';
+  const defaultStyle = 'bg-slate-100 text-slate-600 border-slate-200';
+  const currentStyle = statusStyles[normalized] || defaultStyle;
 
-  const currentStyle = statusStyles[status?.toLowerCase()] || defaultStyle;
-
-  const labelFade = isLabelFade
-    ? 'text-xs font-semibold text-slate-400 flex items-center gap-1'
-    : 'text-xs font-medium text-slate-400';
-
-  return (
-    <div className="flex flex-col gap-1 p-2.5 rounded-xl bg-slate-50 border border-slate-100">
-      <span className={labelFade}>{label}</span>
-      <div>
-        <span
-          className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium border ${currentStyle}`}
-        >
-          {status === true
-            ? 'Aktif'
-            : status === false
-              ? 'Tidak Aktif'
-              : status || 'Belum diisi'}
-        </span>
-      </div>
-    </div>
-  );
-};
-
-// Helper component/function to render status badges
-export const StatusCellBedge = (value) => {
-  if (!value) {
-    return <span className="text-slate-300 font-normal">-</span>;
-  }
-
-  const normalized = String(value).toLowerCase().trim();
-
-  // If status is "ok" or "selesai" or "lengkap"
-  if (normalized === 'ok') {
-    return (
-      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-sea-green-100 text-sea-green-700 border border-sea-green-300 capitalize">
-        {value}
-      </span>
-    );
-  }
-
-  // If status is "menunggu" or "proses"
-  if (normalized === 'menunggu') {
-    return (
-      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-50 text-red-700 border border-red-200 capitalize">
-        {value}
-      </span>
-    );
-  }
-
-  // Default fallback badge
-  return (
-    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 border border-slate-200 capitalize">
-      {value}
+  const badgeElement = (
+    <span
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border capitalize ${currentStyle}`}
+    >
+      {status === true ? 'Aktif' : status === false ? 'Tidak Aktif' : status}
     </span>
   );
+
+  if (label) {
+    const labelFadeClass = isLabelFade
+      ? 'text-xs font-semibold text-slate-400 flex items-center gap-1'
+      : 'text-xs font-medium text-slate-400';
+
+    return (
+      <div className="flex flex-col gap-1 p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+        <span className={labelFadeClass}>{label}</span>
+        <div>{badgeElement}</div>
+      </div>
+    );
+  }
+
+  return badgeElement;
 };

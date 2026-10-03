@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
 import Table from '../ui/global/Table';
 import Button from '../ui/global/Button';
@@ -8,7 +8,10 @@ import useDeleteUser from '../../hooks/admin/user/useDeleteUser';
 import { ListAdminUsersColumns } from '../../features/admin/ListAdminUsersColumns';
 import { SkeletonTableAdminUsers } from '../ui/global/skeletons/index';
 import { UpdateQuotaSection } from '../ui/inputs/UpdateQuotaProvince';
-import { useUserFilters } from '../../hooks/admin/user/useUsersFilter';
+import {
+  ADMIN_DOC_FIELDS,
+  useUserFilters,
+} from '../../hooks/admin/user/useUsersFilter';
 import InlineFilterBar from './components/InlineFilterBar';
 import { UserStatisticsSection } from './components/statistics/UserStatisticSection';
 import { calculateDocumentCompletenessSummary } from '../../utils/helpers/statsCalculators';
@@ -41,12 +44,15 @@ export default function ListUser({
   const currentPage = Number(searchParams.get('page')) || 1;
   const itemsPerPage = 10;
   // URL PARAMS HELPER
-  const setPageInUrl = (newPage) => {
-    setSearchParams((prevParams) => {
-      prevParams.set('page', newPage);
-      return prevParams;
-    });
-  };
+  const setPageInUrl = useCallback(
+    (newPage) => {
+      setSearchParams((prevParams) => {
+        prevParams.set('page', newPage);
+        return prevParams;
+      });
+    },
+    [setSearchParams],
+  );
 
   // CALLING CUSTOM HOOK FILTER
   const {
@@ -64,6 +70,54 @@ export default function ListUser({
     handleYearChange,
     handleClearFilters,
   } = useUserFilters(users, () => setPageInUrl(1));
+
+  // Generic Configuration InlineFIlterBar.jsx
+  const filterConfigs = useMemo(() => {
+    // 1. Dropdown Zona
+    const zoneConfig = {
+      key: 'zone',
+      value: zoneFilter,
+      onChange: handleZoneChange,
+      options: uniqueZones.map((z) => ({
+        value: z,
+        label: z === 'Semua Zona' ? z : `Zona ${z}`,
+      })),
+    };
+
+    // 2. Dropdown Tahun
+    const yearConfig = {
+      key: 'year',
+      value: yearFilter,
+      onChange: handleYearChange,
+      options: uniqueYears.map((y) => ({
+        value: y,
+        label: y === 'Semua Tahun' ? y : `Tahun ${y}`,
+      })),
+    };
+
+    // 3. Dropdown for 10 Status Document (G-Form, Photo, SPPH, dll.)
+    const docConfigs = ADMIN_DOC_FIELDS.map(({ key, label }) => ({
+      key,
+      value: docFilters[key],
+      onChange: (value) => handleDocFilterChange(key, value),
+      options: [
+        { value: 'Semua', label: `${label}: Semua` },
+        { value: 'ok', label: `${label}: OK` },
+        { value: 'menunggu', label: `${label}: Menunggu` },
+      ],
+    }));
+
+    return [zoneConfig, yearConfig, ...docConfigs];
+  }, [
+    zoneFilter,
+    yearFilter,
+    docFilters,
+    uniqueZones,
+    uniqueYears,
+    handleZoneChange,
+    handleYearChange,
+    handleDocFilterChange,
+  ]);
 
   // CALCULATION FOR PAGINATION
   const totalItems = filteredUsers.length;
@@ -144,6 +198,7 @@ export default function ListUser({
       <div className="space-y-6 w-[95%] md:w-[98%] mx-auto p-4 my-4 shadow-md rounded-xl">
         {/* HEADER AREA: Inline Filter & Button Add */}
         <section className="flex flex-col w-full gap-3 md:flex-row md:items-center md:justify-between">
+          {/* SEARCH INPUT */}
           <div className="w-full md:w-[70%]">
             <SearchInput
               placeHolder="Cari nama atau no. porsi..."
@@ -152,6 +207,7 @@ export default function ListUser({
             />
           </div>
 
+          {/* BUTTON ADD NEW USER */}
           <Button
             className="flex items-center justify-center w-full gap-2 px-4 py-2 md:w-auto shrink-0"
             variant="primary"
@@ -219,14 +275,7 @@ export default function ListUser({
         {/* INLINE FILTERS BAR */}
         <section className="w-full">
           <InlineFilterBar
-            zoneFilter={zoneFilter}
-            onZoneChange={handleZoneChange}
-            yearFilter={yearFilter}
-            onYearChange={handleYearChange}
-            docFilters={docFilters}
-            onDocFilterChange={handleDocFilterChange}
-            uniqueZones={uniqueZones}
-            uniqueYears={uniqueYears}
+            filters={filterConfigs}
             isFilterActive={isFilterActive}
             onClear={handleClearFilters}
           />

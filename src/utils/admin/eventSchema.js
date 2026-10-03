@@ -97,7 +97,7 @@ export const EventSchema = z.object({
 
 export const eventCategoryOptions = [
   { label: 'Umum', value: 'umum' },
-  { label: 'Zona', value: 'zona' },
+  { label: 'Khusus', value: 'khusus' },
 ];
 
 export const zonaOptions = [

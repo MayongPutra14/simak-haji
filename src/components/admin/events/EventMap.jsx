@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { APIProvider, Map, Marker, useMap } from '@vis.gl/react-google-maps';
+import {
+  APIProvider,
+  Map,
+  AdvancedMarker,
+  useMap,
+} from '@vis.gl/react-google-maps';
 
 // Helper Component to Draw Neighborhood Radius on the Map
 function RadiusCircle({ center, radius }) {
@@ -39,14 +44,14 @@ export default function EventMap({
   error,
 }) {
   // Default coordinates (e.g., Jakarta/Indonesia) if no point is selected yet
-  const defaultCenter = { lat: -6.2088, lng: 106.8456 };
-
+  const defaultCenter = { lat: -6.301914839989671, lng: 107.30477638895414 };
   const currentPos =
     latitude && longitude
       ? { lat: Number(latitude), lng: Number(longitude) }
       : null;
 
   const handleMapClick = (e) => {
+    if (!onSelectLocation) return;
     if (e.detail && e.detail.latLng) {
       const lat = e.detail.latLng.lat;
       const lng = e.detail.latLng.lng;
@@ -57,10 +62,11 @@ export default function EventMap({
   return (
     <APIProvider apiKey={apiKey}>
       <div className="space-y-2">
-        <div className="relative w-full h-87 md:h-100 rounded-xl overflow-hidden border border-slate-200 shadow-inner">
+        <div className="relative w-full overflow-hidden border shadow-inner h-87 md:h-100 rounded-xl border-slate-200">
           <Map
             defaultCenter={currentPos || defaultCenter}
             defaultZoom={15}
+            mapId="SIMAK_MAP_ID"
             gestureHandling="greedy"
             disableDefaultUI={false}
             onClick={handleMapClick}
@@ -68,13 +74,14 @@ export default function EventMap({
           >
             {currentPos && (
               <>
-                <Marker position={currentPos} />
+                <AdvancedMarker position={currentPos} />
                 <RadiusCircle center={currentPos} radius={radius} />
               </>
             )}
           </Map>
 
-          {!currentPos && (
+          {/* Only appear in mode Create or Update */}
+          {!currentPos && onSelectLocation && (
             <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-slate-200 text-xs text-slate-600 shadow-sm pointer-events-none">
               📍 Click on the map area to select the event location
             </div>
@@ -84,16 +91,14 @@ export default function EventMap({
         {/* Notification / Info Display for Selected Coordinates */}
         <div className="flex items-center justify-between px-1 text-xs">
           {currentPos ? (
-            <p className="text-emerald-700 font-mono">
-              Selected Location: {currentPos.lat.toFixed(6)},{' '}
-              {currentPos.lng.toFixed(6)}
+            <p className="font-mono text-emerald-700">
+              {onSelectLocation ? 'Selected Location: ' : 'Active Location: '}
+              {currentPos.lat.toFixed(6)}, {currentPos.lng.toFixed(6)}
             </p>
           ) : (
-            <p className="text-amber-600">
-              No location selected on the map yet.
-            </p>
+            <p className="text-amber-600">No location coordinates available.</p>
           )}
-          {error && <p className="text-red-500 font-medium">{error}</p>}
+          {error && <p className="font-medium text-red-500">{error}</p>}
         </div>
       </div>
     </APIProvider>

@@ -4,7 +4,7 @@ import {
 } from 'react-icons/md';
 import { FaRegEdit as IconEdit } from 'react-icons/fa';
 import ButtonsActionTable from '../../components/ui/global/ButtonsActionTable';
-import { StatusCellBedge } from '../../components/ui/global/StatusBedge';
+import { StatusBadge } from '../../components/ui/global/StatusBedge';
 import { titleCase } from '../../utils/helpers/titleCase';
 
 export const ListAdminUsersColumns = ({ onDelete, onViewDetail, onEdit }) => [
@@ -54,70 +54,70 @@ export const ListAdminUsersColumns = ({ onDelete, onViewDetail, onEdit }) => [
     header: 'G-Form',
     className: 'text-slate-600 whitespace-nowrap',
     align: 'center',
-    render: (user) => StatusCellBedge(user.statusGoogleForm),
+    render: (user) => StatusBadge({ status: user.statusGoogleForm }),
   },
   {
     key: 'statusPhoto',
     header: 'Photo',
     className: 'text-slate-600 whitespace-nowrap',
     align: 'center',
-    render: (user) => StatusCellBedge(user.statusPhoto),
+    render: (user) => StatusBadge({ status: user.statusPhoto }),
   },
   {
     key: 'statusSpph',
     header: 'SPPH',
     className: 'text-slate-600 whitespace-nowrap',
     align: 'center',
-    render: (user) => StatusCellBedge(user.statusSpph),
+    render: (user) => StatusBadge({ status: user.statusSpph }),
   },
   {
     key: 'statusMutasi',
     header: 'Mutasi',
     className: 'text-slate-600 whitespace-nowrap',
     align: 'center',
-    render: (user) => StatusCellBedge(user.statusMutasi),
+    render: (user) => StatusBadge({ status: user.statusMutasi }),
   },
   {
     key: 'statusBiometrik',
     header: 'Biometrik',
     className: 'text-slate-600 whitespace-nowrap',
     align: 'center',
-    render: (user) => StatusCellBedge(user.statusBiometrik),
+    render: (user) => StatusBadge({ status: user.statusBiometrik }),
   },
   {
     key: 'statusPuskesmas',
     header: 'Puskesmas',
     className: 'text-slate-600 whitespace-nowrap',
     align: 'center',
-    render: (user) => StatusCellBedge(user.statusPuskesmas),
+    render: (user) => StatusBadge({ status: user.statusPuskesmas }),
   },
   {
     key: 'statusMCU',
     header: 'MCU',
     className: 'text-slate-600 whitespace-nowrap',
     align: 'center',
-    render: (user) => StatusCellBedge(user.statusMCU),
+    render: (user) => StatusBadge({ status: user.statusMCU }),
   },
   {
     key: 'statusPelunasan',
     header: 'Pelunasan',
     className: 'text-slate-600 whitespace-nowrap',
     align: 'center',
-    render: (user) => StatusCellBedge(user.statusPelunasan),
+    render: (user) => StatusBadge({ status: user.statusPelunasan }),
   },
   {
     key: 'statusPassport',
     header: 'Passport',
     className: 'text-slate-600 whitespace-nowrap',
     align: 'center',
-    render: (user) => StatusCellBedge(user.statusPassport),
+    render: (user) => StatusBadge({ status: user.statusPassport }),
   },
   {
     key: 'statusVisa',
     header: 'Visa',
     className: 'text-slate-600 whitespace-nowrap',
     align: 'center',
-    render: (user) => StatusCellBedge(user.statusVisa),
+    render: (user) => StatusBadge({ status: user.statusVisa }),
   },
   {
     key: 'actions',

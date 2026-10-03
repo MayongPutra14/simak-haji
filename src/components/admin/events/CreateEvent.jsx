@@ -72,7 +72,7 @@ export default function CreateEvent({ onSubmit }) {
           {/* SPEAKER */}
           <InputText
             label="Pembicara"
-            placeholder="Masjid Agung Karawang"
+            placeholder="Surya Kencana S.Pd M.Si"
             error={errors.speaker?.message}
             {...register('speaker')}
           />
@@ -183,7 +183,7 @@ export default function CreateEvent({ onSubmit }) {
         </div>
       </div>
 
-      <div className="flex gap-2 justify-end items-center">
+      <div className="flex items-center justify-end gap-2">
         <Button to="/admin/events" variant="primary" disabled={isSubmitting}>
           Kembali
         </Button>

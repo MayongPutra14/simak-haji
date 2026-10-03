@@ -60,12 +60,24 @@ export const calculateZoneStats = (users = []) => {
 };
 
 //  Calculator Unique Zone
-export const calculateUniqueZone = (users = []) => {
-  const uniqueZone = new Set(users.map((user) => user.zone));
+// Helper Calculator Unique Zone (Dinamis & Otomatis mendeteksi zona baru)
+export const calculateUniqueZone = (unqVal = []) => {
+  // Pastikan unqVal adalah sebuah array
+  if (!Array.isArray(unqVal)) return 0;
 
-  const totalUniqueZone = uniqueZone.size;
+  // Ambil hanya zona yang memiliki nilai (tidak null, tidak undefined, dan bukan string kosong)
+  const zones = unqVal
+    .map((item) => item?.zone)
+    .filter(
+      (zone) =>
+        zone !== null && zone !== undefined && String(zone).trim() !== '',
+    )
+    .map((zone) => String(zone).trim().toUpperCase()); // Opsional: rapikan spasi & jadikan huruf kapital
 
-  return totalUniqueZone;
+  // Masukkan ke Set untuk mendapatkan nilai unik secara otomatis
+  const uniqueZone = new Set(zones);
+
+  return uniqueZone.size;
 };
 
 // Completness dokcuments calculator

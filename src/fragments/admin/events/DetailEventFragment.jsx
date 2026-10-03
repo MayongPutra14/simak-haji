@@ -1,19 +1,11 @@
-import { bgImage } from '../../../utils/helpers/bgImage';
-import TitlePage from '../../../components/ui/global/TitlePage';
 import DetailEvent from '../../../components/admin/events/DetailEvent';
 import BackButton from '../../../components/ui/global/BackButton';
 
-export default function DetailEventFragment({ eventData, isLoading }) {
+export default function DetailEventFragment({ data, isLoading }) {
   return (
     <>
+      <DetailEvent eventData={data} isLoading={isLoading} />
       <BackButton />
-      <TitlePage
-        bgImage={bgImage.bgNabawi}
-        title="Detail Informasi Acara"
-        subtitle="Menampilkan nama program, jadwal pelaksanaan, serta titik pemetaan lokasi kegiatan seminar atau pelatihan Haji untuk kebutuhan monitoring admin."
-      />
-
-      <DetailEvent eventData={eventData} isLoading={isLoading} />
     </>
   );
 }
