@@ -10,6 +10,7 @@ import {
   InputSelect,
   InputFile,
 } from '../../ui/inputs/index';
+import { useEffect } from 'react';
 
 export default function CreateEvent({ onSubmit }) {
   const {
@@ -28,6 +29,13 @@ export default function CreateEvent({ onSubmit }) {
   const watchLat = useWatch({ control, name: 'latitude' });
   const watchLng = useWatch({ control, name: 'longitude' });
   const watchRadius = useWatch({ control, name: 'radius' });
+  const watchEventCategory = useWatch({ control, name: 'eventCategory' });
+
+  useEffect(() => {
+    if (!watchEventCategory) {
+      setValue('targetZone', '');
+    }
+  }, [watchEventCategory, setValue]);
 
   // CALLBACK WHEN MAP CLICKED
   const handleSelectLocation = (lat, lng) => {
@@ -81,7 +89,7 @@ export default function CreateEvent({ onSubmit }) {
           <InputSelect
             label="Jenis Acara"
             required={true}
-            placeholder=""
+            placeholder="-- Pilih Jenis Acara --"
             options={EventSchemas.eventCategoryOptions}
             error={errors.eventCategory?.message}
             {...register('eventCategory')}
@@ -91,10 +99,17 @@ export default function CreateEvent({ onSubmit }) {
           <InputSelect
             label="ZONA TARGET"
             required={true}
-            placeholder=""
+            placeholder="-- Pilih Target --"
             options={EventSchemas.zonaOptions}
             error={errors.targetZone?.message}
-            {...register('targetZone')}
+            disabled={!watchEventCategory}
+            {...register('targetZone', {
+              onChange: () => {
+                if (!watchEventCategory) {
+                  setValue('targetZone', '');
+                }
+              },
+            })}
           />
         </div>
       </div>
@@ -139,7 +154,7 @@ export default function CreateEvent({ onSubmit }) {
         </h2>
         <InputFile
           label="Upload Materi"
-          description="Format yang didukung: .pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx (Max. 5MB)"
+          description="Format yang didukung: .pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx (Max. 10MB)"
           error={errors.eventMaterial?.message}
           {...register('eventMaterial')}
         />

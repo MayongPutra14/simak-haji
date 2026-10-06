@@ -5,7 +5,7 @@ export default function EditEventFragment() {
   const navigate = useNavigate();
 
   const handleCancel = () => {
-    navigate('/admin/eve');
+    navigate('/admin/events');
   };
   return (
     <>

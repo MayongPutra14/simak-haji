@@ -4,7 +4,7 @@ import z from 'zod';
 const coordinateRegex = /^-?\d*(\.\d*)?$/;
 
 // material settings
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB in bytes
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB in bytes
 const ACCEPTED_EXTENSIONS = [
   'pdf',
   'doc',

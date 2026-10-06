@@ -39,7 +39,7 @@ export const ListAdminUsersColumns = ({ onDelete, onViewDetail, onEdit }) => [
   },
   {
     key: 'zone',
-    header: 'Zona Wilayah',
+    header: 'Zona',
     className: 'text-slate-600 whitespace-nowrap',
     align: 'center',
   },

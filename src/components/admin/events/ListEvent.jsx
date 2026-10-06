@@ -68,22 +68,25 @@ export default function ListEvents({
         options: MONTH_OPTIONS,
       },
       {
-        key: 'type',
-        value: typeFilter,
-        onChange: handleTypeChange,
-        options: TYPE_OPTIONS,
-      },
-      {
         key: 'zone',
         value: zoneFilter,
         onChange: handleZoneChange,
-        options: uniqueZones.map((z) => ({ value: z, label: `Zona: ${z}` })),
+        options: uniqueZones.map((z) => ({
+          value: z,
+          label: z === 'Semua Zona' ? z : `${z}`,
+        })),
       },
       {
         key: 'status',
         value: statusFilter,
         onChange: handleStatusChange,
         options: STATUS_OPTIONS,
+      },
+      {
+        key: 'type',
+        value: typeFilter,
+        onChange: handleTypeChange,
+        options: TYPE_OPTIONS,
       },
     ],
     [
@@ -203,7 +206,7 @@ export default function ListEvents({
 
           <StatisticContainer
             label="Event Umum"
-            value={events.filter((e) => e.type === 'umum').length}
+            value={events.filter((e) => e.type === 'jamaah').length}
             icon={IconSpecial}
             bgClass="bg-gradient-to-br from-blue-500 to-sky-600 border-transparent"
             shadowColorClass="hover:shadow-blue-600/40"
@@ -215,7 +218,7 @@ export default function ListEvents({
 
           <StatisticContainer
             label="Event Khusus"
-            value={events.filter((e) => e.type === 'khusus').length}
+            value={events.filter((e) => e.type === 'leader').length}
             icon={IconSpecial}
             bgClass="bg-gradient-to-br from-pink-500 to-rose-600 border-transparent"
             shadowColorClass="hover:shadow-pink-600/40"
