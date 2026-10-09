@@ -107,3 +107,4 @@ export const StatusBadge = ({ label, isLabelFade = true, status }) => {
 
   return badgeElement;
 };
+

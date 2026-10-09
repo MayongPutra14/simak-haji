@@ -1,10 +1,3 @@
-import CreateEvent from '../../../components/admin/events/CreateEvent';
-
-export default function CreateEventFragment({ onSubmit }) {
-  return (
-    <>
-
-      <CreateEvent onSubmit={onSubmit} />
-    </>
-  );
+export default function CreateEventFragment({ children }) {
+  return <>{children}</>;
 }

@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from 'react-router';
 import { IoLogOutOutline } from 'react-icons/io5';
 import getNavItems from '../../../utils/helpers/navbar';
 import SimakLogo from '../../../assets/images/simak-logo.webp';
+import { useAuth } from '../../../features/auth/useAuth';
 export default function Navigation({ role = 'user' }) {
   const navItems = getNavItems(role);
 
@@ -100,9 +101,10 @@ function SidebarNavItem({ item }) {
  */
 function LogoutNavItem() {
   const navigate = useNavigate();
-
+  const { logout } = useAuth();
   const handleLogout = () => {
-    navigate('/login');
+    logout();
+    navigate('/login', { replace:true });
   };
 
   return (

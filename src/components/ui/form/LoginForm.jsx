@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import { InputLogin } from '../inputs/index';
 import { loginSchema } from '../../../utils/helpers/loginSchema';
 import Button from '../global/Button.jsx';
-import { LuIdCard as IconIdCard, LuLock as IconLock } from 'react-icons/lu';
+import { IconIdCard, IconLock } from '../../../utils/helpers/decorations.js';
 
 export default function LoginForm({ onSubmit }) {
   const [showPassword, setShowPassword] = useState(false);

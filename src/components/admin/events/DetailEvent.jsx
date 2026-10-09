@@ -3,6 +3,11 @@ import { QRCodeCanvas } from 'qrcode.react';
 import EventMap from './EventMap';
 import Button from '../../ui/global/Button';
 import {
+  handleCopyHash,
+  handleDownloadQR,
+  handleDownloadMaterial,
+} from '../../../utils/helpers/helpers';
+import {
   EventInfoSkeleton,
   EventMapSkeleton,
   EventMaterialSkeleton,
@@ -14,28 +19,25 @@ import {
   formatDateIndonesia,
   formatTimeIndonesia,
 } from '../../../utils/helpers/dateConversion';
-import { BsTextParagraph as IconParagraph } from 'react-icons/bs';
 import {
-  TbWorldLongitude as IconLongitude,
-  TbWorldLatitude as IconLatitude,
-  TbMapPin2 as IconRadius,
-  TbCopy as IconCopy,
-  TbCheck as IconCheck,
-  TbDownload as IconDownload,
-} from 'react-icons/tb';
-import {
-  IoEyeOutline as IconEye,
-  IoTimeOutline as IconClock,
-  IoCalendarClearOutline as IconCalendar,
-  IoLocationOutline as IconLocation,
-  IoPersonOutline as IconPerson,
-  IoLayersOutline as IconCategory,
-  IoClipboardOutline as IconClip,
-  IoDocumentTextOutline as IconDocs,
-  IoExpandOutline as IconExpand,
-} from 'react-icons/io5';
+  IconParagraph,
+  IconLatitude,
+  IconLongitude,
+  IconRadius,
+  IconCopy,
+  IconCheck,
+  IconDownload,
+  IconEye,
+  IconClock,
+  IconCalendar,
+  IconLocation,
+  IconPerson,
+  IconCategory,
+  IconClip,
+  IconDocs,
+  IconExpand,
+} from '../../../utils/helpers/decorations';
 
-// run this component with dummy event detail data
 export default function DetailEvent({ eventData, isLoading = false }) {
   const googleApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -48,64 +50,6 @@ export default function DetailEvent({ eventData, isLoading = false }) {
   const eventTime = formatTimeIndonesia(eventData.date);
   const eventDate = formatDateIndonesia(eventData.date);
   const nullData = 'tidak ada / belum diisi';
-
-  // Handler Copy Hash QR
-  const handleCopyHash = () => {
-    if (eventData.qrHash) {
-      navigator.clipboard.writeText(eventData.qrHash);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
-
-  // Handler Download Canvas QR Code ke PNG
-  const handleDownloadQR = () => {
-    const canvas = qrRef.current?.querySelector('canvas');
-    if (canvas) {
-      const url = canvas.toDataURL('image/png');
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `QR-${eventData.eventName.replace(/\s+/g, '_')}.png`;
-      link.click();
-    }
-  };
-
-  // Handle Download Material Event
-  const handleDownloadMaterial = async () => {
-    if (!eventData?.material?.file_path) return;
-
-    const fileUrl = `${BASE_URL}/${eventData.material.file_path}`;
-
-    // Get the original file extension (e.g., pdf, docx)
-    const fileExtension = eventData.material.file_path.split('.').pop();
-
-    // Create a clean file name for the download
-    const fileName = `Material_${eventData.eventName.replace(/\s+/g, '_')}.${fileExtension}`;
-
-    try {
-      // 1. Fetch the file as Blob data
-      const response = await fetch(fileUrl);
-      const blob = await response.blob();
-
-      // 2. Create a temporary URL object from the Blob
-      const blobUrl = window.URL.createObjectURL(blob);
-
-      // 3. Create an invisible <a> element to trigger the download
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.download = fileName; // Force the browser to download with this name
-      document.body.appendChild(link);
-      link.click();
-
-      // 4. Clean up from browser memory
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(blobUrl);
-    } catch (error) {
-      console.error('Failed to download file:', error);
-      // Fallback: If fetch fails (e.g., CORS issues), open the file in a new tab
-      window.open(fileUrl, '_blank');
-    }
-  };
 
   if (isLoading) {
     return (
@@ -193,7 +137,7 @@ export default function DetailEvent({ eventData, isLoading = false }) {
                   <label>Kategori Acara</label>
                 </div>
                 <p className="mt-1 text-sm font-semibold text-slate-700">
-                  {eventData.type || nullData}
+                  {eventData.category || nullData}
                 </p>
               </div>
             </div>
@@ -222,9 +166,15 @@ export default function DetailEvent({ eventData, isLoading = false }) {
                 <IconClock className="w-4 h-4" />
                 <label>Waktu Pelaksanaan</label>
               </div>
-              <p className="mt-1 text-sm font-semibold text-slate-700">
-                {eventTime || nullData}
-              </p>
+              {eventTime ? (
+                <p className="mt-1 text-sm font-semibold text-slate-700">
+                  {eventTime}
+                </p>
+              ) : (
+                <p className="mt-1 text-sm italic font-medium text-slate-400">
+                  {nullData || 'Tidak ada materi untuk acara ini.'}
+                </p>
+              )}
             </div>
           </div>
 
@@ -243,11 +193,11 @@ export default function DetailEvent({ eventData, isLoading = false }) {
               <div className="flex flex-col gap-3 p-4 border rounded-lg border-slate-200 bg-slate-50/50 sm:flex-row sm:items-center sm:justify-between">
                 <div className="space-y-1">
                   <p className="text-base font-semibold text-slate-800">
-                    {eventData.material.title}
+                    {eventData.eventName}
                   </p>
-                  {eventData.material.content && (
+                  {eventData.description && (
                     <p className="text-xs text-slate-500 line-clamp-2">
-                      {eventData.material.content}
+                      {eventData.description}
                     </p>
                   )}
                 </div>
@@ -256,7 +206,7 @@ export default function DetailEvent({ eventData, isLoading = false }) {
                 <div className="flex items-center gap-2 shrink-0">
                   {/* Preview button (new Tab) */}
                   <Button
-                    to={`http://localhost/simak_api/api/${eventData.material.file_path}`}
+                    to={`${BASE_URL}/${eventData.material.file_path}`}
                     variant="actions"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -269,7 +219,13 @@ export default function DetailEvent({ eventData, isLoading = false }) {
                   {/* Download button */}
                   <Button
                     type="button"
-                    onClick={handleDownloadMaterial}
+                    onClick={() =>
+                      handleDownloadMaterial(
+                        eventData.material,
+                        eventData.eventName,
+                        BASE_URL,
+                      )
+                    }
                     className="inline-flex cursor-pointer items-center justify-center gap-2 text-sm font-medium text-white transition-colors rounded-lg bg-sea-green-500 hover:bg-sea-green-600"
                   >
                     <IconDownload className="w-4 h-4" />
@@ -359,7 +315,9 @@ export default function DetailEvent({ eventData, isLoading = false }) {
                       {eventData.qrHash}
                     </code>
                     <button
-                      onClick={handleCopyHash}
+                      onClick={() =>
+                        handleCopyHash(eventData.qrHash, setCopied)
+                      }
                       type="button"
                       className="p-1 transition-colors border rounded-md text-slate-500 hover:text-slate-700 bg-slate-50 hover:bg-slate-100 border-slate-200"
                       title="Salin Hash"
@@ -376,7 +334,7 @@ export default function DetailEvent({ eventData, isLoading = false }) {
                 {/* Action Buttons */}
                 <div className="grid w-full grid-cols-2 gap-2 pt-2 border-t border-slate-100">
                   <button
-                    onClick={handleDownloadQR}
+                    onClick={() => handleDownloadQR(qrRef, eventData.eventName)}
                     type="button"
                     className="flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg transition-colors"
                   >

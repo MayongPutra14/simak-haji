@@ -1,7 +1,5 @@
-// src/hooks/admin/event/useEventFilters.js
 import { useState, useMemo } from 'react';
 
-// Hardcoded daftar bulan
 export const MONTH_OPTIONS = [
   { value: 'Semua Bulan', label: 'Semua Bulan' },
   { value: '01', label: 'Januari' },
@@ -19,13 +17,13 @@ export const MONTH_OPTIONS = [
 ];
 
 export const TYPE_OPTIONS = [
-  { value: 'Semua Tipe', label: 'Tipe: Semua' },
-  { value: 'umum', label: 'Umum' },
-  { value: 'khusus', label: 'Khusus' },
+  { value: 'Semua Tipe', label: 'Semua Kategori' },
+  { value: 'jamaah', label: 'Jamaah' },
+  { value: 'leader', label: 'Leader' },
 ];
 
 export const STATUS_OPTIONS = [
-  { value: 'Semua Status', label: 'Status: Semua' },
+  { value: 'Semua Status', label: 'Semua Status' },
   { value: 'mendatang', label: 'Mendatang' },
   { value: 'live', label: 'Live' },
   { value: 'selesai', label: 'Selesai' },

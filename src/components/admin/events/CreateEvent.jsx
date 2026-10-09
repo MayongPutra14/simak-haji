@@ -9,7 +9,9 @@ import {
   InputTime,
   InputSelect,
   InputFile,
+  TextArea,
 } from '../../ui/inputs/index';
+import { useEffect } from 'react';
 
 export default function CreateEvent({ onSubmit }) {
   const {
@@ -28,15 +30,82 @@ export default function CreateEvent({ onSubmit }) {
   const watchLat = useWatch({ control, name: 'latitude' });
   const watchLng = useWatch({ control, name: 'longitude' });
   const watchRadius = useWatch({ control, name: 'radius' });
+  const watchEventCategory = useWatch({ control, name: 'category' });
+
+  useEffect(() => {
+    if (!watchEventCategory) {
+      setValue('zone', '');
+    }
+  }, [watchEventCategory, setValue]);
 
   // CALLBACK WHEN MAP CLICKED
-  const handleSelectLocation = (lat, lng) => {
+  function handleSelectLocation(lat, lng) {
     setValue('latitude', lat, { shouldValidate: true });
     setValue('longitude', lng, { shouldValidate: true });
-  };
+  }
+
+  function onSubmitForm(formData) {
+    const payload = new FormData();
+
+    payload.append('nama_event', formData.eventName || '');
+    payload.append('deskripsi_event', formData.description || '');
+    payload.append('tempat', formData.location || '');
+    payload.append('pembicara', formData.speaker || '');
+    payload.append('jenis_event', formData.category || 'jamaah');
+    payload.append('status', formData.status || 'mendatang');
+
+    if (formData.category === 'leader') {
+      payload.append(
+        'zona_target',
+        formData.zone || formData.zona_target || '',
+      );
+    } else {
+      payload.append('zona_target', '');
+    }
+
+    // Mapping DATE & TIME
+    const datePart = formData.eventDate || '';
+    const timePart = formData.eventTime || '';
+    let formattedWaktuEvent = '';
+
+    if (datePart && timePart) {
+      formattedWaktuEvent = `${datePart} ${timePart}:00`;
+    } else if (datePart) {
+      formattedWaktuEvent = `${datePart} 00:00:00`;
+    }
+
+    payload.append('waktu_event', formattedWaktuEvent);
+    payload.append('latitude', parseFloat(formData.latitude) || 0);
+    payload.append('longitude', parseFloat(formData.longitude) || 0);
+    payload.append('radius', parseInt(formData.radius, 10) || 100);
+
+    // Handling File Upload
+    if (formData.material) {
+      const rawFile = formData.material;
+      let fileToUpload = null;
+
+      if (rawFile instanceof FileList && rawFile.length > 0) {
+        fileToUpload = rawFile[0];
+      } else if (rawFile instanceof File) {
+        fileToUpload = rawFile;
+      } else if (Array.isArray(rawFile) && rawFile[0] instanceof File) {
+        fileToUpload = rawFile[0];
+      }
+
+      if (fileToUpload) {
+        payload.append('material', fileToUpload);
+      }
+    }
+
+    // send data to parent component
+    if (onSubmit) {
+      onSubmit(payload);
+    }
+  }
+
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmitForm)}
       className="space-y-10 w-[95%] md:w-[98%]  p-6 mx-auto my-5 bg-white border shadow-sm md:p-8 rounded-xl border-slate-200"
     >
       {/* EVENT INFORMATION */}
@@ -53,10 +122,11 @@ export default function CreateEvent({ onSubmit }) {
             {...register('eventName')}
           />
 
-          {/* DESCRIPTION */}
-          <InputText
-            label="Deskripsi Acara"
-            placeholder=" Pembahasan tata cara ihram, fiqih wanita saat haji, dan tips menjaga kesehatan."
+          {/* EVENT DESCRIPTION */}
+          <TextArea
+            label="Deskripsi Event"
+            placeholder="Hadiri acara ini untuk menambah wawasan Anda seputar ibadah haji"
+            rows={5}
             error={errors.description?.message}
             {...register('description')}
           />
@@ -65,8 +135,8 @@ export default function CreateEvent({ onSubmit }) {
           <InputText
             label="Lokasi / Tempat Acara"
             placeholder="Masjid Agung Karawang"
-            error={errors.venue?.message}
-            {...register('venue')}
+            error={errors.location?.message}
+            {...register('location')}
           />
 
           {/* SPEAKER */}
@@ -79,22 +149,39 @@ export default function CreateEvent({ onSubmit }) {
 
           {/* EVENT CATEGORY */}
           <InputSelect
-            label="Jenis Acara"
+            label="Kategori Acara"
             required={true}
-            placeholder=""
+            placeholder="-- Pilih Kategori Acara --"
             options={EventSchemas.eventCategoryOptions}
-            error={errors.eventCategory?.message}
-            {...register('eventCategory')}
+            error={errors.category?.message}
+            {...register('category')}
           />
 
-          {/* ZONA TARGET */}
+          {/* ZONE */}
           <InputSelect
-            label="ZONA TARGET"
+            label="ZONA"
             required={true}
-            placeholder=""
+            placeholder="-- Pilih Target --"
             options={EventSchemas.zonaOptions}
-            error={errors.targetZone?.message}
-            {...register('targetZone')}
+            error={errors.zone?.message}
+            disabled={!watchEventCategory}
+            {...register('zone', {
+              onChange: () => {
+                if (!watchEventCategory) {
+                  setValue('zone', '');
+                }
+              },
+            })}
+          />
+
+          {/* EVENT STATUS */}
+          <InputSelect
+            label="Jenis Acara"
+            required={true}
+            placeholder="-- Pilih Status Acara --"
+            options={EventSchemas.eventStatusOptions}
+            error={errors.status?.message}
+            {...register('status')}
           />
         </div>
       </div>
@@ -139,9 +226,9 @@ export default function CreateEvent({ onSubmit }) {
         </h2>
         <InputFile
           label="Upload Materi"
-          description="Format yang didukung: .pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx (Max. 5MB)"
-          error={errors.eventMaterial?.message}
-          {...register('eventMaterial')}
+          description="Format yang didukung: .pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx (Max. 10MB)"
+          error={errors.material?.message}
+          {...register('material')}
         />
       </div>
 
@@ -150,15 +237,35 @@ export default function CreateEvent({ onSubmit }) {
         <h2 className="bg-sea-green-50 text-sea-green-700 px-4 py-2.5 rounded-lg font-semibold text-md md:text-xl">
           Lokasi Event & Radius Presensi
         </h2>
-
-        <EventMap
-          apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
-          latitude={watchLat}
-          longitude={watchLng}
-          radius={watchRadius}
-          onSelectLocation={handleSelectLocation}
-          error={errors.latitude?.message || errors.longitude?.message}
+        {/* RADIUS */}
+        <InputText
+          label="Radius Absen (Meter)"
+          placeholder="150"
+          required={true}
+          error={errors.radius?.message}
+          {...register('radius', {
+            onChange: (e) => {
+              const value = e.target.value.replace(/[^0-9]/g, '');
+              e.target.value = value;
+            },
+          })}
         />
+
+        <div>
+          <div className="mb-3">
+            <label className="text-sm font-semibold md:text-normal text-slate-700">
+              Peta Lokasi
+            </label>
+          </div>
+          <EventMap
+            apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+            latitude={watchLat}
+            longitude={watchLng}
+            radius={watchRadius}
+            onSelectLocation={handleSelectLocation}
+            error={errors.latitude?.message || errors.longitude?.message}
+          />
+        </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* LATITUDE */}
@@ -166,20 +273,6 @@ export default function CreateEvent({ onSubmit }) {
 
           {/* LONGITUDE */}
           <InputText type="hidden" {...register('longitude')} />
-
-          {/* RADIUS */}
-          <InputText
-            label="Radius Absen (Meter)"
-            placeholder="150"
-            required={true}
-            error={errors.radius?.message}
-            {...register('radius', {
-              onChange: (e) => {
-                const value = e.target.value.replace(/[^0-9]/g, '');
-                e.target.value = value;
-              },
-            })}
-          />
         </div>
       </div>
 

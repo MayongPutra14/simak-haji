@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import {
-  FaFilePdf,
-  FaFileWord,
-  FaFilePowerpoint,
-  FaFileExcel,
-  FaFileAlt,
-  FaUpload,
-  FaEye,
-} from 'react-icons/fa';
+  IconPdf,
+  IconWord,
+  IconPpt,
+  IconExcel,
+  IconAlt,
+  IconUpload,
+  IconEye,
+} from '../../../utils/helpers/decorations';
 
 const InputFile = React.forwardRef(
   (
     {
       label,
+      isLabelGreen = false,
+      isLabelFade = false,
       description,
       required = false,
       error,
@@ -37,26 +39,48 @@ const InputFile = React.forwardRef(
     // ERROR MESSAGE CHECKING
     const errorMessage = typeof error === 'string' ? error : error?.message;
 
-    // HELPER FOR SELECT REACT ICON BASE ON FLE TYPE
+    // HELPER FOR SELECT REACT ICON BASED ON FILE TYPE
     const getFileIcon = (typeOrName) => {
-      const lower = typeOrName?.toLowerCase() || '';
-      if (lower.includes('pdf')) {
-        return <FaFilePdf className="w-6 h-6 text-red-500" />;
-      }
-      if (lower.includes('word') || lower.includes('doc')) {
-        return <FaFileWord className="w-6 h-6 text-blue-500" />;
-      }
-      if (lower.includes('presentation') || lower.includes('ppt')) {
-        return <FaFilePowerpoint className="w-6 h-6 text-orange-500" />;
-      }
+      if (!typeOrName) return <IconAlt className="w-6 h-6 text-slate-500" />;
+
+      const lower = typeOrName.toLowerCase();
+
+      // extract file extension if string contains a dot
+      const extension = lower.includes('.') ? lower.split('.').pop() : lower;
+
+      // check for excel / spreadsheet formats
       if (
-        lower.includes('sheet') ||
-        lower.includes('xls') ||
-        lower.includes('csv')
+        ['xls', 'xlsx', 'csv', 'sheet', 'spreadsheet'].includes(extension) ||
+        lower.includes('excel') ||
+        lower.includes('spreadsheet')
       ) {
-        return <FaFileExcel className="w-6 h-6 text-green-500" />;
+        return <IconExcel className="w-6 h-6 text-green-500" />;
       }
-      return <FaFileAlt className="w-6 h-6 text-slate-500" />;
+
+      // check for word / document formats
+      if (
+        ['doc', 'docx'].includes(extension) ||
+        lower.includes('word') ||
+        lower.includes('msword')
+      ) {
+        return <IconWord className="w-6 h-6 text-blue-500" />;
+      }
+
+      // check for presentation formats
+      if (
+        ['ppt', 'pptx'].includes(extension) ||
+        lower.includes('presentation') ||
+        lower.includes('powerpoint')
+      ) {
+        return <IconPpt className="w-6 h-6 text-orange-500" />;
+      }
+
+      // check for pdf formats
+      if (extension === 'pdf' || lower.includes('pdf')) {
+        return <IconPdf className="w-6 h-6 text-red-500" />;
+      }
+
+      return <IconAlt className="w-6 h-6 text-slate-500" />;
     };
 
     // SYNC FILE ATAU URL WHEN VALUE CHANGE
@@ -143,22 +167,28 @@ const InputFile = React.forwardRef(
       ? 'w-full bg-white p-5 rounded-lg border border-gray-200 shadow-sm flex flex-col gap-2'
       : 'w-full flex flex-col gap-1.5';
 
+    // Variant label green, default adn fade
+    const labelSytle = isLabelGreen
+      ? 'text-xs text-teal-200 font-medium'
+      : isLabelFade
+        ? 'text-xs font-semibold text-slate-400 flex items-center gap-1'
+        : 'text-sm font-semibold md:text-normal text-slate-700';
+
+    const descriptionStyle = isLabelFade
+      ? 'text-xs font-normal text-slate-400 flex items-center gap-1'
+      : '-mt-1 text-xs md:text-sm text-slate-500';
     return (
       <div className={`${wrapperStyles} ${containerClassName}`}>
         {/* LABEL */}
         {label && (
-          <label className="text-sm font-semibold md:text-base text-slate-700">
+          <label className={`${labelSytle}`}>
             {label}
             {required && <span className="ml-1 text-red-500">*</span>}
           </label>
         )}
 
         {/* DESCRIPTION */}
-        {description && (
-          <p className="-mt-1 text-xs md:text-sm text-slate-500">
-            {description}
-          </p>
-        )}
+        {description && <p className={`${descriptionStyle}`}>{description}</p>}
 
         {/* INPUT CONTAINER */}
         <div
@@ -170,7 +200,7 @@ const InputFile = React.forwardRef(
             <label
               className={`cursor-pointer inline-flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors duration-200 shadow-sm ${buttonVariantStyles[variant]} ${className}`}
             >
-              <FaUpload className="w-4 h-4" />
+              <IconUpload className="w-4 h-4" />
               <span>Pilih File</span>
               <input
                 ref={ref}
@@ -214,10 +244,10 @@ const InputFile = React.forwardRef(
                   href={previewUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 transition-colors rounded-md text-slate-500 hover:text-blue-600 hover:bg-white"
+                  className="p-2 transition-colors rounded-md text-slate-500 hover:text-slate-700 hover:bg-slate-200"
                   title="Pratinjau File"
                 >
-                  <FaEye className="w-4 h-4" />
+                  <IconEye className="w-4 h-4" />
                 </a>
               )}
             </div>

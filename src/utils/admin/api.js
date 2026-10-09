@@ -280,6 +280,46 @@ export const getEventDetailAPI = async (eventId) => {
   return response.data;
 };
 
+export const updateEventAPI = async (eventId, payload) => {
+  if (!eventId || !payload) {
+    return {
+      status: 'failed',
+      message:
+        'Id event atau data event tidak ditemukan, pastikan anda mengisi data dengan benar',
+    };
+  }
+
+  let bodyPayload;
+  let config = {};
+  if (payload instanceof FormData) {
+    bodyPayload = payload;
+    if (!bodyPayload.has('action')) {
+      bodyPayload.append('action', 'update_event');
+    }
+
+    if (!bodyPayload.has('event_id')) {
+      bodyPayload.append('event_id', `${eventId}`);
+    }
+
+    // Overwrite Header Content-Type agar Axios/Browser otomatis menyusun Multipart Boundary
+    config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+  } else {
+    bodyPayload = {
+      event_id: eventId,
+      action: 'update_event',
+      ...payload,
+    };
+  }
+
+  const response = await api.post('admin.php', bodyPayload, config);
+
+  return response.data;
+};
+
 export const deleteEventAPI = async (eventId) => {
   if (!eventId)
     return {

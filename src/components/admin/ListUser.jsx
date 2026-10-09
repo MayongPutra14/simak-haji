@@ -80,7 +80,7 @@ export default function ListUser({
       onChange: handleZoneChange,
       options: uniqueZones.map((z) => ({
         value: z,
-        label: z === 'Semua Zona' ? z : `Zona ${z}`,
+        label: z === 'Semua Zona' ? z : `${z}`,
       })),
     };
 

@@ -4,7 +4,7 @@ import z from 'zod';
 const coordinateRegex = /^-?\d*(\.\d*)?$/;
 
 // material settings
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB in bytes
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB in bytes
 const ACCEPTED_EXTENSIONS = [
   'pdf',
   'doc',
@@ -18,11 +18,24 @@ const ACCEPTED_EXTENSIONS = [
 export const EventSchema = z.object({
   eventName: z.string().min(1, 'Nama acara wajib diisi'),
   description: z.string().nullable().optional(),
-  venue: z.string().min(1, 'Lokasi acara wajib diisi'),
+  location: z.string().min(1, 'Lokasi acara wajib diisi'),
   speaker: z.string().min(1, 'Nama pembicara wajib diisi'),
-  eventCategory: z.string().min(1, 'Jenis event wajib diisi'),
-  targetZone: z.string().nullable().optional(),
-  eventMaterial: z.union(
+  category: z.string().min(1, 'Kategori event wajib diisi'),
+  zone: z.string().nullable().optional(),
+  status: z.string().min(1, 'Status event wajib diisi'),
+  eventDate: z.iso.date({
+    error: (issue) =>
+      issue.input === undefined || issue.input === ''
+        ? 'Tanggal acara wajib diisi'
+        : 'Format tanggal tidak valid',
+  }),
+  eventTime: z.iso.time({
+    error: (issue) =>
+      issue.input === undefined || issue.input === ''
+        ? 'Waktu acara wajib diisi'
+        : 'Format waktu tidak valid',
+  }),
+  material: z.union(
     [
       // Case 1: User uploads a new file (Reading FileList from React Hook Form)
       z.custom(
@@ -81,23 +94,40 @@ export const EventSchema = z.object({
     .refine((val) => val > 0, {
       message: 'Radius harus lebih besar dari 0',
     }),
-  eventDate: z.iso.date({
-    error: (issue) =>
-      issue.input === undefined || issue.input === ''
-        ? 'Tanggal acara wajib diisi'
-        : 'Format tanggal tidak valid',
-  }),
-  eventTime: z.iso.time({
-    error: (issue) =>
-      issue.input === undefined || issue.input === ''
-        ? 'Waktu acara wajib diisi'
-        : 'Format waktu tidak valid',
-  }),
+});
+
+export const UpdateEventSchemas = EventSchema.partial().extend({
+  // OVERRIDE MATERIAL SCHEMA TO ALLOW UNDEFINED/NULL ON UPDATE
+  material: z
+    .union([
+      // CASE 1: USER UPLOADS A NEW FILE
+      z.custom((val) => {
+        // allow empty input if file is not replaced
+        if (!val || (val instanceof FileList && val.length === 0)) return true;
+        if (!(val instanceof FileList)) return false;
+
+        const file = val[0];
+        if (file.size > MAX_FILE_SIZE) return false;
+
+        const fileExtension = file.name.split('.').pop()?.toLowerCase();
+        return ACCEPTED_EXTENSIONS.includes(fileExtension || '');
+      }),
+      // CASE 2: EXISTING FILE URL STRING
+      z.string(),
+    ])
+    .nullable()
+    .optional(),
 });
 
 export const eventCategoryOptions = [
-  { label: 'Umum', value: 'umum' },
-  { label: 'Khusus', value: 'khusus' },
+  { label: 'Jamaah', value: 'jamaah' },
+  { label: 'Leader', value: 'leader' },
+];
+
+export const eventStatusOptions = [
+  { label: 'Mendatang', value: 'mendatang' },
+  { label: 'Live', value: 'live' },
+  { label: 'Selesai', value: 'selesai' },
 ];
 
 export const zonaOptions = [

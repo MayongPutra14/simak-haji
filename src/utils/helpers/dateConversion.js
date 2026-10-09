@@ -1,3 +1,7 @@
+/**
+ * Change format to Indonesia date
+ * Example: '2026-08-25' become 'Selasa, 25 Agustus 2026'
+ */
 export function formatDateIndonesia(dateString) {
   if (!dateString) return 'Tanggal belum ditentukan';
   const dateObj = new Date(dateString.replace(' ', 'T'));
@@ -58,3 +62,24 @@ export const formatTanggalIndonesia = (date) => {
   const opsi = { year: 'numeric', month: 'long', day: 'numeric' };
   return new Date(date).toLocaleDateString('id-ID', opsi);
 };
+
+/**
+ * PARSE DATETIME FROM BACKEND FOR FORM INPUTS
+ * Parses string format "YYYY-MM-DD HH:mm:ss" into split date and time values.
+ */
+export function parseDateTimeForInput(dateTimeString) {
+  if (!dateTimeString) {
+    return { eventDate: '', eventTime: '' };
+  }
+
+  // split date and time parts
+  const [datePart = '', timePart = ''] = dateTimeString.split(' ');
+
+  // extract HH:mm from HH:mm:ss
+  const formattedTime = timePart ? timePart.slice(0, 5) : '';
+
+  return {
+    eventDate: datePart,
+    eventTime: formattedTime,
+  };
+}

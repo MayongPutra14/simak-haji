@@ -5,8 +5,8 @@ import {
 import { FaRegEdit as IconEdit } from 'react-icons/fa';
 import ButtonsActionTable from '../../components/ui/global/ButtonsActionTable';
 import { formatDateIndonesia } from '../../utils/helpers/dateConversion';
-import { titleCase } from '../../utils/helpers/titleCase';
-import { StatusBadge } from '../../components/ui/global/StatusBedge';
+import { titleCase } from '../../utils/helpers/helpers';
+import { StatusBadge } from '../../components/ui/global/StatusComponents';
 
 export const ListAdminEventColumns = ({ onDelete, onViewDetail, onEdit }) => [
   {
@@ -44,7 +44,7 @@ export const ListAdminEventColumns = ({ onDelete, onViewDetail, onEdit }) => [
   },
   {
     key: 'zone',
-    header: 'Zona Event',
+    header: 'Zona',
     className: 'text-slate-600 whitespace-nowrap',
     align: 'center',
     render: (event) => event.zone || '-',
@@ -57,20 +57,20 @@ export const ListAdminEventColumns = ({ onDelete, onViewDetail, onEdit }) => [
     render: (event) => StatusBadge({ status: event.status || '-' }),
   },
   {
-    key: 'type',
-    header: 'Jenis Event',
+    key: 'category',
+    header: 'Kategori Event',
     className: 'whitespace-nowrap',
     align: 'center',
     render: (event) =>
-      event.type === 'umum' ? (
+      event.category === 'jamaah' ? (
         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-          Umum
+          Jamaah
         </span>
       ) : (
         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200/60">
           <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-          Khusus
+          Leader
         </span>
       ),
   },

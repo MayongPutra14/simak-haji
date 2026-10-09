@@ -4,8 +4,8 @@ import {
 } from 'react-icons/md';
 import { FaRegEdit as IconEdit } from 'react-icons/fa';
 import ButtonsActionTable from '../../components/ui/global/ButtonsActionTable';
-import { StatusBadge } from '../../components/ui/global/StatusBedge';
-import { titleCase } from '../../utils/helpers/titleCase';
+import { StatusBadge } from '../../components/ui/global/StatusComponents';
+import { titleCase } from '../../utils/helpers/helpers';
 
 export const ListAdminUsersColumns = ({ onDelete, onViewDetail, onEdit }) => [
   {
@@ -39,7 +39,7 @@ export const ListAdminUsersColumns = ({ onDelete, onViewDetail, onEdit }) => [
   },
   {
     key: 'zone',
-    header: 'Zona Wilayah',
+    header: 'Zona',
     className: 'text-slate-600 whitespace-nowrap',
     align: 'center',
   },

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import { useAuth } from '../../../features/auth/useAuth';
 import { MdLogout as IconLogout } from 'react-icons/md';
-import { titleCase } from '../../../utils/helpers/titleCase';
+import { titleCase } from '../../../utils/helpers/helpers';
 const DEFAULT_PROFILE = {
   nama_lengkap: 'Guest User',
   role: 'guest',
@@ -18,7 +18,7 @@ export default function Header() {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/login', { replace: true });
   };
 
   return (

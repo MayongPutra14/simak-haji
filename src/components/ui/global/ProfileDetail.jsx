@@ -3,11 +3,11 @@ import { move } from '@dnd-kit/helpers';
 import { DragDropProvider } from '@dnd-kit/react';
 import { SortableCard } from './SortableCard';
 import UpdatePasswordCard from '../inputs/UpdatePasswordCard';
-import { titleCase } from '../../../utils/helpers/titleCase';
+import { titleCase } from '../../../utils/helpers/helpers';
 import { useAuth } from '../../../features/auth/useAuth';
 import { getDocumentStatus } from '../../../utils/helpers/status';
-import { StatusBadge } from './StatusBedge';
-import { DetailField } from './StatusBedge';
+import { StatusBadge } from './StatusComponents';
+import { DetailField } from './StatusComponents';
 import {
   formatTanggalIndonesia,
   hitungUmur,
@@ -336,11 +336,9 @@ export default function ProfileDetail({ data, isLoading = false }) {
   };
 
   return (
-    <div className=" w-[95%] md:w-[98%] mx-auto py-6 space-y-5 font-sans">
+    <div className=" w-[95%] md:w-[98%] mx-auto py-6 space-y-5">
       {/* Main Profile (Hero Bento Card) */}
       <div className="relative flex flex-col items-center gap-6 p-6 overflow-hidden text-white border shadow-xl bg-linear-to-r from-sea-green-900 via-sea-green-800 to-emerald-900 rounded-3xl lg:p-8 border-sea-green-700 md:flex-row md:items-center">
-        {/* Perubahan: md:items-start diubah ke md:items-center agar teks di kanan sejajar di tengah secara vertikal dengan foto 3x4 yang tinggi */}
-
         {/* Decorative Background Accent */}
         <div className="absolute w-48 h-48 rounded-full pointer-events-none -right-10 -bottom-10 bg-sea-green-600/20 blur-2xl"></div>
 
