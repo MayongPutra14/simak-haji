@@ -6,6 +6,7 @@ import {
   LoginPage,
   RegisterPage,
   ProtectedRoute,
+  PublicRoute,
   LandingPage,
   NotFoundPage,
   UnderDevelopment,
@@ -43,8 +44,12 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
+
+      {/* PUBLIC/GUEST ROUTES */}
+      <Route element={<PublicRoute />}>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Route>
 
       {/* ADMIN ROUTES */}
       <Route element={<ProtectedRoute allowedRoles={['admin']} />}>

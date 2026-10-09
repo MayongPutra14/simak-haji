@@ -1,5 +1,5 @@
 import { IoLocationOutline } from 'react-icons/io5';
-import { bgImage } from '../../../utils/helpers/bgImage';
+import { bgImage } from '../../../utils/helpers/decorations';
 import { usePrayTimes } from '../../../hooks/global/usePrayTimes';
 
 export default function PrayTimesWidget() {

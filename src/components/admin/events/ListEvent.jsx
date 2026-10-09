@@ -5,16 +5,9 @@ import SearcInput from '../../ui/inputs/SeacrhInput';
 import Button from '../../ui/global/Button';
 import StatisticContainer from '../../ui/global/StatisticContainer';
 import Modal from '../../ui/global/Modal';
+import InlineFilterBar from '../components/InlineFilterBar';
 import { ListAdminEventColumns } from '../../../features/admin/ListAdminEventColumns';
 import { SkeletonTableAdminUsers } from '../../ui/global/skeletons/index';
-import { HiStatusOnline as IconOnline } from 'react-icons/hi';
-import {
-  MdAdd as IconAdd,
-  MdOutlineNavigateNext as IconNav,
-  MdPeople as IconPeople,
-  MdOutlineFolderSpecial as IconSpecial,
-} from 'react-icons/md';
-import { IoWarningOutline as IconWarning } from 'react-icons/io5';
 import { calculateUniqueZone } from '../../../utils/helpers/statsCalculators';
 import {
   useEventFilters,
@@ -22,7 +15,14 @@ import {
   TYPE_OPTIONS,
   STATUS_OPTIONS,
 } from '../../../hooks/admin/event/useEventFilters';
-import InlineFilterBar from '../components/InlineFilterBar';
+import {
+  IconOnline,
+  IconAdd,
+  IconNav,
+  IconPeople,
+  IconSpecial,
+  IconWarning,
+} from '../../../utils/helpers/decorations';
 
 export default function ListEvents({
   events = [],
@@ -83,7 +83,7 @@ export default function ListEvents({
         options: STATUS_OPTIONS,
       },
       {
-        key: 'type',
+        key: 'category',
         value: typeFilter,
         onChange: handleTypeChange,
         options: TYPE_OPTIONS,
@@ -112,7 +112,7 @@ export default function ListEvents({
   }, [filteredEvents, currentPage, itemsPerPage]);
 
   // HANDLER DELETE EVENT
-  const confirmDelete = async () => {
+  async function confirmDelete() {
     if (!deleteTarget || !onDelete) return;
 
     setLocalDeleteError(null);
@@ -127,13 +127,13 @@ export default function ListEvents({
     } else {
       setLocalDeleteError(result?.message || 'Gagal menghapus event');
     }
-  };
+  }
 
-  const handleCloseModal = () => {
+  function handleCloseModal() {
     if (isLoading) return;
     setDeleteTarget(null);
     setLocalDeleteError(null);
-  };
+  }
 
   // COLUMNS DEFINITION
   const columns = useMemo(
@@ -206,7 +206,7 @@ export default function ListEvents({
 
           <StatisticContainer
             label="Event Umum"
-            value={events.filter((e) => e.type === 'jamaah').length}
+            value={events.filter((e) => e.category === 'jamaah').length}
             icon={IconSpecial}
             bgClass="bg-gradient-to-br from-blue-500 to-sky-600 border-transparent"
             shadowColorClass="hover:shadow-blue-600/40"
@@ -218,7 +218,7 @@ export default function ListEvents({
 
           <StatisticContainer
             label="Event Khusus"
-            value={events.filter((e) => e.type === 'leader').length}
+            value={events.filter((e) => e.category === 'leader').length}
             icon={IconSpecial}
             bgClass="bg-gradient-to-br from-pink-500 to-rose-600 border-transparent"
             shadowColorClass="hover:shadow-pink-600/40"
