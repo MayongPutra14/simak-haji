@@ -115,7 +115,16 @@ export const EventTimeSkeleton = () => {
         <div className="h-5 bg-slate-200 rounded w-40"></div>
       </div>
 
-      {/* TIME */}
+      {/* TIME START*/}
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 bg-slate-200 rounded"></div>
+          <div className="h-4 bg-slate-200 rounded w-32"></div>
+        </div>
+        <div className="h-5 bg-slate-200 rounded w-36"></div>
+      </div>
+
+      {/* TIME END*/}
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 bg-slate-200 rounded"></div>
@@ -255,3 +264,142 @@ export const EventParametersSkeleton = () => {
     </div>
   );
 };
+
+// SKELETON LOADING FOR USERS
+// skeleton laoding for events menu in user
+export function EventCardSkeleton() {
+  return (
+    <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-slate-200/60 bg-white shadow-xs animate-pulse">
+      {/* Accent Placeholder */}
+      <div className="h-1 w-full bg-slate-200" />
+
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
+        {/* Status Badges Placeholder */}
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-2">
+          <div className="h-7 w-20 rounded-full bg-slate-200" />
+          <div className="h-7 w-24 rounded-full bg-slate-200" />
+        </div>
+
+        {/* Event title & Description Placeholder */}
+        <div className="mb-5 min-w-0">
+          {/* Subtitle / Informasi Kegiatan */}
+          <div className="h-3 w-28 rounded-md bg-slate-200/80 mb-2" />
+
+          {/* Judul Acara dengan min-h-14 agar tinggi tetap konsisten */}
+          <div className="min-h-14 flex flex-col justify-center space-y-1.5">
+            <div className="h-5 w-[90%] rounded-md bg-slate-200" />
+            <div className="h-5 w-[55%] rounded-md bg-slate-200" />
+          </div>
+
+          {/* Deskripsi Acara dengan min-h-10 */}
+          <div className="mt-2 min-h-10 flex flex-col justify-center space-y-1.5">
+            <div className="h-3.5 w-full rounded-md bg-slate-200/70" />
+            <div className="h-3.5 w-[85%] rounded-md bg-slate-200/70" />
+          </div>
+        </div>
+
+        {/* Event details List Placeholder */}
+        <div className="mt-auto border-t border-slate-100 pt-4">
+          {/* Mengikuti grid layout bawaan komponen asli */}
+          <div className="grid grid-cols-1 gap-3 sm:gap-y-4">
+            {/* Membuat 4-5 baris item detail simulasi */}
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div
+                key={i}
+                className="flex min-w-0 items-start gap-3 rounded-xl p-2"
+              >
+                {/* Icon Box */}
+                <div className="h-9 w-9 shrink-0 rounded-lg bg-slate-200/80" />
+
+                {/* Text Lines */}
+                <div className="min-w-0 flex-1 py-0.5">
+                  {/* Label */}
+                  <div className="h-3 w-12 rounded-sm bg-slate-200/60 mb-1.5" />
+                  {/* Value */}
+                  <div className="h-4 w-[65%] rounded-md bg-slate-200" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// Skeleton loading for event dashboard in user
+export function EventDashboardSkeleton() {
+  const skeletonCards = Array.from({ length: 1 });
+
+  return (
+    <section className="mx-auto mt-6 flex w-[95%] flex-col pb-6 md:w-[98%] animate-pulse">
+      {/* Section heading Skeleton */}
+      <div className="mb-5">
+        <div className="h-6 w-36 rounded-md bg-slate-200 mb-2" />
+        <div className="h-4 w-64 rounded-md bg-slate-200/80" />
+      </div>
+
+      {/* Event card grid */}
+      <div className="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        {skeletonCards.map((_, index) => (
+          <article
+            key={index}
+            className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-slate-200/60 bg-white shadow-xs"
+          >
+            {/* Accent Line Placeholder */}
+            <div className="h-1 w-full bg-slate-200" />
+
+            <div className="flex flex-1 flex-col p-4 sm:p-5">
+              {/* Status badges Skeleton */}
+              <div className="mb-5 flex flex-wrap items-center justify-end gap-2">
+                <div className="h-7 w-24 rounded-full bg-slate-200/70" />
+              </div>
+
+              {/* Event title and description Skeleton */}
+              <div className="mb-5 min-w-0 border-l-[3px] border-slate-200 pl-4">
+                {/* Detail Kegiatan label */}
+                <div className="h-3 w-24 rounded-md bg-slate-200/80 mb-2" />
+                {/* Judul Acara (2 Baris) */}
+                <div className="space-y-1.5 mb-3">
+                  <div className="h-5 w-[90%] rounded-md bg-slate-200" />
+                  <div className="h-5 w-[60%] rounded-md bg-slate-200" />
+                </div>
+                {/* Deskripsi Acara */}
+                <div className="space-y-1.5">
+                  <div className="h-3.5 w-full rounded-md bg-slate-200/70" />
+                  <div className="h-3.5 w-[85%] rounded-md bg-slate-200/70" />
+                </div>
+              </div>
+
+              {/* Event information List Skeleton */}
+              <div className="mb-5 mt-auto space-y-1 border-t border-slate-100 pt-4">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="flex min-w-0 items-start gap-3 rounded-xl px-2 py-2"
+                  >
+                    {/* Icon Box Placeholder */}
+                    <div className="h-9 w-9 shrink-0 rounded-lg bg-slate-200/80" />
+
+                    {/* Text Placeholder */}
+                    <div className="min-w-0 flex-1 py-0.5">
+                      {/* Label */}
+                      <div className="h-3 w-12 rounded-sm bg-slate-200/60 mb-1.5" />
+                      {/* Value */}
+                      <div className="h-4 w-[70%] rounded-md bg-slate-200" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Action button Skeleton */}
+              <div className="mt-auto border-t border-slate-100 pt-4">
+                <div className="h-10 w-full rounded-lg bg-slate-200" />
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}

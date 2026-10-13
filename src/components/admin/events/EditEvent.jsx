@@ -32,12 +32,14 @@ export default function EditEvent({
     if (!initialData) return undefined;
 
     // extract and parse datetime string from backend
-    const { eventDate, eventTime } = parseDateTimeForInput(initialData.date);
+    const start = parseDateTimeForInput(initialData.timeStart);
+    const end = parseDateTimeForInput(initialData.timeEnd);
 
     return {
       ...initialData,
-      eventDate,
-      eventTime,
+      eventStartDate: start.date,
+      eventTimeStart: start.time,
+      eventTimeEnd: end.time,
       radius: initialData.radius ? String(initialData.radius) : '',
     };
   }, [initialData]);
@@ -69,16 +71,40 @@ export default function EditEvent({
   function onSubmitForm(data) {
     const formData = new FormData();
 
+    const eventDate =
+      data.eventStartDate ||
+      data.date ||
+      new Date().toISOString().split('T')[0];
+
     // COMBINE DATE AND TIME FOR BACKEND DATETIME FIELD
-    if (data.eventDate && data.eventTime) {
-      const combinedDateTime = `${data.eventDate} ${data.eventTime}:00`;
-      formData.append('date', combinedDateTime);
+    if (data.eventTimeStart) {
+      const timeWithSeconds =
+        data.eventTimeStart.length === 5
+          ? `${data.eventTimeStart}:00`
+          : data.eventTimeStart;
+      const formattedStart = `${eventDate} ${timeWithSeconds}`;
+      formData.append('timeStart', formattedStart);
+    }
+
+    if (data.eventTimeEnd) {
+      const timeWithSeconds =
+        data.eventTimeEnd.length === 5
+          ? `${data.eventTimeEnd}:00`
+          : data.eventTimeEnd;
+      const formattedEnd = `${eventDate} ${timeWithSeconds}`;
+      formData.append('timeEnd', formattedEnd);
     }
 
     // PROCESS FORM FIELDS INTO FORMDATA
     Object.keys(data).forEach((key) => {
       // skip internal date/time split fields to avoid duplicate payload
-      if (key === 'eventDate' || key === 'eventTime') return;
+      if (
+        key === 'eventStartDate' ||
+        key === 'eventTimeStart' ||
+        key === 'eventTimeEnd' ||
+        key === 'timeEnd'
+      )
+        return;
 
       const value = data[key];
 
@@ -214,7 +240,7 @@ export default function EditEvent({
 
               {/* EVENT CATEGORY */}
               <InputSelect
-                label="Kategori Acara"
+                label="Kategori Event"
                 isLabelFade
                 placeholder="-- Pilih Kategori --"
                 variant="editProfile"
@@ -260,23 +286,43 @@ export default function EditEvent({
               <InputDate
                 label="Tanggal Pelaksanaan Acara"
                 isLabelFade
-                error={errors.eventDate?.message}
-                {...register('eventDate')}
+                variant="editProfile"
+                error={errors.eventStartDate?.message}
+                {...register('eventStartDate')}
               />
             </div>
 
             {/* TIME */}
             <div className="space-y-3">
-              {/* EVENT TIME */}
+              {/* EVENT TIME START */}
               <Controller
-                name="eventTime"
+                name="eventTimeStart"
                 control={control}
-                rules={{ required: 'Jam pelaksanaan acara wajib diisi' }}
+                rules={{ required: 'Waktu mulai acara wajib diisi' }}
                 render={({ field }) => (
                   <InputTime
-                    label="Jam Pelaksanaan Acara"
-                    required={true}
-                    error={errors.eventTime?.message}
+                    label="Waktu Mulai Acara"
+                    isLabelFade
+                    variant="editProfile"
+                    error={errors.eventTimeStart?.message}
+                    value={field.value || ''}
+                    onChange={field.onChange}
+                    ref={field.ref}
+                  />
+                )}
+              />
+
+              {/* EVENT TIME END */}
+              <Controller
+                name="eventTimeEnd"
+                control={control}
+                rules={{ required: 'waktu selesai acara wajib diisi' }}
+                render={({ field }) => (
+                  <InputTime
+                    label="Waktu Selesai Acara"
+                    isLabelFade
+                    variant="editProfile"
+                    error={errors.eventTimeEnd?.message}
                     value={field.value || ''}
                     onChange={field.onChange}
                     ref={field.ref}

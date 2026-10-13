@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
 import EventMap from './EventMap';
 import Button from '../../ui/global/Button';
+import { DetailField } from '../../ui/global/StatusComponents';
 import {
   handleCopyHash,
   handleDownloadQR,
@@ -47,9 +48,9 @@ export default function DetailEvent({ eventData, isLoading = false }) {
   const qrRef = useRef(null);
 
   // date and time formatting helpers
-  const eventTime = formatTimeIndonesia(eventData.date);
-  const eventDate = formatDateIndonesia(eventData.date);
-  const nullData = 'tidak ada / belum diisi';
+  const eventDate = formatDateIndonesia(eventData.timeStart);
+  const eventTimeStart = formatTimeIndonesia(eventData.timeStart);
+  const eventTimeEnd = formatTimeIndonesia(eventData.timeEnd);
 
   if (isLoading) {
     return (
@@ -87,59 +88,53 @@ export default function DetailEvent({ eventData, isLoading = false }) {
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {/* EVENT NAME */}
-              <div>
-                <div className="flex items-center gap-2 text-sm font-medium text-slate-700/30 ">
-                  <IconClip className="w-4 h-4" />
-                  <label>Nama Event</label>
-                </div>
-                <p className="mt-1 text-sm font-semibold text-slate-700">
-                  {eventData.eventName || nullData}
-                </p>
-              </div>
+              <DetailField
+                label="Nama Event"
+                icon={IconClip}
+                value={eventData.eventName}
+              />
 
               {/* EVENT DESCRIPTION */}
-              <div>
-                <div className="flex items-center gap-2 text-sm font-medium text-slate-700/30 ">
-                  <IconParagraph className="w-4 h-4" />
-                  <label>Deskripsi</label>
-                </div>
-                <p className="mt-1 text-sm font-semibold text-slate-700">
-                  {eventData.description || nullData}
-                </p>
-              </div>
+              <DetailField
+                icon={IconParagraph}
+                label="Dekripsi Acara"
+                value={eventData.description}
+              />
 
               {/* SPEAKER */}
-              <div>
-                <div className="flex items-center gap-2 text-sm font-medium text-slate-700/30 ">
-                  <IconPerson className="w-4 h-4" />
-                  <label>Pembicara</label>
-                </div>
-                <p className="mt-1 text-sm font-semibold text-slate-700">
-                  {eventData.speaker || nullData}
-                </p>
-              </div>
+              <DetailField
+                icon={IconPerson}
+                label="Pembicara"
+                value={eventData.speaker}
+              />
 
               {/* LOCATION */}
-              <div>
-                <div className="flex items-center gap-2 text-sm font-medium text-slate-700/30 ">
-                  <IconLocation className="w-4 h-4" />
-                  <label>Lokasi / Tempat</label>
-                </div>
-                <p className="mt-1 text-sm font-semibold text-slate-700">
-                  {eventData.location || nullData}
-                </p>
-              </div>
+              <DetailField
+                icon={IconLocation}
+                label="Lokasi"
+                value={eventData.location}
+              />
 
               {/* CATEGORY EVENT */}
-              <div>
-                <div className="flex items-center gap-2 text-sm font-medium text-slate-700/30 ">
-                  <IconCategory className="w-4 h-4" />
-                  <label>Kategori Acara</label>
-                </div>
-                <p className="mt-1 text-sm font-semibold text-slate-700">
-                  {eventData.category || nullData}
-                </p>
-              </div>
+              <DetailField
+                icon={IconCategory}
+                label="Kategori Event"
+                value={eventData.category}
+              />
+
+              {/* EVENT STATUS */}
+              <DetailField
+                icon={IconCategory}
+                label="Zona Event"
+                value={eventData.zone}
+              />
+
+              {/* EVENT STATUS */}
+              <DetailField
+                icon={IconCategory}
+                label="Zona Event"
+                value={eventData.status}
+              />
             </div>
           </div>
 
@@ -149,32 +144,20 @@ export default function DetailEvent({ eventData, isLoading = false }) {
               Waktu Pelaksanaan
             </h2>
 
-            {/* DATE */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-sm font-medium text-slate-700/30">
-                <IconCalendar className="w-4 h-4" />
-                <label>Jadwal Acara</label>
-              </div>
-              <p className="mt-1 text-sm font-semibold text-slate-700">
-                {eventDate || nullData}
-              </p>
-            </div>
+            <div className="flex flex-col gap-4">
+              {/* DATE */}
+              <DetailField
+                icon={IconCalendar}
+                label="Jadwal Acara"
+                value={eventDate}
+              />
 
-            {/* TIME */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-sm font-medium text-slate-700/30">
-                <IconClock className="w-4 h-4" />
-                <label>Waktu Pelaksanaan</label>
-              </div>
-              {eventTime ? (
-                <p className="mt-1 text-sm font-semibold text-slate-700">
-                  {eventTime}
-                </p>
-              ) : (
-                <p className="mt-1 text-sm italic font-medium text-slate-400">
-                  {nullData || 'Tidak ada materi untuk acara ini.'}
-                </p>
-              )}
+              {/* TIME */}
+              <DetailField
+                icon={IconClock}
+                label="Waktu Pelaksanaan"
+                value={`${eventTimeStart} - ${eventTimeEnd}`}
+              />
             </div>
           </div>
 
@@ -235,7 +218,7 @@ export default function DetailEvent({ eventData, isLoading = false }) {
               </div>
             ) : (
               <p className="mt-1 text-sm italic font-medium text-slate-400">
-                {nullData || 'Tidak ada materi untuk acara ini.'}
+                {'Tidak ada materi untuk acara ini.'}
               </p>
             )}
           </div>
@@ -260,22 +243,20 @@ export default function DetailEvent({ eventData, isLoading = false }) {
 
             {/* DETAIL INFORMATIONS */}
             <div className="grid grid-cols-1 gap-3 pt-1 text-xs sm:grid-cols-2 text-slate-500">
-              <p>
-                <span className="font-medium text-slate-700">Lokasi:</span>{' '}
-                {eventData.location || nullData}
-              </p>
-              <p>
-                <span className="font-medium text-slate-700">Koordinat:</span>{' '}
-                {eventData?.latitude && eventData?.longitude
-                  ? `${eventData.latitude}, ${eventData.longitude}`
-                  : nullData}
-              </p>
-              <p>
-                <span className="font-medium text-slate-700">
-                  Radius Presensi:
-                </span>{' '}
-                {eventData?.radius ? `${eventData.radius} meter` : nullData}
-              </p>
+              {/* LOCATION */}
+              <DetailField label="Lokasi" value={eventData.location} />
+
+              {/* COORDINATE */}
+              <DetailField
+                label="Koordinar"
+                value={`${eventData.latitude}, ${eventData.longitude}`}
+              />
+
+              {/* RADIUS */}
+              <DetailField
+                label="Radius Persensi"
+                value={`${eventData.radius} meter`}
+              />
             </div>
           </div>
         </div>
@@ -365,39 +346,28 @@ export default function DetailEvent({ eventData, isLoading = false }) {
               Parameter Presensi
             </h2>
 
-            <div className="space-y-3">
-              {/* RADIUS LATITUDE */}
-              <div className="flex justify-between items-center py-1.5 ">
-                <div className="flex items-center gap-2 text-sm font-medium text-slate-700/30 ">
-                  <IconLatitude className="w-4 h-4" />
-                  <label>Latitude</label>
-                </div>
-                <span className="text-sm font-semibold text-slate-700">
-                  {eventData.latitude || nullData}
-                </span>
-              </div>
+            <div className="flex flex-col gap-4">
+              <DetailField
+                isFlex
+                icon={IconLatitude}
+                label="latitude"
+                value={eventData.latitude}
+              />
 
-              {/* RADIUS LONGITUDE */}
-              <div className="flex justify-between items-center py-1.5 ">
-                <div className="flex items-center gap-2 text-sm font-medium text-slate-700/30 ">
-                  <IconLongitude className="w-4 h-4" />
-                  <label>Longitude</label>
-                </div>
-                <span className="text-sm font-semibold text-slate-700">
-                  {eventData.longitude || nullData}
-                </span>
-              </div>
+              <DetailField
+                isFlex
+                icon={IconLongitude}
+                label="latitude"
+                value={eventData.longitude}
+              />
 
-              {/* RADIUS LIMITATION */}
-              <div className="flex justify-between items-center py-1.5 ">
-                <div className="flex items-center gap-2 text-sm font-medium text-slate-700/30 ">
-                  <IconRadius className="w-4 h-4" />
-                  <label>Batas Radius</label>
-                </div>
-                <span className="text-sm font-semibold text-emerald-600">
-                  {eventData?.radius ? `${eventData.radius} meter` : nullData}
-                </span>
-              </div>
+              {/* RADIUS */}
+              <DetailField
+                isFlex
+                icon={IconRadius}
+                label="latitude"
+                value={`${eventData.radius} meter`}
+              />
             </div>
           </div>
         </div>

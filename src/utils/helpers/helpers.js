@@ -1,6 +1,6 @@
 // Change the words to titleCase
-export const titleCase = (text) => {
-  if (!text) return '';
+export function titleCase(text) {
+  if (!text || text === undefined || text === null) return null;
 
   const cleanText = text.toLowerCase().replace(/_/g, ' ');
 
@@ -17,7 +17,7 @@ export const titleCase = (text) => {
       return kataKapital.replace(/\.[a-z]/g, (match) => match.toUpperCase());
     })
     .join(' ');
-};
+}
 
 // Handler Copy Hash QR
 export function handleCopyHash(qrHash, setCopied) {

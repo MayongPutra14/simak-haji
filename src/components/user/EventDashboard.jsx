@@ -1,18 +1,19 @@
 import Button from '../ui/global/Button';
-import { SkeletonScheduleUserDashboard } from '../ui/global/skeletons/index';
 import NotFoundData from '../ui/global/NotFoundData';
+import { EventDashboardSkeleton } from '../ui/global/skeletons/SkeletonLoading';
+import { titleCase } from '../../utils/helpers/helpers';
 import {
   formatDateIndonesia,
   formatTimeIndonesia,
 } from '../../utils/helpers/dateConversion';
 import { getButtonLabel, getStatusConfig } from '../../utils/helpers/status';
 import {
-  IoTimeOutline as IconClock,
-  IoCalendarClearOutline as IconCalendar,
-  IoLocationOutline as IconLocation,
-  IoPersonOutline as IconPerson,
-  IoLayersOutline as IconCategory,
-} from 'react-icons/io5';
+  IconClock,
+  IconCalendar,
+  IconLocation,
+  IconPerson,
+  IconCategory,
+} from '../../utils/helpers/decorations';
 
 export const EventDashboard = ({
   eventData,
@@ -20,7 +21,7 @@ export const EventDashboard = ({
   onActionClick,
 }) => {
   if (isLoading) {
-    return <SkeletonScheduleUserDashboard />;
+    return <EventDashboardSkeleton />;
   }
 
   if (!eventData) {
@@ -39,94 +40,136 @@ export const EventDashboard = ({
   // FALLBACK IF API DOES NOT RESPONSE
   const {
     eventName = 'Nama Event Tidak Tersedia',
-    eventDescription = 'Hadiri sesi ini untuk panduan lengkap dan update informasi haji Anda',
-    venue = 'Aula Utama',
+    description = 'Hadiri sesi ini untuk panduan lengkap dan update informasi haji Anda',
+    location = 'Aula Utama',
     speaker = 'Panitia',
-    eventType = 'Umum',
-    status = 'upcoming',
+    category = 'Umum',
+    status = 'Belum Dimulai',
     isAttended = 0,
   } = eventData;
 
-  const eventDate = formatDateIndonesia(eventData.eventTime);
-  const eventTime = formatTimeIndonesia(eventData.eventTime);
-  const eventLocation = venue;
-  const eventCapitalized =
-    eventType.charAt(0).toUpperCase() + eventType.slice(1);
+  const eventDate = formatDateIndonesia(eventData.timeStart);
+  const eventTimeStart = formatTimeIndonesia(eventData.timeStart);
+  const eventTimeEnd = formatTimeIndonesia(eventData.timeEnd);
+  const eventTime = `${eventTimeStart} - ${eventTimeEnd}`;
 
   // status event configuration
   const statusConfig = getStatusConfig(status);
 
   return (
-    <div className="w-[95%] md:w-[98%] mt-6 mx-auto flex flex-col pb-6">
-      <div className="w-full mb-3 text-left">
-        <h2 className="inline-block pb-1 text-lg font-bold text-gray-800 border-b-2 border-sea-green-600">
+    <section className="mx-auto mt-6 flex w-[95%] flex-col pb-6 md:w-[98%]">
+      {/* Section heading */}
+      <div className="mb-5">
+        <h2 className="inline-block border-b-2 border-sea-green-600 pb-2 text-lg font-bold text-slate-800">
           Agenda Terdekat
         </h2>
+        <p className="mt-2 text-sm text-slate-500">
+          Informasi kegiatan dan jadwal terdekat Anda.
+        </p>
       </div>
 
-      <div className="flex flex-wrap gap-4">
-        <div className="relative flex flex-col w-full gap-4 p-5 bg-white border shadow-sm md:max-w-md rounded-3xl border-slate-100">
-          {/* BADGE STATUS */}
-          <div className=" flex flex-col items-end gap-2">
-            <span
-              className={`px-3 py-1 text-xs font-semibold rounded-full ${statusConfig.color}`}
-            >
-              {statusConfig.label}
-            </span>
-            {isAttended === 1 && (
-              <span className="px-3 py-1 text-xs font-semibold text-blue-700 bg-blue-100 rounded-full">
-                Terabsensi
+      {/* Event card */}
+      <div className="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <article className="group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-sea-green-200 hover:shadow-lg hover:shadow-slate-200/50">
+          {/* Accent */}
+          <div className="h-1 w-full bg-linear-to-r from-sea-green-600 via-sea-green-400 to-emerald-200" />
+
+          <div className="flex flex-1 flex-col p-4 sm:p-5">
+            {/* Status badges */}
+            <div className="mb-5 flex flex-wrap items-center justify-end gap-2">
+              <span
+                className={`inline-flex max-w-full items-center rounded-full px-3 py-1.5 text-xs font-semibold ${statusConfig.color}`}
+              >
+                {statusConfig.label}
               </span>
-            )}
-          </div>
 
-          <div className="border-l-4 border-sea-green-400 p-4 ">
-            <h2 className="pb-3 text-2xl font-semibold  text-slate-700">
-              {eventName}
-            </h2>
-            <p className="text-sm text-slate-600/70">{eventDescription}</p>
-          </div>
+              {Boolean(isAttended) && (
+                <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 ring-1 ring-inset ring-blue-100">
+                  Terabsensi
+                </span>
+              )}
+            </div>
 
-          {/* DETAIL ATTENDANCE STATUS */}
-          <div className="flex flex-col space-y-4 mt-4">
-            <div className="flex gap-2 items-center">
-              <IconCalendar className="w-6 h-6 text-slate-600" />
-              <p className="text-sm font-medium text-slate-800">{eventDate}</p>
-            </div>
-            <div className="flex gap-2 items-center">
-              <IconClock className="w-6 h-6 text-slate-600" />
-              <p className="text-sm font-medium text-slate-800">{eventTime}</p>
-            </div>
-            <div className="flex gap-2 items-center">
-              <IconLocation className="w-6 h-6 text-slate-600" />
-              <p className="text-sm font-medium text-slate-800">
-                {eventLocation}
+            {/* Event title and description */}
+            <div className="mb-5 min-w-0 border-l-[3px] border-sea-green-500 pl-4">
+              <p className="mb-2 text-[11px] font-bold text-sea-green-700">
+                Detail Kegiatan
+              </p>
+
+              <h3 className="wrap-break-words text-xl font-bold leading-7 text-slate-800 transition-colors group-hover:text-sea-green-800">
+                {eventName || 'Tidak ada judul acara'}
+              </h3>
+
+              <p className="mt-2 wrap-break-words text-sm leading-6 text-slate-500">
+                {description ||
+                  'Informasi kegiatan dan jadwal bimbingan jamaah.'}
               </p>
             </div>
-            <div className="flex gap-2 items-center">
-              <IconCategory className="w-6 h-6 text-slate-600" />
-              <p className="text-sm font-medium text-slate-800">
-                {eventCapitalized}
-              </p>
-            </div>
-            <div className="flex gap-2 items-center">
-              <IconPerson className="w-6 h-6 text-slate-600" />
-              <p className="text-sm font-medium text-slate-800">{speaker}</p>
-            </div>
-          </div>
 
-          <div className="pt-1">
-            <Button
-              variant="primary"
-              onClick={onActionClick}
-              className="w-full"
-            >
-              {getButtonLabel(status, isAttended)}
-            </Button>
+            {/* Event information */}
+            <div className="mb-5 mt-auto space-y-1 border-t border-slate-100 pt-4">
+              {[
+                {
+                  label: 'Tanggal',
+                  value: eventDate,
+                  Icon: IconCalendar,
+                },
+                {
+                  label: 'Waktu',
+                  value: eventTime,
+                  Icon: IconClock,
+                },
+                {
+                  label: 'Lokasi',
+                  value: titleCase(location),
+                  Icon: IconLocation,
+                },
+                {
+                  label: 'Kategori',
+                  value: titleCase(category),
+                  Icon: IconCategory,
+                },
+                {
+                  label: 'Pemateri',
+                  value: titleCase(speaker),
+                  Icon: IconPerson,
+                },
+              ].map(({ label, value, Icon }) => (
+                <div
+                  key={label}
+                  className="flex min-w-0 items-start gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-slate-50"
+                >
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sea-green-50 text-sea-green-700">
+                    <Icon className="h-4 w-4" />
+                  </div>
+
+                  <div className="min-w-0 flex-1 py-0.5">
+                    <p className="mb-0.5 text-[11px] font-medium text-slate-400">
+                      {label}
+                    </p>
+
+                    <p className="wrap-break-words text-sm font-semibold leading-5 text-slate-700">
+                      {value || '-'}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Action button */}
+            <div className="mt-auto border-t border-slate-100 pt-4">
+              <Button
+                variant="primary"
+                onClick={onActionClick}
+                className="w-full"
+              >
+                {getButtonLabel(status, isAttended)}
+              </Button>
+            </div>
           </div>
-        </div>
+        </article>
       </div>
-    </div>
+    </section>
   );
 };
 

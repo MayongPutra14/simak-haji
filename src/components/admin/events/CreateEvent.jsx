@@ -47,39 +47,49 @@ export default function CreateEvent({ onSubmit }) {
   function onSubmitForm(formData) {
     const payload = new FormData();
 
-    payload.append('nama_event', formData.eventName || '');
-    payload.append('deskripsi_event', formData.description || '');
-    payload.append('tempat', formData.location || '');
-    payload.append('pembicara', formData.speaker || '');
-    payload.append('jenis_event', formData.category || 'jamaah');
-    payload.append('status', formData.status || 'mendatang');
+    // Basic Event Information (CamelCase & English)
+    payload.append('eventName', formData.eventName || '');
+    payload.append('description', formData.description || '');
+    payload.append('location', formData.location || '');
+    payload.append('speaker', formData.speaker || '');
+    payload.append('category', formData.category || 'jamaah');
+    payload.append('status', formData.status || 'upcoming');
 
+    // Target Zone (conditional based on category)
     if (formData.category === 'leader') {
-      payload.append(
-        'zona_target',
-        formData.zone || formData.zona_target || '',
-      );
+      payload.append('zone', formData.zone || formData.zonaTarget || '');
     } else {
-      payload.append('zona_target', '');
+      payload.append('zone', '');
     }
 
-    // Mapping DATE & TIME
+    // Formatting Date & Time -> timeStart & timeEnd
     const datePart = formData.eventDate || '';
-    const timePart = formData.eventTime || '';
-    let formattedWaktuEvent = '';
+    const timeStartPart = formData.eventTimeStart || '';
+    const timeEndPart = formData.eventTimeEnd || '';
+    let formattedTimeStart = '';
+    let formattedTimeEnd = '';
 
-    if (datePart && timePart) {
-      formattedWaktuEvent = `${datePart} ${timePart}:00`;
+    if (datePart && timeStartPart) {
+      formattedTimeStart = `${datePart} ${timeStartPart}:00`;
     } else if (datePart) {
-      formattedWaktuEvent = `${datePart} 00:00:00`;
+      formattedTimeStart = `${datePart} 00:00:00`;
     }
 
-    payload.append('waktu_event', formattedWaktuEvent);
+    if (datePart && timeEndPart) {
+      formattedTimeEnd = `${datePart} ${timeEndPart}:00`;
+    } else if (datePart) {
+      formattedTimeEnd = `${datePart} 00:00:00`;
+    }
+
+    payload.append('timeStart', formattedTimeStart);
+    payload.append('timeEnd', formattedTimeEnd);
+
+    // Geo-location & Radius
     payload.append('latitude', parseFloat(formData.latitude) || 0);
     payload.append('longitude', parseFloat(formData.longitude) || 0);
     payload.append('radius', parseInt(formData.radius, 10) || 100);
 
-    // Handling File Upload
+    // Handling File Upload (Material)
     if (formData.material) {
       const rawFile = formData.material;
       let fileToUpload = null;
@@ -97,7 +107,7 @@ export default function CreateEvent({ onSubmit }) {
       }
     }
 
-    // send data to parent component
+    // Send data to parent component
     if (onSubmit) {
       onSubmit(payload);
     }
@@ -116,7 +126,7 @@ export default function CreateEvent({ onSubmit }) {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* EVENT NAME */}
           <InputText
-            label="Nama Acara"
+            label="Nama Event"
             placeholder="Perkenalan Organisasi SIMAK"
             error={errors.eventName?.message}
             {...register('eventName')}
@@ -131,14 +141,6 @@ export default function CreateEvent({ onSubmit }) {
             {...register('description')}
           />
 
-          {/* LOCATION */}
-          <InputText
-            label="Lokasi / Tempat Acara"
-            placeholder="Masjid Agung Karawang"
-            error={errors.location?.message}
-            {...register('location')}
-          />
-
           {/* SPEAKER */}
           <InputText
             label="Pembicara"
@@ -147,9 +149,17 @@ export default function CreateEvent({ onSubmit }) {
             {...register('speaker')}
           />
 
+          {/* LOCATION */}
+          <InputText
+            label="Lokasi / Tempat Acara"
+            placeholder="Masjid Agung Karawang"
+            error={errors.location?.message}
+            {...register('location')}
+          />
+
           {/* EVENT CATEGORY */}
           <InputSelect
-            label="Kategori Acara"
+            label="Kategori Event"
             required={true}
             placeholder="-- Pilih Kategori Acara --"
             options={EventSchemas.eventCategoryOptions}
@@ -159,9 +169,9 @@ export default function CreateEvent({ onSubmit }) {
 
           {/* ZONE */}
           <InputSelect
-            label="ZONA"
+            label="Zona Event"
             required={true}
-            placeholder="-- Pilih Target --"
+            placeholder="-- Pilih Zona --"
             options={EventSchemas.zonaOptions}
             error={errors.zone?.message}
             disabled={!watchEventCategory}
@@ -176,7 +186,7 @@ export default function CreateEvent({ onSubmit }) {
 
           {/* EVENT STATUS */}
           <InputSelect
-            label="Jenis Acara"
+            label="Jenis Event"
             required={true}
             placeholder="-- Pilih Status Acara --"
             options={EventSchemas.eventStatusOptions}
@@ -200,16 +210,33 @@ export default function CreateEvent({ onSubmit }) {
             {...register('eventDate')}
           />
 
-          {/* EVENT TIME */}
+          {/* EVENT TIME START*/}
           <Controller
-            name="eventTime"
+            name="eventTimeStart"
+            control={control}
+            rules={{ required: 'Waktu mulai acara wajib diisi' }}
+            render={({ field }) => (
+              <InputTime
+                label="Waktu Mulai Acara"
+                required={true}
+                error={errors.eventTimeStart}
+                value={field.value || ''}
+                onChange={field.onChange}
+                ref={field.ref}
+              />
+            )}
+          />
+
+          {/* EVENT TIME END*/}
+          <Controller
+            name="eventTimeEnd"
             control={control}
             rules={{ required: 'Jam pelaksanaan acara wajib diisi' }}
             render={({ field }) => (
               <InputTime
-                label="Jam Pelaksanaan Acara"
+                label="Waktu Selesai Acara"
                 required={true}
-                error={errors.eventTime}
+                error={errors.eventTimeEnd}
                 value={field.value || ''}
                 onChange={field.onChange}
                 ref={field.ref}

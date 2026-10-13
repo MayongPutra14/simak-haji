@@ -344,7 +344,6 @@ export default function ProfileDetail({ data, isLoading = false }) {
 
         {/* User Avatar */}
         <div className="relative group shrink-0">
-          {/* Perubahan: Ditambahkan `shrink-0` agar bingkai avatar tidak tertekan/gepeng oleh teks di sebelahnya */}
           <img
             src={
               user.photoUrl ||
@@ -358,11 +357,13 @@ export default function ProfileDetail({ data, isLoading = false }) {
         </div>
 
         {/* Highlighted Main Info */}
-        <div className="flex-1 space-y-3 -left z-10">
+        <div className="flex-1 flex flex-col items-center text-center space-y-3 z-10 w-full">
+          {/* Badge Profil Jamaah */}
           <div className="inline-block px-3 py-1 text-xs font-medium border rounded-full bg-sea-green-700/50 text-sea-green-200 border-sea-green-500/30">
             Profil Jamaah
           </div>
 
+          {/* Nama Jamaah */}
           <h1 className="text-2xl font-bold tracking-tight text-white lg:text-3xl">
             {titleCase(user.fullName) || (
               <span className="italic font-normal text-slate-300">

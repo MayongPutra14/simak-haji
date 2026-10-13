@@ -3,7 +3,6 @@ import UserHomePage from './UserHomePages';
 import UserProfilePage from './UserProfilePage';
 import UserSchedulePage from './UserSchedulePage';
 import IdentityPage from './IdentityPage';
-import MateriReaderPage from './MateriReaderPage';
 
 export {
   UserLayout,
@@ -11,5 +10,4 @@ export {
   UserProfilePage,
   UserSchedulePage,
   IdentityPage,
-  MateriReaderPage,
 };
