@@ -9,7 +9,6 @@ const UserHomePage = () => {
   const { user } = useAuth();
   const { eventData, isLoading } = useDashboardEvent(user?.id);
 
-  console.log(eventData);
   return (
     <UserHomeFragment>
       <PrayTimesWidget />

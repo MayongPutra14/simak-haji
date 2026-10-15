@@ -207,3 +207,19 @@ export const updatePasswordAPI = async (userId, newPassword) => {
     };
   }
 };
+
+export const attendanceAPI = async (payload) => {
+  if (!payload)
+    return {
+      status: 'failed',
+      message: 'Absen gagal, data tidak ada',
+    };
+
+  const bodyPayload = {
+    action: 'submit_attendance',
+    ...payload,
+  };
+  const response = await api.post('user.php', bodyPayload);
+
+  return response.data;
+};

@@ -1,11 +1,9 @@
 import { useNavigate, Link } from 'react-router';
-import {
-  IoArrowBack as IconBack,
-  IoHomeOutline as IconHome,
-} from 'react-icons/io5';
 import SimakLogo from '../../../assets/images/simak-logo.webp';
+import { getHomeRoute } from '../../../utils/helpers/helpers';
+import { IconBack, IconHome } from '../../../utils/helpers/decorations';
 
-const NotFoundUI = () => {
+const NotFoundUI = ({ userRole }) => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -45,7 +43,7 @@ const NotFoundUI = () => {
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
           {/* BACK TO HOME */}
           <Link
-            to="/"
+            to={getHomeRoute(userRole)}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-sea-green-600 hover:bg-sea-green-700 text-white font-semibold text-sm transition-colors cursor-pointer shadow-xs"
           >
             <IconHome className="w-4 h-4" />

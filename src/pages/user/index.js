@@ -3,6 +3,7 @@ import UserHomePage from './UserHomePages';
 import UserProfilePage from './UserProfilePage';
 import UserSchedulePage from './UserSchedulePage';
 import IdentityPage from './IdentityPage';
+import ScanQrPage from './ScanQrPage';
 
 export {
   UserLayout,
@@ -10,4 +11,5 @@ export {
   UserProfilePage,
   UserSchedulePage,
   IdentityPage,
+  ScanQrPage,
 };

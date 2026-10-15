@@ -153,7 +153,7 @@ export const StatusBadge = ({ label, isLabelFade = true, status }) => {
 export function IsValueEmpty(value) {
   if (value === null || value === undefined) {
     return (
-      <span className="text-sm italic font-light text-slate-400">
+      <span className="text-sm italic font-light mt-8 text-slate-400">
         Belum ada data / Belum diisi
       </span>
     );

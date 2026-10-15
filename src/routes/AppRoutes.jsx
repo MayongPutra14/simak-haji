@@ -38,6 +38,7 @@ import {
   UserProfilePage,
   UserSchedulePage,
   IdentityPage,
+  ScanQrPage,
 } from '../pages/user/index';
 
 export default function AppRoutes() {
@@ -85,6 +86,7 @@ export default function AppRoutes() {
             <Route path="home" element={<UserHomePage />} />
             <Route path="profile" element={<UserProfilePage />} />
             <Route path="schedules" element={<UserSchedulePage />} />
+            <Route path="scan" element={<ScanQrPage />} />
           </Route>
         </Route>
 

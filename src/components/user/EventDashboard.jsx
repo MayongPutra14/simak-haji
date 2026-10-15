@@ -76,7 +76,7 @@ export const EventDashboard = ({
 
           <div className="flex flex-1 flex-col p-4 sm:p-5">
             {/* Status badges */}
-            <div className="mb-5 flex flex-wrap items-center justify-end gap-2">
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-2">
               <span
                 className={`inline-flex max-w-full items-center rounded-full px-3 py-1.5 text-xs font-semibold ${statusConfig.color}`}
               >
@@ -84,8 +84,8 @@ export const EventDashboard = ({
               </span>
 
               {Boolean(isAttended) && (
-                <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 ring-1 ring-inset ring-blue-100">
-                  Terabsensi
+                <span className="inline-flex items-center rounded-full bg-sea-green-50 px-3 py-1.5 text-xs font-semibold text-sea-green-700 ring-1 ring-inset ring-sea-green-100">
+                  Hadir
                 </span>
               )}
             </div>

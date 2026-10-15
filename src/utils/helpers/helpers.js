@@ -76,3 +76,17 @@ export async function handleDownloadMaterial(material, eventName, BASE_URL) {
     window.open(fileUrl, '_blank');
   }
 }
+
+// Route Not found
+export function getHomeRoute(userRole) {
+  if (!userRole) return '/';
+
+  switch (userRole) {
+  case 'admin':
+    return '/admin/home';
+  case 'user':
+    return '/user/home';
+  default:
+    return '/';
+  }
+}
