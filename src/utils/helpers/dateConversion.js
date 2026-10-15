@@ -3,7 +3,7 @@
  * Example: '2026-08-25' become 'Selasa, 25 Agustus 2026'
  */
 export function formatDateIndonesia(dateString) {
-  if (!dateString) return 'Tanggal belum ditentukan';
+  if (!dateString) return null;
   const dateObj = new Date(dateString.replace(' ', 'T'));
   if (isNaN(dateObj)) return dateString;
 
@@ -16,7 +16,7 @@ export function formatDateIndonesia(dateString) {
 }
 
 export function formatTimeIndonesia(dateString) {
-  if (!dateString) return 'Waktu belum ditentukan';
+  if (!dateString) return null;
   const dateObj = new Date(dateString.replace(' ', 'T'));
   if (isNaN(dateObj)) return dateString;
 
@@ -69,17 +69,14 @@ export const formatTanggalIndonesia = (date) => {
  */
 export function parseDateTimeForInput(dateTimeString) {
   if (!dateTimeString) {
-    return { eventDate: '', eventTime: '' };
+    return { date: '', time: '' };
   }
 
-  // split date and time parts
   const [datePart = '', timePart = ''] = dateTimeString.split(' ');
-
-  // extract HH:mm from HH:mm:ss
   const formattedTime = timePart ? timePart.slice(0, 5) : '';
 
   return {
-    eventDate: datePart,
-    eventTime: formattedTime,
+    date: datePart,
+    time: formattedTime,
   };
 }

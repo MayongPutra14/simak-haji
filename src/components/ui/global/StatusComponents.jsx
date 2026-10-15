@@ -1,18 +1,55 @@
 // Helper Component: Display Key and Value with Fallback Handling
-export const DetailField = ({ label, value }) => {
+export function DetailField({ label, value, icon: Icon, isFlex = false }) {
   const isEmpty =
     value === null ||
     value === undefined ||
     value === '' ||
     (Array.isArray(value) && value.length === 0);
 
+  if (isFlex) {
+    return (
+      <div className="flex justify-between my-1">
+        {/* Bungkus label dan ikon dengan flex container */}
+        <div className="flex items-center gap-2 text-xs font-medium tracking-wide text-slate-400/70">
+          {/* Render ikon HANYA jika prop icon dikirimkan */}
+          {Icon && <Icon className="w-4 h-4" />}
+          <span>{label}:</span>
+        </div>
+
+        {/* Sisa kode pengecekan value tetap sama persis */}
+        {isEmpty ? (
+          <span className="text-sm italic font-light text-slate-400">
+            Belum ada data / Belum diisi
+          </span>
+        ) : Array.isArray(value) ? (
+          <div className="flex flex-wrap gap-1.5 mt-0.5">
+            {value.map((item, idx) => (
+              <span
+                key={idx}
+                className="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-teal-100 text-teal-800 border border-teal-200"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        ) : (
+          <span className="text-sm font-semibold text-slate-600 wrap-break-words">
+            {value}
+          </span>
+        )}
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col gap-1 my-1">
-      {/* Key: Slate 300 */}
-      <span className="text-xs font-medium tracking-wide text-slate-400/70">
-        {label}:
-      </span>
-      {/* Value: Slate 600 or Fallback Italic */}
+      {/* Bungkus label dan ikon dengan flex container */}
+      <div className="flex items-center gap-2 text-xs font-medium tracking-wide text-slate-400/70">
+        {/* Render ikon HANYA jika prop icon dikirimkan */}
+        {Icon && <Icon className="w-4 h-4" />}
+        <span>{label}:</span>
+      </div>
+
+      {/* Sisa kode pengecekan value tetap sama persis */}
       {isEmpty ? (
         <span className="text-sm italic font-light text-slate-400">
           Belum ada data / Belum diisi
@@ -35,7 +72,7 @@ export const DetailField = ({ label, value }) => {
       )}
     </div>
   );
-};
+}
 
 // Helper Component: Status Badge
 /**
@@ -108,3 +145,19 @@ export const StatusBadge = ({ label, isLabelFade = true, status }) => {
   return badgeElement;
 };
 
+// Helper compoent: for checking value
+/**
+ * @param {any} [value] - All of value
+ */
+
+export function IsValueEmpty(value) {
+  if (value === null || value === undefined) {
+    return (
+      <span className="text-sm italic font-light mt-8 text-slate-400">
+        Belum ada data / Belum diisi
+      </span>
+    );
+  }
+
+  return value;
+}

@@ -1,6 +1,6 @@
 // Change the words to titleCase
-export const titleCase = (text) => {
-  if (!text) return '';
+export function titleCase(text) {
+  if (!text || text === undefined || text === null) return null;
 
   const cleanText = text.toLowerCase().replace(/_/g, ' ');
 
@@ -17,7 +17,7 @@ export const titleCase = (text) => {
       return kataKapital.replace(/\.[a-z]/g, (match) => match.toUpperCase());
     })
     .join(' ');
-};
+}
 
 // Handler Copy Hash QR
 export function handleCopyHash(qrHash, setCopied) {
@@ -74,5 +74,19 @@ export async function handleDownloadMaterial(material, eventName, BASE_URL) {
     console.error('Failed to download file:', error);
     // Fallback: If fetch fails (e.g., CORS issues), open the file in a new tab
     window.open(fileUrl, '_blank');
+  }
+}
+
+// Route Not found
+export function getHomeRoute(userRole) {
+  if (!userRole) return '/';
+
+  switch (userRole) {
+  case 'admin':
+    return '/admin/home';
+  case 'user':
+    return '/user/home';
+  default:
+    return '/';
   }
 }

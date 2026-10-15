@@ -1,9 +1,5 @@
 import { SkeletonTableAdminUsers } from './SkeletonTable';
 import {
-  SkeletonScheduleUserMenu,
-  SkeletonScheduleUserDashboard,
-} from './SkeletonSchedule';
-import {
   SkeletonCardProfileDetail,
   SkeletonProfileImage,
   EventInfoSkeleton,
@@ -12,13 +8,12 @@ import {
   EventMapSkeleton,
   EventQrCodeSkeleton,
   EventParametersSkeleton,
+  EventDashboardSkeleton,
 } from './SkeletonLoading';
 
 export {
   SkeletonCardProfileDetail,
   SkeletonProfileImage,
-  SkeletonScheduleUserDashboard,
-  SkeletonScheduleUserMenu,
   SkeletonTableAdminUsers,
   EventInfoSkeleton,
   EventTimeSkeleton,
@@ -26,4 +21,5 @@ export {
   EventMapSkeleton,
   EventQrCodeSkeleton,
   EventParametersSkeleton,
+  EventDashboardSkeleton,
 };

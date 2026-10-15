@@ -19,7 +19,7 @@ export const EventSchema = z.object({
   eventName: z.string().min(1, 'Nama acara wajib diisi'),
   description: z.string().nullable().optional(),
   location: z.string().min(1, 'Lokasi acara wajib diisi'),
-  speaker: z.string().min(1, 'Nama pembicara wajib diisi'),
+  speaker: z.string().nullable().optional(),
   category: z.string().min(1, 'Kategori event wajib diisi'),
   zone: z.string().nullable().optional(),
   status: z.string().min(1, 'Status event wajib diisi'),
@@ -29,10 +29,16 @@ export const EventSchema = z.object({
         ? 'Tanggal acara wajib diisi'
         : 'Format tanggal tidak valid',
   }),
-  eventTime: z.iso.time({
+  eventTimeStart: z.iso.time({
     error: (issue) =>
       issue.input === undefined || issue.input === ''
-        ? 'Waktu acara wajib diisi'
+        ? 'Waktu mulai acara wajib diisi'
+        : 'Format waktu tidak valid',
+  }),
+  eventTimeEnd: z.iso.time({
+    error: (issue) =>
+      issue.input === undefined || issue.input === ''
+        ? 'Waktu selesai acara wajib diisi'
         : 'Format waktu tidak valid',
   }),
   material: z.union(
@@ -45,7 +51,7 @@ export const EventSchema = z.object({
 
           const file = val[0]; // Get the first file
 
-          // Validate size (maximum 5 MB)
+          // Validate size (maximum 10 MB)
           if (file.size > MAX_FILE_SIZE) return false;
 
           // Validate file extension
@@ -54,14 +60,14 @@ export const EventSchema = z.object({
         },
         {
           message:
-            'Material file is required. Allowed formats are PDF/Word/PPT/Excel, with a maximum size of 5 MB.',
+            'Materi Event dibutuhkan. Format yang di izinkan adalah PDF/Word/PPT/Excel, dengan ukuran maksimal 10 MB.',
         },
       ),
       // Case 2: Accepts an existing file URL string (if in edit mode)
-      z.string().min(1, { message: 'Material file is required.' }),
+      z.string().min(1, { message: 'URL Material tidak valid..' }),
     ],
     {
-      required_error: 'Material file is required.',
+      required_error: 'Materi acara wajib diisi.',
     },
   ),
   latitude: z

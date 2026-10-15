@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { getDashboardEvent } from './eventDashboardAPI';
 import { getScheduleDashboard } from '../../utils/user/api';
 
 export const useDashboardEvent = (userId) => {

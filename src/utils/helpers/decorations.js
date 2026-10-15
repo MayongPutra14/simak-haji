@@ -1,6 +1,7 @@
 import { BsTextParagraph as IconParagraph } from 'react-icons/bs';
 import { HiStatusOnline as IconOnline } from 'react-icons/hi';
 import { LuIdCard as IconIdCard, LuLock as IconLock } from 'react-icons/lu';
+import { AiOutlineLoading3Quarters as IconLoading } from 'react-icons/ai';
 import {
   MdAdd as IconAdd,
   MdOutlineNavigateNext as IconNav,
@@ -27,6 +28,8 @@ import {
   IoCloseOutline as IconClose,
   IoCheckmark as IconCheck,
   IoWarningOutline as IconWarning,
+  IoArrowBack as IconBack,
+  IoHomeOutline as IconHome,
 } from 'react-icons/io5';
 import {
   FaFilePdf as IconPdf,
@@ -80,4 +83,7 @@ export {
   IconWarning,
   IconIdCard,
   IconLock,
+  IconBack,
+  IconHome,
+  IconLoading,
 };

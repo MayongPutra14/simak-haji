@@ -49,7 +49,7 @@ export default function getNavItems(role) {
   const qrItem = {
     id: 'scan-qr',
     label: 'Scan QR',
-    path: '/maintenance',
+    path: '/user/scan',
     IconOutline: IconQrOutline,
     IconFill: IconQrFill,
     isPrimary: true, // Floating button for mobile

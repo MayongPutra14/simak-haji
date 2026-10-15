@@ -27,11 +27,11 @@ export default function CreateEventPage() {
     });
   }
 
-  function showErrorModal() {
+  function showErrorModal(message) {
     showModal({
       isOpen: true,
       title: 'Event Gagal Dibuat',
-      description: 'Silahkan Coba Lagi.',
+      description: message,
       icon: <IconClose className="w-7 h-7" />,
       iconBgColor: 'bg-red-100',
       iconColor: 'text-red-400',

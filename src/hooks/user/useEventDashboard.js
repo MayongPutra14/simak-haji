@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDashboardEvent } from '../../features/eventsDashboard/useDashboardEvent';
+import { useDashboardEvent } from './useDashboardEvent';
 import {
   calculateDistance,
   getUserLocation,

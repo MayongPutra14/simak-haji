@@ -375,11 +375,11 @@ export default function ListEvents({
           title="Hapus Data Acara?"
           description={
             <>
-              Apakah Anda yakin ingin menghapus{' '}
+              Apakah Anda yakin ingin menghapus event{' '}
               <span className="font-semibold text-slate-700">
-                {deleteTarget?.nama_event}
-              </span>
-              ? Data yang dihapus akan hilang permanen.
+                {deleteTarget?.eventName}?
+              </span>{' '}
+              Data yang dihapus akan hilang permanen.
               {localDeleteError && (
                 <span className="block p-2 mt-2 text-xs font-normal border rounded-lg bg-rose-50 text-rose-600 border-rose-200">
                   {localDeleteError}

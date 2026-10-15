@@ -118,7 +118,8 @@ export const getUserGlobalProfile = () => {
 
 export const getUserProfile = async (userId) => {
   try {
-    const response = await api.post('get_profile.php', {
+    const response = await api.post('user.php', {
+      action: 'get_profile',
       user_id: userId,
     });
 
@@ -132,7 +133,8 @@ export const getUserProfile = async (userId) => {
 export const getScheduleDashboard = async (userId) => {
   if (!userId) throw new Error('User ID tidak ditemukan');
   try {
-    const response = await api.post('get_dashboard_event.php', {
+    const response = await api.post('user.php', {
+      action: 'get_event_dashboard',
       user_id: userId,
     });
 
@@ -151,7 +153,8 @@ export const getScheduleDashboard = async (userId) => {
 export const getSchedules = async (userId) => {
   if (!userId) throw new Error('User ID tidak ditemukan');
   try {
-    const response = await api.post('get_jadwal.php', {
+    const response = await api.post('user.php', {
+      action: 'get_events',
       user_id: userId,
     });
 
@@ -172,14 +175,12 @@ export const updatePasswordAPI = async (userId, newPassword) => {
 
   try {
     const bodyPayload = {
+      action: 'update_pasword',
       user_id: userId,
       newPassword: newPassword,
     };
 
-    const response = await api.post(
-      'user.php?action=update-password',
-      bodyPayload,
-    );
+    const response = await api.post('user.php', bodyPayload);
     if (
       response.data?.status === 'failed' ||
       response.data?.status === 'error'
@@ -205,4 +206,20 @@ export const updatePasswordAPI = async (userId, newPassword) => {
       message: errorMessage,
     };
   }
+};
+
+export const attendanceAPI = async (payload) => {
+  if (!payload)
+    return {
+      status: 'failed',
+      message: 'Absen gagal, data tidak ada',
+    };
+
+  const bodyPayload = {
+    action: 'submit_attendance',
+    ...payload,
+  };
+  const response = await api.post('user.php', bodyPayload);
+
+  return response.data;
 };

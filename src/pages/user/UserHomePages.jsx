@@ -1,15 +1,21 @@
+import FeatureHubContainer from '../../components/ui/global/FeatureHubMenu';
+import PrayTimesWidget from '../../components/ui/global/PrayTimesWidget';
+import EventDashboard from '../../components/user/EventDashboard';
 import { useAuth } from '../../features/auth/useAuth';
 import UserHomeFragment from '../../fragments/user/UserHomeFragment';
+import { useDashboardEvent } from '../../hooks/user/useDashboardEvent';
 
 const UserHomePage = () => {
   const { user } = useAuth();
-
-  if (!user) return null;
+  const { eventData, isLoading } = useDashboardEvent(user?.id);
 
   return (
-    <section >
-      <UserHomeFragment user={user} />
-    </section>
+    <UserHomeFragment>
+      <PrayTimesWidget />
+      <FeatureHubContainer />
+
+      <EventDashboard eventData={eventData} isLoading={isLoading} />
+    </UserHomeFragment>
   );
 };
 
