@@ -56,7 +56,7 @@ export default function EditEvent({
     values: formattedValues,
   });
 
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const BASE_URL = import.meta.env.VITE_STORAGE_BASE_URL;
   const googleApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const watchLat = useWatch({ control, name: 'latitude' });
   const watchLng = useWatch({ control, name: 'longitude' });
@@ -338,7 +338,7 @@ export default function EditEvent({
               Materi Acara
             </h2>
 
-            <div className="text-xs font-semibold text-slate-400 items-center ">
+            <div className="items-center text-xs font-semibold text-slate-400 ">
               <label>File Materi Saat Ini</label>
             </div>
 
@@ -360,7 +360,7 @@ export default function EditEvent({
                 <div className="flex items-center gap-2 shrink-0">
                   {/* Preview button (new Tab) */}
                   <Button
-                    to={`${BASE_URL}/${initialData.material.file_path}`}
+                    to={`${BASE_URL}/${initialData?.material}`}
                     variant="actions"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -380,7 +380,7 @@ export default function EditEvent({
                         BASE_URL,
                       )
                     }
-                    className="inline-flex cursor-pointer items-center justify-center gap-2 text-sm font-medium text-white transition-colors rounded-lg bg-sea-green-500 hover:bg-sea-green-600"
+                    className="inline-flex items-center justify-center gap-2 text-sm font-medium text-white transition-colors rounded-lg cursor-pointer bg-sea-green-500 hover:bg-sea-green-600"
                   >
                     <IconDownload className="w-4 h-4" />
                     Unduh
@@ -428,7 +428,7 @@ export default function EditEvent({
 
         <div>
           <div className="mb-3">
-            <label className="text-xs font-semibold text-slate-400 flex items-center gap-1">
+            <label className="flex items-center gap-1 text-xs font-semibold text-slate-400">
               Peta Lokasi
             </label>
           </div>

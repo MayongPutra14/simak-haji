@@ -5,11 +5,12 @@ import ProtectedRoute from '../routes/ProtectedRoute';
 import PublicRoute from '../routes/PublicRoute';
 import LandingPage from './LandingPage';
 import NotFoundPage from './NotFoundPage';
-import UnderDevelopment from '../components/ui/global/UnderDevelopment';
+import { UnderDevelopmentPage } from './UnderDevelopmentage';
 import {
   RequiredCompletedIdentity,
   RequiredInCompletedIdentity,
 } from '../routes/IdentityGuard';
+import { MaterialGuardRoute } from '../routes/MaterialGuardRoute';
 
 export {
   Routes,
@@ -21,7 +22,8 @@ export {
   PublicRoute,
   LandingPage,
   NotFoundPage,
-  UnderDevelopment,
+  UnderDevelopmentPage,
   RequiredCompletedIdentity,
   RequiredInCompletedIdentity,
+  MaterialGuardRoute,
 };

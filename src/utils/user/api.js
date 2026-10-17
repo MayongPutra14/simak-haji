@@ -130,12 +130,13 @@ export const getUserProfile = async (userId) => {
   }
 };
 
-export const getScheduleDashboard = async (userId) => {
+export const getScheduleDashboard = async (userId, eventId) => {
   if (!userId) throw new Error('User ID tidak ditemukan');
   try {
     const response = await api.post('user.php', {
       action: 'get_event_dashboard',
       user_id: userId,
+      event_di: eventId,
     });
 
     if (response.status === 'error' || response.status === 'failed') {
