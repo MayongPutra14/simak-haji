@@ -42,12 +42,12 @@ export function handleDownloadQR(qrRef, eventName) {
 
 // Handle Download Material Event
 export async function handleDownloadMaterial(material, eventName, BASE_URL) {
-  if (!material?.file_path) return;
+  if (!material) return;
 
-  const fileUrl = `${BASE_URL}/${material.file_path}`;
+  const fileUrl = `${BASE_URL}/${material}`;
 
   // Get the original file extension (e.g., pdf, docx)
-  const fileExtension = material.file_path.split('.').pop();
+  const fileExtension = material.split('.').pop();
 
   // Create a clean file name for the download
   const fileName = `Material_${eventName.replace(/\s+/g, '_')}.${fileExtension}`;

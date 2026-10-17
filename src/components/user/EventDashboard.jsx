@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router';
 import Button from '../ui/global/Button';
 import NotFoundData from '../ui/global/NotFoundData';
 import { EventDashboardSkeleton } from '../ui/global/skeletons/SkeletonLoading';
@@ -6,7 +7,11 @@ import {
   formatDateIndonesia,
   formatTimeIndonesia,
 } from '../../utils/helpers/dateConversion';
-import { getButtonLabel, getStatusConfig } from '../../utils/helpers/status';
+import { getStatusConfig } from '../../utils/helpers/status';
+import {
+  getEventActionConfig,
+  EVENT_ACTION_TYPES,
+} from '../../utils/helpers/status';
 import {
   IconClock,
   IconCalendar,
@@ -20,6 +25,8 @@ export const EventDashboard = ({
   isLoading = false,
   onActionClick,
 }) => {
+  const navigate = useNavigate();
+
   if (isLoading) {
     return <EventDashboardSkeleton />;
   }
@@ -39,13 +46,14 @@ export const EventDashboard = ({
 
   // FALLBACK IF API DOES NOT RESPONSE
   const {
+    id,
     eventName = 'Nama Event Tidak Tersedia',
     description = 'Hadiri sesi ini untuk panduan lengkap dan update informasi haji Anda',
     location = 'Aula Utama',
     speaker = 'Panitia',
     category = 'Umum',
     status = 'Belum Dimulai',
-    isAttended = 0,
+    isAttended = false,
   } = eventData;
 
   const eventDate = formatDateIndonesia(eventData.timeStart);
@@ -55,6 +63,29 @@ export const EventDashboard = ({
 
   // status event configuration
   const statusConfig = getStatusConfig(status);
+
+  // get button configuration
+  const { label, disabled, actionType } = getEventActionConfig(
+    status,
+    isAttended,
+  );
+
+  // ACTION BUTTON HANDLER
+  const handleButtonClick = () => {
+    if (disabled) return;
+
+    if (onActionClick) {
+      onActionClick({ actionType, event: eventData });
+      return;
+    }
+
+    // default routing fallback
+    if (actionType === EVENT_ACTION_TYPES.SCAN) {
+      navigate('/user/scan');
+    } else if (actionType === EVENT_ACTION_TYPES.MATERIAL) {
+      navigate(`/user/materi/${id}`);
+    }
+  };
 
   return (
     <section className="mx-auto mt-6 flex w-[95%] flex-col pb-6 md:w-[98%]">
@@ -160,10 +191,11 @@ export const EventDashboard = ({
             <div className="mt-auto border-t border-slate-100 pt-4">
               <Button
                 variant="primary"
-                onClick={onActionClick}
+                onClick={handleButtonClick}
+                disabled={disabled}
                 className="w-full"
               >
-                {getButtonLabel(status, isAttended)}
+                {label}
               </Button>
             </div>
           </div>

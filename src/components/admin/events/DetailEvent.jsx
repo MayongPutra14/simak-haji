@@ -41,8 +41,7 @@ import {
 
 export default function DetailEvent({ eventData, isLoading = false }) {
   const googleApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
+  const BASE_URL = import.meta.env.VITE_STORAGE_BASE_URL;
   const [copied, setCopied] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const qrRef = useRef(null);
@@ -189,7 +188,7 @@ export default function DetailEvent({ eventData, isLoading = false }) {
                 <div className="flex items-center gap-2 shrink-0">
                   {/* Preview button (new Tab) */}
                   <Button
-                    to={`${BASE_URL}/${eventData.material.file_path}`}
+                    to={`${BASE_URL}/${eventData?.material}`}
                     variant="actions"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -209,7 +208,7 @@ export default function DetailEvent({ eventData, isLoading = false }) {
                         BASE_URL,
                       )
                     }
-                    className="inline-flex cursor-pointer items-center justify-center gap-2 text-sm font-medium text-white transition-colors rounded-lg bg-sea-green-500 hover:bg-sea-green-600"
+                    className="inline-flex items-center justify-center gap-2 text-sm font-medium text-white transition-colors rounded-lg cursor-pointer bg-sea-green-500 hover:bg-sea-green-600"
                   >
                     <IconDownload className="w-4 h-4" />
                     Unduh

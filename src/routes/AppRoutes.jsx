@@ -9,9 +9,10 @@ import {
   PublicRoute,
   LandingPage,
   NotFoundPage,
-  UnderDevelopment,
+  UnderDevelopmentPage,
   RequiredCompletedIdentity,
   RequiredInCompletedIdentity,
+  MaterialGuardRoute,
 } from '../pages/index';
 
 // ADMIN
@@ -39,6 +40,7 @@ import {
   UserSchedulePage,
   IdentityPage,
   ScanQrPage,
+  UserMaterialPage,
 } from '../pages/user/index';
 
 export default function AppRoutes() {
@@ -88,6 +90,11 @@ export default function AppRoutes() {
             <Route path="schedules" element={<UserSchedulePage />} />
             <Route path="scan" element={<ScanQrPage />} />
           </Route>
+
+          {/* FULL SCREEN MATERIAL PDF */}
+          <Route element={<MaterialGuardRoute />}>
+            <Route path="/user/materi/:id" element={<UserMaterialPage />} />
+          </Route>
         </Route>
 
         <Route element={<RequiredInCompletedIdentity />}>
@@ -95,7 +102,7 @@ export default function AppRoutes() {
         </Route>
       </Route>
 
-      <Route path="/maintenance" element={<UnderDevelopment />} />
+      <Route path="/maintenance" element={<UnderDevelopmentPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

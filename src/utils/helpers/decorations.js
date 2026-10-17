@@ -14,6 +14,7 @@ import {
   TbMapPin2 as IconRadius,
   TbCopy as IconCopy,
   TbDownload as IconDownload,
+  TbArrowNarrowLeft as IconArrowLeft,
 } from 'react-icons/tb';
 import {
   IoEyeOutline as IconEye,
@@ -86,4 +87,5 @@ export {
   IconBack,
   IconHome,
   IconLoading,
+  IconArrowLeft,
 };
