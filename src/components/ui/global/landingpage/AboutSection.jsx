@@ -33,10 +33,7 @@ export default function AboutSection() {
     );
   };
   return (
-    <section
-      className="py-20 border-t md:py-28 bg-slate-50 border-sea-green-100"
-      id="tentang"
-    >
+    <section className="py-20  md:py-28 bg-slate-50" id="tentang">
       <div className="px-6 mx-auto space-y-24 max-w-7xl md:space-y-32">
         {/*  Row 1 (Introduction): Text Left, Image Right  */}
         <div className="grid items-center grid-cols-1 gap-10 md:grid-cols-2 md:gap-16">
