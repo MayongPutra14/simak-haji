@@ -3,7 +3,7 @@ import { getLandingContentAPI } from '../../../utils/admin/api';
 
 export function useGetLandingContent() {
   const [landingData, setLandingData] = useState(null);
-  const [isloading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export function useGetLandingContent() {
 
   return {
     landingData,
-    isloading,
+    isLoading,
     error,
   };
 }
