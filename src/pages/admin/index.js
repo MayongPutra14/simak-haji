@@ -9,6 +9,7 @@ import ListEventsPage from './events/ListEventPage';
 import DetailEventPage from './events/DetailEventPage';
 import CreateEventPage from './events/CreateEventPage';
 import EditEventPage from './events/EditEventPage';
+import EditLandingPage from './landing/EditLandingPage';
 
 export {
   AdminHome,
@@ -22,4 +23,5 @@ export {
   DetailEventPage,
   CreateEventPage,
   EditEventPage,
+  EditLandingPage,
 };

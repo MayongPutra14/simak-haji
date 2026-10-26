@@ -41,13 +41,20 @@ export const EventSchema = z.object({
         ? 'Waktu selesai acara wajib diisi'
         : 'Format waktu tidak valid',
   }),
-  material: z.union(
-    [
-      // Case 1: User uploads a new file (Reading FileList from React Hook Form)
+  material: z
+    .union([
+      // Case 1: User uploads a new file (atau jika tidak diisi sama sekali)
       z.custom(
         (val) => {
-          // Check if this is a FileList and contains at least 1 file
-          if (!(val instanceof FileList) || val.length === 0) return false;
+          if (
+            val === undefined ||
+            val === null ||
+            (val instanceof FileList && val.length === 0)
+          ) {
+            return true;
+          }
+
+          if (!(val instanceof FileList)) return false;
 
           const file = val[0]; // Get the first file
 
@@ -60,16 +67,14 @@ export const EventSchema = z.object({
         },
         {
           message:
-            'Materi Event dibutuhkan. Format yang di izinkan adalah PDF/Word/PPT/Excel, dengan ukuran maksimal 10 MB.',
+            'Format yang di izinkan adalah PDF/Word/PPT/Excel, dengan ukuran maksimal 10 MB.',
         },
       ),
-      // Case 2: Accepts an existing file URL string (if in edit mode)
+      // Case 2: Accepts an existing file URL string
       z.string().min(1, { message: 'URL Material tidak valid..' }),
-    ],
-    {
-      required_error: 'Materi acara wajib diisi.',
-    },
-  ),
+    ])
+    .nullable()
+    .optional(),
   latitude: z
     .union([z.string(), z.number()])
     .transform((val) => String(val))

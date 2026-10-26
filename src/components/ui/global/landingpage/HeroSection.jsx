@@ -1,29 +1,18 @@
-import BackgroundHero from '../../../../assets/images/decorations/BackgroundHero.webp';
 import Button from '../Button';
 import { motion } from 'motion/react';
 import * as motionFrame from '../../../../utils/helpers/motion';
+import { parseHeadlineWithQuotes } from '../../../../utils/helpers/helpers';
+import { openWa } from '../../../../utils/helpers/helpers';
 import {
-  FaWhatsapp as IconWhatsapp,
-  FaExternalLinkAlt as IconExternalLink,
-} from 'react-icons/fa';
-import {
-  MdOutlineVerifiedUser as IconVerified,
-  MdOutlineMenuBook as IconBook,
-  MdGroups as IconGroup,
-  MdOutlineVolunteerActivism as IconVolunteer,
-} from 'react-icons/md';
+  IconWhatsapp,
+  IconExternalLink,
+  IconVerified,
+  IconBook,
+  IconGroup,
+  IconVolunteer,
+} from '../../../../utils/helpers/decorations';
 
-const HeroSection = () => {
-  const openWa = () => {
-    const text =
-      "Assalamu'alaikum, Admin SIMAK. Saya ingin berkonsultasi mengenai program SIMAK ini.";
-    const message = encodeURIComponent(text);
-    window.open(
-      `https://wa.me/6281809847017?text=${message}`,
-      '_blank',
-      'noopener,noreferrer',
-    );
-  };
+const HeroSection = ({ content }) => {
   return (
     <motion.section
       id="home"
@@ -40,8 +29,8 @@ const HeroSection = () => {
       */}
 
       <img
-        src={BackgroundHero}
-        alt="Pemandangan Masjidil Haram di Mekkah"
+        src={content.background.image_url}
+        alt={content.background.alt}
         className="absolute inset-0 object-cover object-right w-full h-full md:object-center"
         loading="eager"
         decoding="sync"
@@ -88,20 +77,20 @@ const HeroSection = () => {
               variants={motionFrame.innerItemVariants}
               className="block mb-2"
             >
-              Beribadah Haji
+              {parseHeadlineWithQuotes(content.headline).firstText}
             </motion.span>
             {/* Visual emphasis on "Tenang dan Nyaman" using a lighter sea-green accent for high contrast */}
             <motion.span
               variants={motionFrame.innerItemVariants}
               className="block pb-1 mb-2 font-semibold text-transparent bg-linear-to-r from-galliano-600 to-galliano-400 bg-clip-text"
             >
-              Tenang dan Nyaman
+              {parseHeadlineWithQuotes(content.headline).highlighted}
             </motion.span>
             <motion.span
               variants={motionFrame.innerItemVariants}
               className="block"
             >
-              Bersama SIMAK
+              {parseHeadlineWithQuotes(content.headline).secondText}
             </motion.span>
           </motion.h1>
 
@@ -110,9 +99,7 @@ const HeroSection = () => {
             variants={motionFrame.innerItemVariants}
             className="max-w-2xl mt-6 font-light leading-relaxed text-md sm:text-xl text-white/80"
           >
-            SIMAK hadir dari hati yang bergerak untuk membantu sesama. Komunitas
-            nirlaba yang mendampingi jamaah melalui pelatihan ibadah haji
-            mandiri yang terstruktur, jujur, dan amanah.
+            {content.subheadline}
           </motion.p>
 
           {/* Call to Action Group */}
@@ -131,7 +118,7 @@ const HeroSection = () => {
 
             {/* Secondary CTA */}
             <Button
-              onClick={() => openWa()}
+              onClick={() => openWa(content.buttons.secondary.link)}
               className="inline-flex justify-center items-center px-8 py-4 text-base font-medium text-white border border-white/30 bg-white/5 hover:bg-white/10 hover:border-white/50 backdrop-blur-sm transition-all duration-300 ease-out rounded-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#022c22]"
             >
               Konsultasi Gratis
@@ -157,10 +144,11 @@ const HeroSection = () => {
                 </span>
               </div>
               <span className="leading-snug font-label-md text-label-md">
-                100% Nirlaba &amp; Tanpa Biaya Tambahan
+                {content.features[0].description}
               </span>
             </motion.div>
 
+            {/* SECOND BADGE */}
             <motion.div
               variants={motionFrame.bedgeVariants}
               className="flex items-center gap-2.5"
@@ -174,10 +162,11 @@ const HeroSection = () => {
                 </span>
               </div>
               <span className="leading-snug font-label-md text-label-md">
-                Bimbingan Manasik Terstruktur
+                {content.features[1].description}
               </span>
             </motion.div>
 
+            {/* THIRD BADGE */}
             <motion.div
               variants={motionFrame.bedgeVariants}
               className="flex items-center gap-2.5"
@@ -191,7 +180,7 @@ const HeroSection = () => {
                 </span>
               </div>
               <span className="leading-snug font-label-md text-label-md">
-                Komunitas Jamaah Mandiri
+                {content.features[2].description}
               </span>
             </motion.div>
           </motion.div>

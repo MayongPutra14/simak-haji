@@ -27,7 +27,7 @@ export const useGetEventDetail = (eventId) => {
           const message =
             error.response?.data?.message ||
             error.message ||
-            'Gagal menghapus event';
+            'Gagal mengambil data event';
 
           setError(message);
           setEventData(null);

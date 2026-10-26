@@ -1,12 +1,39 @@
-import { BsTextParagraph as IconParagraph } from 'react-icons/bs';
+import {
+  BsTextParagraph as IconParagraph,
+  BsQuestionCircle as IconQuestion,
+} from 'react-icons/bs';
+import { SlPlane as IconPlane } from 'react-icons/sl';
 import { HiStatusOnline as IconOnline } from 'react-icons/hi';
 import { LuIdCard as IconIdCard, LuLock as IconLock } from 'react-icons/lu';
-import { AiOutlineLoading3Quarters as IconLoading } from 'react-icons/ai';
+import { GrGallery as IconGallery } from 'react-icons/gr';
+import { IoLogoWhatsapp as IconWhatsappFill } from 'react-icons/io';
 import {
+  AiOutlineLoading3Quarters as IconLoading,
+  AiOutlineLayout as IconLayout,
+  AiFillLayout as IconLayoutFIll,
+} from 'react-icons/ai';
+import {
+  MdLocationOn as IconLocationFill,
+  MdCameraAlt as IconCamera,
   MdAdd as IconAdd,
   MdOutlineNavigateNext as IconNav,
   MdPeople as IconPeople,
   MdOutlineFolderSpecial as IconSpecial,
+  MdOutlineVerifiedUser as IconVerified,
+  MdOutlineMenuBook as IconBook,
+  MdGroups as IconGroup,
+  MdOutlineGroups as IconGroupOutline,
+  MdOutlineVolunteerActivism as IconVolunteer,
+  MdOutlineHistoryEdu as IconHistory,
+  MdOutlineAutoAwesome as IconAwesome,
+  MdOutlineDiversity3 as IconDeversity,
+  MdMenuBook as IconMenuBook,
+  MdPeopleOutline as IconPeopleOutline,
+  MdOutlineHealthAndSafety as IconSafety,
+  MdAccountBalanceWallet as IconBalance,
+  MdCheckCircleOutline as IconCheckCircle,
+  MdFavoriteBorder as IconFavorite,
+  MdArchive as IconArchive,
 } from 'react-icons/md';
 import {
   TbWorldLongitude as IconLongitude,
@@ -15,13 +42,12 @@ import {
   TbCopy as IconCopy,
   TbDownload as IconDownload,
   TbArrowNarrowLeft as IconArrowLeft,
+  TbArrowNarrowRight as IconArrowRight,
 } from 'react-icons/tb';
 import {
   IoEyeOutline as IconEye,
   IoTimeOutline as IconClock,
-  IoCalendarClearOutline as IconCalendar,
   IoLocationOutline as IconLocation,
-  IoPersonOutline as IconPerson,
   IoLayersOutline as IconCategory,
   IoClipboardOutline as IconClip,
   IoDocumentTextOutline as IconDocs,
@@ -30,15 +56,38 @@ import {
   IoCheckmark as IconCheck,
   IoWarningOutline as IconWarning,
   IoArrowBack as IconBack,
+  IoChevronDownOutline as IconDropdownOpen,
+  IoChevronUpOutline as IconDropdownClose,
+  // Menu
+  IoPersonOutline as IconPerson,
+  IoPerson as IconPersonFill,
   IoHomeOutline as IconHome,
+  IoHome as IconHomeFill,
+  IoCalendarClearOutline as IconCalendar,
+  IoCalendarClear as IconCalendarFill,
+  IoQrCodeOutline as IconQr,
+  IoQrCode as IconQrFill,
+  IoWalletOutline as IconWallet,
+  IoWallet as IconWalletFill,
+  IoPeople as IconPeopleFill,
+  IoTimeOutline as IconTime,
+  IoLogoLinkedin as IconLinkedin,
+  IoLogoFacebook as IconFacebook,
+  IoLogoYoutube as IconYoutube,
 } from 'react-icons/io5';
 import {
+  FaInstagramSquare as IconInstagram,
   FaFilePdf as IconPdf,
   FaFileWord as IconWord,
   FaFilePowerpoint as IconPpt,
   FaFileExcel as IconExcel,
   FaFileAlt as IconAlt,
   FaUpload as IconUpload,
+  FaTrashAlt as IconTrash,
+  FaWhatsapp as IconWhatsapp,
+  FaExternalLinkAlt as IconExternalLink,
+  FaQuoteRight as IconQuote,
+  FaRegComments as IconMessage,
 } from 'react-icons/fa';
 
 export const bgImage = {
@@ -53,6 +102,20 @@ export const bgImage = {
 };
 
 export {
+  IconLocationFill,
+  IconLinkedin,
+  IconFacebook,
+  IconYoutube,
+  IconWhatsappFill,
+  IconInstagram,
+  IconDropdownOpen,
+  IconDropdownClose,
+  IconQuestion,
+  IconMessage,
+  IconGallery,
+  IconGroupOutline,
+  IconPlane,
+  IconQuote,
   IconParagraph,
   IconLongitude,
   IconLatitude,
@@ -72,6 +135,7 @@ export {
   IconPdf,
   IconWord,
   IconPpt,
+  IconTime,
   IconExcel,
   IconAlt,
   IconUpload,
@@ -88,4 +152,33 @@ export {
   IconHome,
   IconLoading,
   IconArrowLeft,
+  IconArrowRight,
+  IconPersonFill,
+  IconHomeFill,
+  IconCalendarFill,
+  IconQr,
+  IconQrFill,
+  IconWallet,
+  IconWalletFill,
+  IconPeopleOutline,
+  IconPeopleFill,
+  IconLayout,
+  IconLayoutFIll,
+  IconTrash,
+  IconCamera,
+  IconVerified,
+  IconBook,
+  IconGroup,
+  IconVolunteer,
+  IconWhatsapp,
+  IconExternalLink,
+  IconHistory,
+  IconAwesome,
+  IconDeversity,
+  IconMenuBook,
+  IconSafety,
+  IconBalance,
+  IconCheckCircle,
+  IconFavorite,
+  IconArchive,
 };

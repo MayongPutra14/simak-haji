@@ -1,73 +1,24 @@
 import { useState, useEffect, useCallback } from 'react';
-import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
-import { GrGallery as IconGallery } from 'react-icons/gr';
-import BackgroundGlass from '../../../../assets/images/activities/dokumentasi-group-2026-3.webp';
-import TwoPeople from '../../../../assets/images/activities/Gunung-SIMAKjpg.webp';
-import Huzaifah from '../../../../assets/images/activities/huzaifah.webp';
-import Lecturer from '../../../../assets/images/activities/kajian.webp';
-import DepartureCeremony from '../../../../assets/images/activities/keberangkatan-simak.webp';
-import DepartureAirlines from '../../../../assets/images/activities/keberangkatan.webp';
 import { motion } from 'motion/react';
+import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 import * as motionFrames from '../../../../utils/helpers/motion';
+import { DESKTOP_SPANS } from '../../../../utils/helpers/constant';
+import { IconGallery } from '../../../../utils/helpers/decorations';
 
-const galleryItems = [
-  {
-    id: 1,
-    image: Lecturer,
-    alt: 'Kajian rutin jamaah SIMAK di masjid',
-    category: 'Kajian',
-    desktopSpan: 'col-span-2 row-span-2',
-  },
-  {
-    id: 2,
-    image: DepartureCeremony,
-    alt: 'Momen upacara keberangkatan jamaah haji',
-    category: 'Keberangkatan',
-    desktopSpan: 'col-span-1 row-span-1',
-  },
-  {
-    id: 3,
-    image: Huzaifah,
-    alt: 'Kegiatan silaturahmi antar anggota',
-    category: 'Huzaifah',
-    desktopSpan: 'col-span-1 row-span-2',
-  },
-  {
-    id: 4,
-    image: TwoPeople,
-    alt: 'Praktik manasik dan kegiatan jamaah',
-    category: 'Kegiatan Jamaah',
-    desktopSpan: 'col-span-1 row-span-1',
-  },
-  {
-    id: 5,
-    image: BackgroundGlass,
-    alt: 'Dokumentasi grup jamaah tahun 2026',
-    category: 'Dokumentasi Haji',
-    desktopSpan: 'col-span-2 row-span-1',
-  },
-  {
-    id: 6,
-    image: DepartureAirlines,
-    alt: 'Sesi keberangkatan maskapai jamaah',
-    category: 'Keberangkatan',
-    desktopSpan: 'col-span-1 row-span-1',
-  },
-];
-
-export default function GallerySection() {
+export default function GallerySection({ content }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const { title, description, documentation_items } = content;
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) =>
-      prev === galleryItems.length - 1 ? 0 : prev + 1,
+      prev === documentation_items.length - 1 ? 0 : prev + 1,
     );
-  }, []);
+  }, [documentation_items]);
 
   const prevSlide = () => {
     setCurrentIndex((prev) =>
-      prev === 0 ? galleryItems.length - 1 : prev - 1,
+      prev === 0 ? documentation_items.length - 1 : prev - 1,
     );
   };
 
@@ -98,6 +49,7 @@ export default function GallerySection() {
             <IconGallery className="w-4 h-4" />
             DOKUMENTASI SIMAK
           </motion.span>
+
           {/* TITLE */}
           <motion.h2
             variants={motionFrames.fadeInvariants}
@@ -106,8 +58,10 @@ export default function GallerySection() {
             viewport={{ once: true, amount: 0.3 }}
             className="mb-4 text-3xl font-medium md:text-4xl text-sea-green-50"
           >
-            Galeri SIMAK
+            {title}
           </motion.h2>
+
+          {/* DESCRIPTION */}
           <motion.p
             variants={motionFrames.fadeInvariants}
             initial="hidden"
@@ -115,35 +69,38 @@ export default function GallerySection() {
             viewport={{ once: true, amount: 0.3 }}
             className="max-w-2xl text-sm leading-relaxed text-sea-green-200 md:text-base"
           >
-            Momen-momen kebersamaan, pembelajaran, dan persiapan ibadah haji
-            yang terjalin erat dalam keluarga besar komunitas kami.
+            {description}
           </motion.p>
         </header>
 
         {/* Desktop Asymmetric/Masonry Grid */}
         <div className="hidden grid-cols-4 grid-rows-3 gap-4 md:grid h-150">
-          {galleryItems.map((item) => (
-            <figure
-              key={item.id}
-              className={`relative overflow-hidden rounded-xl bg-sea-green-900 group ${item.desktopSpan}`}
-            >
-              <motion.img
-                variants={motionFrames.imageBlurVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                src={item.image}
-                alt={item.alt}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] group-hover:rotate-[0.5deg]"
-              />
-              <figcaption className="absolute bottom-0 left-0 right-0 p-4 transition-opacity duration-300 opacity-0 bg-linear-to-t from-sea-green-950/90 to-transparent group-hover:opacity-100">
-                <span className="text-sm font-medium text-sea-green-50">
-                  {item.category}
-                </span>
-              </figcaption>
-            </figure>
-          ))}
+          {documentation_items.map((item, index) => {
+            const desktopSpan = DESKTOP_SPANS[index % DESKTOP_SPANS.length];
+
+            return (
+              <figure
+                key={`${item.id}-${index}`}
+                className={`relative overflow-hidden rounded-xl bg-sea-green-900 group ${desktopSpan}`}
+              >
+                <motion.img
+                  variants={motionFrames.imageBlurVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  src={item.image.url}
+                  alt={item.image.alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] group-hover:rotate-[0.5deg]"
+                />
+                <figcaption className="absolute bottom-0 left-0 right-0 p-4 transition-opacity duration-300 opacity-0 bg-linear-to-t from-sea-green-950/90 to-transparent group-hover:opacity-100">
+                  <span className="text-sm font-medium text-sea-green-50">
+                    {item.label}
+                  </span>
+                </figcaption>
+              </figure>
+            );
+          })}
         </div>
 
         {/* Mobile Horizontal Carousel */}
@@ -158,16 +115,19 @@ export default function GallerySection() {
             className="flex transition-transform duration-500 ease-in-out h-87.5"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
-            {galleryItems.map((item) => (
-              <figure key={item.id} className="relative w-full h-full shrink-0">
+            {documentation_items.map((item, index) => (
+              <figure
+                key={`${item.id}-${index}`}
+                className="relative w-full h-full shrink-0"
+              >
                 <img
-                  src={item.image}
-                  alt={item.alt}
+                  src={item.image.url}
+                  alt={item.image.alt}
                   className="object-cover w-full h-full"
                 />
                 <figcaption className="absolute px-3 py-1 border rounded bottom-4 left-4 bg-sea-green-950/80 border-sea-green-800 backdrop-blur-sm">
                   <span className="text-xs font-medium text-sea-green-50">
-                    {item.category}
+                    {item.label}
                   </span>
                 </figcaption>
               </figure>
