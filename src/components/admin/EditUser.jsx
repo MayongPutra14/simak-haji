@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import * as UpdateUserSchema from '../../utils/admin/createUserSchema';
-import { MdCameraAlt as IconCamera } from 'react-icons/md';
+import { IconCamera } from '../../utils/helpers/decorations';
 import Button from '../ui/global/Button';
 import {
   InputText,

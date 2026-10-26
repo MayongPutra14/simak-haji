@@ -30,6 +30,8 @@ import {
   ListEventsPage,
   DetailEventPage,
   EditEventPage,
+  // LANDING PAGE
+  EditLandingPage,
 } from '../pages/admin/index';
 
 // USER
@@ -56,10 +58,17 @@ export default function AppRoutes() {
 
       {/* ADMIN ROUTES */}
       <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="home" replace />} />
           <Route path="home" element={<AdminHome />} />
           <Route path="profile" element={<AdminProfilePage />} />
+
+          {/* LANDING PAGE */}
+          <Route path="landing-page/edit">
+            <Route index element={<Navigate to="hero" replace />} />
+            <Route path=":sectionKey" element={<EditLandingPage />} />
+          </Route>
+
 
           {/* CRUD USER */}
           <Route path="users">

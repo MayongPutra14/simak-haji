@@ -1,47 +1,10 @@
 import { motion } from 'motion/react';
 import * as motionFrames from '../../../../utils/helpers/motion';
-import {
-  FaQuoteLeft as IconQuote,
-  FaRegComments as IconMessage,
-} from 'react-icons/fa';
+import { IconQuote, IconMessage } from '../../../../utils/helpers/decorations';
 
-// Testimonial data reflecting real, varied experiences
-const testimonials = [
-  {
-    id: 1,
-    name: 'Ahmad Fauzi',
-    initials: 'AF',
-    status: 'Jamaah SIMAK',
-    departureYear: '2025',
-    text: 'Alhamdulillah, bergabung dengan SIMAK memberikan ketenangan luar biasa. Proses manasik sangat terstruktur dan para pembimbing sangat sabar menjawab setiap pertanyaan kami. Suasana kekeluargaan benar-benar terasa dari awal pendaftaran hingga persiapan keberangkatan.',
-  },
-  {
-    id: 2,
-    name: 'Siti Nurhaliza',
-    initials: 'SN',
-    status: 'Jamaah SIMAK',
-    departureYear: '2024',
-    text: 'Komunitas yang sangat solid. Saya merasa tidak sendirian dalam mempersiapkan perjalanan spiritual ini. Terima kasih SIMAK atas bimbingannya yang tulus.',
-  },
-  {
-    id: 3,
-    name: 'Budi Santoso',
-    initials: 'BS',
-    status: 'Jamaah SIMAK',
-    departureYear: '2026',
-    text: 'Sangat direkomendasikan untuk calon jamaah yang mencari bimbingan terpercaya dan komunitas yang saling mendukung dalam kebaikan.',
-  },
-  {
-    id: 4,
-    name: 'Lina Marlina',
-    initials: 'LM',
-    status: 'Jamaah SIMAK',
-    departureYear: '2024',
-    text: 'Materi manasik yang disampaikan sangat mudah dipahami. Pengurusnya responsif dan peduli dengan kondisi setiap jamaah, membuat kami merasa aman dan dipedulikan.',
-  },
-];
+export default function TestimonialSection({ content }) {
+  const { title, description, testimonials_list } = content;
 
-export default function TestimonialSection() {
   return (
     // Section uses slate-50 to cleanly contrast the white cards
     <section id="testimoni" className="py-16 overflow-hidden bg-slate-50">
@@ -60,6 +23,7 @@ export default function TestimonialSection() {
             <IconMessage className="w-6 h-6" />
             Testimoni Jamaah
           </motion.span>
+
           {/* TITLE */}
           <motion.h2
             variants={motionFrames.innerItemVariants}
@@ -68,8 +32,9 @@ export default function TestimonialSection() {
             viewport={{ once: true, amount: 0.3 }}
             className="text-3xl font-bold md:text-4xl text-slate-800"
           >
-            Apa Kata Jamaah Kami
+            {title}
           </motion.h2>
+
           {/* DESCRIPTION */}
           <motion.p
             variants={motionFrames.innerItemVariants}
@@ -78,8 +43,7 @@ export default function TestimonialSection() {
             viewport={{ once: true, amount: 0.3 }}
             className="max-w-2xl mt-3 text-slate-700/50"
           >
-            Pengalaman nyata dari mereka yang telah mempercayakan perjalanan
-            spiritualnya bersama komunitas SIMAK.
+            {description}
           </motion.p>
         </header>
 
@@ -91,7 +55,7 @@ export default function TestimonialSection() {
         <div className="relative flex w-full overflow-x-hidden md:hidden">
           {/* We duplicate the array to allow a seamless 50% translation loop */}
           <div className="flex w-max animate-[marquee_40s_linear_infinite] motion-reduce:animate-none space-x-6 pb-4">
-            {[...testimonials, ...testimonials].map((item, idx) => (
+            {[...testimonials_list, ...testimonials_list].map((item, idx) => (
               <TestimonialCard key={`mobile-${idx}`} data={item} isMobile />
             ))}
           </div>
@@ -101,30 +65,32 @@ export default function TestimonialSection() {
           DESKTOP VIEW: Bento / Asymmetric Layout
           Grid layout presenting 1 large featured card and several smaller cards[cite: 1].
         */}
-        <motion.div
-          variants={motionFrames.innerContainerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className="hidden gap-6 md:grid md:grid-cols-12"
-        >
-          <div className="flex flex-col col-span-8 gap-6">
-            <motion.div variants={motionFrames.innerItemVariants}>
-              <TestimonialCard data={testimonials[0]} isLarge />
-            </motion.div>
-            <motion.div variants={motionFrames.innerItemVariants}>
-              <TestimonialCard data={testimonials[3]} />
-            </motion.div>
-          </div>
-          <div className="flex flex-col col-span-4 gap-6">
-            <motion.div variants={motionFrames.innerItemVariants}>
-              <TestimonialCard data={testimonials[1]} />
-            </motion.div>
-            <motion.div variants={motionFrames.innerItemVariants}>
-              <TestimonialCard data={testimonials[2]} />
-            </motion.div>
-          </div>
-        </motion.div>
+        {testimonials_list && testimonials_list.length > 0 && (
+          <motion.div
+            variants={motionFrames.innerContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="hidden gap-6 md:grid md:grid-cols-12"
+          >
+            <div className="flex flex-col col-span-8 gap-6">
+              <motion.div variants={motionFrames.innerItemVariants}>
+                <TestimonialCard data={testimonials_list[0]} isLarge />
+              </motion.div>
+              <motion.div variants={motionFrames.innerItemVariants}>
+                <TestimonialCard data={testimonials_list[3]} />
+              </motion.div>
+            </div>
+            <div className="flex flex-col col-span-4 gap-6">
+              <motion.div variants={motionFrames.innerItemVariants}>
+                <TestimonialCard data={testimonials_list[1]} />
+              </motion.div>
+              <motion.div variants={motionFrames.innerItemVariants}>
+                <TestimonialCard data={testimonials_list[2]} />
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
       </div>
 
       {/* Inline styles for the continuous mobile marquee to avoid external CSS requirements */}
@@ -144,6 +110,13 @@ export default function TestimonialSection() {
 
 // Reusable Testimonial Card Component
 function TestimonialCard({ data, isLarge = false, isMobile = false }) {
+  const name = data?.author.name || 'Jamaah';
+  const qoute = data?.quote || '-';
+  const departure = data?.author.departure_year || '-';
+
+  const encodedName = encodeURIComponent(name);
+  const avatarFallback = `https://ui-avatars.com/api/?name=${encodedName}&background=random&color=fff&bold=false`;
+  const initialName = avatarFallback;
   return (
     // Clean, modern Islamic styling: white surfaces, subtle borders, no AI-slop[cite: 1]
     <article
@@ -166,23 +139,21 @@ function TestimonialCard({ data, isLarge = false, isMobile = false }) {
           ${isLarge ? 'text-lg md:text-xl leading-relaxed' : 'text-base leading-normal'}
         `}
       >
-        "{data.text}"
+        "{qoute}"
       </blockquote>
 
       {/* Footer containing author info and strictly authentic data (no star ratings)[cite: 1] */}
       <footer className="flex items-center gap-4 mt-auto">
-        {/* Initial-based avatar using Sea Green colors[cite: 1] */}
-        <div
-          className="flex items-center justify-center text-sm font-semibold rounded-full w-11 h-11 md:w-12 md:h-12 bg-sea-green-50 text-sea-green-800 md:text-base shrink-0"
-          aria-hidden="true"
-        >
-          {data.initials}
-        </div>
+        <img
+          src={initialName}
+          alt={name || 'Jamaah'}
+          className="rounded-full w-11 h-11 md:w-12 md:h-12 shrink-0 object-cover"
+        />
 
         <div className="flex flex-col">
-          <span className="font-semibold text-slate-800">{data.name}</span>
+          <span className="font-semibold text-slate-800">{name}</span>
           <span className="text-xs md:text-sm text-slate-700/50">
-            {data.status} • Berangkat {data.departureYear}
+            Jamaah SIMAK • Berangkat {departure}
           </span>
         </div>
       </footer>

@@ -1,17 +1,19 @@
 import {
-  IoHomeOutline as IconHomeOutline,
-  IoHome as IconHomeFill,
-  IoCalendarClearOutline as IconCalendarOutline,
-  IoCalendarClear as IconCalendarFill,
-  IoPersonOutline as IconPersonOutline,
-  IoPerson as IconPersonFill,
-  IoQrCodeOutline as IconQrOutline,
-  IoQrCode as IconQrFill,
-  IoWalletOutline as IconWalletOutline,
-  IoWallet as IconWalletFill,
-  IoPeopleOutline as IconPeopleOutline,
-  IoPeople as IconPeopleFill,
-} from 'react-icons/io5';
+  IconHome as IconHomeOutline,
+  IconHomeFill,
+  IconCalendar as IconCalendarOutline,
+  IconCalendarFill,
+  IconPerson as IconPersonOutline,
+  IconPersonFill,
+  IconQr as IconQrOutline,
+  IconQrFill,
+  IconWallet as IconWalletOutline,
+  IconWalletFill,
+  IconPeopleOutline,
+  IconPeopleFill,
+  IconLayout as IconLayoutOutline,
+  IconLayoutFIll,
+} from './decorations';
 
 export default function getNavItems(role) {
   const commonItems = {
@@ -64,6 +66,14 @@ export default function getNavItems(role) {
     IconFill: IconPeopleFill,
   };
 
+  const landingPage = {
+    id: 'landing-page',
+    label: 'Landing Page',
+    path: '/admin/landing-page/edit',
+    IconOutline: IconLayoutOutline,
+    IconFill: IconLayoutFIll,
+  };
+
   if (role === 'admin') {
     return [
       commonItems.home,
@@ -71,6 +81,7 @@ export default function getNavItems(role) {
       commonItems.schedule,
       commonItems.finance,
       commonItems.profile,
+      landingPage,
     ];
   }
 

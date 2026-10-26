@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export const api = axios.create({
+const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
@@ -199,6 +199,7 @@ export const updateUserProfile = async (userId, formData) => {
   }
 };
 
+// EVENT CRUD
 export const createEventAPI = async (payload) => {
   if (!payload)
     return {
@@ -324,13 +325,50 @@ export const deleteEventAPI = async (eventId) => {
   if (!eventId)
     return {
       status: 'failed',
-      message: 'Id evebt tidak ditemukan',
+      message: 'Id event tidak ditemukan',
     };
 
   const response = await api.post('admin.php', {
     id: Number(eventId),
     action: 'delete_event',
   });
+
+  return response.data;
+};
+
+// LANDING PAGE
+
+export const getLandingContentAPI = async () => {
+  const response = await api.post('admin.php', {
+    action: 'get_landing_content',
+  });
+
+  return response.data;
+};
+
+export const getLandingSectionAPI = async (sectionKey) => {
+  const response = await api.post('admin.php', {
+    action: 'get_landing_section',
+    section_key: sectionKey,
+  });
+
+  return response.data;
+};
+
+export const updateLandingPageAPI = async (payload) => {
+  if (!payload) {
+    return {
+      status: 'failed',
+      message: 'Data tidak ada, silakan coba lagi',
+    };
+  }
+
+  const bodyPayload = {
+    action: 'update_landing_section',
+    ...payload,
+  };
+
+  const response = await api.post('admin.php', bodyPayload);
 
   return response.data;
 };

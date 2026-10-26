@@ -1,15 +1,20 @@
+import { SOCIAL_MEDIA_CONFIG } from '../../../../utils/helpers/constant';
 import LogoSimak from '../../../../assets/images/simak-logo.webp';
-import {
-  FaFacebook as IconFacebook,
-  FaLocationDot as IconLocation,
-} from 'react-icons/fa6';
+import { IconLocationFill } from '../../../../utils/helpers/decorations';
 
-export default function FooterSection() {
+export default function FooterSection({ content }) {
+  const { slogan, address, social_media = [] } = content || {};
+
+  // FILTER ITEMS WITH VALID URL
+  const validSocialMedia = social_media.filter(
+    (item) => item?.url && item.url.trim() !== '',
+  );
+
   return (
-    <footer className="relative  overflow-hidden text-white border-t bg-sea-green-950 border-sea-green-800">
+    <footer className="relative overflow-hidden text-white border-t bg-sea-green-950 border-sea-green-800">
       <div className="w-[95%] sm:w-[98%] max-w-7xl mx-auto pt-16 pb-12 px-6 sm:px-8">
         <div className="grid items-start grid-cols-1 gap-10 md:grid-cols-3 md:gap-12">
-          {/*  Column 1: Organization Identity  */}
+          {/* COLUMN 1: ORGANIZATION IDENTITY */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="flex items-center justify-center w-10 h-10 text-white border shadow-sm rounded-xl bg-sea-green-700 border-sea-green-600/50">
@@ -25,38 +30,43 @@ export default function FooterSection() {
               </div>
             </div>
             <p className="max-w-sm leading-relaxed text-sea-green-100">
-              "Bersama Belajar, Berbagi, dan Menjadi Jamaah Mandiri."
+              "{slogan}"
             </p>
           </div>
 
-          {/*  Column 2: Media Sosial  */}
+          {/* COLUMN 2: SOCIAL MEDIA */}
           <div>
             <h4 className="mb-4 text-lg font-semibold tracking-tight text-white">
               Media Sosial
             </h4>
             <ul className="space-y-3">
-              <li className="">
-                <a
-                  className="inline-flex items-center gap-3 p-1 transition-colors duration-200 rounded-lg group text-sea-green-100 hover:text-galliano-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-500"
-                  href="https://www.facebook.com/people/Silaturahmi-Haji-Mandiri-Karawang/100082955517284/?rdid=hrRCh5UNxi2zHPDs&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1DVvKJtvoS%2F"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <span className="flex items-center justify-center transition-colors border rounded-lg shadow-sm w-9 h-9 bg-sea-green-900 border-sea-green-800 text-sea-green-100 group-hover:text-galliano-400 group-hover:border-sea-green-700">
-                    <IconFacebook
-                      className="material-symbols-outlined text-[19px]"
-                      data-icon="facebook"
-                    />
-                  </span>
-                  <span className="font-medium ">
-                    Silaturahmi Haji Mandiri Karawang
-                  </span>
-                </a>
-              </li>
+              {validSocialMedia.map((item, index) => {
+                const normalizedKey = item.name?.toLowerCase().trim();
+                const config = SOCIAL_MEDIA_CONFIG[normalizedKey];
+                const IconComponent = config.icon;
+
+                return (
+                  <li key={index}>
+                    <a
+                      className={`inline-flex items-center gap-3 p-1 transition-colors duration-200 rounded-lg group text-sea-green-100 ${config.hoverColor} focus:outline-none focus-visible:ring-2 focus-visible:ring-sea-green-500`}
+                      href={item.url}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <span
+                        className={`flex items-center justify-center transition-colors border rounded-lg shadow-sm w-9 h-9 bg-sea-green-900 border-sea-green-800 text-sea-green-100 ${config.hoverColor} ${config.borderColor}`}
+                      >
+                        <IconComponent className="text-[19px]" />
+                      </span>
+                      <span className="font-medium">{item.name}</span>
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
-          {/*  Column 3: Alamat  */}
+          {/* COLUMN 3: ADDRESS */}
           <div>
             <h4 className="mb-4 text-lg font-semibold tracking-tight text-white">
               Alamat
@@ -68,38 +78,27 @@ export default function FooterSection() {
             >
               <div className="flex items-start gap-3 leading-relaxed text-sea-green-100">
                 <div className="w-9 h-9 rounded-lg bg-sea-green-900 border border-sea-green-800 flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
-                  <IconLocation
+                  <IconLocationFill
                     className="material-symbols-outlined text-[19px]"
                     data-icon="location_on"
                   />
                 </div>
                 <div>
-                  <p className="font-medium text-white">
-                    Masjid Raya Puri Teluk Jambe
-                  </p>
-                  <p className="text-sea-green-200/90">
-                    Sirnabaya, Telukjambe Timur
-                  </p>
-                  <p className="text-sea-green-200/90">
-                    Karawang, Jawa Barat 41361
-                  </p>
+                  <p className="text-sea-green-200/90">{address}</p>
                 </div>
               </div>
             </a>
           </div>
         </div>
 
-        {/*  Divider  */}
+        {/* DIVIDER */}
         <hr className="my-8 border-t border-sea-green-800" />
 
-        {/*  Copyright Area  */}
-        <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left text-sea-green-200 ">
-          <p className="">
-            ©{' '}
-            <span id="footer-year" className="">
-              {new Date().getFullYear()}
-            </span>{' '}
-            SIMAK — Silaturahmi Haji Mandiri Karawang. All rights reserved.
+        {/* COPYRIGHT AREA */}
+        <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left text-sea-green-200">
+          <p>
+            © <span id="footer-year">{new Date().getFullYear()}</span> SIMAK —
+            Silaturahmi Haji Mandiri Karawang. All rights reserved.
           </p>
           <p className="text-[13px] text-sea-green-200/70">
             Wadah Edukasi &amp; Kemandirian Ibadah Jamaah

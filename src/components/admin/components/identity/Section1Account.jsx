@@ -68,7 +68,7 @@ export default function Section1Account() {
         {/* WHATSAPP NUMBER */}
         <InputNumber
           label="Nomor Whatsapp"
-          placeholder="1000623881"
+          placeholder="089671489951"
           required={true}
           maxLength={13}
           error={errors.whatsapp?.message}

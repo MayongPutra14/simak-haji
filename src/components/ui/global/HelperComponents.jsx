@@ -1,10 +1,18 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { Controller, useFieldArray } from 'react-hook-form';
 import Button from './Button';
 import BrickIlustration from '../../../assets/images/decorations/brick.webp';
 import ConstructionIlustration from '../../../assets/images/decorations/construction.webp';
-import { getHomeRoute } from '../../../utils/helpers/helpers';
-import { IconBack, IconHome } from '../../../utils/helpers/decorations';
 import SimakLogo from '../../../assets/images/simak-logo.webp';
+import { getHomeRoute } from '../../../utils/helpers/helpers';
+import { InputNumber, InputText, TextArea } from '../inputs/index';
+import {
+  IconBack,
+  IconHome,
+  IconTrash,
+  IconCheckCircle,
+} from '../../../utils/helpers/decorations';
 
 export const UnderDevelopment = ({ userRole }) => {
   const navigate = useNavigate();
@@ -104,3 +112,229 @@ export const WatermarkOverlay = ({ watermarkText }) => (
     ))}
   </div>
 );
+
+// Component to manage dynamic nested cards (Only for Block #3, strictly max 4 cards) in EditAboutSection.jsx
+export const DynamicCardsList = ({ nestIndex, control, register, errors }) => {
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: `content.story_blocks.${nestIndex}.cards`,
+  });
+
+  const MAX_CARDS = 4;
+
+  return (
+    <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg space-y-4">
+      <div className="flex justify-between items-center">
+        <h4 className="font-bold text-sea-green-700">
+          Kartu Tujuan / Goals ({fields.length}/{MAX_CARDS})
+        </h4>
+        <button
+          type="button"
+          onClick={() =>
+            append({
+              id: `goal-${Date.now()}`,
+              number: fields.length + 1,
+              title: '',
+              description: '',
+              badge: '',
+            })
+          }
+          disabled={fields.length >= MAX_CARDS}
+          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition cursor-pointer ${
+            fields.length >= MAX_CARDS
+              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              : 'bg-sea-green-600 text-white hover:bg-sea-green-700'
+          }`}
+        >
+          + Tambahkan Kartu
+        </button>
+      </div>
+
+      {fields.length === 0 ? (
+        <p className="text-xs text-gray-500 italic">
+          Belum ada kartu tujuan pada blok ini. Klik tombol di atas untuk
+          menambahkan.
+        </p>
+      ) : (
+        <div className="space-y-4">
+          {fields.map((card, cardIndex) => {
+            const cardErrors =
+              errors?.story_blocks?.[nestIndex]?.cards?.[cardIndex];
+
+            return (
+              <div
+                key={card.id}
+                className="p-4 border border-gray-200 rounded-lg space-y-4 relative bg-white"
+              >
+                <div className="flex justify-between items-center border-b border-gray-100 pb-2">
+                  <span className="font-medium text-gray-700 text-sm">
+                    Kartu #{cardIndex + 1}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => remove(cardIndex)}
+                    className="p-1.5 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition cursor-pointer"
+                    title="Hapus Kartu"
+                  >
+                    <IconTrash />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <InputNumber
+                    label="Nomor Urut"
+                    placeholder="1"
+                    error={cardErrors?.number?.message}
+                    {...register(
+                      `content.story_blocks.${nestIndex}.cards.${cardIndex}.number`,
+                      { valueAsNumber: true },
+                    )}
+                  />
+                  <InputText
+                    label="Judul Kartu"
+                    placeholder="Kecepatan Akses"
+                    error={cardErrors?.title?.message}
+                    {...register(
+                      `content.story_blocks.${nestIndex}.cards.${cardIndex}.title`,
+                    )}
+                  />
+                  <InputText
+                    label="Teks Badge"
+                    placeholder="Prioritas Utama"
+                    error={cardErrors?.badge?.message}
+                    {...register(
+                      `content.story_blocks.${nestIndex}.cards.${cardIndex}.badge`,
+                    )}
+                  />
+                </div>
+
+                <TextArea
+                  label="Deskripsi Kartu"
+                  placeholder="Menyajikan solusi digital berkinerja tinggi..."
+                  rows={2}
+                  error={cardErrors?.description?.message}
+                  {...register(
+                    `content.story_blocks.${nestIndex}.cards.${cardIndex}.description`,
+                  )}
+                />
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+};
+
+// DOCUMENTATION ITEM COMPONENT in EditGallerySection.jsx
+export const DocumentationItem = ({
+  index,
+  control,
+  register,
+  errors,
+  onRemove,
+  canRemove,
+}) => {
+  const [previewUrl, setPreviewUrl] = useState('');
+
+  const handleImageChange = (file, onChangeCallback) => {
+    if (file) {
+      setPreviewUrl(URL.createObjectURL(file));
+      onChangeCallback(file);
+    }
+  };
+
+  return (
+    <div className="p-4 border border-gray-200 rounded-lg space-y-4 bg-gray-50">
+      <div className="flex justify-between items-center">
+        <span className="font-medium text-gray-700">
+          Dokumentasi-{index + 1}
+        </span>
+        {canRemove && (
+          <button
+            type="button"
+            onClick={() => onRemove(index)}
+            className="p-2 text-red-500"
+          >
+            <IconTrash />
+          </button>
+        )}
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        {/* INPUT IMAGE */}
+        <Controller
+          name={`content.documentation_items.${index}.image.file`}
+          control={control}
+          render={({ field: { onChange, ref, value } }) => {
+            // derive current display image URL
+            const displayUrl =
+              previewUrl ||
+              value?.url ||
+              'https://placehold.co/600x400?text=No+Image';
+
+            return (
+              <div className="flex items-center gap-4">
+                <div className="relative group shrink-0">
+                  <img
+                    src={displayUrl}
+                    alt="Preview"
+                    className="w-36 h-24 object-cover rounded-2xl"
+                  />
+                  <input
+                    type="file"
+                    ref={ref}
+                    accept="image/*"
+                    onChange={(e) =>
+                      handleImageChange(e.target.files?.[0], onChange)
+                    }
+                  />
+                </div>
+              </div>
+            );
+          }}
+        />
+
+        {/* INPUT TEXT */}
+        <InputText
+          label="Label / Keterangan Foto"
+          error={errors.content?.documentation_items?.[index]?.label?.message}
+          {...register(`content.documentation_items.${index}.label`)}
+        />
+      </div>
+    </div>
+  );
+};
+
+// HELPER: CARD FOR LANDING PAGE
+export const CardValue = ({
+  title,
+  description,
+  badge,
+  number,
+  icon: Icon,
+}) => {
+  return (
+    <>
+      <div>
+        <div className="flex items-center justify-between mb-5">
+          <span className="text-xl font-extrabold text-galliano-500">
+            {number}
+          </span>
+          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-sea-green-50 text-sea-green-700">
+            <Icon className="w-6 h-6 text-[22px]" data-icon="diversity_3" />
+          </div>
+        </div>
+        <h3 className="text-slate-800 font-semibold mb-2.5">{title}</h3>
+        <p className="leading-relaxed text-slate-700/60">{description}</p>
+      </div>
+      <div className="mt-6 pt-4 border-t border-sea-green-50 text-[13px] font-medium text-sea-green-700 flex items-center gap-1">
+        <IconCheckCircle
+          className="material-symbols-outlined text-[15px]"
+          data-icon="check_circle"
+        />
+        {badge}
+      </div>
+    </>
+  );
+};
