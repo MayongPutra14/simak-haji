@@ -403,3 +403,118 @@ export function EventDashboardSkeleton() {
     </section>
   );
 }
+
+// SKELETON LOADING FOR QUR'AN
+// List Qur'an
+export function ListQuranSkeleton() {
+  return (
+    <div className="container mx-auto px-4 py-8 max-w-7xl">
+      {/* HEADER SECTION SKELETON */}
+      <header className="mb-10 md:mb-12 text-center max-w-2xl mx-auto animate-pulse">
+        <div className="inline-block w-40 h-4 bg-teal-100 rounded-full mb-3"></div>
+        <div className="h-10 w-64 bg-teal-200 rounded-xl mx-auto mb-3"></div>
+        <div className="h-4 w-full max-w-md bg-teal-100 rounded-lg mx-auto mb-2"></div>
+        <div className="h-4 w-3/4 max-w-xs bg-teal-100 rounded-lg mx-auto mb-6"></div>
+        <div className="h-3 w-32 bg-teal-100 rounded-lg mx-auto mb-8"></div>
+
+        {/* Bismillah Divider Skeleton */}
+        <div className="flex items-center justify-center gap-4 mb-8">
+          <div className="w-12 h-px bg-teal-200"></div>
+          <div className="w-36 h-6 bg-teal-100 rounded"></div>
+          <div className="w-12 h-px bg-teal-200"></div>
+        </div>
+
+        {/* Search Input Skeleton */}
+        <div className="h-12 w-full bg-teal-50 border border-teal-100 rounded-xl mb-6"></div>
+
+        {/* Filter Buttons Skeleton */}
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <div className="h-9 w-28 bg-teal-100 rounded-full"></div>
+          <div className="h-9 w-20 bg-teal-100 rounded-full"></div>
+          <div className="h-9 w-20 bg-teal-100 rounded-full"></div>
+        </div>
+      </header>
+
+      {/* SURAH GRID SKELETON (Menampilkan 9 kotak tiruan kartu surat) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+        {[...Array(9)].map((_, index) => (
+          <div
+            key={index}
+            className="w-full flex items-center justify-between p-4 sm:p-5 bg-white rounded-2xl border border-teal-100 shadow-sm animate-pulse"
+          >
+            {/* Sisi Kiri: Nomor & Teks */}
+            <div className="flex items-center space-x-4 w-full">
+              {/* Indikator Nomor Lingkaran */}
+              <div className="shrink-0 w-10 h-10 rounded-full bg-teal-100"></div>
+
+              {/* Nama Latin & Tempat Turun */}
+              <div className="space-y-2 flex-1">
+                <div className="h-4 bg-teal-100 rounded w-28"></div>
+                <div className="h-3 bg-teal-50 rounded w-20"></div>
+              </div>
+            </div>
+
+            {/* Sisi Kanan: Nama Arab */}
+            <div className="shrink-0 pl-4">
+              <div className="h-6 bg-teal-100 rounded w-16"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function ReadSurahSkeleton() {
+  return (
+    <div className="min-h-screen bg-teal-50/30 text-slate-800 font-sans pb-20">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 animate-pulse">
+        {/* HEADER SECTION SKELETON */}
+        <header className="mb-12 flex flex-col items-center text-center">
+          {/* Judul Arab Tiruan */}
+          <div className="h-14 w-48 bg-teal-200/60 rounded-xl mb-4 mx-auto"></div>
+
+          {/* Nama Latin & Arti */}
+          <div className="space-y-2 w-full flex flex-col items-center">
+            <div className="h-7 w-36 bg-teal-200/60 rounded-lg"></div>
+            <div className="h-4 w-56 bg-teal-100 rounded-md"></div>
+          </div>
+
+          {/* Badge Info (Jumlah Ayat & Tempat Turun) */}
+          <div className="mt-6 w-44 h-10 bg-teal-100/80 rounded-full"></div>
+        </header>
+
+        {/* LIST OF VERSES SKELETON (Membuat 5 tiruan ayat) */}
+        <div className="space-y-6 md:space-y-8">
+          {[...Array(5)].map((_, index) => (
+            <div
+              key={index}
+              className="flex flex-col sm:flex-row gap-6 p-4 md:p-6 bg-white rounded-2xl border border-teal-100/60 shadow-sm"
+            >
+              {/* Indikator Nomor Ayat */}
+              <div className="shrink-0 flex items-start sm:pt-2">
+                <div className="w-10 h-10 rounded-full bg-teal-100"></div>
+              </div>
+
+              {/* Konten Ayat Tiruan */}
+              <div className="flex-1 flex flex-col w-full space-y-4">
+                {/* Baris Teks Arab */}
+                <div className="space-y-2.5 flex flex-col items-end w-full">
+                  <div className="h-7 bg-teal-100/80 rounded w-full max-w-md"></div>
+                  <div className="h-7 bg-teal-100/80 rounded w-3/4 max-w-sm"></div>
+                </div>
+
+                {/* Transliterasi & Terjemahan */}
+                <div className="space-y-2 pt-2">
+                  <div className="h-4 bg-teal-100/60 rounded w-5/6"></div>
+                  <div className="h-4 bg-teal-100/40 rounded w-full"></div>
+                  <div className="h-4 bg-teal-100/40 rounded w-2/3"></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+    </div>
+  );
+}

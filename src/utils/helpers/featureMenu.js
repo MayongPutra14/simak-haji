@@ -25,7 +25,7 @@ export default function getFeatureItems(role = 'user') {
     {
       id: 'quran',
       label: "Al-Qur'an",
-      path: role === 'admin' ? '/maintenance' : '/maintenance',
+      path: role === 'admin' ? '/quran' : '/quran',
       Icon: QuranIcon,
       bgColor: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
     },

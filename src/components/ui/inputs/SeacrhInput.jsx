@@ -1,4 +1,4 @@
-import { MdOutlineSearch as IconSearch } from 'react-icons/md';
+import { IconSearch } from '../../../utils/helpers/decorations';
 
 const SeacrhInput = ({ placeHolder, searchQuery, onChange }) => {
   return (

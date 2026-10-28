@@ -1,12 +1,15 @@
+import { SlPlane as IconPlane } from 'react-icons/sl';
+import { LuIdCard as IconIdCard, LuLock as IconLock } from 'react-icons/lu';
+import { GrGallery as IconGallery } from 'react-icons/gr';
+import { IoLogoWhatsapp as IconWhatsappFill } from 'react-icons/io';
 import {
   BsTextParagraph as IconParagraph,
   BsQuestionCircle as IconQuestion,
 } from 'react-icons/bs';
-import { SlPlane as IconPlane } from 'react-icons/sl';
-import { HiStatusOnline as IconOnline } from 'react-icons/hi';
-import { LuIdCard as IconIdCard, LuLock as IconLock } from 'react-icons/lu';
-import { GrGallery as IconGallery } from 'react-icons/gr';
-import { IoLogoWhatsapp as IconWhatsappFill } from 'react-icons/io';
+import {
+  HiStatusOnline as IconOnline,
+  HiOutlineHashtag as IconHash,
+} from 'react-icons/hi';
 import {
   AiOutlineLoading3Quarters as IconLoading,
   AiOutlineLayout as IconLayout,
@@ -34,6 +37,7 @@ import {
   MdCheckCircleOutline as IconCheckCircle,
   MdFavoriteBorder as IconFavorite,
   MdArchive as IconArchive,
+  MdOutlineSearch as IconSearch,
 } from 'react-icons/md';
 import {
   TbWorldLongitude as IconLongitude,
@@ -45,6 +49,10 @@ import {
   TbArrowNarrowRight as IconArrowRight,
 } from 'react-icons/tb';
 import {
+  IoChevronBackOutline as IconChevronBack,
+  IoChevronForwardOutline as IconChevronNext,
+  IoChevronDownOutline as IconChevronDown,
+  IoAlertCircleOutline as IconAlertCircle,
   IoEyeOutline as IconEye,
   IoTimeOutline as IconClock,
   IoLocationOutline as IconLocation,
@@ -102,6 +110,12 @@ export const bgImage = {
 };
 
 export {
+  IconHash,
+  IconChevronNext,
+  IconChevronBack,
+  IconChevronDown,
+  IconAlertCircle,
+  IconSearch,
   IconLocationFill,
   IconLinkedin,
   IconFacebook,

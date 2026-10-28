@@ -1,9 +1,9 @@
-import LandingPageFragment from '../fragments/LandingPageFragment';
-import { useGetLandingContent } from '../hooks/admin/landing/useGetLandingContent';
-import { useScrollRestoration } from '../hooks/admin/landing/useScrollRestoration';
-import { JSONParser } from '../utils/helpers/helpers';
-import LogoSimak from '../assets/images/simak-logo.webp';
-import { IconLoading } from '../utils/helpers/decorations';
+import LandingPageFragment from '../../fragments/LandingPageFragment';
+import { useGetLandingContent } from '../../hooks/admin/landing/useGetLandingContent';
+import { useScrollRestoration } from '../../hooks/admin/landing/useScrollRestoration';
+import { JSONParser } from '../../utils/helpers/helpers';
+import LogoSimak from '../../assets/images/simak-logo.webp';
+import { IconLoading } from '../../utils/helpers/decorations';
 import {
   Navbar,
   AboutSection,
@@ -13,7 +13,7 @@ import {
   HeroSection,
   StatisticsSection,
   TestimonialSection,
-} from '../components/ui/global/landingpage/index';
+} from '../../components/ui/global/landingpage/index';
 
 const LandingPage = () => {
   const { landingData, isLoading, _error } = useGetLandingContent();

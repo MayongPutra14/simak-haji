@@ -40,3 +40,23 @@ export const fetchPraySchedules = async (
     throw new Error(errorMessage, { cause: error });
   }
 };
+
+export const getSurahsListAPI = async () => {
+  const response = await islamicAPI.get('https://equran.id/api/surat');
+
+  return response.data;
+};
+
+export const getSurahByIdAPI = async (surahId) => {
+  if (!surahId)
+    return {
+      status: 'failed',
+      message: 'ID surat tidak dimukan, silahkan coba lagi',
+    };
+
+  const response = await islamicAPI.get(
+    `https://equran.id/api/surat/${surahId}`,
+  );
+
+  return response.data;
+};
