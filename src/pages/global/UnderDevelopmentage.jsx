@@ -6,7 +6,7 @@ export function UnderDevelopmentPage() {
 
   return (
     <>
-      <UnderDevelopment userRole={user.role} />
+      <UnderDevelopment userRole={user?.role} />
     </>
   );
 }
