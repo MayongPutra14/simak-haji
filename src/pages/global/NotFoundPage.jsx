@@ -5,7 +5,7 @@ const NotFoundPage = () => {
   const { user } = useAuth();
   return (
     <>
-      <NotFoundUI userRole={user.role} />
+      <NotFoundUI userRole={user?.role} />
     </>
   );
 };
