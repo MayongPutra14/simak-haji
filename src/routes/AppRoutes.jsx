@@ -15,6 +15,8 @@ import {
   MaterialGuardRoute,
   QuranPage,
   SurahReadingPage,
+  HadithPage,
+  HadithListingPage,
 } from '../pages/global/index';
 
 // ADMIN
@@ -55,6 +57,11 @@ export default function AppRoutes() {
       <Route path="quran">
         <Route index element={<QuranPage />} />
         <Route path="read/:surahId" element={<SurahReadingPage />} />
+      </Route>
+
+      <Route path="hadiths">
+        <Route index element={<HadithPage />} />
+        <Route path="list/:slug" element={<HadithListingPage />} />
       </Route>
 
       {/* PUBLIC/GUEST ROUTES */}

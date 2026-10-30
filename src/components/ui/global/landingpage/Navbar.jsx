@@ -97,6 +97,8 @@ const Navbar = () => {
                 <li>
                   <a
                     href="/quran"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block px-5 py-2 text-sm text-white transition-colors duration-200 hover:bg-sea-green-600 hover:text-white-600"
                   >
                     Al-Quran
@@ -104,7 +106,9 @@ const Navbar = () => {
                 </li>
                 <li>
                   <a
-                    href="/maintenance"
+                    href="/hadiths"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block px-5 py-2 text-sm text-white transition-colors duration-200 hover:bg-sea-green-600 hover:text-white-600"
                   >
                     Hadith
@@ -275,17 +279,19 @@ const Navbar = () => {
                   <li>
                     <a
                       href="/quran"
-                      className="block px-4 py-3 text-base font-medium text-white transition-colors rounded-lg hover:bg-white/50 hover:text-white"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block px-5 py-2 text-sm text-white transition-colors duration-200 hover:bg-sea-green-600 hover:text-white-600"
                     >
                       Al-Quran
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/maintenance"
-                      className="block px-4 py-3 text-base font-medium text-white transition-colors rounded-lg hover:bg-white/50 hover:text-white "
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      href="/hadiths"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block px-5 py-2 text-sm text-white transition-colors duration-200 hover:bg-sea-green-600 hover:text-white-600"
                     >
                       Hadith
                     </a>

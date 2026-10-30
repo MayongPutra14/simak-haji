@@ -11,8 +11,6 @@ import {
   IconWalletFill,
   IconPeopleOutline,
   IconPeopleFill,
-  IconLayout as IconLayoutOutline,
-  IconLayoutFIll,
 } from './decorations';
 
 export default function getNavItems(role) {
@@ -66,13 +64,6 @@ export default function getNavItems(role) {
     IconFill: IconPeopleFill,
   };
 
-  const landingPage = {
-    id: 'landing-page',
-    label: 'Landing Page',
-    path: '/admin/landing-page/edit',
-    IconOutline: IconLayoutOutline,
-    IconFill: IconLayoutFIll,
-  };
 
   if (role === 'admin') {
     return [
@@ -81,7 +72,6 @@ export default function getNavItems(role) {
       commonItems.schedule,
       commonItems.finance,
       commonItems.profile,
-      landingPage,
     ];
   }
 

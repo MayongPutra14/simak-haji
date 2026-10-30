@@ -13,6 +13,8 @@ import {
 import { MaterialGuardRoute } from '../../routes/MaterialGuardRoute';
 import QuranPage from './QuranPage';
 import SurahReadingPage from './SurahReadingPage';
+import HadithPage from './HadistPage';
+import HadithListingPage from './ListHadiths';
 
 export {
   Routes,
@@ -30,4 +32,6 @@ export {
   MaterialGuardRoute,
   QuranPage,
   SurahReadingPage,
+  HadithPage,
+  HadithListingPage,
 };

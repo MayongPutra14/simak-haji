@@ -3,16 +3,9 @@ import {
   HadithIcon,
   TasbihIcon,
   DuaIcon,
-  SavingIcon,
 } from '../../components/ui/global/MenuIcon';
 
-import {
-  IoQrCodeOutline as IconQr,
-  IoWalletOutline as IconWallet,
-  IoTrophyOutline as _IconLeaderboard,
-  IoPeopleOutline as _IconPeople,
-  IoGridOutline as IconMore,
-} from 'react-icons/io5';
+import { IconQr, IconMore, IconLayout } from './decorations';
 
 /**
  * Get menu list features based on role  (Role-Based)
@@ -22,6 +15,7 @@ import {
 export default function getFeatureItems(role = 'user') {
   // General menu (User & Admin)
   const commonIslamicItems = [
+    // AL-QUR'AN
     {
       id: 'quran',
       label: "Al-Qur'an",
@@ -29,10 +23,11 @@ export default function getFeatureItems(role = 'user') {
       Icon: QuranIcon,
       bgColor: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
     },
+    // HADITH
     {
       id: 'hadits',
       label: 'Hadits',
-      path: role === 'admin' ? '/maintenance' : '/maintenance',
+      path: role === 'admin' ? '/hadiths' : '/hadiths',
       Icon: HadithIcon,
       bgColor: 'bg-amber-500/10 text-amber-600 dark:text-amber-400',
     },
@@ -57,10 +52,10 @@ export default function getFeatureItems(role = 'user') {
     role === 'admin'
       ? [
         {
-          id: 'materi',
-          label: 'Kelola Materi',
-          path: '/maintenance',
-          Icon: SavingIcon,
+          id: 'landing',
+          label: 'Landing Page',
+          path: '/admin/landing-page/edit',
+          Icon: IconLayout,
           bgColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
         },
         {
@@ -70,36 +65,29 @@ export default function getFeatureItems(role = 'user') {
           Icon: IconQr,
           bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
         },
-        {
-          id: 'keuangan',
-          label: 'Kas Kloter',
-          path: '/maintenance',
-          Icon: IconWallet,
-          bgColor: 'bg-green-500/10 text-green-600 dark:text-green-400',
-        },
       ]
       : [
-        {
-          id: 'materi',
-          label: 'Materi',
-          path: '/user/materi',
-          Icon: SavingIcon,
-          bgColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
-        },
-        {
-          id: 'absen',
-          label: 'Absen',
-          path: '/maintenance',
-          Icon: IconQr,
-          bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
-        },
-        {
-          id: 'keuangan',
-          label: 'Keuangan',
-          path: '/maintenance',
-          Icon: IconWallet,
-          bgColor: 'bg-green-500/10 text-green-600 dark:text-green-400',
-        },
+        // {
+        //   id: 'materi',
+        //   label: 'Materi',
+        //   path: '/user/materi',
+        //   Icon: SavingIcon,
+        //   bgColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+        // },
+        // {
+        //   id: 'absen',
+        //   label: 'Absen',
+        //   path: '/maintenance',
+        //   Icon: IconQr,
+        //   bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
+        // },
+        // {
+        //   id: 'keuangan',
+        //   label: 'Keuangan',
+        //   path: '/maintenance',
+        //   Icon: IconWallet,
+        //   bgColor: 'bg-green-500/10 text-green-600 dark:text-green-400',
+        // },
       ];
 
   //  Menu "Lainnya"

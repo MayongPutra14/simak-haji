@@ -518,3 +518,189 @@ export function ReadSurahSkeleton() {
     </div>
   );
 }
+
+// SKELETON FOR HADITH
+// list hadith in a book
+export function HadithSkeletonCard() {
+  return (
+    <div className="bg-white p-6 rounded-2xl border border-teal-200 shadow-xs animate-pulse">
+      {/* HEADER CARD: KITAB & NOMOR */}
+      <div className="flex justify-between items-center mb-6 pb-4 border-b border-teal-100">
+        <div className="h-6 w-32 bg-teal-200 rounded-full"></div>
+      </div>
+
+      {/* ARABIC TEXT SECTION */}
+      <div className="space-y-3 flex flex-col items-end mb-6">
+        <div className="h-7 bg-teal-200 rounded w-full"></div>
+        <div className="h-7 bg-teal-200 rounded w-5/6"></div>
+        <div className="h-7 bg-teal-200 rounded w-2/3"></div>
+      </div>
+
+      {/* FOOTER CARD: TRANSLATION PLACEHOLDER */}
+      <div className="space-y-2 mt-4 pt-4 border-t border-teal-50">
+        <div className="h-4 bg-teal-200 rounded w-full"></div>
+        <div className="h-4 bg-teal-200 rounded w-11/12"></div>
+        <div className="h-4 bg-teal-200 rounded w-4/5"></div>
+      </div>
+    </div>
+  );
+}
+
+// LOADING SKELETON COMPONENT
+export function ReadHadithSkeleton({ bookName }) {
+  return (
+    <div className="min-h-screen bg-stone-50 text-slate-800 font-sans">
+      <div className="max-w-3xl mx-auto px-4 py-6 md:py-10">
+        {/* HEADER SECTION */}
+        <header className="flex justify-between items-center gap-4 mb-8">
+          <div className="h-9 w-24 bg-teal-200 rounded-full animate-pulse"></div>
+        </header>
+
+        {/* HERO SECTION (BENTO STYLE) */}
+        <section className="bg-white rounded-2xl border border-teal-200/80 p-6 md:p-8 shadow-sm mb-8 animate-pulse">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* MAIN DETAILS */}
+            <div className="lg:col-span-8 flex flex-col gap-4">
+              {/* BADGES ROW */}
+              <div className="flex flex-wrap items-center gap-2.5">
+                <div className="h-5 w-24 bg-teal-200 rounded-full"></div>
+                <div className="h-5 w-20 bg-teal-200 rounded-full"></div>
+              </div>
+
+              {/* TITLE AND DESCRIPTION */}
+              <div>
+                <h1 className="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight opacity-70">
+                  {bookName || 'Memuat...'}
+                </h1>
+                <div className="space-y-2 mt-3">
+                  <div className="h-4 bg-teal-200 rounded w-full"></div>
+                  <div className="h-4 bg-teal-200 rounded w-full"></div>
+                  <div className="h-4 bg-teal-200 rounded w-3/4"></div>
+                </div>
+              </div>
+
+              {/* METADATA FOOTER */}
+              <div className="pt-2">
+                <div className="h-4 bg-teal-200 rounded w-2/3"></div>
+              </div>
+            </div>
+
+            {/* ARABIC CALLIGRAPHY BADGE FEATURE */}
+            <div className="lg:col-span-4 flex flex-col items-center lg:items-end justify-center w-full">
+              <div className="w-full max-w-xs p-6 bg-teal-50/80 rounded-xl border border-teal-200/60 flex flex-col items-center">
+                <div className="h-8 bg-teal-200 rounded w-32 mb-3"></div>
+                <div className="w-12 h-0.5 bg-teal-200"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* HADITH LIST SECTION (Render 3 item skeleton) */}
+        <main className="space-y-6">
+          <HadithSkeletonCard />
+          <HadithSkeletonCard />
+          <HadithSkeletonCard />
+        </main>
+
+        {/* PAGINATION CONTROLS SKELETON */}
+        <nav className="flex items-center justify-between md:justify-center gap-4 mt-10 animate-pulse">
+          <div className="h-9 w-28 bg-teal-200 rounded-lg"></div>
+          <div className="h-5 w-32 bg-teal-200 rounded"></div>
+          <div className="h-9 w-28 bg-teal-200 rounded-lg"></div>
+        </nav>
+      </div>
+    </div>
+  );
+}
+
+// SKELETON FOR EACH CARD IN HADITH
+function CollectionCardSkeleton() {
+  return (
+    <div className="flex flex-col justify-between rounded-2xl bg-white p-6 shadow-sm border border-teal-100/80 animate-pulse">
+      {/* TOP SECTION: TITLE & COUNT */}
+      <div>
+        {/* Book Title Placeholder */}
+        <div className="h-6 bg-teal-200 rounded-md w-3/4 mb-3"></div>
+        {/* Hadith Count Placeholder */}
+        <div className="h-4 bg-teal-200 rounded-md w-1/3"></div>
+      </div>
+
+      {/* BOTTOM ACTION SECTION */}
+      <div className="mt-6 pt-4 border-t border-teal-100 flex items-center justify-between">
+        {/* "Lihat Hadis" text placeholder */}
+        <div className="h-4 bg-teal-200 rounded-md w-20"></div>
+        {/* Circle Chevron icon placeholder */}
+        <div className="w-6 h-6 rounded-full bg-teal-200"></div>
+      </div>
+    </div>
+  );
+}
+
+// MAIN COMPONENT SKELETON PAGE
+export function HadithHubSkeleton() {
+  return (
+    <div className="min-h-screen bg-teal-50 font-sans">
+      {/* HEADER SKELETON */}
+      <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-lg border-b border-teal-200 animate-pulse">
+        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+          {/* Back button placeholder */}
+          <div className="h-8 bg-teal-200 rounded-lg w-24"></div>
+        </div>
+      </header>
+
+      {/* HERO SECTION SKELETON */}
+      <section className="relative overflow-hidden pt-16 pb-12 md:pt-28 md:pb-24 px-4 text-center">
+        {/* Ambient Glow Background tetap dipertahankan agar visual konsisten sejak loading */}
+        <div
+          aria-hidden="true"
+          className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 w-full max-w-7xl h-105 pointer-events-none"
+        >
+          <div className="absolute top-10 left-1/2 -translate-x-1/2 w-75 sm:w-125 h-62 bg-linear-to-tr from-emerald-400/20 via-teal-300/20 to-emerald-200/10 blur-3xl rounded-full" />
+        </div>
+
+        <div className="max-w-3xl mx-auto relative z-10 flex flex-col items-center animate-pulse">
+          {/* Main Heading Placeholder */}
+          <div className="h-10 sm:h-14 bg-teal-200 rounded-xl w-5/6 mb-4"></div>
+          <div className="h-10 sm:h-14 bg-teal-200 rounded-xl w-3/5 mb-6"></div>
+
+          {/* Subtitle Placeholder */}
+          <div className="space-y-2 w-full max-w-2xl mb-8 flex flex-col items-center">
+            <div className="h-4 bg-teal-200 rounded-md w-full"></div>
+            <div className="h-4 bg-teal-200 rounded-md w-5/6"></div>
+          </div>
+
+          {/* SEARCH INTERFACE SKELETON */}
+          <div className="w-full max-w-2xl bg-white rounded-2xl border border-teal-900/5 shadow-md p-2 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 pl-3 w-full">
+              {/* Icon Search Placeholder */}
+              <div className="w-5 h-5 bg-teal-200 rounded-full shrink-0"></div>
+              {/* Input text field placeholder */}
+              <div className="h-5 bg-teal-200 rounded-md w-2/3"></div>
+            </div>
+            {/* Button Cari Placeholder */}
+            <div className="h-11 bg-teal-300 rounded-xl w-32 shrink-0"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* COLLECTION GRID SECTION SKELETON */}
+      <main className="max-w-6xl mx-auto px-4 pb-16">
+        {/* Section Title Placeholder (Contoh: "Daftar Kitab Hadis") */}
+        <div className="h-6 bg-teal-200 rounded-md w-48 mb-6 animate-pulse"></div>
+
+        {/* Grid Grid Layout (Disetel 9 item skeleton sebagai dummy data awal) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <CollectionCardSkeleton />
+          <CollectionCardSkeleton />
+          <CollectionCardSkeleton />
+          <CollectionCardSkeleton />
+          <CollectionCardSkeleton />
+          <CollectionCardSkeleton />
+          <CollectionCardSkeleton />
+          <CollectionCardSkeleton />
+          <CollectionCardSkeleton />
+        </div>
+      </main>
+    </div>
+  );
+}

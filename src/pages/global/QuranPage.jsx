@@ -62,8 +62,8 @@ export default function QuranPage() {
           <div className="relative mb-8 text-center">
             {/* textual header elements */}
             <div className="relative z-10">
-              <span className="inline-block text-sm text-teal-600 uppercase tracking-widest mb-2 font-medium">
-                Mushaf Digital Indonesia
+              <span className="inline-block text-sm text-teal-600 uppercase mb-2 font-medium">
+                Mushaf Digital
               </span>
               <h1 className="text-3xl md:text-4xl font-semibold text-teal-900 tracking-tight mb-3">
                 Daftar Surah

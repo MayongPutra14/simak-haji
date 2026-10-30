@@ -60,3 +60,66 @@ export const getSurahByIdAPI = async (surahId) => {
 
   return response.data;
 };
+
+const hadithAPI = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+  headers: { 'Content-Type': 'application/json' },
+});
+
+// GET HADITH BOOKS API SERVICE
+export const getHadithBooksAPI = async () => {
+  const response = await hadithAPI.get('user.php', {
+    params: { action: 'get_hadith_books' },
+  });
+
+  return response.data;
+};
+
+// SEARCH HADITH API SERVICE
+export const searchHadithAPI = async (
+  query,
+  kitab = '',
+  page = 1,
+  limit = 5,
+) => {
+  const trimmedQuery = query ? query.trim() : '';
+  const isNumeric = /^\d+$/.test(trimmedQuery);
+
+  // ALLOW NUMERIC INPUT OR MINIMUM 3 CHARACTERS FOR TEXT
+  if (!trimmedQuery || (trimmedQuery.length < 3 && !isNumeric)) {
+    return {
+      status: 'failed',
+      message:
+        'Kata kunci pencarian minimal harus 3 karakter atau masukkan nomor hadis.',
+    };
+  }
+
+  const response = await hadithAPI.post('user.php', {
+    action: 'search_hadith',
+    q: query,
+    kitab: kitab,
+    page: page,
+    limit: limit,
+  });
+
+  return response.data;
+};
+
+// GET HADITH BY KITAB
+export const getHadithByKitabAPI = async (kitab = '', page = 1, limit = 5) => {
+  if (page < 1) {
+    return {
+      status: 'failed',
+      message: 'Nomor halaman tidak boleh kurang dari nol atau minus',
+    };
+  }
+
+  const response = await hadithAPI.post('user.php', {
+    action: 'get_hadith_by_books',
+    kitab: kitab,
+    page: page,
+    limit: limit,
+  });
+
+  return response.data;
+};
