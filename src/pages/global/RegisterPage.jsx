@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import RegisterFormFragment from '../fragments/RegisterFragment';
-import Modal from '../components/ui/global/Modal';
-import { useRegister } from '../hooks/global/useRegister';
+import RegisterFormFragment from '../../fragments/RegisterFragment';
+import Modal from '../../components/ui/global/Modal';
+import { useRegister } from '../../hooks/global/useRegister';
 import { motion } from 'motion/react';
-import BgFormLogReg from '../assets/images/decorations/mekah.webp';
+import BgFormLogReg from '../../assets/images/decorations/mekah.webp';
 import {
   IoCloseOutline as IconClose,
   IoCheckmark as IconCheck,

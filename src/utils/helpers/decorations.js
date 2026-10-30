@@ -1,12 +1,19 @@
+import { SlPlane as IconPlane } from 'react-icons/sl';
+import { GrGallery as IconGallery } from 'react-icons/gr';
+import { IoLogoWhatsapp as IconWhatsappFill } from 'react-icons/io';
+import {
+  LuIdCard as IconIdCard,
+  LuLock as IconLock,
+  LuBookText as IconBookClose,
+} from 'react-icons/lu';
 import {
   BsTextParagraph as IconParagraph,
   BsQuestionCircle as IconQuestion,
 } from 'react-icons/bs';
-import { SlPlane as IconPlane } from 'react-icons/sl';
-import { HiStatusOnline as IconOnline } from 'react-icons/hi';
-import { LuIdCard as IconIdCard, LuLock as IconLock } from 'react-icons/lu';
-import { GrGallery as IconGallery } from 'react-icons/gr';
-import { IoLogoWhatsapp as IconWhatsappFill } from 'react-icons/io';
+import {
+  HiStatusOnline as IconOnline,
+  HiOutlineHashtag as IconHash,
+} from 'react-icons/hi';
 import {
   AiOutlineLoading3Quarters as IconLoading,
   AiOutlineLayout as IconLayout,
@@ -20,7 +27,7 @@ import {
   MdPeople as IconPeople,
   MdOutlineFolderSpecial as IconSpecial,
   MdOutlineVerifiedUser as IconVerified,
-  MdOutlineMenuBook as IconBook,
+  MdOutlineMenuBook as IconBookOpen,
   MdGroups as IconGroup,
   MdOutlineGroups as IconGroupOutline,
   MdOutlineVolunteerActivism as IconVolunteer,
@@ -34,8 +41,10 @@ import {
   MdCheckCircleOutline as IconCheckCircle,
   MdFavoriteBorder as IconFavorite,
   MdArchive as IconArchive,
+  MdOutlineSearch as IconSearch,
 } from 'react-icons/md';
 import {
+  TbRefresh as IconRefresh,
   TbWorldLongitude as IconLongitude,
   TbWorldLatitude as IconLatitude,
   TbMapPin2 as IconRadius,
@@ -45,6 +54,11 @@ import {
   TbArrowNarrowRight as IconArrowRight,
 } from 'react-icons/tb';
 import {
+  IoGridOutline as IconMore,
+  IoChevronBackOutline as IconChevronBack,
+  IoChevronForwardOutline as IconChevronNext,
+  IoChevronDownOutline as IconChevronDown,
+  IoAlertCircleOutline as IconAlertCircle,
   IoEyeOutline as IconEye,
   IoTimeOutline as IconClock,
   IoLocationOutline as IconLocation,
@@ -102,6 +116,15 @@ export const bgImage = {
 };
 
 export {
+  IconMore,
+  IconBookClose,
+  IconRefresh,
+  IconHash,
+  IconChevronNext,
+  IconChevronBack,
+  IconChevronDown,
+  IconAlertCircle,
+  IconSearch,
   IconLocationFill,
   IconLinkedin,
   IconFacebook,
@@ -167,7 +190,7 @@ export {
   IconTrash,
   IconCamera,
   IconVerified,
-  IconBook,
+  IconBookOpen,
   IconGroup,
   IconVolunteer,
   IconWhatsapp,

@@ -1,16 +1,20 @@
 import { Routes, Route, Navigate } from 'react-router';
 import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
-import ProtectedRoute from '../routes/ProtectedRoute';
-import PublicRoute from '../routes/PublicRoute';
+import ProtectedRoute from '../../routes/ProtectedRoute';
+import PublicRoute from '../../routes/PublicRoute';
 import LandingPage from './LandingPage';
 import NotFoundPage from './NotFoundPage';
 import { UnderDevelopmentPage } from './UnderDevelopmentage';
 import {
   RequiredCompletedIdentity,
   RequiredInCompletedIdentity,
-} from '../routes/IdentityGuard';
-import { MaterialGuardRoute } from '../routes/MaterialGuardRoute';
+} from '../../routes/IdentityGuard';
+import { MaterialGuardRoute } from '../../routes/MaterialGuardRoute';
+import QuranPage from './QuranPage';
+import SurahReadingPage from './SurahReadingPage';
+import HadithPage from './HadistPage';
+import HadithListingPage from './ListHadiths';
 
 export {
   Routes,
@@ -26,4 +30,8 @@ export {
   RequiredCompletedIdentity,
   RequiredInCompletedIdentity,
   MaterialGuardRoute,
+  QuranPage,
+  SurahReadingPage,
+  HadithPage,
+  HadithListingPage,
 };

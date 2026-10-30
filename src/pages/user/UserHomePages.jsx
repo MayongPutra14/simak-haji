@@ -12,7 +12,7 @@ const UserHomePage = () => {
   return (
     <UserHomeFragment>
       <PrayTimesWidget />
-      <FeatureHubContainer />
+      <FeatureHubContainer role={user.role} />
 
       <EventDashboard eventData={eventData} isLoading={isLoading} />
     </UserHomeFragment>

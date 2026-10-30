@@ -13,7 +13,11 @@ import {
   RequiredCompletedIdentity,
   RequiredInCompletedIdentity,
   MaterialGuardRoute,
-} from '../pages/index';
+  QuranPage,
+  SurahReadingPage,
+  HadithPage,
+  HadithListingPage,
+} from '../pages/global/index';
 
 // ADMIN
 import {
@@ -50,6 +54,16 @@ export default function AppRoutes() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
 
+      <Route path="quran">
+        <Route index element={<QuranPage />} />
+        <Route path="read/:surahId" element={<SurahReadingPage />} />
+      </Route>
+
+      <Route path="hadiths">
+        <Route index element={<HadithPage />} />
+        <Route path="list/:slug" element={<HadithListingPage />} />
+      </Route>
+
       {/* PUBLIC/GUEST ROUTES */}
       <Route element={<PublicRoute />}>
         <Route path="/login" element={<LoginPage />} />
@@ -68,7 +82,6 @@ export default function AppRoutes() {
             <Route index element={<Navigate to="hero" replace />} />
             <Route path=":sectionKey" element={<EditLandingPage />} />
           </Route>
-
 
           {/* CRUD USER */}
           <Route path="users">

@@ -96,7 +96,9 @@ const Navbar = () => {
               <ul className="absolute invisible w-48 py-2 mt-1 transition-all duration-200 ease-out -translate-x-1/2 border rounded-lg shadow-sm opacity-0 left-1/2 top-full bg-sea-green-800 border-sea-green-100 group-hover:opacity-100 group-hover:visible">
                 <li>
                   <a
-                    href="/maintenance"
+                    href="/quran"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block px-5 py-2 text-sm text-white transition-colors duration-200 hover:bg-sea-green-600 hover:text-white-600"
                   >
                     Al-Quran
@@ -104,7 +106,9 @@ const Navbar = () => {
                 </li>
                 <li>
                   <a
-                    href="/maintenance"
+                    href="/hadiths"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block px-5 py-2 text-sm text-white transition-colors duration-200 hover:bg-sea-green-600 hover:text-white-600"
                   >
                     Hadith
@@ -274,18 +278,20 @@ const Navbar = () => {
                 <ul className="flex flex-col gap-1 pl-8 pr-4 ml-6 border-l-2 border-sea-green-100">
                   <li>
                     <a
-                      href="/maintenance"
-                      className="block px-4 py-3 text-base font-medium text-white transition-colors rounded-lg hover:bg-white/50 hover:text-white"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      href="/quran"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block px-5 py-2 text-sm text-white transition-colors duration-200 hover:bg-sea-green-600 hover:text-white-600"
                     >
                       Al-Quran
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/maintenance"
-                      className="block px-4 py-3 text-base font-medium text-white transition-colors rounded-lg hover:bg-white/50 hover:text-white "
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      href="/hadiths"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block px-5 py-2 text-sm text-white transition-colors duration-200 hover:bg-sea-green-600 hover:text-white-600"
                     >
                       Hadith
                     </a>

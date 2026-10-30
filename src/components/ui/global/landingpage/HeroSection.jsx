@@ -7,7 +7,7 @@ import {
   IconWhatsapp,
   IconExternalLink,
   IconVerified,
-  IconBook,
+  IconBookOpen,
   IconGroup,
   IconVolunteer,
 } from '../../../../utils/helpers/decorations';
@@ -158,7 +158,7 @@ const HeroSection = ({ content }) => {
                   className="material-symbols-outlined text-[16px]"
                   data-icon="menu_book"
                 >
-                  <IconBook />
+                  <IconBookOpen />
                 </span>
               </div>
               <span className="leading-snug font-label-md text-label-md">

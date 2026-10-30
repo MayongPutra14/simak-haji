@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useAuth } from '../features/auth/useAuth';
-import LoginFormFragment from '../fragments/LoginFormFragment';
-import Modal from '../components/ui/global/Modal';
+import { useAuth } from '../../features/auth/useAuth';
+import LoginFormFragment from '../../fragments/LoginFormFragment';
+import Modal from '../../components/ui/global/Modal';
 import { IoCloseOutline as IconClose } from 'react-icons/io5';
-import { useLogin } from '../hooks/user/useLogin';
-import BgFormLogReg from '../assets/images/decorations/mekah.webp';
+import { useLogin } from '../../hooks/user/useLogin';
+import BgFormLogReg from '../../assets/images/decorations/mekah.webp';
 import { motion } from 'motion/react';
 
 export default function LoginPage() {
