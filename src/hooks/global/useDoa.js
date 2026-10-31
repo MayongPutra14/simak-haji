@@ -42,9 +42,9 @@ export function useSearchDoa() {
       } else {
         setSearchResults(response || []);
       }
-    } catch (err) {
+    } catch (_err) {
       // handle search request failure
-      setError(err.message || 'Terjadi kesalahan saat mencari doa.');
+      setError('Doa dengan kata kunci tersebut tidak dapat ditemukan');
     } finally {
       // ensure loading state is closed
       setIsLoading(false);

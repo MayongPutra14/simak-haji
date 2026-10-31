@@ -73,9 +73,12 @@ export default function QuranPage() {
                 Jelajahi 114 surah Al-Qur'anul Karim lengkap dengan terjemahan
                 resmi, identifikasi tempat wahyu, dan rincian ayat.
               </p>
-              <p className="text-xs text-teal-300/60 font-medium pt-1">
+              <a
+                href="https://equran.id/"
+                className="text-xs text-teal-300/60 font-medium pt-1 underline"
+              >
                 Powered by EQuran.id
-              </p>
+              </a>
             </div>
 
             {/* bismillah decorative device */}
