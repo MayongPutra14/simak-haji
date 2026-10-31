@@ -158,11 +158,6 @@ export function useHadithByKitab(kitabSlug, initialPage = 1, limit = 5) {
     fetchHadith(currentPage);
   }, [currentPage, fetchHadith]);
 
-  // TRIGGER FETCH WHEN PAGE OR SLUG CHANGES
-  useEffect(() => {
-    fetchHadith(currentPage);
-  }, [currentPage, fetchHadith]);
-
   // PAGINATION HANDLERS
   const totalPages = hadithData?.total_pages || 1;
   const hasNextPage = currentPage < totalPages;

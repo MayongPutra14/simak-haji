@@ -4,7 +4,6 @@ import {
   TasbihIcon,
   DuaIcon,
 } from '../../components/ui/global/MenuIcon';
-
 import { IconQr, IconMore, IconLayout } from './decorations';
 
 /**
@@ -32,18 +31,11 @@ export default function getFeatureItems(role = 'user') {
       bgColor: 'bg-amber-500/10 text-amber-600 dark:text-amber-400',
     },
     {
-      id: 'dzikir',
-      label: 'Dzikir',
-      path: role === 'admin' ? '/maintenance' : '/maintenance',
+      id: 'duas',
+      label: 'Doa & Dzikir',
+      path: role === 'admin' ? '/duas' : '/duas',
       Icon: TasbihIcon,
       bgColor: 'bg-teal-500/10 text-teal-600 dark:text-teal-400',
-    },
-    {
-      id: 'doa',
-      label: "Do'a",
-      path: role === 'admin' ? '/maintenance' : '/maintenance',
-      Icon: DuaIcon,
-      bgColor: 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400',
     },
   ];
 

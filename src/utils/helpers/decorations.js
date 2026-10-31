@@ -5,6 +5,8 @@ import {
   LuIdCard as IconIdCard,
   LuLock as IconLock,
   LuBookText as IconBookClose,
+  LuSunMoon as IconSunMoon,
+  LuBookHeart as IconBookHeart,
 } from 'react-icons/lu';
 import {
   BsTextParagraph as IconParagraph,
@@ -116,6 +118,8 @@ export const bgImage = {
 };
 
 export {
+  IconBookHeart,
+  IconSunMoon,
   IconMore,
   IconBookClose,
   IconRefresh,
