@@ -18,7 +18,6 @@ import {
   HadithPage,
   HadithListingPage,
   DoaPage,
-  ListDoaPage,
 } from '../pages/global/index';
 
 // ADMIN
@@ -70,7 +69,6 @@ export default function AppRoutes() {
       {/* DOA & DZIKIR */}
       <Route path="duas">
         <Route index element={<DoaPage />} />
-        <Route path="list/:slug" element={<ListDoaPage />} />
       </Route>
 
       {/* PUBLIC/GUEST ROUTES */}

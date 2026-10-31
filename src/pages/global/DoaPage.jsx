@@ -35,6 +35,7 @@ function Footer() {
 
 export default function DoaPage() {
   const navigate = useNavigate();
+
   // STATE FOR SEARCH INPUT QUERY
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -43,6 +44,8 @@ export default function DoaPage() {
 
   // STATE FOR HIGHLIGHTED / SELECTED DOA CARD
   const [selectedDoaId, setSelectedDoaId] = useState(null);
+
+  const isSearchActive = searchQuery.trim().length >= 2;
 
   // HOOK FOR CATEGORIES
   const {
@@ -116,7 +119,6 @@ export default function DoaPage() {
   function handleBack() {
     navigate(-1);
   }
-  const isSearchActive = searchQuery.trim().length >= 2;
 
   return (
     // MAIN CONTAINER WITH TEAL/EMERALD BACKGROUND
@@ -288,7 +290,7 @@ export default function DoaPage() {
           {/* SEARCH ERROR STATE (ONLY DISPLAY IF NO RESULTS) */}
           {isSearchActive &&
             searchError &&
-            (!searchResults || searchResults.length === 0) && (
+            (!searchResults) && (
             <div className="p-4 rounded-xl bg-rose-950/60 border border-rose-800 text-rose-200 text-sm">
               {searchError}
             </div>

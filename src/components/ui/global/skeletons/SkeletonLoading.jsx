@@ -405,58 +405,58 @@ export function EventDashboardSkeleton() {
 }
 
 // SKELETON LOADING FOR QUR'AN
-// List Qur'an
+// LIST QURAN SKELETON
 export function ListQuranSkeleton() {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
+    <div className="container mx-auto px-4 py-8 max-w-7xl bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100 font-sans selection:bg-teal-400 selection:text-emerald-950">
       {/* HEADER SECTION SKELETON */}
       <header className="mb-10 md:mb-12 text-center max-w-2xl mx-auto animate-pulse">
-        <div className="inline-block w-40 h-4 bg-teal-100 rounded-full mb-3"></div>
-        <div className="h-10 w-64 bg-teal-200 rounded-xl mx-auto mb-3"></div>
-        <div className="h-4 w-full max-w-md bg-teal-100 rounded-lg mx-auto mb-2"></div>
-        <div className="h-4 w-3/4 max-w-xs bg-teal-100 rounded-lg mx-auto mb-6"></div>
-        <div className="h-3 w-32 bg-teal-100 rounded-lg mx-auto mb-8"></div>
+        <div className="inline-block w-40 h-4 bg-emerald-900/60 border border-emerald-800/50 rounded-full mb-3"></div>
+        <div className="h-10 w-64 bg-emerald-800/60 rounded-xl mx-auto mb-3"></div>
+        <div className="h-4 w-full max-w-md bg-emerald-900/50 rounded-lg mx-auto mb-2"></div>
+        <div className="h-4 w-3/4 max-w-xs bg-emerald-900/50 rounded-lg mx-auto mb-6"></div>
+        <div className="h-3 w-32 bg-emerald-900/40 rounded-lg mx-auto mb-8"></div>
 
         {/* Bismillah Divider Skeleton */}
         <div className="flex items-center justify-center gap-4 mb-8">
-          <div className="w-12 h-px bg-teal-200"></div>
-          <div className="w-36 h-6 bg-teal-100 rounded"></div>
-          <div className="w-12 h-px bg-teal-200"></div>
+          <div className="w-12 h-px bg-emerald-800/50"></div>
+          <div className="w-36 h-6 bg-emerald-900/60 rounded"></div>
+          <div className="w-12 h-px bg-emerald-800/50"></div>
         </div>
 
         {/* Search Input Skeleton */}
-        <div className="h-12 w-full bg-teal-50 border border-teal-100 rounded-xl mb-6"></div>
+        <div className="h-12 w-full bg-emerald-900/60 border border-emerald-700/60 rounded-2xl mb-6 backdrop-blur-sm"></div>
 
         {/* Filter Buttons Skeleton */}
         <div className="flex flex-wrap items-center justify-center gap-2">
-          <div className="h-9 w-28 bg-teal-100 rounded-full"></div>
-          <div className="h-9 w-20 bg-teal-100 rounded-full"></div>
-          <div className="h-9 w-20 bg-teal-100 rounded-full"></div>
+          <div className="h-9 w-28 bg-emerald-900/80 border border-emerald-800/60 rounded-xl"></div>
+          <div className="h-9 w-20 bg-emerald-900/80 border border-emerald-800/60 rounded-xl"></div>
+          <div className="h-9 w-20 bg-emerald-900/80 border border-emerald-800/60 rounded-xl"></div>
         </div>
       </header>
 
-      {/* SURAH GRID SKELETON (Menampilkan 9 kotak tiruan kartu surat) */}
+      {/* SURAH GRID SKELETON */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
         {[...Array(9)].map((_, index) => (
           <div
             key={index}
-            className="w-full flex items-center justify-between p-4 sm:p-5 bg-white rounded-2xl border border-teal-100 shadow-sm animate-pulse"
+            className="w-full flex items-center justify-between p-4 sm:p-5 bg-emerald-900/40 rounded-2xl border border-emerald-800/60 shadow-sm animate-pulse backdrop-blur-sm"
           >
-            {/* Sisi Kiri: Nomor & Teks */}
+            {/* Left Side: Number & Text */}
             <div className="flex items-center space-x-4 w-full">
-              {/* Indikator Nomor Lingkaran */}
-              <div className="shrink-0 w-10 h-10 rounded-full bg-teal-100"></div>
+              {/* Number Circle Indicator Skeleton */}
+              <div className="shrink-0 w-11 h-11 rounded-xl bg-emerald-950 border border-emerald-800"></div>
 
-              {/* Nama Latin & Tempat Turun */}
+              {/* Latin Name & Revelation Location */}
               <div className="space-y-2 flex-1">
-                <div className="h-4 bg-teal-100 rounded w-28"></div>
-                <div className="h-3 bg-teal-50 rounded w-20"></div>
+                <div className="h-4 bg-emerald-800/60 rounded w-28"></div>
+                <div className="h-3 bg-emerald-900/50 rounded w-20"></div>
               </div>
             </div>
 
-            {/* Sisi Kanan: Nama Arab */}
+            {/* Right Side: Arabic Name */}
             <div className="shrink-0 pl-4">
-              <div className="h-6 bg-teal-100 rounded w-16"></div>
+              <div className="h-6 bg-emerald-800/60 rounded w-16"></div>
             </div>
           </div>
         ))}
@@ -465,50 +465,51 @@ export function ListQuranSkeleton() {
   );
 }
 
+// READ SURAH SKELETON
 export function ReadSurahSkeleton() {
   return (
-    <div className="min-h-screen bg-teal-50/30 text-slate-800 font-sans pb-20">
+    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100 font-sans pb-20">
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 animate-pulse">
         {/* HEADER SECTION SKELETON */}
         <header className="mb-12 flex flex-col items-center text-center">
-          {/* Judul Arab Tiruan */}
-          <div className="h-14 w-48 bg-teal-200/60 rounded-xl mb-4 mx-auto"></div>
+          {/* Mock Arabic Title */}
+          <div className="h-14 w-48 bg-emerald-800/60 rounded-xl mb-4 mx-auto"></div>
 
-          {/* Nama Latin & Arti */}
+          {/* Latin Name & Meaning */}
           <div className="space-y-2 w-full flex flex-col items-center">
-            <div className="h-7 w-36 bg-teal-200/60 rounded-lg"></div>
-            <div className="h-4 w-56 bg-teal-100 rounded-md"></div>
+            <div className="h-7 w-36 bg-emerald-800/50 rounded-lg"></div>
+            <div className="h-4 w-56 bg-emerald-900/50 rounded-md"></div>
           </div>
 
-          {/* Badge Info (Jumlah Ayat & Tempat Turun) */}
-          <div className="mt-6 w-44 h-10 bg-teal-100/80 rounded-full"></div>
+          {/* Info Badge (Verse Count & Revelation Location) */}
+          <div className="mt-6 w-44 h-10 bg-emerald-900/60 border border-emerald-800/60 rounded-full"></div>
         </header>
 
-        {/* LIST OF VERSES SKELETON (Membuat 5 tiruan ayat) */}
+        {/* LIST OF VERSES SKELETON */}
         <div className="space-y-6 md:space-y-8">
           {[...Array(5)].map((_, index) => (
             <div
               key={index}
-              className="flex flex-col sm:flex-row gap-6 p-4 md:p-6 bg-white rounded-2xl border border-teal-100/60 shadow-sm"
+              className="flex flex-col sm:flex-row gap-6 p-5 md:p-7 bg-emerald-900/40 rounded-2xl border border-emerald-800/60 shadow-sm backdrop-blur-sm"
             >
-              {/* Indikator Nomor Ayat */}
+              {/* Verse Number Indicator Skeleton */}
               <div className="shrink-0 flex items-start sm:pt-2">
-                <div className="w-10 h-10 rounded-full bg-teal-100"></div>
+                <div className="w-11 h-11 rounded-xl bg-emerald-950 border border-emerald-800"></div>
               </div>
 
-              {/* Konten Ayat Tiruan */}
+              {/* Mock Verse Content */}
               <div className="flex-1 flex flex-col w-full space-y-4">
-                {/* Baris Teks Arab */}
+                {/* Arabic Text Lines Skeleton */}
                 <div className="space-y-2.5 flex flex-col items-end w-full">
-                  <div className="h-7 bg-teal-100/80 rounded w-full max-w-md"></div>
-                  <div className="h-7 bg-teal-100/80 rounded w-3/4 max-w-sm"></div>
+                  <div className="h-7 bg-emerald-800/60 rounded w-full max-w-md"></div>
+                  <div className="h-7 bg-emerald-800/60 rounded w-3/4 max-w-sm"></div>
                 </div>
 
-                {/* Transliterasi & Terjemahan */}
+                {/* Transliteration & Translation Skeleton */}
                 <div className="space-y-2 pt-2">
-                  <div className="h-4 bg-teal-100/60 rounded w-5/6"></div>
-                  <div className="h-4 bg-teal-100/40 rounded w-full"></div>
-                  <div className="h-4 bg-teal-100/40 rounded w-2/3"></div>
+                  <div className="h-4 bg-emerald-800/50 rounded w-5/6"></div>
+                  <div className="h-4 bg-emerald-900/50 rounded w-full"></div>
+                  <div className="h-4 bg-emerald-900/50 rounded w-2/3"></div>
                 </div>
               </div>
             </div>
@@ -523,79 +524,78 @@ export function ReadSurahSkeleton() {
 // list hadith in a book
 export function HadithSkeletonCard() {
   return (
-    <div className="bg-white p-6 rounded-2xl border border-teal-200 shadow-xs animate-pulse">
+    <div className="bg-emerald-900/50 p-6 rounded-2xl border border-emerald-800/60 shadow-xs animate-pulse">
       {/* HEADER CARD: KITAB & NOMOR */}
-      <div className="flex justify-between items-center mb-6 pb-4 border-b border-teal-100">
-        <div className="h-6 w-32 bg-teal-200 rounded-full"></div>
+      <div className="flex justify-between items-center mb-6 pb-4 border-b border-emerald-600/60">
+        <div className="h-6 w-32 bg-emerald-800/70 rounded-full"></div>
       </div>
 
       {/* ARABIC TEXT SECTION */}
       <div className="space-y-3 flex flex-col items-end mb-6">
-        <div className="h-7 bg-teal-200 rounded w-full"></div>
-        <div className="h-7 bg-teal-200 rounded w-5/6"></div>
-        <div className="h-7 bg-teal-200 rounded w-2/3"></div>
+        <div className="h-7 bg-emerald-700/60 rounded w-full"></div>
+        <div className="h-7 bg-emerald-700/60 rounded w-5/6"></div>
+        <div className="h-7 bg-emerald-700/60 rounded w-2/3"></div>
       </div>
 
       {/* FOOTER CARD: TRANSLATION PLACEHOLDER */}
       <div className="space-y-2 mt-4 pt-4 border-t border-teal-50">
-        <div className="h-4 bg-teal-200 rounded w-full"></div>
-        <div className="h-4 bg-teal-200 rounded w-11/12"></div>
-        <div className="h-4 bg-teal-200 rounded w-4/5"></div>
+        <div className="h-4 bg-emerald-700/60 rounded w-full"></div>
+        <div className="h-4 bg-emerald-700/60 rounded w-11/12"></div>
+        <div className="h-4 bg-emerald-700/60 rounded w-4/5"></div>
       </div>
     </div>
   );
 }
 
-// LOADING SKELETON COMPONENT
 export function ReadHadithSkeleton({ bookName }) {
   return (
-    <div className="min-h-screen bg-stone-50 text-slate-800 font-sans">
-      <div className="max-w-3xl mx-auto px-4 py-6 md:py-10">
-        {/* HEADER SECTION */}
+    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100 font-sans pb-12">
+      <div className="max-w-4xl mx-auto px-4 py-6 md:py-10">
+        {/* HEADER SECTION SKELETON */}
         <header className="flex justify-between items-center gap-4 mb-8">
-          <div className="h-9 w-24 bg-teal-200 rounded-full animate-pulse"></div>
+          <div className="h-9 w-24 bg-emerald-900/60 border border-emerald-800/60 rounded-xl animate-pulse" />
         </header>
 
-        {/* HERO SECTION (BENTO STYLE) */}
-        <section className="bg-white rounded-2xl border border-teal-200/80 p-6 md:p-8 shadow-sm mb-8 animate-pulse">
+        {/* HERO SECTION (BENTO STYLE SKELETON) */}
+        <section className="bg-emerald-900/40 rounded-2xl border border-emerald-800/60 p-6 md:p-8 shadow-sm mb-8 backdrop-blur-md animate-pulse">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* MAIN DETAILS */}
             <div className="lg:col-span-8 flex flex-col gap-4">
               {/* BADGES ROW */}
               <div className="flex flex-wrap items-center gap-2.5">
-                <div className="h-5 w-24 bg-teal-200 rounded-full"></div>
-                <div className="h-5 w-20 bg-teal-200 rounded-full"></div>
+                <div className="h-5 w-24 bg-emerald-800/60 rounded-full" />
+                <div className="h-5 w-20 bg-emerald-800/60 rounded-full" />
               </div>
 
-              {/* TITLE AND DESCRIPTION */}
+              {/* TITLE AND DESCRIPTION SKELETON */}
               <div>
-                <h1 className="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight opacity-70">
+                <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight bg-linear-to-r from-teal-200 via-emerald-300 to-teal-100 bg-clip-text text-transparent opacity-70">
                   {bookName || 'Memuat...'}
                 </h1>
                 <div className="space-y-2 mt-3">
-                  <div className="h-4 bg-teal-200 rounded w-full"></div>
-                  <div className="h-4 bg-teal-200 rounded w-full"></div>
-                  <div className="h-4 bg-teal-200 rounded w-3/4"></div>
+                  <div className="h-4 bg-emerald-800/50 rounded w-full" />
+                  <div className="h-4 bg-emerald-800/50 rounded w-full" />
+                  <div className="h-4 bg-emerald-800/50 rounded w-3/4" />
                 </div>
               </div>
 
-              {/* METADATA FOOTER */}
+              {/* METADATA FOOTER SKELETON */}
               <div className="pt-2">
-                <div className="h-4 bg-teal-200 rounded w-2/3"></div>
+                <div className="h-4 bg-emerald-800/50 rounded w-2/3" />
               </div>
             </div>
 
-            {/* ARABIC CALLIGRAPHY BADGE FEATURE */}
+            {/* ARABIC CALLIGRAPHY BADGE FEATURE SKELETON */}
             <div className="lg:col-span-4 flex flex-col items-center lg:items-end justify-center w-full">
-              <div className="w-full max-w-xs p-6 bg-teal-50/80 rounded-xl border border-teal-200/60 flex flex-col items-center">
-                <div className="h-8 bg-teal-200 rounded w-32 mb-3"></div>
-                <div className="w-12 h-0.5 bg-teal-200"></div>
+              <div className="w-full max-w-xs p-6 bg-emerald-950/80 rounded-2xl border border-emerald-800/80 flex flex-col items-center shadow-inner">
+                <div className="h-8 bg-emerald-800/60 rounded w-32 mb-3" />
+                <div className="w-12 h-0.5 bg-linear-to-r from-transparent via-teal-400/50 to-transparent" />
               </div>
             </div>
           </div>
         </section>
 
-        {/* HADITH LIST SECTION (Render 3 item skeleton) */}
+        {/* HADITH LIST SECTION SKELETON */}
         <main className="space-y-6">
           <HadithSkeletonCard />
           <HadithSkeletonCard />
@@ -603,10 +603,10 @@ export function ReadHadithSkeleton({ bookName }) {
         </main>
 
         {/* PAGINATION CONTROLS SKELETON */}
-        <nav className="flex items-center justify-between md:justify-center gap-4 mt-10 animate-pulse">
-          <div className="h-9 w-28 bg-teal-200 rounded-lg"></div>
-          <div className="h-5 w-32 bg-teal-200 rounded"></div>
-          <div className="h-9 w-28 bg-teal-200 rounded-lg"></div>
+        <nav className="flex items-center justify-between md:justify-center gap-4 mt-10 bg-emerald-900/40 p-4 rounded-2xl border border-emerald-800/60 backdrop-blur-md animate-pulse">
+          <div className="h-9 w-28 bg-emerald-950/80 border border-emerald-800/80 rounded-xl" />
+          <div className="h-5 w-32 bg-emerald-800/50 rounded" />
+          <div className="h-9 w-28 bg-emerald-950/80 border border-emerald-800/80 rounded-xl" />
         </nav>
       </div>
     </div>
@@ -616,21 +616,21 @@ export function ReadHadithSkeleton({ bookName }) {
 // SKELETON FOR EACH CARD IN HADITH
 function CollectionCardSkeleton() {
   return (
-    <div className="flex flex-col justify-between rounded-2xl bg-white p-6 shadow-sm border border-teal-100/80 animate-pulse">
+    <div className="flex flex-col justify-between rounded-2xl bg-emerald-900/40 p-6 shadow-sm border border-emerald-800/60 animate-pulse">
       {/* TOP SECTION: TITLE & COUNT */}
       <div>
         {/* Book Title Placeholder */}
-        <div className="h-6 bg-teal-200 rounded-md w-3/4 mb-3"></div>
+        <div className="h-6 bg-emerald-800/60 rounded-md w-3/4 mb-3"></div>
         {/* Hadith Count Placeholder */}
-        <div className="h-4 bg-teal-200 rounded-md w-1/3"></div>
+        <div className="h-4 bg-emerald-900/50 rounded-md w-1/3"></div>
       </div>
 
       {/* BOTTOM ACTION SECTION */}
-      <div className="mt-6 pt-4 border-t border-teal-100 flex items-center justify-between">
+      <div className="mt-6 pt-4 border-t border-emerald-800/80 flex items-center justify-between">
         {/* "Lihat Hadis" text placeholder */}
-        <div className="h-4 bg-teal-200 rounded-md w-20"></div>
+        <div className="h-4 bg-emerald-800/50 rounded-md w-20"></div>
         {/* Circle Chevron icon placeholder */}
-        <div className="w-6 h-6 rounded-full bg-teal-200"></div>
+        <div className="w-6 h-6 rounded-full bg-emerald-800/50"></div>
       </div>
     </div>
   );
@@ -639,18 +639,17 @@ function CollectionCardSkeleton() {
 // MAIN COMPONENT SKELETON PAGE
 export function HadithHubSkeleton() {
   return (
-    <div className="min-h-screen bg-teal-50 font-sans">
+    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100 font-sans selection:bg-teal-400 selection:text-emerald-950">
       {/* HEADER SKELETON */}
-      <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-lg border-b border-teal-200 animate-pulse">
+      <header className="sticky top-0 z-50 w-full bg-emerald-800/60 backdrop-blur-lg border-b border-emerald-200 animate-pulse">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           {/* Back button placeholder */}
-          <div className="h-8 bg-teal-200 rounded-lg w-24"></div>
+          <div className="h-8 bg-emerald-800/60 rounded-lg w-24"></div>
         </div>
       </header>
 
       {/* HERO SECTION SKELETON */}
       <section className="relative overflow-hidden pt-16 pb-12 md:pt-28 md:pb-24 px-4 text-center">
-        {/* Ambient Glow Background tetap dipertahankan agar visual konsisten sejak loading */}
         <div
           aria-hidden="true"
           className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 w-full max-w-7xl h-105 pointer-events-none"
@@ -660,25 +659,25 @@ export function HadithHubSkeleton() {
 
         <div className="max-w-3xl mx-auto relative z-10 flex flex-col items-center animate-pulse">
           {/* Main Heading Placeholder */}
-          <div className="h-10 sm:h-14 bg-teal-200 rounded-xl w-5/6 mb-4"></div>
-          <div className="h-10 sm:h-14 bg-teal-200 rounded-xl w-3/5 mb-6"></div>
+          <div className="h-10 sm:h-14 bg-emerald-800/50 rounded-xl w-5/6 mb-4"></div>
+          <div className="h-10 sm:h-14 bg-emerald-800/50 rounded-xl w-3/5 mb-6"></div>
 
           {/* Subtitle Placeholder */}
           <div className="space-y-2 w-full max-w-2xl mb-8 flex flex-col items-center">
-            <div className="h-4 bg-teal-200 rounded-md w-full"></div>
-            <div className="h-4 bg-teal-200 rounded-md w-5/6"></div>
+            <div className="h-4 bg-emerald-900/50 rounded-md w-full"></div>
+            <div className="h-4 bg-emerald-900/50 rounded-md w-5/6"></div>
           </div>
 
           {/* SEARCH INTERFACE SKELETON */}
-          <div className="w-full max-w-2xl bg-white rounded-2xl border border-teal-900/5 shadow-md p-2 flex items-center justify-between gap-3">
+          <div className="w-full max-w-2xl bg-emerald-900/60 rounded-2xl border border-emerald-700/60 shadow-md p-2 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3 pl-3 w-full">
               {/* Icon Search Placeholder */}
-              <div className="w-5 h-5 bg-teal-200 rounded-full shrink-0"></div>
+              <div className="w-5 h-5 bg-emerald-800 rounded-full shrink-0"></div>
               {/* Input text field placeholder */}
-              <div className="h-5 bg-teal-200 rounded-md w-2/3"></div>
+              <div className="h-5 bg-emerald-800 rounded-md w-2/3"></div>
             </div>
             {/* Button Cari Placeholder */}
-            <div className="h-11 bg-teal-300 rounded-xl w-32 shrink-0"></div>
+            <div className="h-11 bg-emerald-800 rounded-xl w-32 shrink-0"></div>
           </div>
         </div>
       </section>
@@ -686,7 +685,7 @@ export function HadithHubSkeleton() {
       {/* COLLECTION GRID SECTION SKELETON */}
       <main className="max-w-6xl mx-auto px-4 pb-16">
         {/* Section Title Placeholder (Contoh: "Daftar Kitab Hadis") */}
-        <div className="h-6 bg-teal-200 rounded-md w-48 mb-6 animate-pulse"></div>
+        <div className="h-6 bg-emerald-900 rounded-md w-48 mb-6 animate-pulse"></div>
 
         {/* Grid Grid Layout (Disetel 9 item skeleton sebagai dummy data awal) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

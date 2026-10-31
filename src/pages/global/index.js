@@ -16,7 +16,6 @@ import SurahReadingPage from './SurahReadingPage';
 import HadithPage from './HadistPage';
 import HadithListingPage from './ListHadiths';
 import DoaPage from './DoaPage';
-import ListDoaPage from './ListDoas';
 
 export {
   Routes,
@@ -37,5 +36,4 @@ export {
   HadithPage,
   HadithListingPage,
   DoaPage,
-  ListDoaPage,
 };
