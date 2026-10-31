@@ -17,6 +17,8 @@ import {
   SurahReadingPage,
   HadithPage,
   HadithListingPage,
+  DoaPage,
+  ListDoaPage,
 } from '../pages/global/index';
 
 // ADMIN
@@ -53,15 +55,22 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-
+      {/* QURAN ROUTE */}
       <Route path="quran">
         <Route index element={<QuranPage />} />
         <Route path="read/:surahId" element={<SurahReadingPage />} />
       </Route>
 
+      {/* HADITHS */}
       <Route path="hadiths">
         <Route index element={<HadithPage />} />
         <Route path="list/:slug" element={<HadithListingPage />} />
+      </Route>
+
+      {/* DOA & DZIKIR */}
+      <Route path="duas">
+        <Route index element={<DoaPage />} />
+        <Route path="list/:slug" element={<ListDoaPage />} />
       </Route>
 
       {/* PUBLIC/GUEST ROUTES */}

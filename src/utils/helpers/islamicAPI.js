@@ -61,14 +61,14 @@ export const getSurahByIdAPI = async (surahId) => {
   return response.data;
 };
 
-const hadithAPI = axios.create({
+const ahmadsanusi = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: { 'Content-Type': 'application/json' },
 });
 
 // GET HADITH BOOKS API SERVICE
 export const getHadithBooksAPI = async () => {
-  const response = await hadithAPI.get('user.php', {
+  const response = await ahmadsanusi.get('user.php', {
     params: { action: 'get_hadith_books' },
   });
 
@@ -94,7 +94,7 @@ export const searchHadithAPI = async (
     };
   }
 
-  const response = await hadithAPI.post('user.php', {
+  const response = await ahmadsanusi.post('user.php', {
     action: 'search_hadith',
     q: query,
     kitab: kitab,
@@ -114,11 +114,57 @@ export const getHadithByKitabAPI = async (kitab = '', page = 1, limit = 5) => {
     };
   }
 
-  const response = await hadithAPI.post('user.php', {
+  const response = await ahmadsanusi.post('user.php', {
     action: 'get_hadith_by_books',
     kitab: kitab,
     page: page,
     limit: limit,
+  });
+
+  return response.data;
+};
+
+// SEARCH DOA BY QUERY
+export const searchDoaByQueryAPI = async (query = '', limit = 5) => {
+  const trimmedQuery = query ? query.trim() : '';
+
+  const response = await ahmadsanusi.get('user.php', {
+    params: {
+      action: 'search_doa_by_query',
+      q: trimmedQuery,
+      limit: limit,
+    },
+  });
+
+  return response.data;
+};
+
+// GET DOA CATEGORY
+export const getDoaCategoriesAPI = async () => {
+  const response = await ahmadsanusi.get('user.php', {
+    params: {
+      action: 'get_doa_categories',
+    },
+  });
+
+  return response.data;
+};
+
+export const getDoaByCategory = async (slug = '', page = 1, limit = 5) => {
+  if (page < 1) {
+    return {
+      status: 'failed',
+      message: 'Nomor halaman tidak boleh kurang dari nol atau minus',
+    };
+  }
+
+  const response = await ahmadsanusi.get('user.php', {
+    params: {
+      action: 'get_doa_by_category',
+      slug: slug,
+      page: page,
+      limit: limit,
+    },
   });
 
   return response.data;
