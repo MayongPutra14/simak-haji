@@ -1,0 +1,68 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "NIAT SHOLAT SAFAR",
+      "description": "",
+      "arab": "أُصَلِّي سُنَّةَ السَّفَرِ رَكْعَتَيْنِ لِلّٰهِ تَعَالَى",
+      "transliteration": "Ushalliî sunnatas safari rak’ataini lillâhi ta’âla",
+      "translation": "Saya niat shalat sunnah perjalanan dua rakaat karena Allah ta’âla."
+    },
+    {
+      "id": 2,
+      "name": "DOA SETELAH SHOLAT SAFAR",
+      "description": "",
+      "arab": "اَللَّهُمَّ بِكَ أَسْتَعِيْنُ، وَعَلَيْكَ أَتَوَكَّلُ، اَللَّهُمَّ ذَلِّلْ لِيْ صُعُوْبَةَ أَمْرِيْ، وَسَهِّلْ عَلَيَّ مَشَقَّةَ سَفَرِيْ، وَارْزُقْنِيْ مِنَ الْخَيْرِ أَكْثَرَ مِمَّا أَطْلُبُ، وَاصْرِفْ عَنِّيْ كُلَّ شَرٍّ، رَبِّ اشْرَحْ لِيْ صَدْرِيْ، وَيَسِّرْ لِيْ أَمْرِيْ، اَللَّهُمَّ إِنِّيْ أَسْتَحْفِظُكَ وَأَسْتَوْدِعُكَ نَفْسِيْ وَدِيْنِيْ وَأَهْلِيْ وَأَقَارِبِيْ وَكُلَّ مَا أَنْعَمْتَ عَلَيَّ وَعَلَيْهِمْ بِهِ مِنْ آخِرَةٍ وَدُنْيَا، فَاحْفَظْنَا أَجْمَعِيْنَ مِنْ كُلِّ سُوْءٍ يَا كَرِيْمُ",
+      "transliteration": "Allahumma bika asta'iin, wa 'alaika atawakkal, Allahumma dzallil lii shu'ubata amrii, wa sahhil 'alayya masyaqqata safari, warzuqnii minal khairi aktsara mimmaa athlub, washrif 'annii kulla syarr, Rabbisy-syrah lii shadrii, wa yassir lii amrii, Allahumma innii astahfidhuka wa astawdi'uka nafsii wa diinii wa ahlii wa aqaaribii wa kulla maa an'amta 'alayya wa 'alaihim bihi min aakhiratin wa dunyaa, fahfadzhnaa ajma'iina min kulli suu-in yaa kariim.",
+      "translation": "Ya Allah, kepada-Mu aku memohon pertolongan dan kepada-Mu aku berserah diri. Ya Allah, mudahkanlah bagiku sulitnya urusanku, dan ringankanlah bagiku beratnya perjalananku. Berilah aku rezeki berupa kebaikan yang lebih banyak dari apa yang aku minta, dan palingkanlah dariku segala keburukan. Wahai Tuhanku, lapangkanlah dadaku dan mudahkanlah urusanku. Ya Allah, sesungguhnya aku memohon penjagaan-Mu dan menitipkan kepada-Mu diriku, agamaku, keluargaku, kerabatku, dan semua nikmat akhirat maupun dunia yang telah Engkau anugerahkan kepadaku dan kepada mereka. Maka jagalah kami semua dari segala keburukan, wahai Dzat Yang Maha Mulia."
+    },
+    {
+      "id": 3,
+      "name": "DOA KELUAR RUMAH",
+      "description": "",
+      "arab": "بِسْمِ اللهِ تَوَكَّلْتُ عَلَى اللهِ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ",
+      "transliteration": "Bismillâhi tawakkaltu ‘alallâhi wa lâ ḫaula wa lâ quwwata illâ billâh(i)",
+      "translation": "Dengan nama Allah, aku bertawakal kepada Allah. Tidak ada daya dan kekuatan kecuali dengan (pertolongan) Allah."
+    },
+    {
+      "id": 4,
+      "name": "DOA NAIK KENDARAAN",
+      "description": "",
+      "arab": "بِسْمِ اللهِ مَجْرِيْهَا وَمُرْسَاهَا إِنَّ رَبِّيْ لَغَفُوْرٌ رَحِيْمٌ",
+      "transliteration": "Bismillāhi majrēha wa mursāhā, inna rabbī laghafūrur raḥīm.",
+      "translation": "Dengan menyebut nama Allah di waktu berlayar dan berlabuhnya. Sungguh Tuhanku benar-benar Maha Pengampun lagi Maha Penyayang."
+    },
+    {
+      "id": 5,
+      "name": "DO'A KETIKA SAMPAI DI TUJUAN",
+      "description": "",
+      "arab": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. اَللَّهُمَّ إِنِّيْ أَسْأَلُكَ خَيْرَهَا وَخَيْرَ أَهْلِهَا وَخَيْرَ مَا فِيْهَا وَخَيْرَ مَا أَرْسَلْتَ بِهِ، وَأَعُوْذُ بِكَ مِنْ شَرِّهَا وَشَرِّ أَهْلِهَا وَشَرِّ مَا فِيْهَا وَشَرِّ مَا أَرْسَلْتَ بِهِ.",
+      "transliteration": "Bismillahir rahmaanir rahiim. Allahumma inni as'aluka khairaha wa khaira ahliha wa khaira ma fiiha wa khaira ma arsalta bihi, wa a'udzubika min syarriha wa syarri ahliha wa syarri ma fiiha wa syarri ma arsalta bihi.",
+      "translation": "Dengan menyebut nama Allah Yang Maha Pengasih lagi Maha Penyayang. Ya Allah, sesungguhnya aku memohon kepada-Mu kebaikan tempat ini, kebaikan penduduknya, kebaikan apa yang ada di dalamnya, dan kebaikan apa yang Engkau utus bersamanya. Dan aku berlindung kepada-Mu dari keburukan tempat ini, keburukan penduduknya, keburukan apa yang ada di dalamnya, dan keburukan apa yang Engkau utus bersamanya."
+    },
+    {
+      "id": 6,
+      "name": "DO'A MASUK KOTA MAKKAH",
+      "description": "",
+      "arab": "اَللَّهُمَّ هَذَا حَرَامُكَ وَأَمْنُكَ فَحَرِّمْ لَحْمِيْ وَدَمِيْ وَشَعْرِيْ وَبَشَرِيْ عَلَى النَّارِ وَآمِنِّيْ مِنْ عَذَابِكَ يَوْمَ تَبْعَثُ عِبَادَكَ وَاجْعَلْنِيْ مِنْ أَوْلِيَائِكَ وَأَهْلِ طَاعَتِكَ",
+      "transliteration": "Allahumma hadza haramuka wa amnuka fa harrim lahmi wa dami wa sya'ri wa basyari 'alan nari wa aminni min 'adzabika yauma tab'atsu 'ibadaka waj'alni min auliya'ika wa ahli tha'atika.",
+      "translation": "Ya Allah, kota ini adalah tanah haram-Mu dan tempat aman-Mu, maka haramkanlah dagingku, darahku, rambutku, dan kulitku dari api neraka. Dan selamatkanlah aku dari siksa-Mu pada hari Engkau membangkitkan hamba-hamba-Mu, serta jadikanlah aku termasuk di antara kekasih-Mu dan orang-orang yang taat kepada-Mu."
+    },
+    {
+      "id": 7,
+      "name": "DOA MASUK MUZDALIFAH",
+      "description": "",
+      "arab": "اللَّهُمَّ إِنَّ هَذِهِ مُزْدَلِفَةُ جُمِعَتْ فِيْهَا أَلْسِنَةٌ مُخْتَلِفَةٌ، تَسْأَلُكَ حَوَائِجَ مُتَنَوِّعَةً فَاجْعَلْنِيْ مِمَّنْ دَعَاكَ فَاسْتَجَبْتَ لَهُ وَتَوَكَّلَ عَلَيْكَ فَكَفَّيْتَهُ يَا أَرْحَمَ الرَّاحِمِيْنَ",
+      "transliteration": "Allâhumma inna hâdzihi muzdalifatu jumi‘at fîhâ alsinatun mukhtalifatun, tas’aluka hawâija mutanawwi‘atan faj’alnî mimman da‘âka fastajabta lahu wa tawakkala ‘alaika fakaffaitahu yâ arḫamar râḫimîn",
+      "translation": "Ya Allah, sesungguhnya di Muzdalifah ini telah berkumpul bermacam-macam bahasa yang memohon kepada-Mu berbagai hajat yang beraneka ragam. Maka, masukkanlah aku ke dalam golongan orang yang berdoa lalu Engkau kabulkan, golongan orang yang berserah diri pada-Mu lalu Engkau lindungi dia, wahai Tuhan yang Maha Pengasih dari segala yang pengasih."
+    },
+    {
+      "id": 8,
+      "name": "DOA KETIKA SAMPAI DI MINA",
+      "description": "",
+      "arab": "اَللّٰهُمَّ هٰذَا مِنَى فَامْنُنْ عَلَيَّ بِمَا مَنَنْتَ بِهِ عَلَى أَوْلِيَائِكَ وَأَهْلِ طَاعَتِكَ",
+      "transliteration": "Allâhumma hadzâ minâ famnun ‘alayya bimâ mananta bihi ‘alâ awliyâika wa ahli thâ‘atika",
+      "translation": "Ya Allah, tempat ini adalah di Mina, anugerahkanlah kepadaku apa yang Engkau telah anugerahkan kepada orang-orang yang selalu dekat dan taat kepada-Mu."
+    }
+  ]
+}

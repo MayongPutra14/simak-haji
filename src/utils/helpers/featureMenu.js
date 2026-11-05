@@ -2,7 +2,7 @@ import {
   QuranIcon,
   HadithIcon,
   TasbihIcon,
-  DuaIcon,
+  IconKabahOutline
 } from '../../components/ui/global/MenuIcon';
 import { IconQr, IconMore, IconLayout } from './decorations';
 
@@ -36,6 +36,13 @@ export default function getFeatureItems(role = 'user') {
       path: role === 'admin' ? '/duas' : '/duas',
       Icon: TasbihIcon,
       bgColor: 'bg-teal-500/10 text-teal-600 dark:text-teal-400',
+    },
+    {
+      id: 'hajj',
+      label: 'Doa Haji & Umrah',
+      path: role === 'admin' ? '/hajj' : '/hajj',
+      Icon: IconKabahOutline,
+      bgColor: 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400',
     },
   ];
 
@@ -83,7 +90,7 @@ export default function getFeatureItems(role = 'user') {
       ];
 
   //  Menu "Lainnya"
-  const moreItem = {
+  const _moreItem = {
     id: 'more',
     label: 'Lainnya',
     isAction: true,
@@ -91,5 +98,5 @@ export default function getFeatureItems(role = 'user') {
     bgColor: 'bg-slate-500/10 text-slate-600 dark:text-slate-400',
   };
 
-  return [...commonIslamicItems, ...roleSpecificItems, moreItem];
+  return [...commonIslamicItems, ...roleSpecificItems];
 }

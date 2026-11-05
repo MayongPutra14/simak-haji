@@ -1,9 +1,9 @@
-export const QuranIcon = ({
+export function QuranIcon({
   width = 24,
   height = 24,
   stroke = 'currentColor',
   className = '',
-}) => {
+}) {
   return (
     <svg
       width={width}
@@ -22,14 +22,14 @@ export const QuranIcon = ({
       />
     </svg>
   );
-};
+}
 
-export const HadithIcon = ({
+export function HadithIcon({
   width = 24,
   height = 24,
   stroke = 'currentColor',
   className = '',
-}) => {
+}) {
   return (
     <svg
       width={width}
@@ -69,14 +69,14 @@ export const HadithIcon = ({
       />
     </svg>
   );
-};
+}
 
-export const DuaIcon = ({
+export function DuaIcon({
   width = 24,
   height = 24,
   fill = 'currentColor',
   className = '',
-}) => {
+}) {
   return (
     <svg
       width={width}
@@ -92,14 +92,14 @@ export const DuaIcon = ({
       />
     </svg>
   );
-};
+}
 
-export const TasbihIcon = ({
+export function TasbihIcon({
   width = 24,
   height = 24,
   stroke = 'currentColor',
   className = '',
-}) => {
+}) {
   return (
     <svg
       width={width}
@@ -123,14 +123,14 @@ export const TasbihIcon = ({
       />
     </svg>
   );
-};
+}
 
-export const SavingIcon = ({
+export function SavingIcon({
   width = 24,
   height = 24,
   stroke = 'currentColor',
   className = '',
-}) => {
+}) {
   return (
     <svg
       width={width}
@@ -156,4 +156,57 @@ export const SavingIcon = ({
       />
     </svg>
   );
-};
+}
+
+export function IconKabahOutline({
+  width = 24,
+  height = 24,
+  stroke = 'currentColor',
+  className = '',
+}) {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <g
+        stroke={stroke}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <polygon points="16,25.5 6.4,20.7 6.4,9.5 16,13.5" />
+        <polygon points="16,25.5 25.6,20.7 25.6,9.5 16,13.5" />
+        <polygon points="16,13.5 6.4,9.5 16,6.3 25.6,9.5" />
+
+        <line x1="6.4" y1="11.9" x2="16" y2="15.5" />
+        <line x1="25.6" y1="11.9" x2="16" y2="15.5" />
+
+        <g strokeWidth="1" opacity="0.7">
+          <line x1="8.8" y1="10.9" x2="8.8" y2="12.8" />
+          <line x1="11.2" y1="11.8" x2="11.2" y2="13.6" />
+          <line x1="13.6" y1="12.7" x2="13.6" y2="14.5" />
+          <line x1="23.2" y1="10.9" x2="23.2" y2="12.8" />
+          <line x1="20.8" y1="11.8" x2="20.8" y2="13.6" />
+          <line x1="18.4" y1="12.7" x2="18.4" y2="14.5" />
+        </g>
+
+        <polygon points="18.4,21.5 18.4,15.5 21.6,14.3 21.6,20.1" />
+        <line x1="20" y1="14.9" x2="20" y2="20.8" strokeWidth="1" />
+
+        <circle cx="16" cy="25.1" r="0.6" fill={stroke} stroke="none" />
+        <circle cx="16" cy="25.1" r="1" strokeWidth="0.8" />
+
+        <polyline
+          points="5.8,21 5.8,21.3 16,26.2 26.2,21.3 26.2,21"
+          strokeWidth="1"
+          opacity="0.8"
+        />
+      </g>
+    </svg>
+  );
+}

@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Doa Tasbih, Tahmid, Tahlil, Takbir, dan Hauqalah",
+      "description": "Keterangan singkat setiap pusaran dari. Hajar Aswad hingga rukunnya mandi.",
+      "arab": "سُبْحَانَ اللهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللهُ وَاللهُ أَكْبَرُ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ",
+      "transliteration": "Subhaanallahi walhamdulillahi walaa ilaaha illallahu wallahu akbar, walaa haula walaa quwwata illaa billahil 'aliyyil 'azhiim.",
+      "translation": "Maha Suci Allah, segala puji bagi Allah, tidak ada tuhan yang berhak disembah selain Allah, Allah Maha Besar, dan tidak ada daya dan upaya kecuali dengan pertolongan Allah Yang Maha Tinggi lagi Maha Agung."
+    },
+    {
+      "id": 2,
+      "name": "Doa Sapu Jagat",
+      "description": "Dari Rukun Yamani ke Hajar Aswad.",
+      "arab": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ وَأَدْخِلْنَا الْجَنَّةَ مَعَ الْأَبْرَارِ يَا عَزِيزُ يَا غَفَّارُ يَا رَبَّ الْعَالَمِينَ",
+      "transliteration": "Rabbanaa aatinaa fid-dunyaa hasanataw wa fil-aakhirati hasanataw wa qinaa 'adzaaban-naar. Wa adkhilnal-jannata ma'al-abraar, yaa 'Aziizu yaa Ghaffaaru yaa Rabbal-'aalamiin.",
+      "translation": "Ya Tuhan kami, berilah kami kebaikan di dunia dan kebaikan di akhirat, dan lindungilah kami dari azab neraka. Dan masukkanlah kami ke dalam surga bersama orang-orang yang berbuat baik, wahai Tuhan Yang Maha Perkasa, Maha Pengampun, wahai Tuhan semesta alam."
+    },
+    {
+      "id": 3,
+      "name": "Sayyidul Istighfar",
+      "description": "",
+      "arab": "اَللّٰهُمَّ أَنْتَ رَبِّي لَا إِلٰهَ إِلَّا أَنْتَ خَلَقْتَنِيْ، وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ أَعُوْذُ بِـكَ مِنْ شَرِّ مَـا صَنَعْـتُ، أَبُوْءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوْءُ بِذَنْبِيْ فَاغْفِرْ لِيْ، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوْبَ إِلَّا أَنْتَ",
+      "transliteration": "Allâhumma anta rabbî lâ ilâha illâ anta khalaqtanî, wa anâ `abduka, wa anâ `ala `ahdika wa wa`dika mâstatha`tu a`ûdzubika min syarri mâ shana`tu, abû’u laka bi ni`matika alayya, wa abû’u bi dzanbî faghfirlî, fa innahu lâ yaghfirudz-dzunûba illa anta.",
+      "translation": "Ya Allah, Engkaulah Tuhanku, tidak ada Tuhan selain-Mu, Engkau telah menciptakan aku dan aku ini adalah hamba-Mu, dan aku di atas titah dan janji-Mu sekuat kemampuanku. Aku berlindung kepada-Mu dari keburukan apa pun yang aku lakukan, aku mengakui nikmat yang Engkau karuniakan kepadaku, dan aku mengakui dosaku. Maka ampunilah aku, karena tak ada yang dapat mengampuni dosa-dosa selain Engkau."
+    },
+    {
+      "id": 4,
+      "name": "Doa Haji Mabrur",
+      "description": "",
+      "arab": "اللَّهُمَّ اجْعَلْنَا حَجّاً مَبْرُوراً، وَسَعْيَنَا سَعْياً مَشْكُوراً، وَتِجَارَتَنَا تِجَارَةً لَنْ تَبُورَ، بِرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِينَ",
+      "transliteration": "Allahummaj'alnaa hajjan mabruuran, wa sa'yanaa sa'yan masykuuran, wa tijaaratanaa tijaaratan lan tabuur, birohmatika yaa arhamar-roohimiin.",
+      "translation": "YYa Allah, jadikanlah haji kami haji yang mabrur (diterima dan mendatangkan kebaikan), dan sa'i (usaha/perjalanan) kami usaha yang disyukuri (diberi pahala), dan perdagangan (amal usaha) kami perdagangan yang tidak akan rugi, dengan rahmat-Mu, wahai Dzat Yang Maha Pengasih di antara yang pengasih."
+    },
+    {
+      "id": 5,
+      "name": "Do' a Selamat",
+      "description": "",
+      "arab": "اَللّٰهُمَّ اِنَّا نَسْئَلُكَ سَلَامَةً فِى الدِّيْنِ، وَعَافِيَةً فِى الْجَسَدِ وَزِيَادَةً فِى الْعِلْمِ وَبَرَكَةً فِى الرِّزْقِ وَتَوْبَةَ قَبْلَ الْمَوْتِ وَرَحْمَةً عِنْدَ الْمَوْتِ وَمَغْفِرَةً بَعْدَ الْمَوْتِ، اَللّٰهُمَّ هَوِّنْ عَلَيْنَا فِيْ سَكَرَاتِ الْمَوْتِ، وَنَجَاةً مِنَ النَّارِ وَالْعَفْوَعِنْدَ الْحِسَابِ، رَبَّنَا لاَتُزِغْ قُلُوْبَنَا بَعْدَ اِذْهَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً اِنَّكَ اَنْتَ الْوَهَّابُ، رَبَّنَا أَتِنَا فِى الدُّنْيَا حَسَنَةً وَفِي اْلأَخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+      "transliteration": "Allahumma innaa nas-aluka salaamatan fid diini wa ‘afiyatan fil jasadi wa ziyaadatan fil ‘ilmi wa barokatan fir rizqi wa taubatan qablal mauti wa rohmatan ‘indal mauti wa maghfirotan ba’dal mauti, allahummaa hawwin ‘alainaa fil sakaraatil mauti wannajaata minan naari wal ‘afwa ‘indal hisaabi, rabbanaa laa tuzigh quluubana ba’da idz hadaitanaa wahab lanaa mil ladunka rahma, innaka antal wahhaab, rabbanaa aatinaa fiddunnyaa hasanah, wa fil akhirati hasanah waqinaa ‘adzaa ban naar.",
+      "translation": "Ya Allah, kami memohon kepada-Mu keselamatan dalam agama, dan kesejahteraan/kesegaran pada tubuh dan penambahan ilmu, dan keberkahan rezeki, serta taubat sebelum mati dan rahmat di waktu mati, dan keampunan sesudah mati. Ya Allah, mudahkanlah kami saat pencabutan nyawa selamat dari api neraka dan mendapat kemaafan ketika amal diperhitungkan. Ya Allah, janganlah Engkau goyahkan hati kami setelah Engkau beri petunjuk dan berilah kami rahmat dari sisi-Mu. Sesungguhnya Engkau Maha Pemberi. Ya Tuhan kami, berilah kami kebaikan hidup di dunia dan kebaikan hidup di akhirat, dan jagalah kami dari siksa api neraka."
+    }
+  ]
+}

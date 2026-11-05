@@ -1,0 +1,343 @@
+{
+  "data": {
+    "talbiyah": {
+      "id": 1,
+      "name": "Doa Talbiyah",
+      "description": "",
+      "arab": "لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لا شَرِيكَ لكَ لَبَّيْكَ، إنَّ الحَمْدَ والنِّعْمَةَ لكَ وَالمُلكَ، لا شَرِيكَ لكَ",
+      "transliteration": "Labbaika allāhumma labbaik, labbaika lā syarīka laka labbaik, innal-ḥamda wan-ni‘mata laka wal-mulk, lā syarīka lak.",
+      "translation": "Aku memenuhi panggilan-Mu ya Allah, aku memenuhi panggilan-Mu. Aku memenuhi panggilan-Mu, tiada sekutu bagi-Mu, aku memenuhi panggilan-Mu. Sesungguhnya segala puji, nikmat, dan kerajaan adalah milik-Mu. Tiada sekutu bagi-Mu."
+    },
+    "intention_hajj": [
+      {
+        "id": 1,
+        "name": "Niat Haji",
+        "description": "",
+        "arab": "نَوَيْتُ الْحَجَّ وَأَحْرَمْتُ بِهِ لِلهِ تَعَالَى لَبَّيْكَ اللَّهُمَّ حَجًّا",
+        "transliteration": "Nawaitul hajja wa ahramtu bihi lillahi ta'ala labbaika allahumma hajjan.",
+        "translation": "Aku niat melaksanakan haji dan berihram karena Allah Ta'ala. Aku sambut panggilan-Mu, ya Allah, untuk berhaji."
+      },
+      {
+        "id": 2,
+        "name": "Niat Umrah",
+        "description": "",
+        "arab": "نَوَيْتُ الْعُمْرَةَ وَأَحْرَمْتُ بِهَا لِلهِ تَعَالَى لَبَّيْكَ اللَّهُمَّ عُمْرَةً",
+        "transliteration": "Nawaitul 'umrata wa ahramtu biha lillahi ta'ala labbaika allahumma 'umratan.",
+        "translation": "Aku niat melaksanakan umrah dan berihram karena Allah Ta'ala. Aku sambut panggilan-Mu, ya Allah, untuk berumrah."
+      },
+      {
+        "id": 3,
+        "name": "Tambahan Pada Niat Haji (Niat Bersyarat / Isytirat)",
+        "description": "",
+        "arab": "فَإِنْ حَبَسَنِيْ حَابِسٌ فَمَحِلِّيْ حَيْثُ حَبَسْتَنِيْ",
+        "transliteration": "Fa in habasanii haabisun fa mahillii haitsu habastanii.",
+        "translation": "Jika aku terhalang oleh suatu halangan, maka tempat tahallulku adalah di mana Engkau menahanku."
+      }
+    ],
+    "doa_arafah": [
+      {
+        "id": 1,
+        "name": "Dzikir Tauhid",
+        "description": "Dibaca 100 kali",
+        "arab": "لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيْكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِيْ وَيُمِيْتُ بِيَدِهِ الْخَيْرُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيْرٌ",
+        "transliteration": "Lā ilāha illallāhu waḥdahu lā syarīka lahu, lahul-mulku wa lahul-ḥamdu yuḥyī wa yumītu biyadihil-khairu wa huwa ‘alā kulli syai'in qadīr.",
+        "translation": "Tidak ada Tuhan selain Allah Yang Maha Esa, tidak ada sekutu bagi-Nya. Bagi-Nya segala kerajaan dan bagi-Nya segala pujian. Dia yang menghidupkan dan yang mematikan. Di tangan-Nya segala kebaikan dan Dia Maha Kuasa atas segala sesuatu."
+      },
+      {
+        "id": 2,
+        "name": "Shalawat Ibrahimiyah",
+        "description": "Dibaca 100 kali",
+        "arab": "اللّٰهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى سَيِّدِنَا إِبْرَاهِيْمَ وَعَلَى آلِ سَيِّدِنَا إِبْرَاهِيْمَ إِنَّكَ حَمِيْدٌ مَجِيْدٌ وَعَلَيْنَا مَعَهُمْ",
+        "transliteration": "Allāhumma ṣalli ‘alā sayyidinā muḥammadin kamā ṣallaita ‘alā sayyidinā ibrāhīma wa ‘alā āli sayyidinā ibrāhīma innaka ḥamīdun majīd, wa ‘alainā ma'ahum.",
+        "translation": "Ya Allah, limpahkanlah rahmat kepada junjungan kami Nabi Muhammad, sebagaimana Engkau telah melimpahkan rahmat kepada junjungan kami Nabi Ibrahim dan kepada keluarga junjungan kami Nabi Ibrahim. Sesungguhnya Engkau Maha Terpuji lagi Maha Mulia. Dan semoga rahmat-Mu juga tercurah kepada kami bersama mereka."
+      },
+      {
+        "id": 3,
+        "name": "Istighfar",
+        "description": "Dibaca 100 kali",
+        "arab": "أَسْتَغْفِرُ اللهَ الَّذِي لَا إِلٰهَ إِلَّا اللهُ هُوَ الْحَيُّ الْقَيُّوْمُ وَأَتُوْبُ إِلَيْهِ",
+        "transliteration": "Astagfirullāhal-ladzī lā ilāha illallāhu huwal-ḥayyul-qayyūmu wa atūbu ilaih.",
+        "translation": "Aku memohon ampun kepada Allah, yang tidak ada Tuhan selain Dia, Yang Maha Hidup lagi Maha Berdiri Sendiri, dan aku bertobat kepada-Nya."
+      },
+      {
+        "id": 4,
+        "name": "Kalimat Talbiyah",
+        "description": "",
+        "arab": "لَبَّيْكَ اللّٰهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيْكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيْكَ لَكَ",
+        "transliteration": "Labbaika allāhumma labbaik, labbaika lā syarīka laka labbaik, innal-ḥamda wan-ni‘mata laka wal-mulk, lā syarīka lak.",
+        "translation": "Aku datang memenuhi panggilan-Mu ya Allah, aku datang memenuhi panggilan-Mu. Aku datang memenuhi panggilan-Mu, tidak ada sekutu bagi-Mu, aku datang memenuhi panggilan-Mu. Sesungguhnya segala pujian, nikmat, dan kerajaan adalah milik-Mu, tidak ada sekutu bagi-Mu."
+      },
+      {
+        "id": 5,
+        "name": "Takbir dan Tahmid",
+        "description": "Dibaca 3 kali",
+        "arab": "اللهُ أَكْبَرُ اللهُ أَكْبَرُ اللهُ أَكْبَرُ لَا إِلٰهَ إِلَّا اللهُ هُوَ اللهُ أَكْبَرُ وَلِلهِ الْحَمْدُ",
+        "transliteration": "Allāhu akbar, Allāhu akbar, Allāhu akbar, lā ilāha illallāhu huwallāhu akbar wa lillāhil-ḥamd.",
+        "translation": "Allah Maha Besar, Allah Maha Besar, Allah Maha Besar. Tidak ada Tuhan selain Allah, Dialah Allah Yang Maha Besar, dan segala puji hanya bagi Allah."
+      },
+      {
+        "id": 6,
+        "name": "Hauqolah & Penyaksian Ilmu Allah",
+        "description": "",
+        "arab": "لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ الْعَلِيِّ الْعَظِيْمِ اَشْهَدُ أَنَّ اللهَ عَلَى كُلِّ شَيْءٍ قَدِيْرٌ وَأَنَّ اللهَ قَدْ أَحَاطَ بِكُلِّ شَيْءٍ عِلْمًا",
+        "transliteration": "Lā ḥaula wa lā quwwata illā billāhil-‘aliyyil-‘aẓīm. Asyhadu annallāha ‘alā kulli syai'in qadīr, wa annallāha qad aḥāṭa bikulli syai'in ‘ilmā.",
+        "translation": "Tidak ada daya dan kekuatan kecuali dengan pertolongan Allah Yang Maha Tinggi lagi Maha Agung. Aku bersaksi bahwa Allah Maha Kuasa atas segala sesuatu, dan sesungguhnya ilmu Allah benar-benar meliputi segala sesuatu."
+      },
+      {
+        "id": 7,
+        "name": "Isti'adzah",
+        "description": "Dibaca 3 kali",
+        "arab": "أَعُوْذُ بِاللهِ مِنَ الشَّيْطَانِ الرَّجِيْمِ إِنَّ اللهَ هُوَ السَّمِيْعُ الْعَلِيْمُ",
+        "transliteration": "A‘ūdu billāhi minasy-syaiṭānir-rajīm, innallāha huwas-samī‘ul-‘alīm.",
+        "translation": "Aku berlindung kepada Allah dari godaan setan yang terkutuk. Sesungguhnya Allah, Dialah Yang Maha Mendengar lagi Maha Mengetahui."
+      },
+      {
+        "id": 8,
+        "name": "Surah Al-Fatihah",
+        "description": "Dibaca 3 kali",
+        "arab": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ. الْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَ. الرَّحْمٰنِ الرَّحِيْمِ. مٰلِكِ يَوْمِ الدِّيْنِ. اِيَّاكَ نَعْبُدُ وَاِيَّاكَ نَسْتَعِيْنُ. اِهْدِنَا الصِّرَاطَ الْمُسْتَقِيْمَ. صِرَاطَ الَّذِيْنَ اَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوْبِ عَلَيْهِمْ وَلَا الضَّاۤلِّيْنَ",
+        "transliteration": "Bismillāhir-raḥmānir-raḥīm. Al-ḥamdu lillāhi rabbil-‘ālamīn. Ar-raḥmānir-raḥīm. Māliki yaumid-dīn. Iyyāka na‘budu wa iyyāka nasta‘īn. Ihdinaṣ-ṣirāṭal-mustaqīm. Ṣirāṭal-ladzīna an‘amta ‘alaihim gairil-magḍūbi ‘alaihim wa laḍ-ḍāllīn.",
+        "translation": "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang. Segala puji bagi Allah, Tuhan seluruh alam. Yang Maha Pengasih, Maha Penyayang. Pemilik hari pembalasan. Hanya kepada-Mulah kami menyembah dan hanya kepada-Mulah kami memohon pertolongan. Bimbinglah kami ke jalan yang lurus. (Yaitu) jalan orang-orang yang telah Engkau beri nikmat, bukan (jalan) mereka yang dimurkai dan bukan (pula jalan) mereka yang sesat."
+      },
+      {
+        "id": 9,
+        "name": "Surah Al-Ikhlas",
+        "description": "Dibaca 100 kali",
+        "arab": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ. قُلْ هُوَ اللّٰهُ اَحَدٌ. اَللّٰهُ الصَّمَدُ. لَمْ يَلِدْ وَلَمْ يُوْلَدْ. وَلَمْ يَكُنْ لَّهٗ كُفُوًا اَحَدٌ",
+        "transliteration": "Bismillāhir-raḥmānir-raḥīm. Qul huwallāhu aḥad. Allāhuṣ-ṣamad. Lam yalid wa lam yūlad. Wa lam yakul-lahū kufuwan aḥad.",
+        "translation": "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang. Katakanlah (Muhammad), 'Dialah Allah, Yang Maha Esa.' Allah tempat meminta segala sesuatu. (Allah) tidak beranak dan tidak pula diperanakkan. Dan tidak ada sesuatu yang setara dengan Dia."
+      },
+      {
+        "id": 10,
+        "name": "Doa Permohonan Ampunan, Kebaikan Bersama, Keselamatan, & Rezeki",
+        "description": "",
+        "arab": "اللَّهُمَّ إِنَّا نَسْأَلُكَ بِوَجْهِكَ الْكَرِيمِ وَجُودِكَ الْقَدِيمِ وَبِاسْمِكَ الْأَعْظَمِ أَنْ تُصَلِّيَ عَلَى سَيِّدِنَا مُحَمَّدٍ أَنْ تَغْفِرَ لَنَا وَلِوَالِدِينَا وَأَوْلَادِنَا وَإِخْوَانِنَا وَأَقْرِبَائِنَا وَمَشَايِخِنَا وَأَصْحَابِنَا وَأَزْوَاجِنَا وَأَصْدِقَائِنَا وَلِمَنْ أَوْصَانَا بِالدُّعَاءِ وَلِمَنْ أَحْسَنَ إِلَيْنَا وَلِمَنْ لَهُ حَقٌّ عَلَيْنَا وَلِمَنْ ظَلَمْنَاهُ أَوْ أَسَأْنَا إِلَيْهِ وَلِجَمِيعِ الْمُسْلِمِينَ وَالْمُسْلِمَاتِ الْأَحْيَاءِ مِنْهُمْ وَالْأَمْوَاتِ وَأَنْ تَرْزُقَنَا وَإِيَّاهُمْ خَيْرَيِ الدُّنْيَا وَالْآخِرَةِ وَأَنْ تَحْفَظَنَا وَإِيَّاهُمْ مِنْ جَمِيعِ بَلَاءِ الدُّنْيَا وَأَهْوَالِ يَوْمِ الْقِيَامَةِ وَأَنْ تَرْزُقَنَا الْعُلُومَ النَّافِعَةَ وَالْأَعْمَالَ الصَّالِحَةَ وَأَنْ تَعْصِمَنَا مِنْ جَمِيعِ الْمَعَاصِي الظَّاهِرَةِ وَالْبَاطِنَةِ وَأَنْ تُسَهِّلَ لَنَا رِزْقًا حَلَالًا وَاسِعًا وَأَنْ تَكْفِيَنَا شَرَّ الْأَشْرَارِ مِنَ الْإِنْسِ وَالْجِنِّ وَالدَّوَابِّ وَغَيْرِهَا وَأَنْ تَخْتِمَنَا وَإِيَّاهُمْ بِحُسْنِ الْخَاتِمَةِ آمِينَ وَصَلَّى اللهُ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلَّمَ",
+        "transliteration": "Allāhumma innā nas'aluka biwajhikal-karīmi wa jūdikal-qadīmi wa bismikal-a‘ẓami an tuṣalliya ‘alā sayyidinā muḥammadin an tagfira lanā wa liwālidīnā wa awlādinā wa ikhwāninā wa aqribā'inā wa masyāikhinā wa aṣḥābinā wa azwājinā wa aṣdiqā'inā wa liman auṣānā bid-du‘ā'i wa liman aḥsana ilainā wa liman lahū ḥaqqun ‘alainā wa liman ẓalamnāhu aw asa'nā ilaihi wa lijamī‘il-muslimīna wal-muslimātil-aḥyā'i minhum wal-amwāt, wa an tarzuqanā wa iyyāhum khairayid-dunyā wal-ākhirah, wa an taḥfaẓanā wa iyyāhum min jamī‘i balā'id-dunyā wa ahwāli yaumi-l-qiyāmah, wa an tarzuqanal-‘ulūman-nāfi‘ata wal-a‘mālas-ṣāliḥata wa an ta‘ṣimanā min jamī‘il-ma‘āṣiẓ-ẓāhirati wal-bāṭinah wa an tusahhila lanā rizqan ḥalālan wāsi‘an wa an takfiyanā syarral-asyrāri minal-insi wal-jinni wad-dawābbi wa gairihā, wa an takhtimana wa iyyāhum biḥusnil-khātimati āmīn. Wa ṣallallāhu ‘alā sayyidinā muḥammadin wa ‘alā ālihī wa ṣahbihī wa sallam.",
+        "translation": "Ya Allah, sesungguhnya kami memohon kepada-Mu demi Wajah-Mu Yang Mulia, kedermawanan-Mu yang abadi, dan demi Nama-Mu Yang Paling Agung, agar Engkau melimpahkan rahmat kepada junjungan kami Nabi Muhammad, dan agar Engkau mengampuni kami, orang tua kami, anak-anak kami, saudara-saudara kami, kerabat dekat kami, guru-guru kami, sahabat-sahabat kami, pasangan-pasangan kami, teman-teman kami, orang-orang yang menitipkan doa kepada kami, orang-orang yang berbuat baik kepada kami, orang-orang yang memiliki hak atas kami, serta orang-orang yang pernah kami zalimi atau orang yang pernah kami berbuat buruk kepadanya, serta bagi seluruh kaum muslimin dan muslimat, baik yang masih hidup maupun yang telah wafat. Dan (kami memohon) agar Engkau menganugerahkan kepada kami dan mereka kebaikan dunia dan akhirat, menjaga kami dan mereka dari segala bala bencana dunia dan kengerian hari kiamat, memberikan rezeki berupa ilmu yang bermanfaat dan amal saleh, serta memelihara kami dari segala maksiat, baik yang lahir (tampak) maupun yang batin. Dan agar Engkau memudahkan bagi kami rezeki yang halal lagi luas, melindungi kami dari kejahatan makhluk-makhluk jahat baik dari golongan manusia, jin, binatang melata, maupun lainnya, serta akhirilah hidup kami dan mereka dengan akhir yang baik (husnul khatimah). Amin. Dan semoga Allah melimpahkan rahmat serta keselamatan kepada junjungan kami Nabi Muhammad, beserta keluarga dan para sahabatnya."
+      }
+    ],
+    "jumrah": [
+      {
+        "id": 1,
+        "name": "Doa di Setiap Lontaran",
+        "description": "",
+        "arab": "رَجْمًا لِلشَّيَاطِينِ وَرِضًا لِلرَّحْمَنِ بِسْمِ اللهِ اللهُ أَكْبَرُ",
+        "transliteration": "Rajman lisysyayāṭīni wa riḍan lirraḥmāni bismillāhi allāhu akbar.",
+        "translation": "(Aku melempar) sebagai pukulan bagi setan dan untuk meraih keridaan (Allah) Yang Maha Pengasih. Dengan nama Allah, Allah Maha Besar."
+      },
+      {
+        "id": 2,
+        "name": "Doa Setelah Melakukan Lontaran",
+        "description": "",
+        "arab": "اللَّهُمَّ اجْعَلْنَا حَجًّا مَبْرُورًا وَسَعْيًا مَشْكُورًا",
+        "transliteration": "Allāhummaj‘alnā ḥajjan mabrūran wa sa‘yan masykūran.",
+        "translation": "Ya Allah, jadikanlah haji kami haji yang mabrur dan usaha yang diterima."
+      },
+      {
+        "id": 3,
+        "name": "Doa Setelah Selesai 7 Lontaran",
+        "description": "",
+        "arab": "الْحَمْدُ لِلهِ حَمْدًا كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ اللَّهُمَّ لَا أُحْصِي ثَنَاءً عَلَيْكَ أَنْتَ كَمَا أَثْنَيْتَ عَلَى نَفْسِكَ اللَّهُمَّ إِلَيْكَ أَفَضْتُ وَمِنْ عَذَابِكَ أَشْفَقْتُ وَإِلَيْكَ رَغِبْتُ وَمِنْكَ رَهِبْتُ فَاقْبَلْ نُسُكِي وَأَعْظِمْ أَجْرِي وَارْحَمْ تَضَرُّعِي وَاقْبَلْ تَوْبَتِي وَأقِلْ عَثْرَتِي وَاسْتَجِبْ تَوْبَتِي وَأَعْطِنِي سُؤْلِي اللَّهُمَّ اجْعَلْنَا حَجًّا مَبْرُورًا وَسَعْيًا مَشْكُورًا",
+        "transliteration": "Alḥamdulillāhi ḥamdan kaṡīran ṭayyiban mubārakan fīh. Allāhumma lā uḥṣī ṡanā'an ‘alaika anta kamā aṡnaita ‘alā nafsik. Allāhumma ilaika afaḍtu wa min ‘ażābika asyfaqtu wa ilaika ragibtu wa minka rahibtu faqbal nusukī wa a‘ẓim ajrī warḥam taḍarru‘ī waqbal taubatī wa aqil ‘aṡratī wastajib taubatī wa a‘ṭinī su'lī. Allāhummaj‘alnā ḥajjan mabrūran wa sa‘yan masykūran.",
+        "translation": "Segala puji bagi Allah dengan pujian yang banyak, baik, lagi penuh berkah di dalamnya. Ya Allah, aku tidak mampu menghitung pujian atas-Mu, Engkau adalah sebagaimana Engkau memuji diri-Mu sendiri. Ya Allah, kepada-Mu aku kembali, dari azab-Mu aku merasa takut, kepada-Mu aku berharap, dan dari-Mu aku merasa gemetar. Maka terimalah ibadahku, agungkanlah pahalaku, kasihanilah kerendahan hatiku, terimalah tobatku, ampunilah kesalahanku, kabulkanlah tobatku, dan berikanlah permohonanku. Ya Allah, jadikanlah haji kami haji yang mabrur dan usaha yang diterima."
+      }
+    ],
+    "thawaf": [
+      {
+        "id": 1,
+        "name": "Hajar Aswad Ke Rukun Yamani (1/7)",
+        "description": "",
+        "arab": "سُبْحَانَ اللهِ وَالْحَمْدُ للهِ وَلَا إِلٰهَ إِلَّا اللهُ اللهُ أَكْبَرُ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ الْعَلِيِّ الْعَظِيمِ، وَالصَّلَاةُ وَالسَّلَامُ عَلَى رَسُولِ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، اللّٰهُمَّ إِيمَانًا بِكَ وَتَصْدِيقًا بِكِتَابِكَ وَوَفَاءً بِعَهْدِكَ وَاتِّبَاعًا لِسُنَّةِ نَبِيِّكَ مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، اللّٰهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ وَالْمُعَافَاةَ الدَّائِمَةَ فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ وَالْفَوْزَ بِالْجَنَّةِ وَالنَّجَاةَ مِنَ النَّارِ",
+        "transliteration": "Subhanallahi walhamdulillahi wa la ilaha illallahu wallahu akbar, wa la hawla wa la quwwata illa billahil 'aliyyil 'azhim. Wash-shalatu was-salamu 'ala rasulillahi shallallahu 'alaihi wa sallam. Allahumma imanam bika wa tashdiqam bikitabika wa wafaa'am bi'ahdika wattiba'al lissunnati nabiyyika muhammadin shallallahu 'alaihi wa sallam. Allahumma inni as'alukal 'afwa wal 'afiyata wal mu'afatat da'imata fid-dini wad-dunya wal akhirah, wal fauza bil jannati wan-najata minan-nar.",
+        "translation": "Maha Suci Allah, segala puji bagi Allah, tidak ada Tuhan selain Allah, Allah Maha Besar. Tidak ada daya dan kekuatan melainkan dengan pertolongan Allah Yang Maha Tinggi lagi Maha Agung. Shalawat dan salam semoga tercurah kepada Rasulullah SAW. Ya Allah, aku tawaf ini karena beriman kepada-Mu, membenarkan kitab-Mu, memenuhi janji-Mu, dan mengikuti sunnah Nabi-Mu, Muhammad SAW. Ya Allah, sesungguhnya aku memohon kepada-Mu ampunan, kesehatan, dan perlindungan yang kekal dalam agama, dunia, dan akhirat, serta keberuntungan mendapatkan surga dan keselamatan dari api neraka."
+      },
+      {
+        "id": 2,
+        "name": "Hajar Aswad Ke Rukun Yamani (2/7)",
+        "description": "",
+        "arab": "اللّٰهُمَّ إِنَّ هٰذَا الْبَيْتَ بَيْتُكَ، وَهٰذَا الْحَرَمَ حَرَامُكَ وَهٰذَا الْأَمْنَ أَمْنُكَ، وَهٰذَا الْعَبْدَ عَبْدُكَ وَأَنَا عَبْدُكَ وَابْنُ عَبْدِكَ، وَهٰذَا مَقَامُ الْعَائِذِ بِكَ مِنَ النَّارِ، فَحَرِّمْ لُحُومَنَا وَبَشَرَتَنَا عَلَى النَّارِ، اللّٰهُمَّ حَبِّبْ إِلَيْنَا الْإِيمَانَ وَزَيِّنْهُ فِي قُلُوبِنَا وَكَرِّهْ إِلَيْنَا الْكُفْرَ وَالْفُسُوقَ وَالْعِصْيَانَ، وَاجْعَلْنَا مِنَ الرَّاشِدِينَ، اللّٰهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ ، اللّٰهُمَّ ارْزُقْنَا الْجَنَّةَ بِغَيْرِ حِسَابٍ",
+        "transliteration": "Allahumma inna hadzal baita baituka wal harama haramuka wal amna amnuka wal 'abda 'abduka wa ana 'abduka wabnu 'abdik, wa hadza maqamul 'a'idzi bika minan-nar. Fa harrim luhumana wa basyaratana 'alan-nar. Allahumma habbib ilainal imana wa zayyinhu fi qulubina wa karrih ilainal kufra wal fusuqa wal 'ishyan, waj'alna minar-rasyidin. Allahumma qini 'adzabaka yauma tab'atsu 'ibadak. Allahumma-rzuqnal jannata bighairi hisab.",
+        "translation": "Ya Allah, sesungguhnya rumah ini adalah rumah-Mu, tanah suci ini adalah tanah suci-Mu, keamanan ini adalah keamanan-Mu, dan hamba ini adalah hamba-Mu. Aku adalah hamba-Mu dan anak dari hamba-Mu, dan tempat ini adalah tempat orang yang berlindung kepada-Mu dari api neraka. Maka haramkanlah daging dan kulit kami dari api neraka. Ya Allah, cintakanlah kami kepada keimanan dan hiaskanlah ia di dalam hati kami, serta bencikanlah kami kepada kekafiran, kefasikan, dan kedurhakaan, dan jadikanlah kami termasuk orang-orang yang mendapat petunjuk. Ya Allah, peliharalah aku dari azab-Mu pada hari Engkau membangkitkan hamba-hamba-Mu. Ya Allah, anugerahkanlah kami surga tanpa hisab."
+      },
+      {
+        "id": 3,
+        "name": "Hajar Aswad Ke Rukun Yamani (3/7)",
+        "description": "",
+        "arab": "اللّٰهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الشَّكِّ وَالشِّرْكِ وَالشِّقَاقِ وَالنِّفَاقِ وَسُوءِ الْأَخْلَاقِ وَسُوءِ الْمَنْظَرِ وَالْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ وَالْوَلَدِ اللّٰهُمَّ إِنِّي أَسْأَلُكَ رِضَاكَ وَالْجَنَّةَ وَأَعُوذُ بِكَ مِنْ سَخَطِكَ وَالنَّارِ اللّٰهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ فِتْنَةِ الْقَبْرِ وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ",
+        "transliteration": "Allahumma inni a'udzu bika minasy-syakki wasy-syirki wasy-syiqaqi wan-nifaqi wa su'il akhlaqi wa su'il manzhar wal munqalabi fil mali wal ahli wal walad. Allahumma inni as'aluka ridhaka wal jannah, wa a'udzu bika min sakhatika wan-nar. Allahumma inni a'udzu bika min fitnatil qabri wa a'udzu bika min fitnatil mahya wal mamat.",
+        "translation": "Ya Allah, sesungguhnya aku berlindung kepada-Mu dari keraguan, kemusyrikan, perpecahan, kemunafikan, akhlak yang buruk, serta pandangan yang buruk dan perubahan yang jelek dalam harta benda, keluarga, dan anak-anak. Ya Allah, sesungguhnya aku memohon keridhaan-Mu dan surga, dan aku berlindung kepada-Mu dari kemurkaan-Mu dan api neraka. Ya Allah, sesungguhnya aku berlindung kepada-Mu dari fitnah kubur, dan aku berlindung kepada-Mu dari fitnah kehidupan dan kematian."
+      },
+      {
+        "id": 4,
+        "name": "Hajar Aswad Ke Rukun Yamani (4/7)",
+        "description": "",
+        "arab": "اللّٰهُمَّ اجْعَلْنِي حَجًّا مَبْرُورًا وَسَعْيًا مَشْكُورًا وَذَنْبًا مَغْفُورًا وَعَمَلًا صَالِحًا مَقْبُولًا وَتِجَارَةً لَنْ تَبُورَ يَا عَالِمَ مَا فِي الصُّدُورِ أَخْرِجْنِي مِنَ الظُّلُمَاتِ إِلَى النُّورِ اللّٰهُمَّ إِنِّي أَسْأَلُكَ مُوجِبَاتِ رَحْمَتِكَ وَعَزَائِمَ مَغْفِرَتِكَ وَالسَّلَامَةَ مِنْ كُلِّ إِثْمٍ وَالْغَنِيمَةَ مِنْ كُلِّ بِرٍّ وَالْفَوْزَ بِالْجَنَّةِ وَالنَّجَاةَ مِنَ النَّارِ اللّٰهُمَّ قَنِّعْنِي بِمَا رَزَقْتَنِي وَبَارِكْ لِي فِيمَا أَعْطَيْتَنِي وَاخْلُفْ عَلَى كُلِّ غَائِبَةٍ مِنْكَ بِخَيْرٍ",
+        "transliteration": "Allahumma-j'alni hajjam mabruran wa sa'yam masykuran wa dzambam maghfuran wa 'amalan shaliham maqbula, wa tijaratal lan tabur. Ya 'alima ma fish-shudur, akhrijni minazh-zhulumati ilan-nur. Allahumma inni as'aluka mujibati rahmatika wa 'aza'ima maghfiratika was-salamata min kulli itsmin wal ghanimata min kulli birrin wal fauza bil jannati wan-najata minan-nar. Allahumma qanni'ni bima razaqtani wa barik li fima a'thaitani wakhluf 'ala kulli gha'ibatim minka bikhair.",
+        "translation": "Ya Allah, jadikanlah hajiku ini haji yang mabrur, sa'i yang diterima, dosa yang diampuni, amal shaleh yang diterima, dan usaha yang tidak akan merugi. Wahai Yang Maha Mengetahui apa yang ada di dalam dada, keluarkanlah aku dari kegelapan menuju cahaya. Ya Allah, sesungguhnya aku memohon kepada-Mu hal-hal yang mendatangkan rahmat-Mu, ketetapan ampunan-Mu, keselamatan dari segala dosa, keberuntungan dari segala kebaikan, kemenangan memperoleh surga, dan keselamatan dari api neraka. Ya Allah, jadikanlah aku merasa cukup dengan rezeki yang Engkau berikan, berkahilah apa yang Engkau anugerahkan kepadaku, dan gantilah segala yang hilang dariku dengan kebaikan dari-Mu."
+      },
+      {
+        "id": 5,
+        "name": "Hajar Aswad Ke Rukun Yamani (5/7)",
+        "description": "",
+        "arab": "اللّٰهُمَّ أَظِلَّنِي تَحْتَ ظِلِّ عَرْشِكَ يَوْمَ لَا ظِلَّ إِلَّا ظِلُّكَ وَلَا بَاقِيَ إِلَّا وَجْهُكَ وَأَسْقِنِي مِنْ حَوْضِ نَبِيِّكَ مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ شَرْبَةً هَنِيئَةً مَرِيئَةً لَا أَظْمَأُ بَعْدَهَا أَبَدًا اللّٰهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ مَا سَأَلَكَ مِنْهُ نَبِيُّكَ مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ وَأَعُوذُ بِكَ مِنْ شَرِّ مَا اسْتَعَاذَ مِنْهُ نَبِيُّكَ مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ اللّٰهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَنَعِيمَهَا وَمَا يُقَرِّبُنِي إِلَيْهَا مِنْ قَوْلٍ أَوْ فِعْلٍ أَوْ عَمَلٍ وَأَعُوذُ بِكَ مِنَ النَّارِ وَمَا يُقَرِّبُنِي إِلَيْهَا مِنْ قَوْلٍ أَوْ فِعْلٍ أَوْ عَمَلٍ",
+        "transliteration": "Allahumma azhillani tahta zhilli 'arsyika yauma la zhilla illa zhilluka wa la baqiya illa wajhuk, wa asqini min haudhi nabiyyika muhammadin shallallahu 'alaihi wa sallam syar batan hani'atam mari'atal la azhma'u ba'daha abada. Allahumma inni as'aluka min khairi ma sa'alaka minhu nabiyyuka muhammadin shallallahu 'alaihi wa sallam, wa a'udzu bika min syarri masta'adha minhu nabiyyuka muhammadin shallallahu 'alaihi wa sallam. Allahumma inni as'aluka jannata wa na'imaha wa ma yuqarribuni ilaiha min qaulin au fi'lin au 'amal, wa a'udzu bika minan-nari wa ma yuqarribuni ilaiha min qaulin au fi'lin au 'amal.",
+        "translation": "Ya Allah, naungilah aku di bawah naungan Arsy-Mu pada hari yang tidak ada naungan kecuali naungan-Mu, dan tidak ada yang kekal kecuali Dzat-Mu. Dan berilah aku minum dari telaga Nabi-Mu, Muhammad SAW, dengan minuman yang segar dan nikmat, yang membuatku tidak akan haus setelahnya selama-lamanya. Ya Allah, sesungguhnya aku memohon kepada-Mu kebaikan yang dimohonkan oleh Nabi-Mu, Muhammad SAW, dan aku berlindung kepada-Mu dari keburukan yang dimintakan perlindungan darinya oleh Nabi-Mu, Muhammad SAW. Ya Allah, sesungguhnya aku memohon kepada-Mu surga dan kenikmatannya serta apa saja yang dapat mendekatkamu kepadanya, baik ucapan, perbuatan, maupun amal. Dan aku berlindung kepada-Mu dari neraka serta apa saja yang dapat mendekatkanku kepadanya, baik ucapan, perbuatan, maupun amal."
+      },
+      {
+        "id": 6,
+        "name": "Hajar Aswad Ke Rukun Yamani (6/7)",
+        "description": "",
+        "arab": "اللّٰهُمَّ إِنَّ لَكَ عَلَيَّ حُقُوقًا كَثِيرَةً فِيمَا بَيْنِي وَبَيْنَكَ وَحُقُوقًا كَثِيرَةً فِيمَا بَيْنِي وَبَيْنَ خَلْقِكَ اللّٰهُمَّ مَا كَانَ لَكَ مِنْهَا فَاغْفِرْهُ لِي وَمَا كَانَ لِخَلْقِكَ فَتَحَمَّلْهُ عَنِّي وَأَغْنِنِي بِحَلَالِكَ عَنْ حَرَامِكَ وَبِطَاعَتِكَ عَنْ مَعْصِيَتِكَ وَبِفَضْلِكَ عَمَّنْ سِوَاكَ يَا وَاسِعَ الْمَغْفِرَةِ اللّٰهُمَّ إِنَّ بَيْتَكَ عَظِيمٌ وَوَجْهَكَ كَرِيمٌ وَأَنْتَ يَا اللهُ حَلِيمٌ كَرِيمٌ عَظِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنَّا",
+        "transliteration": "Allahumma inna laka 'alayya huquqan katsiratan fima baini wa bainaka wa huquqan katsiratan fima baini wa baina khalqik. Allahumma ma kana laka minha faghfirhu li wa ma kana likhalqika fatahammalhu 'anni, wa aghnini bihalalika 'an haramika wa bitha'atika 'an ma'shiyatika wa bifadhliha 'amman siwak, ya wasi'al maghfirah. Allahumma inna baituka 'azhim wa wajhaka karim, wa anta ya allahu halimun karimun 'azhim tuhibbul 'afwa fa'fu 'anna."
+      },
+      {
+        "id": 7,
+        "name": "Hajar Aswad Ke Rukun Yamani (7/7)",
+        "description": "",
+        "arab": "اللّٰهُمَّ إِنِّي أَسْأَلُكَ إِيمَانًا كَامِلًا وَيَقِينًا صَادِقًا وَرِزْقًا وَاسِعًا وَقَلْبًا خَاشِعًا وَلِسَانًا ذَاكِرًا وَحَلَالًا طَيِّبًا وَتَوْبَةً نَصُوحًا وَتَوْبَةً قَبْلَ الْمَوْتِ وَمَغْفِرَةً وَرَحْمَةً بَعْدَ الْمَوْتِ وَالْعَفْوَ عِنْدَ الْحِسَابِ وَالْفَوْزَ بِالْجَنَّةِ وَالنَّجَاةَ مِنَ النَّارِ بِرَحْمَتِكَ يَا عَزِيزُ يَا غَفَّارُ رَبِّ زِدْنِي عِلْمًا وَأَلْحِقْنِي بِالصَّالِحِينَ بِرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِينَ",
+        "transliteration": "Allahumma inni as'aluka imanan kamilan wa yaqinan shadiqan wa rizqan wasi'an wa qalban khasyi'an wa lisanan dzakiran wa halalan thayyiban wa taubatan nashuha, wa taubatan qablal maut wa maghfiratan wa rahmatan ba'dal maut wal 'afwa 'indal hisab, wal fauza bil jannati wan-najata minan-nari birahmatika ya 'azizu ya ghaffar. Rabbi zidni 'ilman wa alhiqni bish-shalihina birahmatika ya arhamar-rahimin.",
+        "translation": "Ya Allah, sesungguhnya aku memohon kepada-Mu keimanan yang sempurna, keyakinan yang benar, rezeki yang luas, hati yang khusyuk, lisan yang selalu berdzikir, rezeki yang halal lagi baik, taubat yang nasuha (sebenar-benarnya), taubat sebelum mati, ampunan dan rahmat setelah mati, kemaafan pada saat hisab, kemenangan memperoleh surga, dan keselamatan dari api neraka dengan rahmat-Mu, wahai Dzat Yang Maha Perkasa lagi Maha Pengampun. Wahai Tuhanku, tambahkanlah ilmu kepadaku dan gabungkanlah aku bersama orang-orang shaleh dengan rahmat-Mu, wahai Dzat Yang Maha Penyayang di antara para penyayang."
+      },
+      {
+        "id": 8,
+        "name": "DOA SELESAI THAWAF",
+        "description": "Dibaca Setelah Thawaf dan Menghadap Multazam",
+        "arab": "اللَّهُمَّ يَا رَبَّ الْبَيْتِ الْعَتِيقِ، أَعْتِقْ رِقَابَنَا، وَرِقَابَ آبَائِنَا، وَأُمَّهَاتِنَا وَإِخْوَانِنَا وَأَوْلَادِنَا مِنَ النَّارِ، يَا ذَا الْجُودِ وَالْكَرَمِ وَالْفَضْلِ وَالْمَنِّ وَالْعَطَاءِ وَالْإِحْسَانِ، اللَّهُمَّ أَحْسِنْ عَاقِبَتَنَا فِي الْأُمُورِ كُلِّهَا، وَأَجِرْنَا مِنْ خِزْيِ الدُّنْيَا وَعَذَابِ الْآخِرَةِ، اللَّهُمَّ إِنِّي عَبْدُكَ وَابْنُ عَبْدِكَ، وَاقِفٌ تَحْتَ بَابِكَ مُلْتَزِمٌ بِأَعْتَابِكَ، مُتَذَلِّلٌ بَيْنَ يَدَيْكَ، أَرْجُو رَحْمَتَكَ، وَأَخْشَى عَذَابَكَ، يَا قَدِيمَ الْإِحْسَانِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ أَنْ تَرْفَعَ ذِكْرِي، وَتَضَعَ وِزْرِي، وَتُصْلِحَ أَمْرِي، وَتُطَهِّرَ قَلْبِي، وَتُنَوِّرَ لِي فِي قَبْرِي، وَتَغْفِرَ لِي ذَنْبِي، وَأَسْأَلُكَ دَرَجَاتِ الْعُلَى مِنَ الْجَنَّةِ",
+        "transliteration": "Allahumma ya rabbal baitil 'atiq, a'tiq riqabana, wa riqaba aba'ina, wa ummahatina wa ikhwanina wa awladina minan-nar, ya dzal judi wal karami wal fadhli wal manni wal 'atha'i wal ihsan. Allahumma ahsin 'aqibatina fil umuri kulliha, wa ajirna min khizyid-dunya wa 'adzabil akhirah. Allahumma inni 'abduka wabnu 'abdik, waqifun tahta babika multazimun bi a'tabika, mutadzallilun baina yadaik, arju rahmatak, wa akhsya 'adzabak, ya qadimal ihsan. Allahumma inni as'aluka an tarfa'a dzikri, wa tadha'a wizri, wa tushliha amri, wa tuthahhira qalbi, wa tunawwira li fi qabri, wa taghfira li dzambi, wa as'aluka darajatil 'ula minal jannah.",
+        "translation": "Ya Allah, wahai Tuhan Pemilik Rumah Kuno (Ka'bah), bebaskanlah leher kami, leher bapak-bapak kami, ibu-ibu kami, saudara-saudara kami, dan anak-anak kami dari api neraka. Wahai Dzat Yang Maha Pemurah, Maha Mulia, Memiliki Keutamaan, Anugerah, Pemberian, dan Kebaikan. Ya Allah, perbaikilah kesudahan setiap urusan kami seluruhnya, dan lindungilah kami dari kenistaan dunia serta azab akhirat. Ya Allah, sesungguhnya aku adalah hamba-Mu dan anak dari hamba-Mu, yang sedang berdiri di bawah pintu-Mu, bersandar di ambang pintu-Mu, merendahkan diri di hadapan-Mu, mengharapkan rahmat-Mu, dan takut akan azab-Mu, wahai Dzat Yang Kebaikan-Nya tiada berpermulaan. Ya Allah, sesungguhnya aku memohon kepada-Mu agar Engkau meninggikan sebutanku, menghapuskan dosaku, memperbaiki urusanku, menyucikan hatiku, menerangi kuburku, mengampuni dosaku, dan aku memohon kepada-Mu derajat-derajat yang tinggi di surga."
+      }
+    ],
+    "sai": [
+      {
+        "id": 1,
+        "name": "SEBELUM MEMULAI SA'I",
+        "description": "Dibaca saat menuju bukit Shofa",
+        "arab": "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ\n\nأَبْدَأُ بِمَا بَدَأَ اللَّهُ بِهِ وَرَسُولُهُ إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ",
+        "transliteration": "Bismillahirrahmanirrahim. Abda'u bimaa bada'allahu bihi wa rasuluh, innash-shafaa wal-marwata min sya'airillah.",
+        "translation": "Dengan menyebut nama Allah Yang Maha Pengasih lagi Maha Penyayang. Aku memulai dengan apa yang Allah dan Rasul-Nya mulai. Sesungguhnya Shofa dan Marwah adalah sebagian dari syiar-syiar Allah."
+      },
+      {
+        "id": 2,
+        "name": "DO'A SEBELUM SA'I",
+        "description": "Dibaca dibukit Shofa menghadap Ka'bah",
+        "arab": "أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ وَ لِلَّهِ الْحَمْدُ أَللَّهُ أَكْبَرُ عَلَى مَا هَدَانَا وَالْحَمْدُ لِلَّهِ عَلَى مَا أَوْلَانَا لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ بِيدِهِ الْخَيْرُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ أَنْجَزَ وَعْدَهُ وَنَصَرَ عَبْدَهُ وَهَزَمَ الْأَحْزَابَ وَحْدَهُ لَا إِلَهَ إِلَّا اللَّهُ وَلَا نَعْبُدُ إِلَّا إِيَّاهُ مُخْلِصِينَ لَهُ الدِّينَ وَلَوْ كَرِهَ الْكَافِرُونَ",
+        "transliteration": "Allahu akbar Allahu akbar Allahu akbar wa lillahil-hamd. Allahu akbar 'ala ma hadana wal-hamdu lillahi 'ala ma awlana. La ilaha illallahu wahdahu la syarika lah, lahul-mulku wa lahul-hamdu yuhyi wa yumitu biyadihil-khairu wa huwa 'ala kulli syai'in qadir. La ilaha illallahu wahdahu la syarika lah anjaza wa'dahu wa nashara 'abdahu wa hazamal-ahzaba wahdah. La ilaha illallahu wa la na'budu illa iyyahu mukhlisina lahud-dina walau karihal-kafirun.",
+        "translation": "Allah Maha Besar, Allah Maha Besar, Allah Maha Besar, segala puji bagi Allah. Allah Maha Besar atas petunjuk yang diberikan-Nya kepada kami, dan segala puji bagi Allah atas karunia yang telah dilimpahkan-Nya kepada kami. Tidak ada Tuhan selain Allah Yang Maha Esa, tidak ada sekutu bagi-Nya. Bagi-Nya segala kekuasaan dan bagi-Nya segala puji. Dia yang menghidupkan dan yang mematikan, di tangan-Nya lah segala kebaikan, dan Dia Maha Kuasa atas segala sesuatu. Tidak ada Tuhan selain Allah Yang Maha Esa, tidak ada sekutu bagi-Nya, yang menepati janji-Nya, menolong hamba-Nya, dan menghancurkan golongan musuh dengan keesaan-Nya semata. Tidak ada Tuhan selain Allah, dan kami tidak menyembah kecuali kepada-Nya dengan memurnikan kepatuhan agama kepada-Nya, meskipun orang-orang kafir membencinya."
+      },
+      {
+        "id": 3,
+        "name": "Bacaan Sa'i (1/7)",
+        "description": "",
+        "arab": "أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ، أَللَّهُ أَكْبَرُ كَبِيرًا وَالْحَمْدُ لِلَّهِ كَثِيرًا وَسُبْحَانَ اللَّهِ الْعَظِيمِ وَبِحَمْدِهِ الْكَرِيمِ بُكْرَةً وَأَصِيلًا وَمِنَ اللَّيْلِ فَاسْجُدْ لَهُ وَسَبِّحْهُ لَيْلًا طَوِيلًا لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ أَنْجَزَ وَعْدَهُ وَنَصَرَ عَبْدَهُ وَهَزَمَ الْأَحْزَابَ وَحْدَهُ لَا شَيْءَ قَبْلَهُ وَلَا بَعْدَهُ يُحْيِي وَيُمِيتُ وَهُوَ حَيٌّ دَائِمٌ لَا يَمُوتُ وَلَا يَفُوتُ أَبَدًا بِيَدِهِ الْخَيْرُ وَإِلَيْهِ الْمَصِيرُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+        "transliteration": "Allahu akbar Allahu akbar Allahu akbar, Allahu akbar kabira wal-hamdu lillahi katsira wa subhanallahil-'azhimi wa bihamdihil-karimi bukratan wa ashila. Wa minal-laili fasjud lahu wa sabbihhu lailan thawila. La ilaha illallahu wahdahu anjaza wa'dahu wa nashara 'abdahu wa hazamal-ahzaba wahdah la syai'a qablahu wa la ba'dahu yuhyi wa yumitu wa huwa hayyun da'imun la yamutu wa la yafutu abadan biyadihil-khairu wa ilaihil-mashiru wa huwa 'ala kulli syai'in qadir.",
+        "translation": "Allah Maha Besar, Allah Maha Besar, Allah Maha Besar. Allah Maha Besar dengan segala kebesaran-Nya, segala puji bagi Allah sebanyak-banyaknya, dan Maha Suci Allah Yang Maha Agung serta segala puji bagi-Nya Yang Maha Mulia di waktu pagi dan petang. Dan pada sebagian dari malam, maka sujudlah kepada-Nya dan bertasbihlah kepada-Nya pada bagian yang panjang di malam hari. Tidak ada Tuhan selain Allah Yang Maha Esa, yang menepati janji-Nya, menolong hamba-Nya, dan menghancurkan sendiri golongan musuh. Tidak ada sesuatu pun sebelum-Nya dan tidak ada sesuatu pun setelah-Nya. Dia yang menghidupkan dan yang mematikan, dan Dia Maha Hidup kekal tidak mati dan tidak akan binasa selamanya. Di tangan-Nya lah segala kebaikan, dan kepada-Nya lah tempat kembali, dan Dia Maha Kuasa atas segala sesuatu."
+      },
+      {
+        "id": 4,
+        "name": "Bacaan Sa'i (2/7)",
+        "description": "Dibaca dibukit Shofa menghadap Ka'bah",
+        "arab": "أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ وَ لِلَّهِ الْحَمْدُ، لَا إِلَهَ إِلَّا اللَّهُ الْوَاحِدُ الْفَرْدُ الصَّمَدُ الَّذِي لَمْ يَتَّخِذْ صَاحِبَةً وَلَا وَلَدًا وَلَمْ يَكُنْ لَهُ شَرِيكٌ فِي الْمُلْكِ وَلَمْ يَكُنْ لَهُ وَلِيٌّ مِنَ الذُّلِّ وَكَبِّرْهُ تَكْبِيرًا، اَللَّهُمَّ إِنَّكَ قُلْتَ فِي كِتَابِكَ الْمُنْزَلِ ادْعُونِي أَسْتَجِبْ لَكُمْ دَعَوْنَاكَ رَبَّنَا فَاغْفِرْ لَنَا كَمَا أَمَرْتَنَا إِنَّكَ لَا تُخْلِفُ الْمِيعَادَ، رَبَّنَا إِنَّنَا سَمِعْنَا مُنَادِيًا يُنَادِي لِلْإِيمَانِ أَنْ آمِنُوا بِرَبِّكُمْ فَآمَنَّا، رَبَّنَا فَاغْفِرْ لَنَا ذُنُوبَنَا وَكَفِّرْ عَنَّا سَيِّئَاتِنَا وَتَوَفَّنَا مَعَ الْأَبْرَارِ، رَبَّنَا وَآتِنَا مَا وَعَدْتَنَا عَلَى رُسُلِكَ وَلَا تُخْزِنَا يَوْمَ الْقِيَامَةِ إِنَّكَ لَا تُخْلِفُ الْمِيعَادَ، رَبَّنَا عَلَيْكَ تَوَكَّلْنَا وَإِلَيْكَ أَنَبْنَا وَإِلَيْكَ الْمَصِيرُ، رَبَّنَا اغْفِرْ لَنَا ذُنُوبَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ وَلَا تَجْعَلْ فِي قُلُوبِنَا غِلًّا لِلَّذِينَ آمَنُوا رَبَّنَا إِنَّكَ رَءُوفٌ رَحِيمٌ",
+        "transliteration": "Allahu akbar Allahu akbar Allahu akbar wa lillahil-hamd, la ilaha illallahul-wahidul-fardush-shamadul-ladzi lam yattakhidz shahibatan wa la walada, wa lam yakun lahu syarikun fil-mulki wa lam yakun lahu waliyyun minadz-dzulli wa kabbirhu takbira. Allahumma innaka qulta fi kitabikal-munzali 'ud'uni astajib lakum, da'awnaka rabbana faghfir lana kama amartana innaka la tukhliful-mi'ad. Rabbana innana sami'na munadiyan yunadi lil-imani an aminu birabbikum fa amanna. Rabbana faghfir lana dzunubana wa kaffir 'anna sayyi'atina wa tawaffana ma'al-abrar. Rabbana wa atina ma wa'adtana 'ala rusulika wa la tukhzina yaumal-qiyamah innaka la tukhliful-mi'ad. Rabbana 'alaika tawakkalna wa ilaika anabna wa ilaikal-mashir. Rabbanaghfir lana dzunubana wa li'ikhwaninal-ladzina sabaquna bil-imani wa la taj'al fi qulubina ghillal-lilladzina amanu rabbana innaka ra'ufur-rahim.",
+        "translation": "Allah Maha Besar, Allah Maha Besar, Allah Maha Besar, segala puji bagi Allah. Tidak ada Tuhan selain Allah Yang Maha Esa, Tunggal, dan menjadi tempat bergantung, Yang tidak mempunyai istri dan tidak mempunyai anak, serta tidak mempunyai sekutu dalam kerajaan-Nya, dan tidak mempunyai penolong untuk menjaga-Nya dari kehinaan, dan agungkanlah Dia dengan seagung-agungnya. Ya Allah, sesungguhnya Engkau telah berfirman dalam kitab-Mu yang diturunkan: 'Berdoalah kepada-Ku, niscaya akan Aku perkenankan bagimu'. Kami telah berdoa kepada-Mu, ya Tuhan kami, maka ampunilah kami sebagaimana Engkau telah memerintahkan kepada kami, sesungguhnya Engkau tidak menyalahi janji. Ya Tuhan kami, sesungguhnya kami mendengar orang yang menyeru kepada iman: 'Berimanlah kamu kepada Tuhanmu', maka kami pun beriman. Ya Tuhan kami, ampunilah bagi kami dosa-dosa kami dan hapuskanlah dari kami kesalahan-kesalahan kami, dan wafatkanlah kami beserta orang-orang yang berbakti. Ya Tuhan kami, berilah kami apa yang telah Engkau janjikan kepada kami melalui rasul-rasul-Mu, dan janganlah Engkau hinakan kami pada hari kiamat. Sesungguhnya Engkau tidak menyalahi janji. Ya Tuhan kami, hanya kepada-Mu kami bertawakal, hanya kepada-Mu kami bertaubat, dan hanya kepada-Mu lah tempat kembali. Ya Tuhan kami, ampunilah dosa-dosa kami dan dosa saudara-saudara kami yang telah beriman lebih dulu sebelum kami, dan janganlah Engkau tanamkan kedengkian dalam hati kami terhadap orang-orang yang beriman. Ya Tuhan kami, sesungguhnya Engkau Maha Pengasih lagi Maha Penyayang."
+      },
+      {
+        "id": 5,
+        "name": "Bacaan Sa'i (3/7)",
+        "description": "",
+        "arab": "أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ وَ لِلَّهِ الْحَمْدُ، رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا إِنَّكَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، اَللَّهُمَّ إِنِّي أَسْأَلُكَ مِنَ الْخَيْرِ كُلِّهِ عَاجِلِهِ وَآجِلِهِ وَأَسْتَغْفِرُكَ لِذَنْبِي وَأَسْأَلُكَ رَحْمَتَكَ يَا أَرْحَمَ الرَّاحِمِينَ",
+        "transliteration": "Allahu akbar Allahu akbar Allahu akbar wa lillahil-hamd. Rabbana atmim lana nurana waghfir lana innaka 'ala kulli syai'in qadir. Allahumma inni as'aluka minal-khairi kullihi 'ajilihi wa ajilihi wa astaghfiruka lidzanbi wa as'aluka rahmataka ya arhamar-rahimin.",
+        "translation": "Allah Maha Besar, Allah Maha Besar, Allah Maha Besar, segala puji bagi Allah. Ya Tuhan kami, sempurnakanlah untuk kami cahaya kami dan ampunilah kami, sesungguhnya Engkau Maha Kuasa atas segala sesuatu. Ya Allah, sesungguhnya aku memohon kepada-Mu dari segala kebaikan, baik yang lekas (di dunia) maupun yang tertunda (di akhirat), dan aku memohon ampunan kepada-Mu atas dosaku, serta aku memohon rahmat-Mu, wahai Tuhan Yang Maha Penyayang di antara para penyayang."
+      },
+      {
+        "id": 6,
+        "name": "Bacaan Sa'i (4/7)",
+        "description": "",
+        "arab": "أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ وَ لِلَّهِ الْحَمْدُ، اَللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ مَاتَعْلَمُ وَأَعُوذُ بِكَ مِنْ شَرِّ مَا تَعْلَمُ وَأَسْتَغْفِرُكَ مِنْ كُلِّ مَا تَعْلَمُ إِنَّكَ أَنْتَ عَلَّامُ الْغُيُوبِ، لَا إِلَهَ إِلَّا اللَّهُ الْمَلِكُ الْحَقُّ الْمُبِينُ، مُحَمَّدٌ رَسُولُ اللَّهِ صَادِقُ الْوَعْدِ الْأَمِينُ، اَللَّهُمَّ إِنِّي أَسْأَلُكَ كَمَا هَدَيْتَنِي لِلْإِسْلَامِ أَنْ لَا تَنْزِعَهُ مِنِّي حَتَّى تَتَوَفَّانِي وَأَنَا مُسْلِمٌ، اَللَّهُمَّ اجْعَلْ فِي قَلْبِي نُورًا وَفِي سَمْعِي نُورًا وَفِي بَشَرِي نُورًا، اَللَّهُمَّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي وَأَعُوذُ بِكَ مِنْ وَسَاوِسِ الصَّدْرِ وَشَتَاتِ الْأَمْرِ وَفِتْنَةِ الْقَبْرِ، اَللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ مَا يَلِجُ فِي اللَّيْلِ وَشَرِّ مَا يَلِجُ فِي النَّهَارِ وَمِنْ شَرِّ مَا تَهُبُّ بِهِ الرِّيَاحُ يَا أَرْحَمَ الرَّاحِمِينَ، سُبْحَانَكَ مَا عَبَدْنَاكَ حَقَّ عِبَادَتِكَ يَا أَللَّهُ سُبْحَانَكَ مَا ذَكَرْنَاكَ حَقَّ ذِكْرِكَ يَا أَللَّهُ",
+        "transliteration": "Allahu akbar Allahu akbar Allahu akbar wa lillahil-hamd. Allahumma inni as'aluka min khairi ma ta'lamu wa a'udzubika min syarri ma ta'lamu wa astaghfiruka min kulli ma ta'lamu innaka anta 'allamul-ghuyub. La ilaha illallahul-malikul-haqqul-mubin, muhammadur-rasulullahi shadiqul-wa'dil-amin. Allahumma inni as'aluka kama hadaitani lil-islami an la tanzi'ahu minni hatta tatawaffani wa ana muslim. Allahummaj'al fi qalbi nuran wa fi sam'i nuran wa fi basyari nuran. Allahummasyrah li sadri wa yassir li amri wa a'udzubika min wasawisis-sadri wa syatatil-amri wa fitnatil-qabr. Allahumma inni a'udzubika min syarri ma yaliju fil-laili wa syarri ma yaliju fin-nahari wa min syarri ma tahubbu bihir-riyahu ya arhamar-rahimin. Subhanaka ma 'abadnaka haqqa 'ibadatika ya Allah, subhanaka ma dzakarnaka haqqa dzikrika ya Allah.",
+        "translation": "Allah Maha Besar, Allah Maha Besar, Allah Maha Besar, segala puji bagi Allah. Ya Allah, sesungguhnya aku memohon kepada-Mu dari kebaikan apa yang Engkau ketahui, dan aku berlindung kepada-Mu dari keburukan apa yang Engkau ketahui, serta aku memohon ampunan-Mu dari segala apa yang Engkau ketahui, sesungguhnya Engkau Maha Mengetahui segala yang gaib. Tidak ada Tuhan selain Allah, Penguasa yang Maha Benar lagi Maha Nyata, Muhammad adalah utusan Allah, yang benar janjinya lagi terpercaya. Ya Allah, sesungguhnya aku memohon kepada-Mu, sebagaimana Engkau telah memberi petunjuk kepadaku untuk memeluk Islam, agar Engkau tidak mencabutnya dariku sampai Engkau mewafatkanku dalam keadaan muslim. Ya Allah, jadikanlah cahaya di dalam hatiku, cahaya pada pendengaranku, dan cahaya pada kulitku. Ya Allah, lapangkanlah dadaku dan mudahkanlah urusanku, dan aku berlindung kepada-Mu dari bisikan-bisikan dada, urusan yang bercerai-berai, dan fitnah kubur. Ya Allah, sesungguhnya aku berlindung kepada-Mu dari keburukan apa yang masuk di waktu malam, keburukan apa yang masuk di waktu siang, dan dari keburukan apa yang dibawa oleh angin, wahai Tuhan Yang Maha Penyayang di antara para penyayang. Maha Suci Engkau, kami tidak menyembah-Mu dengan sebenar-benar ibadah kepada-Mu ya Allah, Maha Suci Engkau, kami tidak mengingat-Mu dengan sebenar-benar pengingatan kepada-Mu ya Allah."
+      },
+      {
+        "id": 7,
+        "name": "Bacaan Sa'i (5/7)",
+        "description": "",
+        "arab": "أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ وَ لِلَّهِ الْحَمْدُ، سُبْحَانَكَ مَا أَعْلَى شَأْنَكَ يَا أَللَّهُ، اَللَّهُمَّ حَبِّبْ إِلَيْنَا الْإِيمَانَ وَزَيِّنْهُ فِي قُلُوبِنَا وَكَرِّهْ إِلَيْنَا الْكُفْرَ وَالْفُسُوقَ وَالْعِصْيَانَ وَاجْعَلْنَا مِنَ الرَّاشِدِينَ",
+        "transliteration": "Allahu akbar Allahu akbar Allahu akbar wa lillahil-hamd. Subhanaka ma a'la sya'naka ya Allah. Allahumma habbib ilainal-imana wa zayyinhu fi qulubina wa karrih ilainal-kufra wal-fusuqa wal-'ishyāna waj'alna minar-rasyidin.",
+        "translation": "Allah Maha Besar, Allah Maha Besar, Allah Maha Besar, segala puji bagi Allah. Maha Suci Engkau, betapa mulia kedudukan-Mu ya Allah. Ya Allah, tanamkanlah kecintaan iman dalam diri kami dan jadikanlah iman itu indah dalam hati kami, serta tanamkanlah dalam diri kami kebencian terhadap kekafiran, kefasikan, dan kedurhakaan, dan jadikanlah kami termasuk orang-orang yang mendapat petunjuk."
+      },
+      {
+        "id": 8,
+        "name": "Bacaan Sa'i (6/7)",
+        "description": "",
+        "arab": "أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ وَ لِلَّهِ الْحَمْدُ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ صَدَقَ وَعْدَهُ وَنَصَرَ عَبْدَهُ وَهَزَمَ الْأَحْزَابَ وَحْدَهُ، لَا إِلَهَ إِلَّا اللَّهُ وَلَا نَعْبُدُ إِلَّا إِيَّاهُ مُخْلِصِينَ لَهُ الدِّينَ وَلَوْ كَرِهَ الْكَافِرُونَ، اَللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى، اَللَّهُمَّ لَكَ الْحَمْدُ كَالَّذِي نَقُولُ وَخَيْرًا مِمَّا نَقُولُ، اَللَّهُمَّ إِنِّي أَسْأَلُكَ رِضَاكَ وَالْجَنَّةَ وَأَعُوذُ بِكَ مِنْ سَخَطِكَ وَالنَّارِ وَمَا يُقَرِّبُنِي إِلَيْهَا مِنْ قَوْلٍ أَوْ فِعْلٍ أَوْ عَمَلٍ، اَللَّهُمَّ بِنُورِكَ اهْتَدَيْنَا وَبِفَضْلِكَ اسْتَغْنَيْنَا وَفِي كَنَفِكَ وَإِنْعَامِكَ وَعَطَائِكَ وَإِحْسَانِكَ أَصْبَحْنَا وَأَمْسَيْنَا، أَنْتَ الْأَوَّلُ فَلَا قَبْلَكَ شَيْءٌ وَالْآخِرُ فَلَا بَعْدَكَ شَيْءٌ وَالظَّاهِرُ فَلَا شَيْءَ فَوْقَكَ وَالْبَاطِنُ فَلَا شَيْءَ دُونَكَ، نَعُوذُ بِكَ مِنَ الْفَلَسِ وَالْكَسَلِ وَعَذَابِ الْقَبْرِ وَفِتْنَةِ الْغِنَى وَنَسْأَلُكَ الْفَوْزَ بِالْجَنَّةِ",
+        "transliteration": "Allahu akbar Allahu akbar Allahu akbar wa lillahil-hamd. La ilaha illallahu wahdahu shadaqa wa'dahu wa nashara 'abdahu wa hazamal-ahzaba wahdah. La ilaha illallahu wa la na'budu illa iyyahu mukhlisina lahud-dina walau karihal-kafirun. Allahumma inni as'alukal-huda wat-tuqa wal-'afafa wal-ghina. Allahumma lakal-hamdu kalladzi naqulu wa khairan mimma naqulu. Allahumma inni as'aluka ridhaka wal-jannata wa a'udzubika min sakhathika wan-nari wa ma yuqarribuni ilaiha min qaulin au fi'lin au 'amalin. Allahumma binurikahtadaina wa bifadhlikastagnaina wa fi kanafika wa in'amika wa 'atha'ika wa ihsanika ashbahna wa amsaina. Antal-awwalu fala qablaka syai'un wal-akhiru fala ba'daka syai'un wazh-zhahiru fala syai'a fawqaka wal-bathinu fala syai'a dunaka. Na'udzubika minal-falasi wal-kasali wa 'adzabil-qabri wa fitnatil-ghina wa nas'alukal-fauza bil-jannati.",
+        "translation": "Allah Maha Besar, Allah Maha Besar, Allah Maha Besar, segala puji bagi Allah. Tidak ada Tuhan selain Allah Yang Maha Esa, yang menepati janji-Nya, menolong hamba-Nya, dan menghancurkan sendiri golongan musuh. Tidak ada Tuhan selain Allah, dan kami tidak menyembah kecuali kepada-Nya dengan memurnikan kepatuhan agama kepada-Nya, meskipun orang-orang kafir membencinya. Ya Allah, sesungguhnya aku memohon kepada-Mu petunjuk, ketakwaan, kesucian diri, dan kecukupan. Ya Allah, bagi-Mu segala puji seperti apa yang kami ucapkan dan bahkan lebih baik dari apa yang kami ucapkan. Ya Allah, sesungguhnya aku memohon keridaan-Mu dan surga, dan aku berlindung kepada-Mu dari kemurkaan-Mu dan neraka, serta apa saja yang dapat mendekatkanku kepadanya, baik ucapan, perbuatan, maupun tindakan. Ya Allah, dengan cahaya-Mu kami mendapat petunjuk, dengan karunia-Mu kami merasa cukup, dan dalam perlindungan-Mu, limpahan nikmat-Mu, pemberian-Mu, serta kebaikan-Mu kami berada di waktu pagi dan petang. Engkau adalah Yang Awal maka tidak ada sesuatu pun sebelum-Mu, Yang Akhir maka tidak ada sesuatu pun setelah-Mu, Yang Nyata maka tidak ada sesuatu pun di atas-Mu, dan Yang Batin maka tidak ada sesuatu pun di bawah-Mu. Kami berlindung kepada-Mu dari kefakiran, kemalasan, azab kubur, fitnah kekayaan, dan kami memohon kepada-Mu kemenangan berupa surga."
+      },
+      {
+        "id": 9,
+        "name": "Bacaan Sa'i (7/7)",
+        "description": "",
+        "arab": "أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ أَللَّهُ أَكْبَرُ كَبِيرًا وَالْحَمْدُ لِلَّهِ كَثِيرًا، اَللَّهُمَّ حَبِّبْ إِلَيَّ الْإِيمَانَ وَزَيِّنْهُ فِي قَلْبِي وَكَرِّهْ إِلَيَّ الْكُفْرَ وَالْفُسُوقَ وَالْعِصْيَانَ وَاجْعَلْنِي مِنَ الرَّاشِدِينَ",
+        "transliteration": "Allahu akbar Allahu akbar Allahu akbar kabira wal-hamdu lillahi katsira. Allahumma habbib ilayyal-imana wa zayyinhu fi qalbi wa karrih ilayyal-kufra wal-fusuqa wal-'isyana waj'alni minar-rasyidin.",
+        "translation": "Allah Maha Besar, Allah Maha Besar, Allah Maha Besar dengan segala kebesaran-Nya, dan segala puji bagi Allah sebanyak-banyaknya. Ya Allah, tanamkanlah kecintaan iman dalam diriku dan jadikanlah iman itu indah dalam hatiku, serta tanamkanlah dalam diriku kebencian terhadap kekafiran, kefasikan, dan kedurhakaan, dan jadikanlah aku termasuk orang-orang yang mendapat petunjuk."
+      },
+      {
+        "id": 10,
+        "name": "Bacaan di antara 2 pilar hijau",
+        "description": "",
+        "arab": "رَبِّ اغْفِرْ وَارْحَمْ وَاعْفُ وَتَكَرَّمْ، وَتَجَاوَزْ عَمَّا تَعْلَمُ إِنَّكَ تَعْلَمُ مَالَا نَعْلَمُ، إِنَّكَ أَنْتَ اللَّهُ الْأَعَزُّ الْأَكْرَمُ",
+        "transliteration": "Rabbighfir warham wa'fu wa takarram, wa tajawaz 'amma ta'lamu innaka ta'lamu ma la na'lamu, innaka antallahul-a'azzul-akram.",
+        "translation": "Ya Tuhanku, ampunilah, sayangilah, maafkanlah, dan bermurah hatilah. Dan hapuskanlah apa yang Engkau ketahui, sesungguhnya Engkau mengetahui apa yang tidak kami ketahui. Sesungguhnya Engkaulah Allah Yang Maha Perkasa lagi Maha Mulia."
+      },
+      {
+        "id": 11,
+        "name": "Bacaan saat mendekati bukit Shofa & Marwah",
+        "description": "",
+        "arab": "إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ، فَمَنْ حَجَّ الْبَيْتَ أَوِ اعْتَمَرَ فَلَا جُنَاحَ عَلَيْهِ أَنْ يَطَّوَّفَ بِهِمَا، وَمَنْ تَطَوَّعَ خَيْرًا فَإِنَّ اللَّهَ شَاكِرٌ عَلِيمٌ",
+        "transliteration": "Innash-shafa wal-marwata min sya'airillah, faman hajjal-baita awi'tamara fala junaha 'alaihi ay yaththawwafa bihima, wa man tathawwa'a khairan fa innallaha syakirun 'alim.",
+        "translation": "Sesungguhnya Shofa dan Marwah adalah sebagian dari syiar-syiar Allah. Maka barangsiapa yang beribadah haji ke Baitullah atau berumrah, maka tidak ada dosa baginya mengerjakan sa'i di antara keduanya. Dan barangsiapa yang mengerjakan suatu kebajikan dengan kerelaan hati, maka sesungguhnya Allah Maha Mensyukuri kebaikan lagi Maha Mengetahui."
+      },
+      {
+        "id": 12,
+        "name": "Do'a selesai Sa'i",
+        "description": "Di bukit Marwah",
+        "arab": "اللَّهُمَّ رَبَّنَا تَقَبَّلْ مِنَّا وَعَافِنَا وَاعْفُ عَنَّا وَعَلَى طَاعَتِكَ وَشُكْرِكَ أَعِنَّا وَعَلَى غَيْرِكَ لَا تَكِلْنَا وَعَلَى الْإِيمَانِ وَالْإِسْلَامِ الْكَامِلِ جَمِيعًا تَوَفَّنَا وَأَنْتَ رَاضٍ عَنَّا اللَّهُمَّ ارْحَمْنِي بِتَرْكِ الْمَعَاصِي أَبَدًا مَا أَبْقَيْتَنِي وَارْحَمْنِي أَنْ أَتَكَلَّفَ مَا لَا يَعْنِينِي وَارْزُقْنِي حُسْنَ النَّظَرِ فِيمَا يُرْضِيكَ عَنِّي يَا أَرْحَمَ الرَّاحِمِينَ",
+        "transliteration": "Allahumma rabbana taqabbal minna wa 'afina wa'fu 'anna wa 'ala tha'atika wa syukrika a'inna wa 'ala ghairika la takilna wa 'alal imani wal islamil kamili jami'an tawaffana wa anta radhin 'anna. Allahummar-hamni bitarkil ma'ashi abadan ma abqaitani warhamni an atakal-lafa ma la ya'nini warzuqni husnan-nazhari fima yurdhika 'anni ya arhamar-rahimin.",
+        "translation": "Ya Allah, Tuhan kami, terimalah amalan dari kami, berikanlah kesehatan kepada kami, maafkanlah kesalahan kami, dan bantulah kami untuk senantiasa taat dan bersyukur kepada-Mu. Janganlah Engkau serahkan urusan kami kepada selain-Mu. Wafatkanlah kami semua dalam keadaan iman dan Islam yang sempurna, dan dalam keadaan Engkau ridha kepada kami. Ya Allah, sayangilah aku dengan membimbingku untuk meninggalkan kemaksiatan selamanya selama Engkau masih menghidupkanku, sayangilah aku agar tidak menyibukkan diri dengan hal yang tidak bermanfaat bagiku, dan anugerahkanlah kepadaku sudut pandang yang baik dalam segala hal yang mendatangkan keridhaan-Mu kepadaku, wahai Dzat Yang Maha Penyayang di antara para penyayang."
+      },
+      {
+        "id": 13,
+        "name": "Do'a selesai Sa'i",
+        "description": "Di bukit Marwah",
+        "arab": "اَللَّهُمَّ رَبَّنَا تَقَبَّلْ مِنَّا وَعَافِنَا وَاعْفُ عَنَّا، وَعَلَى طَاعَتِكَ وَشُكْرِكَ أَعِنَّا وَعَلَى غَيْرِكَ لَا تَكِلْنَا، وَعَلَى الْإِيمَانِ وَالْإِسْلَامِ الْكَامِلِ جَمِيعًا تَوَفَّنَا وَأَنْتَ رَاضٍ عَنَّا، اَللَّهُمَّ ارْحَمْنِي بِتَرْكِ الْمَعَاصِي أَبَدًا مَا أَبْقَيْتَنِي، وَارْحَمْنِي أَنْ أَتَكَلَّفَ مَا لَا يَعْنِينِي وَارْزُقْنِي حُسْنَ النَّظَرِ فِيمَا يُرْضِيكَ عَنِّي يَا أَرْحَمَ الرَّاحِمِينَ",
+        "transliteration": "Allahumma rabbana taqabbal minna wa 'afina wa'fu 'anna, wa 'ala tha'atika wa syukrika a'inna wa 'ala ghairika la takilna, wa 'alail-imani wal-islamil-kamili jami'an tawaffana wa anta radhin 'anna. Allahummarhamni bitarkil-ma'ashi abadan ma abqaitani, warhamni an atakallafa ma la ya'nini warzuqni husnan-nazhari fima yurdhika 'anni ya arhamar-rahimin.",
+        "translation": "Ya Allah Ya Tuhan kami, terimalah amalan kami, sejahterakanlah kami, dan maafkanlah kami. Bantulah kami untuk senantiasa taat dan bersyukur kepada-Mu, dan janganlah Engkau serahkan urusan kami kepada selain-Mu. Wafatkanlah kami semua dalam keadaan iman dan Islam yang sempurna, sementara Engkau rida kepada kami. Ya Allah, sayangilah aku dengan membimbingku untuk meninggalkan maksiat selamanya selama Engkau masih menghidupkanku. Dan sayangilah aku agar tidak menyibukkan diri dengan hal yang tidak berguna bagiku, serta anugerahkanlah kepadaku cara pandang yang baik terhadap apa saja yang membuat-Mu rida kepadaku, wahai Tuhan Yang Maha Penyayang di antara para penyayang."
+      }
+    ],
+    "tahalul": [
+      {
+        "id": 1,
+        "name": "Do'a Ketika memotong rambut",
+        "description": "",
+        "arab": "اللَّهُمَّ اجْعَلْ لِكُلِّ شَعْرٍ نُورًا يَوْمَ الْقِيَامَةِ",
+        "transliteration": "Allahummaj-'al likulli sya'rin nuray yaumal qiyamah.",
+        "translation": "Ya Allah, jadikanlah untuk setiap helai rambut ini cahaya pada hari kiamat."
+      },
+      {
+        "id": 2,
+        "name": "Do'a selesai Tahalul",
+        "description": "",
+        "arab": "الْحَمْدُ لِلَّهِ الَّذِي قَضَى عَنَّا مَنَاسِكَنَا اللَّهُمَّ إِيمَانًا وَيَقِينًا وَعَوْنًا وَاغْفِرْ لَنَا وَلِوَالِدَيْنَا وَلِسَائِرِ الْمُسْلِمِينَ وَالْمُسْلِمَاتِ",
+        "transliteration": "Alhamdulillahil ladzi qadha 'anna manasikana. Allahumma imanam wa yaqinaw wa 'awnaw waghfir lana wa liwalidaina wa lisairil muslimina wal muslimat.",
+        "translation": "Segala puji bagi Allah yang telah menyelesaikan ibadah manasik kami. Ya Allah, tambahkanlah kepada kami keimanan, keyakinan, dan pertolongan, serta ampunilah kami, kedua orang tua kami, dan seluruh kaum muslimin dan muslimat."
+      },
+      {
+        "id": 3,
+        "name": "Do'a Haji Mabrur",
+        "description": "",
+        "arab": "اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ فَحَيِّنَا رَبَّنَا بِالسَّلَامِ وَأَدْخِلْنَا الْجَنَّةَ دَارَ السَّلَامِ تَبَارَكْتَ وَتَعَالَيْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ. اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ وَمَغْفِرَتِكَ وَأَدْخِلْنَا فِيهَا. بِسْمِ اللهِ وَالْحَمْدُ لِلَّهِ وَالصَّلَاةُ وَالسَّلَامُ عَلَى رَسُولِ اللهِ",
+        "transliteration": "Allahumma antas-salamu wa minkas-salamu fa hayyina rabbana bis-salami wa adkhilnal jannata daras-salam, tabarakta wa ta'alaita ya dzal jalali wal ikram. Allahummaftah li abwaba rahmatika wa maghfiratika wa adkhilna fiha. Bismillahi walhamdulillahi wash-shalatu was-salamu 'ala rasulillah.",
+        "translation": "Ya Allah, Engkau adalah Dzat Yang Maha Damai (Maha Sejahtera), dan dari-Mu lah segala kedamaian. Maka hidupkanlah kami, wahai Tuhan kami, dengan kedamaian, dan masukkanlah kami ke dalam surga, negeri kedamaian. Maha Berkah Engkau dan Maha Tinggi Engkau, wahai Dzat Pemilik Keagungan dan Kemuliaan. Ya Allah, bukakanlah bagiku pintu-pintu rahmat-Mu serta ampunan-Mu, dan masukkanlah kami ke dalamnya. Dengan menyebut nama Allah, segala puji bagi Allah, serta shalawat dan salam semoga tercurah kepada Rasulullah."
+      }
+    ]
+  }
+}
