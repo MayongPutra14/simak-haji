@@ -27,7 +27,7 @@ const CATEGORY_CONFIG = {
     description:
       'Panduan lengkap doa dan dzikir selama menjalankan rukun ibadah.',
     fetchData: () =>
-      import('../../../utils/jsons/hajjUmrahduas.json').then(
+      import('../../../utils/jsons/hajjUmrahDuas.json').then(
         (module) => module.default,
       ),
   },
