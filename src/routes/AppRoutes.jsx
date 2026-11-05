@@ -74,13 +74,16 @@ export default function AppRoutes() {
         <Route index element={<DoaPage />} />
       </Route>
 
-      <Route path="hajj">
-        <Route index element={<HajjDuasPage />} />
-        <Route path="categories/:categoryId" element={<HajjDuaListPage />} />
-        <Route
-          path="categories/:categoryId/:prayerId"
-          element={<HajjDuaDetailPage />}
-        />
+      {/* PROTECTED HAJJ ROUTES (ADMIN & USER) */}
+      <Route element={<ProtectedRoute allowedRoles={['admin', 'user']} />}>
+        <Route path="hajj">
+          <Route index element={<HajjDuasPage />} />
+          <Route path="categories/:categoryId" element={<HajjDuaListPage />} />
+          <Route
+            path="categories/:categoryId/:prayerId"
+            element={<HajjDuaDetailPage />}
+          />
+        </Route>
       </Route>
 
       {/* PUBLIC/GUEST ROUTES */}
