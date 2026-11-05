@@ -18,6 +18,9 @@ import {
   HadithPage,
   HadithListingPage,
   DoaPage,
+  HajjDuasPage,
+  HajjDuaListPage,
+  HajjDuaDetailPage,
 } from '../pages/global/index';
 
 // ADMIN
@@ -69,6 +72,15 @@ export default function AppRoutes() {
       {/* DOA & DZIKIR */}
       <Route path="duas">
         <Route index element={<DoaPage />} />
+      </Route>
+
+      <Route path="hajj">
+        <Route index element={<HajjDuasPage />} />
+        <Route path="categories/:categoryId" element={<HajjDuaListPage />} />
+        <Route
+          path="categories/:categoryId/:prayerId"
+          element={<HajjDuaDetailPage />}
+        />
       </Route>
 
       {/* PUBLIC/GUEST ROUTES */}

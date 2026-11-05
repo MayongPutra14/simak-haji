@@ -16,6 +16,9 @@ import SurahReadingPage from './SurahReadingPage';
 import HadithPage from './HadistPage';
 import HadithListingPage from './ListHadiths';
 import DoaPage from './DoaPage';
+import HajjDuasPage from './HajjDuas/HajjDuasPage';
+import HajjDuaListPage from './HajjDuas/HajjDuaListPage';
+import HajjDuaDetailPage from './HajjDuas/HajjDuaDetailPage';
 
 export {
   Routes,
@@ -36,4 +39,7 @@ export {
   HadithPage,
   HadithListingPage,
   DoaPage,
+  HajjDuasPage,
+  HajjDuaListPage,
+  HajjDuaDetailPage,
 };

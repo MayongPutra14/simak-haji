@@ -7,6 +7,7 @@ import {
   LuBookText as IconBookClose,
   LuSunMoon as IconSunMoon,
   LuBookHeart as IconBookHeart,
+  LuBookOpen as IconBookOpen2,
 } from 'react-icons/lu';
 import {
   BsTextParagraph as IconParagraph,
@@ -54,6 +55,7 @@ import {
   TbDownload as IconDownload,
   TbArrowNarrowLeft as IconArrowLeft,
   TbArrowNarrowRight as IconArrowRight,
+  TbAdjustmentsHorizontal as IconAdjust,
 } from 'react-icons/tb';
 import {
   IoGridOutline as IconMore,
@@ -104,6 +106,7 @@ import {
   FaExternalLinkAlt as IconExternalLink,
   FaQuoteRight as IconQuote,
   FaRegComments as IconMessage,
+  FaKaaba as IconMecah,
 } from 'react-icons/fa';
 
 export const bgImage = {
@@ -118,6 +121,9 @@ export const bgImage = {
 };
 
 export {
+  IconAdjust,
+  IconBookOpen2,
+  IconMecah,
   IconBookHeart,
   IconSunMoon,
   IconMore,

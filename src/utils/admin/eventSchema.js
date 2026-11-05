@@ -142,6 +142,7 @@ export const eventStatusOptions = [
 ];
 
 export const zonaOptions = [
+  { label: 'Umum', value: 'umum' },
   { label: 'A', value: 'A' },
   { label: 'B', value: 'B' },
   { label: 'C', value: 'C' },
