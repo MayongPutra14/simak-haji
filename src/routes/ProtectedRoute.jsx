@@ -5,15 +5,23 @@ const ProtectedRoute = ({ allowedRoles }) => {
   const location = useLocation();
   const { user } = useAuth();
 
+  // Redirect unauthenticated users to landing page
   if (!user) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
 
+  // Normalize user role to lowercase string
   const currentRole = String(user.role || '')
     .toLowerCase()
     .trim();
 
-  if (allowedRoles && !allowedRoles.includes(currentRole)) {
+  // Normalize allowedRoles array to lowercase
+  const normalizedAllowedRoles = allowedRoles?.map((role) =>
+    String(role).toLowerCase().trim(),
+  );
+
+  // Check if current role is authorized
+  if (normalizedAllowedRoles && !normalizedAllowedRoles.includes(currentRole)) {
     if (currentRole === 'admin') {
       return <Navigate to="/admin/home" replace />;
     }
