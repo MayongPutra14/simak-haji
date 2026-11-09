@@ -59,6 +59,7 @@ import {
   TbAdjustmentsHorizontal as IconAdjust,
 } from 'react-icons/tb';
 import {
+  IoLogOutOutline as IconLogout,
   IoDocument as IconDocsFill,
   IoGridOutline as IconMore,
   IoChevronBackOutline as IconChevronBack,
@@ -123,6 +124,7 @@ export const bgImage = {
 };
 
 export {
+  IconLogout,
   IconDocsFill,
   IconTimeLapes,
   IconAdjust,

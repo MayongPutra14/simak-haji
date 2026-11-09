@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router';
-import { IoLogOutOutline } from 'react-icons/io5';
+import { IconLogout } from '../../../utils/helpers/decorations';
 import getNavItems from '../../../utils/helpers/navbar';
 import SimakLogo from '../../../assets/images/simak-logo.webp';
 import { useAuth } from '../../../features/auth/useAuth';
@@ -119,7 +119,7 @@ function LogoutNavItem() {
       onClick={handleLogout}
       className="flex items-center w-full gap-3 px-4 py-3 text-sm text-left text-red-400 transition-all duration-200 cursor-pointer  rounded-xl hover:bg-red-500/10 hover:text-red-300 active:bg-linear-to-r active:from-red-600 active:to-red-500 active:text-white group"
     >
-      <IoLogOutOutline className="w-5 h-5 text-red-400 transition-colors group-active:text-white" />
+      <IconLogout className="w-5 h-5 text-red-400 transition-colors group-active:text-white" />
       <span>Keluar</span>
     </button>
   );
