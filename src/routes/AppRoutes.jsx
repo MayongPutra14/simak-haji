@@ -54,7 +54,11 @@ import {
 } from '../pages/user/index';
 
 // LEADER
-import { LeaderLayout, LeaderHome } from '../pages/leader/index';
+import {
+  LeaderLayout,
+  LeaderHome,
+  LeaderProfilePage,
+} from '../pages/leader/index';
 
 export default function AppRoutes() {
   return (
@@ -156,6 +160,7 @@ export default function AppRoutes() {
         <Route path="leader" element={<LeaderLayout />}>
           <Route index element={<Navigate to="home" replace />} />
           <Route path="home" element={<LeaderHome />} />
+          <Route path="profile" element={<LeaderProfilePage />} />
         </Route>
       </Route>
 
