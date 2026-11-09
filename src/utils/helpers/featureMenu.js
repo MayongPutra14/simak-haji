@@ -2,7 +2,7 @@ import {
   QuranIcon,
   HadithIcon,
   TasbihIcon,
-  IconKabahOutline
+  IconKabahOutline,
 } from '../../components/ui/global/MenuIcon';
 import { IconQr, IconMore, IconLayout } from './decorations';
 
@@ -65,29 +65,40 @@ export default function getFeatureItems(role = 'user') {
           bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
         },
       ]
-      : [
-        // {
-        //   id: 'materi',
-        //   label: 'Materi',
-        //   path: '/user/materi',
-        //   Icon: SavingIcon,
-        //   bgColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
-        // },
-        // {
-        //   id: 'absen',
-        //   label: 'Absen',
-        //   path: '/maintenance',
-        //   Icon: IconQr,
-        //   bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
-        // },
-        // {
-        //   id: 'keuangan',
-        //   label: 'Keuangan',
-        //   path: '/maintenance',
-        //   Icon: IconWallet,
-        //   bgColor: 'bg-green-500/10 text-green-600 dark:text-green-400',
-        // },
-      ];
+      : role === 'leader'
+        ? [
+          {
+            id: 'absen',
+            label: 'Rekap Absen',
+            path: '/maintenance',
+            Icon: IconQr,
+            bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
+          },
+        ]
+        : [
+          // {
+          //   id: 'materi',
+          //   label: 'Materi',
+          //   path: '/user/materi',
+          //   Icon: SavingIcon,
+          //   bgColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+          // },
+          // {
+          //   id: 'absen',
+          //   label: 'Absen',
+          //   path: '/maintenance',
+          //   Icon: IconQr,
+          //   bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
+          // },
+          // {
+          //   id: 'keuangan',
+          //   label: 'Keuangan',
+          //   path: '/maintenance',
+          //   Icon: IconWallet,
+          //   bgColor: 'bg-green-500/10 text-green-600 dark:text-green-400',
+          // },
+        ];
+
 
   //  Menu "Lainnya"
   const _moreItem = {

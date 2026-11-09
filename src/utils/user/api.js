@@ -80,6 +80,7 @@ export const updateProfileIdentity = async (userId, formData) => {
 
   // ATTACH MANDATORY PARAMETERS
   payload.append('user_id', userId);
+  payload.append('action', 'update_user_profile');
   payload.append('is_completed', 'true');
 
   // APPEND FORM DATA FIELDS TO PAYLOAD
@@ -91,7 +92,7 @@ export const updateProfileIdentity = async (userId, formData) => {
   });
 
   // SEND MULTIPART REQUEST
-  const response = await api.post('update_profile.php', payload, {
+  const response = await api.post('user.php', payload, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

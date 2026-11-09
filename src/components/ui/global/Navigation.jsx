@@ -3,6 +3,7 @@ import { IoLogOutOutline } from 'react-icons/io5';
 import getNavItems from '../../../utils/helpers/navbar';
 import SimakLogo from '../../../assets/images/simak-logo.webp';
 import { useAuth } from '../../../features/auth/useAuth';
+
 export default function Navigation({ role = 'user' }) {
   const navItems = getNavItems(role);
 
@@ -23,7 +24,11 @@ export default function Navigation({ role = 'user' }) {
             />
             <div>
               <h1 className=" font-bold leading-tight text-white">
-                {role === 'admin' ? 'SIMAK Admin' : 'SIMAK Jamaah'}
+                {role === 'admin'
+                  ? 'SIMAK Admin'
+                  : role === 'leader'
+                    ? 'SIMAK Leader'
+                    : 'SIMAK Jamaah'}
               </h1>
             </div>
           </div>
@@ -66,7 +71,9 @@ export default function Navigation({ role = 'user' }) {
 function SidebarNavItem({ item }) {
   const { path, label, IconOutline, IconFill } = item;
 
-  const isExact = path === '/admin/home' || path === '/user/home';
+  const isExact =
+    path === '/admin/home' || path === '/leader/home' || path === '/user/home';
+
   return (
     <NavLink
       to={path}
@@ -104,7 +111,7 @@ function LogoutNavItem() {
   const { logout } = useAuth();
   const handleLogout = () => {
     logout();
-    navigate('/login', { replace:true });
+    navigate('/login', { replace: true });
   };
 
   return (
@@ -123,7 +130,8 @@ function LogoutNavItem() {
  */
 function StandardNavItem({ item }) {
   const { path, label, IconOutline, IconFill } = item;
-  const isExact = path === '/admin/home' || path === '/user/home';
+  const isExact =
+    path === '/admin/home' || path === '/leader/home' || path === '/user/home';
 
   return (
     <NavLink
@@ -150,9 +158,7 @@ function StandardNavItem({ item }) {
             </div>
             <span
               className={`text-[11px] tracking-tight mt-0.5 leading-tight ${
-                isActive
-                  ? 'font-medium text-white'
-                  : ' text-sea-green-300'
+                isActive ? 'font-medium text-white' : ' text-sea-green-300'
               }`}
             >
               {label}

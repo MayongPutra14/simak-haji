@@ -53,6 +53,9 @@ import {
   UserMaterialPage,
 } from '../pages/user/index';
 
+// LEADER
+import { LeaderLayout, LeaderHome } from '../pages/leader/index';
+
 export default function AppRoutes() {
   return (
     <Routes>
@@ -75,7 +78,9 @@ export default function AppRoutes() {
       </Route>
 
       {/* PROTECTED HAJJ ROUTES (ADMIN & USER) */}
-      <Route element={<ProtectedRoute allowedRoles={['admin', 'user']} />}>
+      <Route
+        element={<ProtectedRoute allowedRoles={['admin', 'leader', 'user']} />}
+      >
         <Route path="hajj">
           <Route index element={<HajjDuasPage />} />
           <Route path="categories/:categoryId" element={<HajjDuaListPage />} />
@@ -143,6 +148,14 @@ export default function AppRoutes() {
 
         <Route element={<RequiredInCompletedIdentity />}>
           <Route path="user/form" element={<IdentityPage />} />
+        </Route>
+      </Route>
+
+      {/* LEADER ROUTES */}
+      <Route element={<ProtectedRoute allowedRoles={['leader']} />}>
+        <Route path="leader" element={<LeaderLayout />}>
+          <Route index element={<Navigate to="home" replace />} />
+          <Route path="home" element={<LeaderHome />} />
         </Route>
       </Route>
 

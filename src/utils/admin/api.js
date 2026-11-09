@@ -30,9 +30,9 @@ export const getUserDetail = async (userId) => {
   if (!userId) return null;
 
   try {
-    const response = await api.post('get_profile.php', {
+    const response = await api.post('admin.php', {
       user_id: userId,
-      action: 'get_jamaah',
+      action: 'get_user_detail',
     });
 
     return response.data?.data || null;
@@ -50,7 +50,7 @@ export const createBasicAccount = async (formData) => {
       ...formData,
     };
 
-    const response = await api.post('admin_manage.php', payload);
+    const response = await api.post('admin.php', payload);
     if (
       response.data?.status === 'failed' ||
       response.data?.status === 'error'
@@ -70,10 +70,11 @@ export const updateProfile = async (userId, payload) => {
   try {
     const bodyPayload = {
       user_id: String(userId),
+      action: 'update_user_profile',
       ...payload,
     };
 
-    const response = await api.post('update_profile.php', bodyPayload);
+    const response = await api.post('admin.php', bodyPayload);
 
     if (
       response.data?.status === 'failed' ||
@@ -93,12 +94,12 @@ export const updateDocuments = async (userId, payload) => {
   try {
     const bodyPayload = {
       user_id: userId,
-      action: 'update_dokumen',
+      action: 'update_document',
       isCompleted: 1,
       ...payload,
     };
 
-    const response = await api.post('manage_dokumen.php', bodyPayload);
+    const response = await api.post('admin.php', bodyPayload);
     if (
       response.data?.status === 'failed' ||
       response.data?.status === 'error'
@@ -122,7 +123,7 @@ export const deleteAdminUserData = async (userId) => {
       action: 'delete_user',
       user_id: userId,
     };
-    const response = await api.post('admin_manage.php', payload);
+    const response = await api.post('admin.php', payload);
     if (
       response.data?.status === 'failed' ||
       response.data?.status === 'error'
@@ -180,11 +181,11 @@ export const updateUserProfile = async (userId, formData) => {
   try {
     const bodyPayload = {
       user_id: userId,
-      action: 'edit_users',
+      action: 'edit_user',
       ...formData,
     };
 
-    const response = await api.post('admin_manage.php', bodyPayload);
+    const response = await api.post('admin.php', bodyPayload);
     if (
       response.data?.status === 'failed' ||
       response.data?.status === 'error'

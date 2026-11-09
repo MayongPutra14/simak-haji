@@ -64,8 +64,17 @@ export default function getNavItems(role) {
     IconFill: IconPeopleFill,
   };
 
-
   if (role === 'admin') {
+    return [
+      commonItems.home,
+      jamaahItem,
+      commonItems.schedule,
+      commonItems.finance,
+      commonItems.profile,
+    ];
+  }
+
+  if (role === 'leader') {
     return [
       commonItems.home,
       jamaahItem,

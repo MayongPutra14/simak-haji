@@ -93,8 +93,8 @@ const CreateUserFragment = () => {
     try {
       // send step 1 basic account data to backend
       const result = await createBasicAccount(data);
-      if (result?.user_id || result?.id) {
-        const userId = result.user_id || result.id;
+      if (result?.data?.user_id) {
+        const userId = result.data.user_id;
 
         // store the newly generated user id
         setCreatedUserId(userId);

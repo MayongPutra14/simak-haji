@@ -25,6 +25,11 @@ const ProtectedRoute = ({ allowedRoles }) => {
     if (currentRole === 'admin') {
       return <Navigate to="/admin/home" replace />;
     }
+
+    if (currentRole === 'leader') {
+      return <Navigate to="/leader/home" replace />;
+    }
+
     if (currentRole === 'user') {
       return <Navigate to="/user/home" replace />;
     }

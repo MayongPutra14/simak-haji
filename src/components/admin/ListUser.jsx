@@ -1,33 +1,30 @@
 import { useState, useMemo, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
-import Table from '../ui/global/Table';
-import Button from '../ui/global/Button';
-import StatisticContainer from '../ui/global/StatisticContainer';
-import Modal from '../ui/global/Modal';
 import useDeleteUser from '../../hooks/admin/user/useDeleteUser';
-import { ListAdminUsersColumns } from '../../features/admin/ListAdminUsersColumns';
-import { SkeletonTableAdminUsers } from '../ui/global/skeletons/index';
-import { UpdateQuotaSection } from '../ui/inputs/UpdateQuotaProvince';
 import {
   ADMIN_DOC_FIELDS,
   useUserFilters,
 } from '../../hooks/admin/user/useUsersFilter';
+import { ListAdminUsersColumns } from '../../features/admin/ListAdminUsersColumns';
 import InlineFilterBar from './components/InlineFilterBar';
 import { UserStatisticsSection } from './components/statistics/UserStatisticSection';
-import { calculateDocumentCompletenessSummary } from '../../utils/helpers/statsCalculators';
+import Table from '../ui/global/Table';
+import Button from '../ui/global/Button';
+import StatisticContainer from '../ui/global/StatisticContainer';
+import Modal from '../ui/global/Modal';
+import { SkeletonTableAdminUsers } from '../ui/global/skeletons/index';
 import { SearchInput } from '../ui/inputs';
-import {
-  IoWarningOutline as IconWarning,
-  IoLocation as IconLocation,
-  IoDocument as IconDocument,
-} from 'react-icons/io5';
-import {
-  MdAdd as IconAdd,
-  MdOutlineNavigateNext as IconNav,
-  MdPeople as IconPeople,
-  MdTimelapse as IconTimeLapes,
-} from 'react-icons/md';
+import { calculateDocumentCompletenessSummary } from '../../utils/helpers/statsCalculators';
 import { calculateUniqueZone } from '../../utils/helpers/statsCalculators';
+import {
+  IconAdd,
+  IconNav,
+  IconPeople,
+  IconTimeLapes,
+  IconLocationFill,
+  IconWarning,
+  IconDocsFill,
+} from '../../utils/helpers/decorations';
 
 export default function ListUser({
   users = [],
@@ -219,7 +216,7 @@ export default function ListUser({
         </section>
 
         {/* UPDATE NEW PROVINCE QUOTA */}
-        <UpdateQuotaSection onRefresh={onRefresh} />
+        {/* <UpdateQuotaSection onRefresh={onRefresh} /> */}
 
         {/* BASIC STATISTIC */}
         <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -238,7 +235,7 @@ export default function ListUser({
           <StatisticContainer
             label="Total Zona Aktif"
             value={calculateUniqueZone(users)}
-            icon={IconLocation}
+            icon={IconLocationFill}
             bgClass="bg-gradient-to-br from-orange-400 to-amber-500 border-transparent"
             shadowColorClass="hover:shadow-orange-600/40"
             textColorClass="text-white"
@@ -250,7 +247,7 @@ export default function ListUser({
           <StatisticContainer
             label="Dokumen Lengkap"
             value={`${docSummary.completePercentage}%`}
-            icon={IconDocument}
+            icon={IconDocsFill}
             bgClass="bg-gradient-to-br from-blue-500 to-sky-600 border-transparent"
             shadowColorClass="hover:shadow-blue-600/40"
             textColorClass="text-white"
