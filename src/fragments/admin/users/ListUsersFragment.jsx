@@ -1,4 +1,4 @@
-import ListUser from '../../../components/admin/ListUser.jsx';
+import ListUser from '../../../components/admin/user/ListUser.jsx';
 import useAdminUsersData from '../../../hooks/admin/user/useGetUsers';
 const ListUsersFragment = ({ user }) => {
   const { usersData, isLoading, error, refetch } = useAdminUsersData({

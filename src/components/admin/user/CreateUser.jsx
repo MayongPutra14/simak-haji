@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import Button from '../ui/global/Button';
-import { WarningAlert } from '../ui/global/GiudelineForm';
+import Button from '../../ui/global/Button';
+import { WarningAlert } from '../../ui/global/GiudelineForm';
 import {
   Section1Account,
   Section2PersonalData,
@@ -11,13 +11,13 @@ import {
   Section6HajjData,
   Section7ControlProcess,
   Section8Placement,
-} from './components/identity/index';
+} from '../../ui/form/identity/index';
 
 import {
   step1Schema,
   step2Schema,
   step3Schema,
-} from '../../utils/admin/createUserSchema';
+} from '../../../utils/admin/createUserSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const CreateUser = ({

@@ -5,7 +5,7 @@ import SearcInput from '../../ui/inputs/SeacrhInput';
 import Button from '../../ui/global/Button';
 import StatisticContainer from '../../ui/global/StatisticContainer';
 import Modal from '../../ui/global/Modal';
-import InlineFilterBar from '../components/InlineFilterBar';
+import InlineFilterBar from '../../ui/global/InlineFilterBar';
 import { ListAdminEventColumns } from '../../../features/admin/ListAdminEventColumns';
 import { SkeletonTableAdminUsers } from '../../ui/global/skeletons/index';
 import { calculateUniqueZone } from '../../../utils/helpers/statsCalculators';

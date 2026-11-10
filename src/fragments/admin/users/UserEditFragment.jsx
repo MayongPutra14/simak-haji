@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import useEditUser from '../../../hooks/admin/user/useEdiUser';
-import EditUser from '../../../components/admin/EditUser';
+import EditUser from '../../../components/admin/user/EditUser';
 import Modal from '../../../components/ui/global/Modal';
 import { IoCloseOutline as IconClose } from 'react-icons/io5';
 

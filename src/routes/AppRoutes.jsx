@@ -58,6 +58,8 @@ import {
   LeaderLayout,
   LeaderHome,
   LeaderProfilePage,
+  LeaderListUsersPage,
+  LeaderUserDetailPage,
 } from '../pages/leader/index';
 
 export default function AppRoutes() {
@@ -132,6 +134,21 @@ export default function AppRoutes() {
         </Route>
       </Route>
 
+      {/* LEADER ROUTES */}
+      <Route element={<ProtectedRoute allowedRoles={['leader']} />}>
+        <Route path="leader" element={<LeaderLayout />}>
+          <Route index element={<Navigate to="home" replace />} />
+          <Route path="home" element={<LeaderHome />} />
+          <Route path="profile" element={<LeaderProfilePage />} />
+
+          {/* CRUD USERS */}
+          <Route path="users">
+            <Route index element={<LeaderListUsersPage />} />
+            <Route path="detail/:userId" element={<LeaderUserDetailPage />} />
+          </Route>
+        </Route>
+      </Route>
+
       {/* USER ROUTES */}
       <Route element={<ProtectedRoute allowedRoles={['user']} />}>
         <Route element={<RequiredCompletedIdentity />}>
@@ -152,15 +169,6 @@ export default function AppRoutes() {
 
         <Route element={<RequiredInCompletedIdentity />}>
           <Route path="user/form" element={<IdentityPage />} />
-        </Route>
-      </Route>
-
-      {/* LEADER ROUTES */}
-      <Route element={<ProtectedRoute allowedRoles={['leader']} />}>
-        <Route path="leader" element={<LeaderLayout />}>
-          <Route index element={<Navigate to="home" replace />} />
-          <Route path="home" element={<LeaderHome />} />
-          <Route path="profile" element={<LeaderProfilePage />} />
         </Route>
       </Route>
 

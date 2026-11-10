@@ -6,6 +6,20 @@ import {
   IconLinkedin,
 } from './decorations';
 
+// HELPER FOR useUserFilter.js
+export const ADMIN_DOC_FIELDS = [
+  { key: 'statusGoogleForm', label: 'G-Form' },
+  { key: 'statusPhoto', label: 'Photo' },
+  { key: 'statusSpph', label: 'SPPH' },
+  { key: 'statusMutasi', label: 'Mutasi' },
+  { key: 'statusBiometrik', label: 'Biometrik' },
+  { key: 'statusPuskesmas', label: 'Puskesmas' },
+  { key: 'statusMCU', label: 'MCU' },
+  { key: 'statusPelunasan', label: 'Pelunasan' },
+  { key: 'statusPassport', label: 'Passport' },
+  { key: 'statusVisa', label: 'Visa' },
+];
+
 // GALLERY LANDING PAGE
 export const DESKTOP_SPANS = [
   'col-span-2 row-span-2', // item 0

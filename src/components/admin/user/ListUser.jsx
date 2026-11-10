@@ -1,21 +1,19 @@
 import { useState, useMemo, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
-import useDeleteUser from '../../hooks/admin/user/useDeleteUser';
-import {
-  ADMIN_DOC_FIELDS,
-  useUserFilters,
-} from '../../hooks/admin/user/useUsersFilter';
-import { ListAdminUsersColumns } from '../../features/admin/ListAdminUsersColumns';
-import InlineFilterBar from './components/InlineFilterBar';
-import { UserStatisticsSection } from './components/statistics/UserStatisticSection';
-import Table from '../ui/global/Table';
-import Button from '../ui/global/Button';
-import StatisticContainer from '../ui/global/StatisticContainer';
-import Modal from '../ui/global/Modal';
-import { SkeletonTableAdminUsers } from '../ui/global/skeletons/index';
-import { SearchInput } from '../ui/inputs';
-import { calculateDocumentCompletenessSummary } from '../../utils/helpers/statsCalculators';
-import { calculateUniqueZone } from '../../utils/helpers/statsCalculators';
+import useDeleteUser from '../../../hooks/admin/user/useDeleteUser';
+import { useUserFilters } from '../../../hooks/global/useUsersFilter';
+import { ListAdminUsersColumns } from '../../../features/admin/ListAdminUsersColumns';
+import InlineFilterBar from '../../ui/global/InlineFilterBar';
+import { UserStatisticsSection } from '../../ui/global/statistics/UserStatisticSection';
+import Table from '../../ui/global/Table';
+import Button from '../../ui/global/Button';
+import StatisticContainer from '../../ui/global/StatisticContainer';
+import Modal from '../../ui/global/Modal';
+import { SkeletonTableAdminUsers } from '../../ui/global/skeletons/index';
+import { SearchInput } from '../../ui/inputs';
+import { calculateDocumentCompletenessSummary } from '../../../utils/helpers/statsCalculators';
+import { ADMIN_DOC_FIELDS } from '../../../utils/helpers/constant';
+import { calculateUniqueZone } from '../../../utils/helpers/statsCalculators';
 import {
   IconAdd,
   IconNav,
@@ -24,7 +22,7 @@ import {
   IconLocationFill,
   IconWarning,
   IconDocsFill,
-} from '../../utils/helpers/decorations';
+} from '../../../utils/helpers/decorations';
 
 export default function ListUser({
   users = [],

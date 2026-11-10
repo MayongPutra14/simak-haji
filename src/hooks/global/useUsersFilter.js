@@ -1,17 +1,5 @@
 import { useState, useMemo } from 'react';
-
-export const ADMIN_DOC_FIELDS = [
-  { key: 'statusGoogleForm', label: 'G-Form' },
-  { key: 'statusPhoto', label: 'Photo' },
-  { key: 'statusSpph', label: 'SPPH' },
-  { key: 'statusMutasi', label: 'Mutasi' },
-  { key: 'statusBiometrik', label: 'Biometrik' },
-  { key: 'statusPuskesmas', label: 'Puskesmas' },
-  { key: 'statusMCU', label: 'MCU' },
-  { key: 'statusPelunasan', label: 'Pelunasan' },
-  { key: 'statusPassport', label: 'Passport' },
-  { key: 'statusVisa', label: 'Visa' },
-];
+import { ADMIN_DOC_FIELDS } from '../../utils/helpers/constant';
 
 const INITIAL_DOC_FILTERS = ADMIN_DOC_FIELDS.reduce((acc, field) => {
   acc[field.key] = 'Semua';

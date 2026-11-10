@@ -1,196 +1,34 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router';
-import { useUserManagement } from '../../../hooks/admin/user/useUserManagement';
 import TitlePage from '../../../components/ui/global/TitlePage';
-import CreateUser from '../../../components/admin/CreateUser';
+import CreateUser from '../../../components/admin/user/CreateUser';
 import Modal from '../../../components/ui/global/Modal';
 import { bgImage } from '../../../utils/helpers/decorations';
-import {
-  createUserSession,
-  getUserSession,
-  deleteUserSession,
-} from '../../../utils/admin/sessionStorage';
-import {
-  IoCloseOutline as IconClose,
-  IoCheckmark as IconCheck,
-} from 'react-icons/io5';
+import { useCreateUserFlow } from '../../../hooks/admin/user/useCreateUserFlow';
+import { IconClose, IconCheck } from '../../../utils/helpers/decorations';
 
-// Cloudinary variabel
-const CLOUD_NAME = 'llp0te3a';
-const UPLOAD_PRESET = 'simak_preset';
-const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
-
+// MAIN COMPONENT
 const CreateUserFragment = () => {
-  const navigate = useNavigate();
-  const { createBasicAccount, updateProfile, updateDocuments, isLoading } =
-    useUserManagement();
-
-  const [createdUserId, setCreatedUserId] = useState(() => {
-    const { userId } = getUserSession();
-    return userId;
-  });
-  const [currentStep, setCurrentStep] = useState(() => {
-    const { step } = getUserSession();
-    return step;
-  });
-
-  const [modal, setModal] = useState({
-    isOpen: false,
-    title: '',
-    description: '',
-    icon: null,
-    iconBgColor: '',
-    iconColor: '',
-    buttonColor: '',
-    onConfirm: null,
-  });
-
-  const closeModal = () => {
-    setModal((prev) => ({
-      ...prev,
-      isOpen: false,
-    }));
-  };
-
-  const showErrorModal = (message) => {
-    setModal({
-      isOpen: true,
-      title: 'Akun Gagal Dibuat',
-      description:
-        message || 'Gagal mendaftarkan jamaah baru. Periksa kembali data Anda.',
-      icon: <IconClose className="w-7 h-7" />,
-      iconBgColor: 'bg-red-100',
-      iconColor: 'text-red-500',
-      buttonColor: 'bg-red-500 hover:bg-red-600 text-white',
-      onConfirm: null,
-    });
-  };
-
-  const showSuccessModal = (title, description, onConfirmAction) => {
-    setModal({
-      isOpen: true,
-      title: title,
-      description: description,
-      icon: <IconCheck className="w-7 h-7" />,
-      iconBgColor: 'bg-sea-green-100',
-      iconColor: 'text-sea-green-400',
-      buttonColor: 'bg-sea-green-500 hover:bg-sea-green-700 text-white',
-      onConfirm: () => {
-        closeModal();
-        if (onConfirmAction) onConfirmAction();
-      },
-    });
-  };
-
-  // HANDLER CACEL/BACK
-  const handleCacelProcess = () => {
-    deleteUserSession();
-    navigate('/admin/users');
-  };
-
-  // STEP 1 HANDLER: CREATE BASIC ACCOUNT
-  const handleStep1Submit = async (data) => {
-    try {
-      // send step 1 basic account data to backend
-      const result = await createBasicAccount(data);
-      if (result?.data?.user_id) {
-        const userId = result.data.user_id;
-
-        // store the newly generated user id
-        setCreatedUserId(userId);
-        setCurrentStep(2);
-        createUserSession(userId, 2);
-
-        showSuccessModal(
-          'Akun berhasil dibuat',
-          'Akun dasar berhasil dibuat. Lanjut melengkapi biodata profil.',
-          () => {
-            closeModal();
-          },
-        );
-      }
-    } catch (err) {
-      showErrorModal(err.message);
-    }
-  };
-
-  // STEP 2 HANDLER: UPDATE PROFILE BIODATA
-  const handleStep2Submit = async (data) => {
-    try {
-      let imageUrl = data.profileImage;
-
-      // if profile image is a file
-      if (data.profileImage instanceof File) {
-        const cloudinaryForm = new FormData();
-        cloudinaryForm.append('file', data.profileImage);
-        cloudinaryForm.append('upload_preset', UPLOAD_PRESET);
-        const cloudRes = await fetch(UPLOAD_URL, {
-          method: 'POST',
-          body: cloudinaryForm,
-        });
-
-        const cloudData = await cloudRes.json();
-
-        if (!cloudRes.ok || !cloudData.secure_url) {
-          throw new Error(
-            cloudData?.error?.message ||
-              'Gagal mengunggah foto profil ke Cloudinary.',
-          );
-        }
-        // AMBIL SECURE URL DARI CLOUDINARY
-        imageUrl = cloudData.secure_url;
-      }
-
-      const finalPayload = {
-        ...data,
-        profileImage: imageUrl,
-      };
-
-      // pass created user id and payload to step 2 api
-      await updateProfile(createdUserId, finalPayload);
-
-      setCurrentStep(3);
-      createUserSession(createdUserId, 3);
-
-      showSuccessModal(
-        'Dokumen Berhasil di lengkapi',
-        'Profil jamaah berhasil diperbarui. Lanjut melengkapi birokrasi.',
-        () => {
-          closeModal();
-        },
-      );
-    } catch (err) {
-      showErrorModal(err.message);
-    }
-  };
-
-  // STEP 3 HANDLER: UPDATE BUREAUCRACY & DOCUMENTS
-  const handleStep3Submit = async (data) => {
-    try {
-      // send final step bureaucracy payload
-      await updateDocuments(createdUserId, data);
-      showSuccessModal(
-        'Dokumen Berhasil di lengkapi',
-        'Seluruh data jamaah berhasil diselesaikan!',
-        () => {
-          closeModal();
-          deleteUserSession();
-          navigate('/admin/users');
-        },
-      );
-    } catch (err) {
-      showErrorModal(err.message);
-    }
-  };
+  const {
+    currentStep,
+    createdUserId,
+    isLoading,
+    modal,
+    closeModal,
+    handleCancelProcess,
+    handleStep1Submit,
+    handleStep2Submit,
+    handleStep3Submit,
+  } = useCreateUserFlow();
 
   return (
     <>
+      {/* PAGE TITLE HEADER */}
       <TitlePage
         bgImage={bgImage.bgAqsa}
         title="Pendaftaran Jamaah Baru"
         subtitle="Silakan isi data di bawah ini untuk membuat akses jamaah baru. Nomor porsi yang didaftarkan akan digunakan untuk verifikasi login."
       />
 
+      {/* CREATE USER MULTISTEP FORM CONTAINER */}
       <CreateUser
         currentStep={currentStep}
         createdUserId={createdUserId}
@@ -198,15 +36,22 @@ const CreateUserFragment = () => {
         onStep1Submit={handleStep1Submit}
         onStep2Submit={handleStep2Submit}
         onStep3Submit={handleStep3Submit}
-        onCancel={handleCacelProcess}
+        onCancel={handleCancelProcess}
       />
 
+      {/* NOTIFICATION MODAL */}
       <Modal
         isOpen={modal.isOpen}
         onClose={modal.onConfirm || closeModal}
         title={modal.title}
         description={modal.description}
-        icon={modal.icon}
+        icon={
+          modal.iconType === 'check' ? (
+            <IconCheck className="w-7 h-7" />
+          ) : (
+            <IconClose className="w-7 h-7" />
+          )
+        }
         iconBgColor={modal.iconBgColor}
         iconColor={modal.iconColor}
         buttonText="Tutup"
