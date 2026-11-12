@@ -137,3 +137,47 @@ export const KITAB_METADATA = {
     author: 'Yahya bin Syaraf an-Nawawi',
   },
 };
+
+// CENTRALIZED CATEGORY CONFIGURATION
+export const CATEGORY_CONFIG = {
+  'doa-praktis': {
+    id: 'doa-praktis',
+    title: 'Kumpulan Doa Praktis',
+    description:
+      'Berbagai doa praktis untuk menemani aktivitas dan kebutuhan selama ibadah.',
+    fetchData: () =>
+      import('../jsons/practiceDuas.json').then((module) => module.default),
+  },
+  'doa-haji': {
+    id: 'doa-haji',
+    title: 'Doa dan Dzikir Haji / Umroh',
+    description:
+      'Panduan lengkap doa dan dzikir selama menjalankan rukun ibadah.',
+    fetchData: () =>
+      import('../jsons/hajjUmrahDuas.json').then((module) => module.default),
+  },
+  'masjidil-haram': {
+    id: 'masjidil-haram',
+    title: 'Masjidil Haram',
+    description:
+      'Kumpulan doa khusus ketika berada di dalam kawasan Masjidil Haram.',
+    fetchData: () =>
+      import('../jsons/masjidHaramDuas.json').then((module) => module.default),
+  },
+  perjalanan: {
+    id: 'perjalanan',
+    title: 'Perjalanan',
+    description:
+      'Doa dan dzikir yang dibaca selama dalam perjalanan ibadah Anda.',
+    fetchData: () =>
+      import('../jsons/travelDuas.json').then((module) => module.default),
+  },
+};
+
+// CENTRALIZED CATEGORY CONFIGURATION FOR DETAIL PAGE DUA
+export const CATEGORY_ORDER = [
+  'doa-praktis',
+  'doa-haji',
+  'masjidil-haram',
+  'perjalanan',
+];

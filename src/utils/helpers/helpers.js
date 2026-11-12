@@ -241,3 +241,44 @@ export const processAndUploadFiles = async (data, uploadFn) => {
 
   return data;
 };
+
+
+// DATA NORMALIZATION HELPER FOR DUA
+export const normalizePrayerData = (jsonData) => {
+  // step 1: validate input data
+  if (!jsonData || !jsonData.data) return [];
+
+  const rawData = jsonData.data;
+  const normalizedItems = [];
+
+  // CASE 1: DIRECT ARRAY STRUCTURE
+  if (Array.isArray(rawData)) {
+    return rawData;
+  }
+
+  // CASE 2: NESTED OBJECT STRUCTURE
+  if (typeof rawData === 'object' && rawData !== null) {
+    Object.entries(rawData).forEach(([groupKey, value]) => {
+      // step 2: map array items with composite id
+      if (Array.isArray(value)) {
+        value.forEach((item) => {
+          if (item && typeof item === 'object') {
+            normalizedItems.push({
+              ...item,
+              id: `${groupKey}_${item.id}`,
+            });
+          }
+        });
+      }
+      // step 3: map single prayer object with composite id
+      else if (value && typeof value === 'object' && 'id' in value) {
+        normalizedItems.push({
+          ...value,
+          id: `${groupKey}_${value.id}`,
+        });
+      }
+    });
+  }
+
+  return normalizedItems;
+};
