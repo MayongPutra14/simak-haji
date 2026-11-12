@@ -4,7 +4,7 @@ import InputDate from '../../../ui/inputs/InputDate';
 import InputRadio from '../../../ui/inputs/InputRadio';
 import InputImage from '../../../ui/inputs/InputImage';
 import { useFormContext, useWatch, Controller } from 'react-hook-form';
-import * as CreateUserSchema from '../../../../utils/admin/createUserSchema';
+import * as CreateUserSchema from '../../../../utils/schemas/createUserSchema';
 
 export default function Section2PersonalData() {
   const {

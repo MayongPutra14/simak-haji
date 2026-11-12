@@ -1,35 +1,33 @@
 import { useState, useMemo, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
-import Table from '../ui/global/Table';
-import Button from '../ui/global/Button';
-import StatisticContainer from '../ui/global/StatisticContainer';
-import Modal from '../ui/global/Modal';
-import useDeleteUser from '../../hooks/admin/user/useDeleteUser';
-import { ListAdminUsersColumns } from '../../features/admin/ListAdminUsersColumns';
-import { SkeletonTableAdminUsers } from '../ui/global/skeletons/index';
-import { UpdateQuotaSection } from '../ui/inputs/UpdateQuotaProvince';
+import useLeaderDeleteUser from '../../../hooks/leader/user/useDeleteUser';
+import { useUserFilters } from '../../../hooks/global/useUsersFilter';
+import { ListAdminUsersColumns } from '../../../features/leader/ListLeaderUsersColumns';
+import Table from '../../ui/global/Table';
+import InlineFilterBar from '../../ui/global/InlineFilterBar';
+import Button from '../../ui/global/Button';
+import StatisticContainer from '../../ui/global/StatisticContainer';
+import Modal from '../../ui/global/Modal';
+import { UserStatisticsSection } from '../../ui/global/statistics/UserStatisticSection';
+import { SkeletonTableAdminUsers } from '../../ui/global/skeletons/index';
+import { SearchInput } from '../../ui/inputs';
+import { calculateDocumentCompletenessSummary } from '../../../utils/helpers/statsCalculators';
+import { ADMIN_DOC_FIELDS } from '../../../utils/helpers/constant';
+import { calculateUniqueZone } from '../../../utils/helpers/statsCalculators';
 import {
-  ADMIN_DOC_FIELDS,
-  useUserFilters,
-} from '../../hooks/admin/user/useUsersFilter';
-import InlineFilterBar from './components/InlineFilterBar';
-import { UserStatisticsSection } from './components/statistics/UserStatisticSection';
-import { calculateDocumentCompletenessSummary } from '../../utils/helpers/statsCalculators';
-import { SearchInput } from '../ui/inputs';
-import {
-  IoWarningOutline as IconWarning,
-  IoLocation as IconLocation,
-  IoDocument as IconDocument,
-} from 'react-icons/io5';
-import {
-  MdAdd as IconAdd,
-  MdOutlineNavigateNext as IconNav,
-  MdPeople as IconPeople,
-  MdTimelapse as IconTimeLapes,
-} from 'react-icons/md';
-import { calculateUniqueZone } from '../../utils/helpers/statsCalculators';
+  IconAdd,
+  IconNav,
+  IconPeople,
+  IconTimeLapes,
+  IconLocationFill,
+  IconWarning,
+  IconDocsFill,
+} from '../../../utils/helpers/decorations';
+import { titleCase } from '../../../utils/helpers/helpers';
 
 export default function ListUser({
+  leaderId,
+  zone = '',
   users = [],
   isLoading = false,
   error = null,
@@ -38,9 +36,8 @@ export default function ListUser({
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-
   const { deleteUser, isDeleting, deleteError, setDeleteError } =
-    useDeleteUser();
+    useLeaderDeleteUser(leaderId, zone);
   const currentPage = Number(searchParams.get('page')) || 1;
   const itemsPerPage = 10;
   // URL PARAMS HELPER
@@ -59,6 +56,7 @@ export default function ListUser({
     searchQuery,
     zoneFilter,
     yearFilter,
+    roleFilter,
     uniqueZones,
     uniqueYears,
     filteredUsers,
@@ -68,11 +66,23 @@ export default function ListUser({
     handleSearchChange,
     handleZoneChange,
     handleYearChange,
+    handleRoleChange,
     handleClearFilters,
   } = useUserFilters(users, () => setPageInUrl(1));
 
   // Generic Configuration InlineFIlterBar.jsx
   const filterConfigs = useMemo(() => {
+    const roleConfig = {
+      key: 'role',
+      value: roleFilter,
+      onChange: handleRoleChange,
+      options: [
+        { value: 'Semua Role', label: 'Semua Role' },
+        { value: 'user', label: 'Role: User' },
+        { value: 'leader', label: 'Role: Leader' },
+      ],
+    };
+
     // 1. Dropdown Zona
     const zoneConfig = {
       key: 'zone',
@@ -107,15 +117,17 @@ export default function ListUser({
       ],
     }));
 
-    return [zoneConfig, yearConfig, ...docConfigs];
+    return [zoneConfig, yearConfig, roleConfig, ...docConfigs];
   }, [
     zoneFilter,
     yearFilter,
+    roleFilter,
     docFilters,
     uniqueZones,
     uniqueYears,
     handleZoneChange,
     handleYearChange,
+    handleRoleChange,
     handleDocFilterChange,
   ]);
 
@@ -164,10 +176,10 @@ export default function ListUser({
           setDeleteError(null);
         },
         onViewDetail: (user) => {
-          navigate(`/admin/users/detail/${user.id}`);
+          navigate(`/leader/users/detail/${user.id}`);
         },
         onEdit: (user) => {
-          navigate(`/admin/users/edit/${user.id}`);
+          navigate(`/leader/users/edit/${user.id}`);
         },
       }),
     [setDeleteError, navigate],
@@ -211,7 +223,7 @@ export default function ListUser({
           <Button
             className="flex items-center justify-center w-full gap-2 px-4 py-2 md:w-auto shrink-0"
             variant="primary"
-            to="/admin/users/create"
+            to="/leader/users/create"
           >
             <IconAdd className="w-5 h-5" />
             <span>Tambah Jamaah</span>
@@ -219,7 +231,7 @@ export default function ListUser({
         </section>
 
         {/* UPDATE NEW PROVINCE QUOTA */}
-        <UpdateQuotaSection onRefresh={onRefresh} />
+        {/* <UpdateQuotaSection onRefresh={onRefresh} /> */}
 
         {/* BASIC STATISTIC */}
         <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -238,7 +250,7 @@ export default function ListUser({
           <StatisticContainer
             label="Total Zona Aktif"
             value={calculateUniqueZone(users)}
-            icon={IconLocation}
+            icon={IconLocationFill}
             bgClass="bg-gradient-to-br from-orange-400 to-amber-500 border-transparent"
             shadowColorClass="hover:shadow-orange-600/40"
             textColorClass="text-white"
@@ -250,7 +262,7 @@ export default function ListUser({
           <StatisticContainer
             label="Dokumen Lengkap"
             value={`${docSummary.completePercentage}%`}
-            icon={IconDocument}
+            icon={IconDocsFill}
             bgClass="bg-gradient-to-br from-blue-500 to-sky-600 border-transparent"
             shadowColorClass="hover:shadow-blue-600/40"
             textColorClass="text-white"
@@ -439,7 +451,7 @@ export default function ListUser({
             <>
               Apakah Anda yakin ingin menghapus{' '}
               <span className="font-semibold text-slate-700">
-                {deleteTarget?.name}
+                {titleCase(deleteTarget?.fullName)}
               </span>
               ? Data yang dihapus akan hilang permanen.
               {deleteError && (

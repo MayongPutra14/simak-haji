@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import InputText from '../../../ui/inputs/InputText';
+import InputText from '../../inputs/InputText';
 
 export default function Section4HealthSkill() {
   const {

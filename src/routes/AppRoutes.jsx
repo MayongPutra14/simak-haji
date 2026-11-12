@@ -53,6 +53,17 @@ import {
   UserMaterialPage,
 } from '../pages/user/index';
 
+// LEADER
+import {
+  LeaderLayout,
+  LeaderHome,
+  LeaderProfilePage,
+  LeaderListUsersPage,
+  LeaderUserDetailPage,
+  LeaderCreateUserPage,
+  LeaderUserEditPage,
+} from '../pages/leader/index';
+
 export default function AppRoutes() {
   return (
     <Routes>
@@ -75,7 +86,9 @@ export default function AppRoutes() {
       </Route>
 
       {/* PROTECTED HAJJ ROUTES (ADMIN & USER) */}
-      <Route element={<ProtectedRoute allowedRoles={['admin', 'user']} />}>
+      <Route
+        element={<ProtectedRoute allowedRoles={['admin', 'leader', 'user']} />}
+      >
         <Route path="hajj">
           <Route index element={<HajjDuasPage />} />
           <Route path="categories/:categoryId" element={<HajjDuaListPage />} />
@@ -119,6 +132,23 @@ export default function AppRoutes() {
             <Route path="create" element={<CreateEventPage />} />
             <Route path="detail/:eventId" element={<DetailEventPage />} />
             <Route path="edit/:eventId" element={<EditEventPage />} />
+          </Route>
+        </Route>
+      </Route>
+
+      {/* LEADER ROUTES */}
+      <Route element={<ProtectedRoute allowedRoles={['leader']} />}>
+        <Route path="leader" element={<LeaderLayout />}>
+          <Route index element={<Navigate to="home" replace />} />
+          <Route path="home" element={<LeaderHome />} />
+          <Route path="profile" element={<LeaderProfilePage />} />
+
+          {/* CRUD USERS */}
+          <Route path="users">
+            <Route index element={<LeaderListUsersPage />} />
+            <Route path="create" element={<LeaderCreateUserPage />} />
+            <Route path="detail/:userId" element={<LeaderUserDetailPage />} />
+            <Route path="edit/:userId" element={<LeaderUserEditPage />} />
           </Route>
         </Route>
       </Route>

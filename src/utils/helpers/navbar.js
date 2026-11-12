@@ -18,7 +18,12 @@ export default function getNavItems(role) {
     home: {
       id: 'home',
       label: 'Beranda',
-      path: role === 'admin' ? '/admin/home' : '/user/home',
+      path:
+        role === 'admin'
+          ? '/admin/home'
+          : role === 'leader'
+            ? '/leader/home'
+            : '/user/home',
       IconOutline: IconHomeOutline,
       IconFill: IconHomeFill,
     },
@@ -32,14 +37,19 @@ export default function getNavItems(role) {
     finance: {
       id: 'finance',
       label: 'Keuangan',
-      path: role === 'admin' ? '/maintenance' : '/user/keuangan',
+      path: role === 'admin' ? '/maintenance' : '/maintenance',
       IconOutline: IconWalletOutline,
       IconFill: IconWalletFill,
     },
     profile: {
       id: 'profile',
       label: 'Profil',
-      path: role === 'admin' ? '/admin/profile' : '/user/profile',
+      path:
+        role === 'admin'
+          ? '/admin/profile'
+          : role === 'leader'
+            ? '/leader/profile'
+            : '/user/profile',
       IconOutline: IconPersonOutline,
       IconFill: IconPersonFill,
     },
@@ -59,13 +69,27 @@ export default function getNavItems(role) {
   const jamaahItem = {
     id: 'jamaah',
     label: 'Jamaah',
-    path: '/admin/users',
+    path:
+      role === 'admin'
+        ? '/admin/users'
+        : role === 'leader'
+          ? '/leader/users'
+          : '',
     IconOutline: IconPeopleOutline,
     IconFill: IconPeopleFill,
   };
 
-
   if (role === 'admin') {
+    return [
+      commonItems.home,
+      jamaahItem,
+      commonItems.schedule,
+      commonItems.finance,
+      commonItems.profile,
+    ];
+  }
+
+  if (role === 'leader') {
     return [
       commonItems.home,
       jamaahItem,

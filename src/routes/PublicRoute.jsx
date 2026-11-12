@@ -8,8 +8,13 @@ export default function PublicRoute() {
     const currentRole = String(user.role || '')
       .toLowerCase()
       .trim();
+
     if (currentRole === 'admin') {
       return <Navigate to="/admin/home" replace />;
+    }
+
+    if (currentRole === 'leader') {
+      return <Navigate to="/leader/home" replace />;
     }
 
     if (currentRole === 'user') {

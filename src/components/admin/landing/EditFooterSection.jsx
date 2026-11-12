@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { footerSectionSchema } from '../../../utils/admin/landingPageSchemas';
+import { footerSectionSchema } from '../../../utils/schemas/landingPageSchemas';
 import { InputText, TextArea } from '../../ui/inputs';
 import { IconTrash } from '../../../utils/helpers/decorations';
 

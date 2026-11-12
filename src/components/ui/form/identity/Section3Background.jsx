@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import InputText from '../../../ui/inputs/InputText';
 import InputSelect from '../../../ui/inputs/InputSelect';
-import * as CreateUserSchema from '../../../../utils/admin/createUserSchema';
+import * as CreateUserSchema from '../../../../utils/schemas/createUserSchema';
 
 export default function Section3Background() {
   const {

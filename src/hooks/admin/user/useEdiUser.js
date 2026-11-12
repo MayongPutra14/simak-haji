@@ -1,78 +1,110 @@
-import { useState, useCallback } from 'react';
-import * as api from '../../../utils/admin/api';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router';
+import { useModal } from '../../global/useModal';
+import { getUserDetail, updateUserProfile } from '../../../utils/admin/api';
 
+// CLOUDINARY CONFIGURATION
 const CLOUD_NAME = 'llp0te3a';
 const UPLOAD_PRESET = 'simak_preset';
 const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
 
 export default function useEditUser() {
+  const { userId } = useParams();
+  const navigate = useNavigate();
+  const { modal, showModal, closeModal } = useModal();
+
+  const [initialData, setInitialData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const executeRequest = useCallback(async (apiFunc, ...arg) => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const data = await apiFunc(...arg);
-      return data;
-    } catch (error) {
-      setError(error.message || 'Terjadi kesalahan sistem');
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  function showErrorModal(errorMessage) {
+    showModal({
+      isOpen: true,
+      title: 'Update Gagal',
+      description:
+        errorMessage || 'Terjadi kesalahan sistem. Silahkan coba lagi nanti.',
+      icon: 'close',
+      iconBgColor: 'bg-red-100',
+      iconColor: 'text-red-400',
+      buttonColor: 'bg-red-500 hover:bg-red-600 text-white',
+      onConfirm: null,
+    });
+  }
 
-  const getUserProfile = useCallback(
-    (userId) => {
-      return executeRequest(api.getUserDetail, userId);
-    },
-    [executeRequest],
-  );
-
-  const updateProfileUser = useCallback(
-    async (userId, payload, rawImageFile) => {
-      if (!userId) {
-        throw new Error('ID user tidak ditemukan');
-      }
-
+  // FETCH INITIAL USER PROFILE DATA
+  useEffect(() => {
+    const fetchData = async () => {
       setIsLoading(true);
       setError(null);
-
       try {
-        const finalPayload = { ...payload };
-        delete finalPayload.profileImage;
-
-        // Proses upload ke Cloudinary jika ada file gambar baru
-        if (rawImageFile instanceof File) {
-          const cloudinaryForm = new FormData();
-          cloudinaryForm.append('file', rawImageFile);
-          cloudinaryForm.append('upload_preset', UPLOAD_PRESET);
-
-          const cloudRes = await fetch(UPLOAD_URL, {
-            method: 'POST',
-            body: cloudinaryForm,
-          });
-          const cloudData = await cloudRes.json();
-
-          if (!cloudRes.ok || !cloudData.secure_url) {
-            throw new Error('Gagal mengunggah foto profil baru.');
-          }
-
-          finalPayload.profileImage = cloudData.secure_url;
-        }
-
-        const data = await api.updateUserProfile(userId, finalPayload);
-        return data;
+        const data = await getUserDetail(userId);
+        if (data) setInitialData(data);
       } catch (err) {
-        setError(err.message || 'Terjadi kesalahan sistem');
-        throw err;
+        console.error('Gagal memuat profil jamaah:', err);
+        setError(err.message || 'Gagal memuat data');
       } finally {
         setIsLoading(false);
       }
-    },
-    [],
-  );
+    };
 
-  return { getUserProfile, updateProfileUser, isLoading, error };
+    if (userId) fetchData();
+  }, [userId]);
+
+  // SAVE / UPDATE PROFILE HANDLER
+  async function handleSave(payload, rawImageFile) {
+    if (!userId) {
+      showErrorModal('ID user tidak ditemukan');
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const finalPayload = { ...payload };
+      delete finalPayload.profileImage;
+
+      // Upload new image to Cloudinary if provided as a File instance
+      if (rawImageFile instanceof File) {
+        const cloudinaryForm = new FormData();
+        cloudinaryForm.append('file', rawImageFile);
+        cloudinaryForm.append('upload_preset', UPLOAD_PRESET);
+
+        const cloudRes = await fetch(UPLOAD_URL, {
+          method: 'POST',
+          body: cloudinaryForm,
+        });
+        const cloudData = await cloudRes.json();
+
+        if (!cloudRes.ok || !cloudData.secure_url) {
+          throw new Error('Gagal mengunggah foto profil baru.');
+        }
+
+        finalPayload.profileImage = cloudData.secure_url;
+      }
+
+      await updateUserProfile(userId, finalPayload);
+      navigate('/admin/users');
+    } catch (err) {
+      setError(err.message || 'Gagal memperbarui data profil');
+      showErrorModal(err.message || 'Gagal memperbarui data profil');
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  // CANCEL HANDLER
+  function handleCancel() {
+    navigate(-1);
+  }
+
+  return {
+    initialData,
+    isLoading,
+    error,
+    modal,
+    closeModal,
+    handleSave,
+    handleCancel,
+  };
 }

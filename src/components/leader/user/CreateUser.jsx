@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import Button from '../ui/global/Button';
-import { WarningAlert } from '../ui/global/GiudelineForm';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Button from '../../ui/global/Button';
+import { WarningAlert } from '../../ui/global/GiudelineForm';
 import {
   Section1Account,
   Section2PersonalData,
@@ -11,16 +12,17 @@ import {
   Section6HajjData,
   Section7ControlProcess,
   Section8Placement,
-} from './components/identity/index';
+} from '../../ui/form/identity/index';
 
 import {
   step1Schema,
   step2Schema,
   step3Schema,
-} from '../../utils/admin/createUserSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
+} from '../../../utils/schemas/createUserSchema';
 
-const CreateUser = ({
+export default function CreateUser({
+  role = 'leader',
+  zone = '',
   currentStep,
   createdUserId,
   isLoading,
@@ -28,13 +30,14 @@ const CreateUser = ({
   onStep2Submit,
   onStep3Submit,
   onCancel,
-}) => {
+}) {
   const currentSchema = useMemo(() => {
+    if (role !== 'leader') return;
     if (currentStep === 1) return step1Schema;
     if (currentStep === 2) return step2Schema;
     if (currentStep === 3) return step3Schema;
     return step1Schema;
-  }, [currentStep]);
+  }, [currentStep, role]);
 
   const methods = useForm({
     resolver: zodResolver(currentSchema),
@@ -150,7 +153,7 @@ const CreateUser = ({
           className="space-y-8"
         >
           {/* STEP 1: RENDER SECTION 1 ONLY */}
-          {currentStep === 1 && <Section1Account />}
+          {currentStep === 1 && <Section1Account role={role} />}
 
           {/* STEP 2: RENDER SECTION 2 TO 5 */}
           {currentStep === 2 && (
@@ -166,7 +169,7 @@ const CreateUser = ({
           {/* STEP 3: RENDER SECTION 6 TO 8 */}
           {currentStep === 3 && (
             <>
-              <Section6HajjData />
+              <Section6HajjData role={role} zone={zone} />
               <Section7ControlProcess />
               <Section8Placement />
             </>
@@ -190,6 +193,4 @@ const CreateUser = ({
       </div>
     </FormProvider>
   );
-};
-
-export default CreateUser;
+}

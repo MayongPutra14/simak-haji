@@ -54,10 +54,21 @@ export default function LoginPage() {
 
         authLogin(userData);
 
-        if (userData.role === 'admin') {
+        switch (userData.role) {
+        case 'admin':
           navigate('/admin/home');
-        } else {
+          break;
+
+        case 'user':
           navigate('/user/home');
+          break;
+
+        case 'leader':
+          navigate('/leader/home');
+          break;
+
+        default:
+          break;
         }
       } else {
         showErrorModal(result?.message || 'Login Gagal');

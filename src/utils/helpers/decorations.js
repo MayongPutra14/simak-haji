@@ -23,6 +23,7 @@ import {
   AiFillLayout as IconLayoutFIll,
 } from 'react-icons/ai';
 import {
+  MdTimelapse as IconTimeLapes,
   MdLocationOn as IconLocationFill,
   MdCameraAlt as IconCamera,
   MdAdd as IconAdd,
@@ -58,6 +59,8 @@ import {
   TbAdjustmentsHorizontal as IconAdjust,
 } from 'react-icons/tb';
 import {
+  IoLogOutOutline as IconLogout,
+  IoDocument as IconDocsFill,
   IoGridOutline as IconMore,
   IoChevronBackOutline as IconChevronBack,
   IoChevronForwardOutline as IconChevronNext,
@@ -121,6 +124,9 @@ export const bgImage = {
 };
 
 export {
+  IconLogout,
+  IconDocsFill,
+  IconTimeLapes,
   IconAdjust,
   IconBookOpen2,
   IconMecah,

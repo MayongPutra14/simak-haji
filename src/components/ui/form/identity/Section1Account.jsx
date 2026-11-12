@@ -4,9 +4,9 @@ import { IoEyeOutline, IoEyeOffOutline, IoKeyOutline } from 'react-icons/io5';
 import InputText from '../../../ui/inputs/InputText';
 import InputNumber from '../../../ui/inputs/InputNumber';
 import { InputSelect } from '../../../ui/inputs';
-import * as CreateUserSchema from '../../../../utils/admin/createUserSchema';
+import * as CreateUserSchema from '../../../../utils/schemas/createUserSchema';
 
-export default function Section1Account() {
+export default function Section1Account({ role = 'admin' }) {
   const {
     register,
     formState: { errors },
@@ -76,14 +76,25 @@ export default function Section1Account() {
         />
 
         {/* ROLE */}
-        <InputSelect
-          label="Role"
-          required={true}
-          placeholder=""
-          options={CreateUserSchema.roleOptions}
-          error={errors.role?.message}
-          {...register('role')}
-        />
+        {role === 'admin' ? (
+          <InputSelect
+            label="Role"
+            required={true}
+            placeholder=""
+            options={CreateUserSchema.roleOptions}
+            error={errors.role?.message}
+            {...register('role')}
+          />
+        ) : (
+          <InputSelect
+            label="Role"
+            required={true}
+            placeholder=""
+            options={CreateUserSchema.roleLeaderOption}
+            error={errors.role?.message}
+            {...register('role')}
+          />
+        )}
 
         {/* PASSWORD FIELD DENGAN FITUR BARU */}
         <div className="flex flex-col">

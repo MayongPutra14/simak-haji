@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Controller, useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '../../ui/global/Button';
-import * as UpdateEventSchemas from '../../../utils/admin/eventSchema';
+import * as UpdateEventSchemas from '../../../utils/schemas/eventSchema';
 import EventMap from './EventMap';
 import { parseDateTimeForInput } from '../../../utils/helpers/dateConversion';
 import { handleDownloadMaterial } from '../../../utils/helpers/helpers';

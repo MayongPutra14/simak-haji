@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { aboutSectionSchema } from '../../../utils/admin/landingPageSchemas';
+import { aboutSectionSchema } from '../../../utils/schemas/landingPageSchemas';
 import Button from '../../ui/global/Button';
 import { IconCamera, IconTrash } from '../../../utils/helpers/decorations';
 import { InputText, InputNumber, TextArea } from '../../ui/inputs/index';

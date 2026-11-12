@@ -4,7 +4,10 @@ import {
 } from 'react-icons/md';
 import { FaRegEdit as IconEdit } from 'react-icons/fa';
 import ButtonsActionTable from '../../components/ui/global/ButtonsActionTable';
-import { StatusBadge } from '../../components/ui/global/StatusComponents';
+import {
+  StatusBadge,
+  GetRoleBadge,
+} from '../../components/ui/global/StatusComponents';
 import { titleCase } from '../../utils/helpers/helpers';
 
 export const ListAdminUsersColumns = ({ onDelete, onViewDetail, onEdit }) => [
@@ -30,6 +33,13 @@ export const ListAdminUsersColumns = ({ onDelete, onViewDetail, onEdit }) => [
         </div>
       );
     },
+  },
+  {
+    key: 'role',
+    header: 'Role',
+    className: 'text-slate-600 whitespace-nowrap',
+    align: 'left',
+    render: (item) => GetRoleBadge(item.role),
   },
   {
     key: 'portionNumber',

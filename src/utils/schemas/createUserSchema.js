@@ -43,8 +43,13 @@ export const step1Schema = z.object({
 
 export const roleOptions = [
   { label: 'Jamaah', value: 'user' },
-  { label: 'Pembimbing', value: 'pembimbing' },
+  { label: 'Leader', value: 'leader' },
   { label: 'Admin', value: 'admin' },
+];
+
+export const roleLeaderOption = [
+  { label: 'Jamaah', value: 'user' },
+  { label: 'Leader', value: 'leader' },
 ];
 
 // STEP 2 SCHEMA: PROFILE BIODATA

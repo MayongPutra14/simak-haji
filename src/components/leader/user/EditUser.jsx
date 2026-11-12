@@ -1,26 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import * as UpdateUserSchema from '../../utils/admin/createUserSchema';
-import { IconCamera } from '../../utils/helpers/decorations';
-import Button from '../ui/global/Button';
+import * as UpdateUserSchema from '../../../utils/schemas/createUserSchema';
+import { IconCamera } from '../../../utils/helpers/decorations';
+import Button from '../../ui/global/Button';
 import {
   InputText,
   InputNumber,
   InputSelect,
   InputDate,
   InputSearchSelect,
-} from '../ui/inputs/index';
+} from '../../ui/inputs/index';
 
-export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
+export const EditUser = ({
+  zone,
+  initialData,
+  onSave,
+  onCancel,
+  isLoading,
+}) => {
   const {
     register,
     handleSubmit,
+    setValue,
     control,
     formState: { errors },
   } = useForm({
     values: initialData
       ? {
         ...initialData,
+        zone: zone || initialData.zone,
         health: Array.isArray(initialData.health)
           ? initialData.health.join(', ')
           : initialData.health || '',
@@ -34,6 +42,12 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
       }
       : undefined,
   });
+
+  useEffect(() => {
+    if (zone) {
+      setValue('zone', zone);
+    }
+  }, [zone, setValue]);
 
   const [previewImage, setPreviewImage] = useState('');
   const [rawImageFile, setRawImageFile] = useState(null);
@@ -330,16 +344,23 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
               {...register('currPortionPosition')}
             />
 
-            {/* ZONE */}
-            <InputSelect
-              label="Zona"
-              isLabelFade={true}
-              variant="editProfile"
-              placeholder=""
-              options={UpdateUserSchema.zonaOptions}
-              error={errors.zone?.message}
-              {...register('zone')}
-            />
+            {/* Zone */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Zona
+              </label>
+              <input
+                type="text"
+                value={zone || ''}
+                readOnly
+                disabled
+                className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-600 cursor-not-allowed font-medium"
+                {...register('zone')}
+              />
+              <p className="mt-1 text-xs text-red-500">
+                *Zona terkunci otomatis berdasarkan wilayah kepemimpinan Anda.
+              </p>
+            </div>
 
             {/* PLOT NUMBER BACK UP */}
             <InputText

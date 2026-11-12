@@ -1,17 +1,5 @@
 import { useState, useMemo } from 'react';
-
-export const ADMIN_DOC_FIELDS = [
-  { key: 'statusGoogleForm', label: 'G-Form' },
-  { key: 'statusPhoto', label: 'Photo' },
-  { key: 'statusSpph', label: 'SPPH' },
-  { key: 'statusMutasi', label: 'Mutasi' },
-  { key: 'statusBiometrik', label: 'Biometrik' },
-  { key: 'statusPuskesmas', label: 'Puskesmas' },
-  { key: 'statusMCU', label: 'MCU' },
-  { key: 'statusPelunasan', label: 'Pelunasan' },
-  { key: 'statusPassport', label: 'Passport' },
-  { key: 'statusVisa', label: 'Visa' },
-];
+import { ADMIN_DOC_FIELDS } from '../../utils/helpers/constant';
 
 const INITIAL_DOC_FILTERS = ADMIN_DOC_FIELDS.reduce((acc, field) => {
   acc[field.key] = 'Semua';
@@ -22,6 +10,7 @@ export const useUserFilters = (users, onResetPage) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [zoneFilter, setZoneFilter] = useState('Semua Zona');
   const [yearFilter, setYearFilter] = useState('Semua Tahun');
+  const [roleFilter, setRoleFilter] = useState('Semua Role');
   const [docFilters, setDocFilters] = useState(INITIAL_DOC_FILTERS);
 
   // 1. AUTOMATICALLY GET THE ZONE LIST FROM BACKEND DATA
@@ -56,15 +45,25 @@ export const useUserFilters = (users, onResetPage) => {
         yearFilter === 'Semua Tahun' ||
         String(user.statusPortion) === String(yearFilter);
 
+      const matchesRole =
+        roleFilter === 'Semua Role' ||
+        String(user.role).toLowerCase() === roleFilter.toLowerCase();
+
       const matchesDocs = ADMIN_DOC_FIELDS.every(({ key }) => {
         const filterVal = docFilters[key];
         if (filterVal === 'Semua') return true;
         return user[key]?.toLowerCase() === filterVal.toLowerCase();
       });
 
-      return matchesSearch && matchesZone && matchesYear && matchesDocs;
+      return (
+        matchesSearch &&
+        matchesRole &&
+        matchesZone &&
+        matchesYear &&
+        matchesDocs
+      );
     });
-  }, [users, searchQuery, zoneFilter, yearFilter, docFilters]);
+  }, [users, searchQuery, zoneFilter, yearFilter, roleFilter, docFilters]);
 
   // 4. HANDLERS THAT AUTOMATICALLY RESET PAGE TO 1
   const handleSearchChange = (value) => {
@@ -82,6 +81,11 @@ export const useUserFilters = (users, onResetPage) => {
     onResetPage();
   };
 
+  const handleRoleChange = (value) => {
+    setRoleFilter(value);
+    onResetPage();
+  };
+
   const handleDocFilterChange = (key, value) => {
     setDocFilters((prev) => ({ ...prev, [key]: value }));
     onResetPage?.();
@@ -92,15 +96,17 @@ export const useUserFilters = (users, onResetPage) => {
     return (
       zoneFilter !== 'Semua Zona' ||
       yearFilter !== 'Semua Tahun' ||
+      roleFilter !== 'Semua Role' ||
       searchQuery !== '' ||
       hasActiveDoc
     );
-  }, [zoneFilter, yearFilter, searchQuery, docFilters]);
+  }, [zoneFilter, yearFilter, roleFilter, searchQuery, docFilters]);
 
   const handleClearFilters = () => {
     setSearchQuery('');
     setZoneFilter('Semua Zona');
     setYearFilter('Semua Tahun');
+    setRoleFilter('Semua Role');
     setDocFilters(INITIAL_DOC_FILTERS);
     onResetPage();
   };
@@ -109,6 +115,7 @@ export const useUserFilters = (users, onResetPage) => {
     searchQuery,
     zoneFilter,
     yearFilter,
+    roleFilter,
     docFilters,
     uniqueZones,
     uniqueYears,
@@ -117,6 +124,7 @@ export const useUserFilters = (users, onResetPage) => {
     handleSearchChange,
     handleZoneChange,
     handleYearChange,
+    handleRoleChange,
     handleDocFilterChange,
     handleClearFilters,
   };

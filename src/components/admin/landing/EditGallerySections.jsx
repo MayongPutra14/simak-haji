@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '../../ui/global/Button';
-import { editDocumentationSectionSchema } from '../../../utils/admin/landingPageSchemas';
+import { editDocumentationSectionSchema } from '../../../utils/schemas/landingPageSchemas';
 import { InputText, TextArea } from '../../ui/inputs/index';
 import { IconTrash, IconCamera } from '../../../utils/helpers/decorations';
 
