@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { normalizePrayerData } from '../../../utils/helpers/helpers';
+import {
+  CATEGORY_CONFIG,
+  CATEGORY_ORDER,
+} from '../../../utils/helpers/constant';
 import {
   IconArrowLeft,
   IconChevronNext,
@@ -8,96 +13,6 @@ import {
   IconLoading,
   IconAdjust,
 } from '../../../utils/helpers/decorations';
-
-// CENTRALIZED CATEGORY CONFIGURATION
-const CATEGORY_CONFIG = {
-  'doa-praktis': {
-    id: 'doa-praktis',
-    title: 'Kumpulan Doa Praktis',
-    description:
-      'Berbagai doa praktis untuk menemani aktivitas dan kebutuhan selama ibadah.',
-    fetchData: () =>
-      import('../../../utils/jsons/practiceDuas.json').then(
-        (module) => module.default,
-      ),
-  },
-  'doa-haji': {
-    id: 'doa-haji',
-    title: 'Doa dan Dzikir Haji / Umroh',
-    description:
-      'Panduan lengkap doa dan dzikir selama menjalankan rukun ibadah.',
-    fetchData: () =>
-      import('../../../utils/jsons/hajjUmrahDuas.json').then(
-        (module) => module.default,
-      ),
-  },
-  'masjidil-haram': {
-    id: 'masjidil-haram',
-    title: 'Masjidil Haram',
-    description:
-      'Kumpulan doa khusus ketika berada di dalam kawasan Masjidil Haram.',
-    fetchData: () =>
-      import('../../../utils/jsons/masjidHaramDuas.json').then(
-        (module) => module.default,
-      ),
-  },
-  perjalanan: {
-    id: 'perjalanan',
-    title: 'Perjalanan',
-    description:
-      'Doa dan dzikir yang dibaca selama dalam perjalanan ibadah Anda.',
-    fetchData: () =>
-      import('../../../utils/jsons/travelDuas.json').then(
-        (module) => module.default,
-      ),
-  },
-};
-
-const CATEGORY_ORDER = [
-  'doa-praktis',
-  'doa-haji',
-  'masjidil-haram',
-  'perjalanan',
-];
-
-// DATA NORMALIZATION HELPER
-// Converts nested objects or direct arrays into a unified flat prayer array with globally unique IDs
-const normalizePrayerData = (jsonData) => {
-  if (!jsonData || !jsonData.data) return [];
-
-  const rawData = jsonData.data;
-  const normalizedItems = [];
-
-  // If data is a pure array (for categories like practiceDuas, masjidHaramDuas, travelDuas)
-  if (Array.isArray(rawData)) {
-    return rawData;
-  }
-
-  // If data is a nested object (for categories like hajjUmrahDuas)
-  if (typeof rawData === 'object' && rawData !== null) {
-    Object.entries(rawData).forEach(([groupKey, value]) => {
-      if (Array.isArray(value)) {
-        // If the value is an array, map each item and create a composite ID (group_originalId)
-        value.forEach((item) => {
-          if (item && typeof item === 'object') {
-            normalizedItems.push({
-              ...item,
-              id: `${groupKey}_${item.id}`,
-            });
-          }
-        });
-      } else if (value && typeof value === 'object' && 'id' in value) {
-        // If the value is a single object (such as talbiyah)
-        normalizedItems.push({
-          ...value,
-          id: `${groupKey}_${value.id}`,
-        });
-      }
-    });
-  }
-
-  return normalizedItems;
-};
 
 // 1. HEADER COMPONENT
 const PrayerReadingHeader = ({ onNavigateBack, onOpenNavigation }) => (
