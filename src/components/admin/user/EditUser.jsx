@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import * as UpdateUserSchema from '../../../utils/admin/createUserSchema';
+import * as UpdateUserSchema from '../../../utils/schemas/createUserSchema';
 import { IconCamera } from '../../../utils/helpers/decorations';
 import Button from '../../ui/global/Button';
 import {
@@ -20,18 +20,18 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
   } = useForm({
     values: initialData
       ? {
-          ...initialData,
-          health: Array.isArray(initialData.health)
-            ? initialData.health.join(', ')
-            : initialData.health || '',
-          expertise: Array.isArray(initialData.expertise)
-            ? initialData.expertise.join(', ')
-            : initialData.expertise || '',
-          contribution: Array.isArray(initialData.contribution)
-            ? initialData.contribution.join(', ')
-            : initialData.contribution || '',
-          profileImage: '',
-        }
+        ...initialData,
+        health: Array.isArray(initialData.health)
+          ? initialData.health.join(', ')
+          : initialData.health || '',
+        expertise: Array.isArray(initialData.expertise)
+          ? initialData.expertise.join(', ')
+          : initialData.expertise || '',
+        contribution: Array.isArray(initialData.contribution)
+          ? initialData.contribution.join(', ')
+          : initialData.contribution || '',
+        profileImage: '',
+      }
       : undefined,
   });
 
@@ -54,23 +54,23 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
       health:
         typeof data.health === 'string'
           ? data.health
-              .split(',')
-              .map((item) => item.trim())
-              .filter(Boolean)
+            .split(',')
+            .map((item) => item.trim())
+            .filter(Boolean)
           : data.health,
       expertise:
         typeof data.expertise === 'string'
           ? data.expertise
-              .split(',')
-              .map((item) => item.trim())
-              .filter(Boolean)
+            .split(',')
+            .map((item) => item.trim())
+            .filter(Boolean)
           : data.expertise,
       contribution:
         typeof data.contribution === 'string'
           ? data.contribution
-              .split(',')
-              .map((item) => item.trim())
-              .filter(Boolean)
+            .split(',')
+            .map((item) => item.trim())
+            .filter(Boolean)
           : data.contribution,
     };
 

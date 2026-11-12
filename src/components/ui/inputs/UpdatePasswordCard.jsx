@@ -7,7 +7,7 @@ import {
 } from 'react-icons/io5';
 import InputText from './InputText';
 import Button from '../global/Button';
-import { updatePasswordSchemas } from '../../../utils/admin/createUserSchema';
+import { updatePasswordSchemas } from '../../../utils/schemas/createUserSchema';
 import { useUpdatePassword } from '../../../hooks/global/useUpdatePassword';
 
 export default function UpdatePasswordCard({ userId, logout }) {

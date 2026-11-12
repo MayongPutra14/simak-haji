@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '../../ui/global/Button';
 import { WarningAlert } from '../../ui/global/GiudelineForm';
 import {
@@ -17,10 +18,10 @@ import {
   step1Schema,
   step2Schema,
   step3Schema,
-} from '../../../utils/admin/createUserSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
+} from '../../../utils/schemas/createUserSchema';
 
 const CreateUser = ({
+  role,
   currentStep,
   createdUserId,
   isLoading,
@@ -150,7 +151,7 @@ const CreateUser = ({
           className="space-y-8"
         >
           {/* STEP 1: RENDER SECTION 1 ONLY */}
-          {currentStep === 1 && <Section1Account />}
+          {currentStep === 1 && <Section1Account role={role} />}
 
           {/* STEP 2: RENDER SECTION 2 TO 5 */}
           {currentStep === 2 && (

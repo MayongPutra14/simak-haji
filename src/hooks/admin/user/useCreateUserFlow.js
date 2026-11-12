@@ -6,7 +6,7 @@ import {
   createUserSession,
   getUserSession,
   deleteUserSession,
-} from '../../../utils/admin/sessionStorage';
+} from '../../../utils/helpers/sessionStorage';
 
 // CLOUDINARY CONFIGURATION
 const CLOUD_NAME = 'llp0te3a';

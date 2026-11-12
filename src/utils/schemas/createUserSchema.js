@@ -47,6 +47,11 @@ export const roleOptions = [
   { label: 'Admin', value: 'admin' },
 ];
 
+export const roleLeaderOption = [
+  { label: 'Jamaah', value: 'user' },
+  { label: 'Leader', value: 'leader' },
+];
+
 // STEP 2 SCHEMA: PROFILE BIODATA
 export const step2Schema = z.object({
   fatherName: z

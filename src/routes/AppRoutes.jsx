@@ -60,6 +60,8 @@ import {
   LeaderProfilePage,
   LeaderListUsersPage,
   LeaderUserDetailPage,
+  LeaderCreateUserPage,
+  LeaderUserEditPage,
 } from '../pages/leader/index';
 
 export default function AppRoutes() {
@@ -144,7 +146,9 @@ export default function AppRoutes() {
           {/* CRUD USERS */}
           <Route path="users">
             <Route index element={<LeaderListUsersPage />} />
+            <Route path="create" element={<LeaderCreateUserPage />} />
             <Route path="detail/:userId" element={<LeaderUserDetailPage />} />
+            <Route path="edit/:userId" element={<LeaderUserEditPage />} />
           </Route>
         </Route>
       </Route>

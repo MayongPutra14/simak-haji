@@ -1,3 +1,4 @@
+import { useAuth } from '../../../features/auth/useAuth';
 import TitlePage from '../../../components/ui/global/TitlePage';
 import CreateUser from '../../../components/admin/user/CreateUser';
 import Modal from '../../../components/ui/global/Modal';
@@ -7,6 +8,7 @@ import { IconClose, IconCheck } from '../../../utils/helpers/decorations';
 
 // MAIN COMPONENT
 const CreateUserFragment = () => {
+  const { user } = useAuth();
   const {
     currentStep,
     createdUserId,
@@ -30,6 +32,7 @@ const CreateUserFragment = () => {
 
       {/* CREATE USER MULTISTEP FORM CONTAINER */}
       <CreateUser
+        role={user.role}
         currentStep={currentStep}
         createdUserId={createdUserId}
         isLoading={isLoading}

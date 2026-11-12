@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { testimonialSectionSchema } from '../../../utils/admin/landingPageSchemas';
+import { testimonialSectionSchema } from '../../../utils/schemas/landingPageSchemas';
 import { InputText, InputNumber, TextArea } from '../../ui/inputs/index';
 import { IconTrash } from '../../../utils/helpers/decorations';
 import Button from '../../ui/global/Button';

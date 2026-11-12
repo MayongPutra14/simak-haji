@@ -14,6 +14,7 @@ import { SearchInput } from '../../ui/inputs';
 import { calculateDocumentCompletenessSummary } from '../../../utils/helpers/statsCalculators';
 import { ADMIN_DOC_FIELDS } from '../../../utils/helpers/constant';
 import { calculateUniqueZone } from '../../../utils/helpers/statsCalculators';
+import { titleCase } from '../../../utils/helpers/helpers';
 import {
   IconAdd,
   IconNav,
@@ -54,6 +55,7 @@ export default function ListUser({
     searchQuery,
     zoneFilter,
     yearFilter,
+    roleFilter,
     uniqueZones,
     uniqueYears,
     filteredUsers,
@@ -63,11 +65,24 @@ export default function ListUser({
     handleSearchChange,
     handleZoneChange,
     handleYearChange,
+    handleRoleChange,
     handleClearFilters,
   } = useUserFilters(users, () => setPageInUrl(1));
 
   // Generic Configuration InlineFIlterBar.jsx
   const filterConfigs = useMemo(() => {
+    const roleConfig = {
+      key: 'role',
+      value: roleFilter,
+      onChange: handleRoleChange,
+      options: [
+        { value: 'Semua Role', label: 'Semua Role' },
+        { value: 'user', label: 'Role: User' },
+        { value: 'admin', label: 'Role: Admin' },
+        { value: 'leader', label: 'Role: Leader' },
+      ],
+    };
+
     // 1. Dropdown Zona
     const zoneConfig = {
       key: 'zone',
@@ -102,15 +117,17 @@ export default function ListUser({
       ],
     }));
 
-    return [zoneConfig, yearConfig, ...docConfigs];
+    return [zoneConfig, yearConfig, roleConfig, ...docConfigs];
   }, [
     zoneFilter,
     yearFilter,
+    roleFilter,
     docFilters,
     uniqueZones,
     uniqueYears,
     handleZoneChange,
     handleYearChange,
+    handleRoleChange,
     handleDocFilterChange,
   ]);
 
@@ -434,7 +451,7 @@ export default function ListUser({
             <>
               Apakah Anda yakin ingin menghapus{' '}
               <span className="font-semibold text-slate-700">
-                {deleteTarget?.name}
+                {titleCase(deleteTarget?.fullName)}
               </span>
               ? Data yang dihapus akan hilang permanen.
               {deleteError && (
