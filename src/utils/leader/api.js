@@ -155,7 +155,6 @@ export const leaderUpdateUserProfile = async (
       ...formData,
     };
 
-    console.log(bodyPayload);
     const response = await api.post('leader.php', bodyPayload);
     if (
       response.data?.status === 'failed' ||
