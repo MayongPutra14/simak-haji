@@ -1,34 +1,5 @@
 import { useState, useMemo } from 'react';
 
-export const MONTH_OPTIONS = [
-  { value: 'Semua Bulan', label: 'Semua Bulan' },
-  { value: '01', label: 'Januari' },
-  { value: '02', label: 'Februari' },
-  { value: '03', label: 'Maret' },
-  { value: '04', label: 'April' },
-  { value: '05', label: 'Mei' },
-  { value: '06', label: 'Juni' },
-  { value: '07', label: 'Juli' },
-  { value: '08', label: 'Agustus' },
-  { value: '09', label: 'September' },
-  { value: '10', label: 'Oktober' },
-  { value: '11', label: 'November' },
-  { value: '12', label: 'Desember' },
-];
-
-export const TYPE_OPTIONS = [
-  { value: 'Semua Tipe', label: 'Semua Kategori' },
-  { value: 'jamaah', label: 'Jamaah' },
-  { value: 'leader', label: 'Leader' },
-];
-
-export const STATUS_OPTIONS = [
-  { value: 'Semua Status', label: 'Semua Status' },
-  { value: 'mendatang', label: 'Mendatang' },
-  { value: 'live', label: 'Live' },
-  { value: 'selesai', label: 'Selesai' },
-];
-
 export const useEventFilters = (events = [], onResetPage) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [monthFilter, setMonthFilter] = useState('Semua Bulan');

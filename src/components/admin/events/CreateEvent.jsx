@@ -2,7 +2,7 @@ import { Controller, useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as EventSchemas from '../../../utils/schemas/eventSchema';
 import Button from '../../ui/global/Button';
-import EventMap from './EventMap';
+import EventMap from '../../ui/global/EventMap';
 import {
   InputText,
   InputDate,

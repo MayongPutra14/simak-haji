@@ -159,7 +159,7 @@ export default function CreateUser({
           {currentStep === 2 && (
             <>
               <WarningAlert />
-              <Section2PersonalData />
+              <Section2PersonalData role={role} zone={zone} />
               <Section3Background />
               <Section4HealthSkill />
               <Section5Reference />

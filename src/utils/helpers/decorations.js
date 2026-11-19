@@ -8,6 +8,7 @@ import {
   LuSunMoon as IconSunMoon,
   LuBookHeart as IconBookHeart,
   LuBookOpen as IconBookOpen2,
+  LuPhone as IconPhone,
 } from 'react-icons/lu';
 import {
   BsTextParagraph as IconParagraph,
@@ -124,6 +125,7 @@ export const bgImage = {
 };
 
 export {
+  IconPhone,
   IconLogout,
   IconDocsFill,
   IconTimeLapes,

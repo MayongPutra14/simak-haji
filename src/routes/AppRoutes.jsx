@@ -58,10 +58,16 @@ import {
   LeaderLayout,
   LeaderHome,
   LeaderProfilePage,
+  // USER
+  LeaderCreateUserPage,
   LeaderListUsersPage,
   LeaderUserDetailPage,
-  LeaderCreateUserPage,
   LeaderUserEditPage,
+  // EVENT
+  LeaderCreateEventPage,
+  LeaderListEventsPage,
+  LeaderDetailEventPage,
+  LeaderEditEventPage,
 } from '../pages/leader/index';
 
 export default function AppRoutes() {
@@ -150,18 +156,26 @@ export default function AppRoutes() {
             <Route path="detail/:userId" element={<LeaderUserDetailPage />} />
             <Route path="edit/:userId" element={<LeaderUserEditPage />} />
           </Route>
+
+          {/* CRUD EVENT */}
+          <Route path="events">
+            <Route index element={<LeaderListEventsPage />} />
+            <Route path="create" element={<LeaderCreateEventPage />} />
+            <Route path="detail/:eventId" element={<LeaderDetailEventPage />} />
+            <Route path="edit/:eventId" element={<LeaderEditEventPage />} />
+          </Route>
         </Route>
       </Route>
 
       {/* USER ROUTES */}
       <Route element={<ProtectedRoute allowedRoles={['user']} />}>
         <Route element={<RequiredCompletedIdentity />}>
-          <Route path="/user" element={<UserLayout />}>
+          <Route path="user" element={<UserLayout />}>
             <Route index element={<Navigate to={'home'} replace />} />
 
             <Route path="home" element={<UserHomePage />} />
             <Route path="profile" element={<UserProfilePage />} />
-            <Route path="schedules" element={<UserSchedulePage />} />
+            <Route path="events" element={<UserSchedulePage />} />
             <Route path="scan" element={<ScanQrPage />} />
           </Route>
 

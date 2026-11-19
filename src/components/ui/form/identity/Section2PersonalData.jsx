@@ -1,15 +1,17 @@
+import { useEffect, useMemo } from 'react';
+import { useFormContext, useWatch, Controller } from 'react-hook-form';
 import InputText from '../../../ui/inputs/InputText';
 import InputSelect from '../../../ui/inputs/InputSelect';
 import InputDate from '../../../ui/inputs/InputDate';
 import InputRadio from '../../../ui/inputs/InputRadio';
 import InputImage from '../../../ui/inputs/InputImage';
-import { useFormContext, useWatch, Controller } from 'react-hook-form';
 import * as CreateUserSchema from '../../../../utils/schemas/createUserSchema';
 
-export default function Section2PersonalData() {
+export default function Section2PersonalData({ role, zone }) {
   const {
     register,
     control,
+    setValue,
     formState: { errors },
   } = useFormContext();
 
@@ -17,6 +19,27 @@ export default function Section2PersonalData() {
     control,
     name: 'gender',
   });
+
+  // WATCH SELECTED SUB-DISTRICT FOR DEPENDENT VILLAGE DROPDOWN
+  const selectedSubDistrict = useWatch({
+    control,
+    name: 'subDistrict',
+  });
+
+  // COMPUTE AVAILABLE DISTRICT OPTIONS BASED ON ROLE AND ZONE
+  const filteredDistrictOptions = useMemo(() => {
+    return CreateUserSchema.getDistrictOptions(role, zone);
+  }, [role, zone]);
+
+  // COMPUTE AVAILABLE VILLAGE OPTIONS BASED ON SELECTED SUB-DISTRICT
+  const filteredVillageOptions = useMemo(() => {
+    return CreateUserSchema.getVillageOptionsByDistrict(selectedSubDistrict);
+  }, [selectedSubDistrict]);
+
+  // RESET VILLAGE VALUE WHENEVER SUB-DISTRICT CHANGES
+  useEffect(() => {
+    setValue('village', '');
+  }, [selectedSubDistrict, setValue]);
 
   return (
     <section className="space-y-4">
@@ -76,16 +99,22 @@ export default function Section2PersonalData() {
           label="Kecamatan"
           required={true}
           placeholder="-- Pilih Kecamatan --"
-          options={CreateUserSchema.districtOptions}
+          options={filteredDistrictOptions}
           error={errors.subDistrict?.message}
           {...register('subDistrict')}
         />
 
         {/* VILLAGE */}
-        <InputText
+        <InputSelect
           label="Desa / Kelurahan"
-          placeholder="Cikampek Barat"
           required={true}
+          placeholder={
+            selectedSubDistrict
+              ? '-- Pilih Desa / Kelurahan --'
+              : '-- Pilih Kecamatan Terlebih Dahulu --'
+          }
+          options={filteredVillageOptions}
+          disabled={!selectedSubDistrict}
           error={errors.village?.message}
           {...register('village')}
         />

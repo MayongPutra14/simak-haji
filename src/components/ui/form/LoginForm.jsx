@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'react-router';
 import { InputLogin } from '../inputs/index';
-import { loginSchema } from '../../../utils/helpers/loginSchema';
+import { loginSchema } from '../../../utils/schemas/loginSchema';
 import Button from '../global/Button.jsx';
 import { IconIdCard, IconLock } from '../../../utils/helpers/decorations.js';
 

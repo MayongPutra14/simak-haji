@@ -9,12 +9,12 @@ import InlineFilterBar from '../../ui/global/InlineFilterBar';
 import { ListAdminEventColumns } from '../../../features/admin/ListAdminEventColumns';
 import { SkeletonTableAdminUsers } from '../../ui/global/skeletons/index';
 import { calculateUniqueZone } from '../../../utils/helpers/statsCalculators';
+import { useEventFilters } from '../../../hooks/global/useEventFilters';
 import {
-  useEventFilters,
   MONTH_OPTIONS,
   TYPE_OPTIONS,
   STATUS_OPTIONS,
-} from '../../../hooks/admin/event/useEventFilters';
+} from '../../../utils/helpers/constant';
 import {
   IconOnline,
   IconAdd,

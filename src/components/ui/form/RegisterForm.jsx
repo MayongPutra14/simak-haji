@@ -3,14 +3,14 @@ import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { InputLogin as InputRegistration } from '../inputs/index';
-import { registrationSchema } from '../../../utils/helpers/registerFormSchema';
+import { registrationSchema } from '../../../utils/schemas/registerFormSchema.js';
 import Button from '../global/Button.jsx';
-import { MdOutlinePermIdentity as IconPerson } from 'react-icons/md';
 import {
-  LuIdCard as IconIdCard,
-  LuPhone as IconPhone,
-  LuLock as IconLock,
-} from 'react-icons/lu';
+  IconPerson,
+  IconIdCard,
+  IconLock,
+  IconPhone,
+} from '../../../utils/helpers/decorations.js';
 
 const RegisterForm = ({ onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);

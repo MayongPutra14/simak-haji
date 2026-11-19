@@ -198,7 +198,7 @@ export const leaderDeleteUserData = async (userId, leaderId, zone) => {
 };
 
 // EVENT CRUD
-export const createEventAPI = async (payload) => {
+export const leaderCreateEventAPI = async (payload, leaderId, zone) => {
   if (!payload)
     return {
       status: 'failed',
@@ -216,6 +216,19 @@ export const createEventAPI = async (payload) => {
         finalPayload.append('action', 'create_event');
       }
 
+      if (!finalPayload.has('leader_id') && leaderId) {
+        finalPayload.append('leader_id', leaderId);
+      }
+
+      const categoryValue = finalPayload.get('category')?.toLowerCase();
+      const currentZone = finalPayload.get('zone');
+
+      if (categoryValue === 'leader' && !currentZone && zone) {
+        finalPayload.set('zone', zone);
+      } else if (!finalPayload.has('zone') && zone) {
+        finalPayload.append('zone', zone);
+      }
+
       // Overwrite Header Content-Type agar Axios/Browser otomatis menyusun Multipart Boundary
       config = {
         headers: {
@@ -225,11 +238,13 @@ export const createEventAPI = async (payload) => {
     } else {
       finalPayload = {
         action: 'create_event',
+        leader_id: leaderId,
+        zone: zone,
         ...payload,
       };
     }
 
-    const response = await api.post('admin.php', finalPayload, config);
+    const response = await api.post('leader.php', finalPayload, config);
 
     if (
       response.data?.status === 'failed' ||
@@ -256,30 +271,39 @@ export const createEventAPI = async (payload) => {
   }
 };
 
-export const getEventsAPI = async () => {
-  const response = await api.post('admin.php', {
+export const leaderGetEventsAPI = async (leaderId, zone) => {
+  const response = await api.post('leader.php', {
     action: 'get_events',
+    leader_id: leaderId,
+    zone: zone,
   });
 
   return response.data;
 };
 
-export const getEventDetailAPI = async (eventId) => {
+export const leaderGetEventDetailAPI = async (eventId, leaderId, zone) => {
   if (!eventId)
     return {
       status: 'failed',
       message: 'Id event tidak ditemukan',
     };
 
-  const response = await api.post('admin.php', {
+  const response = await api.post('leader.php', {
     id: Number(eventId),
     action: 'get_event_detail',
+    leader_id: leaderId,
+    zone: zone,
   });
 
   return response.data;
 };
 
-export const updateEventAPI = async (eventId, payload) => {
+export const leaderUpdateEventAPI = async (
+  eventId,
+  payload,
+  leaderId,
+  zone,
+) => {
   if (!eventId || !payload) {
     return {
       status: 'failed',
@@ -300,6 +324,13 @@ export const updateEventAPI = async (eventId, payload) => {
       bodyPayload.append('event_id', `${eventId}`);
     }
 
+    if (!bodyPayload.has('leader_id') && leaderId) {
+      bodyPayload.append('leader_id', leaderId);
+    }
+
+    if (!bodyPayload.has('zone') && zone) {
+      bodyPayload.append('zone', zone);
+    }
     // Overwrite Header Content-Type agar Axios/Browser otomatis menyusun Multipart Boundary
     config = {
       headers: {
@@ -310,62 +341,30 @@ export const updateEventAPI = async (eventId, payload) => {
     bodyPayload = {
       event_id: eventId,
       action: 'update_event',
+      leader_id: leaderId,
+      zone: zone,
       ...payload,
     };
   }
 
-  const response = await api.post('admin.php', bodyPayload, config);
+  const response = await api.post('leader.php', bodyPayload, config);
 
   return response.data;
 };
 
-export const deleteEventAPI = async (eventId) => {
+export const leaderDeleteEventAPI = async (eventId, leaderId, zone) => {
   if (!eventId)
     return {
       status: 'failed',
       message: 'Id event tidak ditemukan',
     };
 
-  const response = await api.post('admin.php', {
+  const response = await api.post('leader.php', {
     id: Number(eventId),
     action: 'delete_event',
+    leader_id: leaderId,
+    zone: zone,
   });
-
-  return response.data;
-};
-
-// LANDING PAGE
-export const getLandingContentAPI = async () => {
-  const response = await api.post('admin.php', {
-    action: 'get_landing_content',
-  });
-
-  return response.data;
-};
-
-export const getLandingSectionAPI = async (sectionKey) => {
-  const response = await api.post('admin.php', {
-    action: 'get_landing_section',
-    section_key: sectionKey,
-  });
-
-  return response.data;
-};
-
-export const updateLandingPageAPI = async (payload) => {
-  if (!payload) {
-    return {
-      status: 'failed',
-      message: 'Data tidak ada, silakan coba lagi',
-    };
-  }
-
-  const bodyPayload = {
-    action: 'update_landing_section',
-    ...payload,
-  };
-
-  const response = await api.post('admin.php', bodyPayload);
 
   return response.data;
 };

@@ -3,7 +3,7 @@ import { Controller, useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '../../ui/global/Button';
 import * as UpdateEventSchemas from '../../../utils/schemas/eventSchema';
-import EventMap from './EventMap';
+import EventMap from '../../ui/global/EventMap';
 import { parseDateTimeForInput } from '../../../utils/helpers/dateConversion';
 import { handleDownloadMaterial } from '../../../utils/helpers/helpers';
 import { IconEye, IconDownload } from '../../../utils/helpers/decorations';

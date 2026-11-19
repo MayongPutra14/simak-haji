@@ -5,6 +5,10 @@ import LeaderCreateUserPage from './user/CreateUserPage';
 import LeaderListUsersPage from './user/ListUsersPage';
 import LeaderUserDetailPage from './user/UserProfileDetailPage';
 import LeaderUserEditPage from './user/UserEditPage';
+import LeaderCreateEventPage from './event/CreateEventPage';
+import LeaderListEventsPage from './event/ListEventPage';
+import LeaderDetailEventPage from './event/DetailEventPage';
+import LeaderEditEventPage from './event/EditEventPage';
 
 export {
   LeaderLayout,
@@ -14,4 +18,8 @@ export {
   LeaderListUsersPage,
   LeaderUserDetailPage,
   LeaderUserEditPage,
+  LeaderCreateEventPage,
+  LeaderListEventsPage,
+  LeaderDetailEventPage,
+  LeaderEditEventPage,
 };

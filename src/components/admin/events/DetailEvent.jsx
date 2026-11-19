@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
-import EventMap from './EventMap';
+import EventMap from '../../ui/global/EventMap';
 import Button from '../../ui/global/Button';
 import { DetailField } from '../../ui/global/StatusComponents';
 import {
