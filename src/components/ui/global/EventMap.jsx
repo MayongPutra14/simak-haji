@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import OsmAutocomplete from '../../ui/global/OsmAutocomplete';
+import OsmAutocomplete from './OsmAutocomplete';
 import {
   APIProvider,
   Map,

@@ -181,3 +181,89 @@ export const CATEGORY_ORDER = [
   'masjidil-haram',
   'perjalanan',
 ];
+
+// CENTRALIZED FILTERS FOR ENVENT
+export const MONTH_OPTIONS = [
+  { value: 'Semua Bulan', label: 'Semua Bulan' },
+  { value: '01', label: 'Januari' },
+  { value: '02', label: 'Februari' },
+  { value: '03', label: 'Maret' },
+  { value: '04', label: 'April' },
+  { value: '05', label: 'Mei' },
+  { value: '06', label: 'Juni' },
+  { value: '07', label: 'Juli' },
+  { value: '08', label: 'Agustus' },
+  { value: '09', label: 'September' },
+  { value: '10', label: 'Oktober' },
+  { value: '11', label: 'November' },
+  { value: '12', label: 'Desember' },
+];
+
+export const TYPE_OPTIONS = [
+  { value: 'Semua Tipe', label: 'Semua Kategori' },
+  { value: 'jamaah', label: 'Jamaah' },
+  { value: 'leader', label: 'Leader' },
+];
+
+export const STATUS_OPTIONS = [
+  { value: 'Semua Status', label: 'Semua Status' },
+  { value: 'mendatang', label: 'Mendatang' },
+  { value: 'live', label: 'Live' },
+  { value: 'selesai', label: 'Selesai' },
+];
+
+// ZONE TO SUB-DISTRICT MAPPING
+export const DISTRICT_BY_ZONE = {
+  A: [
+    { label: 'Cikampek', value: 'CIKAMPEK' },
+    { label: 'Jatisari', value: 'JATISARI' },
+    { label: 'Kotabaru', value: 'KOTABARU' },
+    { label: 'Purwasari', value: 'PURWASARI' },
+    { label: 'Tirtamulya', value: 'TIRTAMULYA' },
+  ],
+  B: [
+    { label: 'Banyusari', value: 'BANYUSARI' },
+    { label: 'Cilamaya Kulon', value: 'CILAMAYA KULON' },
+    { label: 'Cilamaya Wetan', value: 'CILAMAYA WETAN' },
+    { label: 'Lemahabang', value: 'LEMAHABANG' },
+    { label: 'Majalaya', value: 'MAJALAYA' },
+    { label: 'Rawamerta', value: 'RAWAMERTA' },
+    { label: 'Telagasari', value: 'TELAGASARI' },
+    { label: 'Tempuran', value: 'TEMPURAN' },
+  ],
+  C: [
+    { label: 'Ciampel', value: 'CIAMPEL' },
+    { label: 'Karawang Timur', value: 'KARAWANG TIMUR' },
+    { label: 'Klari', value: 'KLARI' },
+  ],
+  D: [
+    { label: 'Karawang Barat', value: 'KARAWANG BARAT' },
+    { label: 'Telukjambe Barat', value: 'TELUKJAMBE BARAT' },
+    { label: 'Telukjambe Timur', value: 'TELUKJAMBE TIMUR' },
+  ],
+  E: [
+    { label: 'Pangkalan', value: 'PANGKALAN' },
+    { label: 'Tegalwaru', value: 'TEGALWARU' },
+  ],
+  F: [
+    { label: 'Batujaya', value: 'BATUJAYA' },
+    { label: 'Cibuaya', value: 'CIBUAYA' },
+    { label: 'Cilebar', value: 'CILEBAR' },
+    { label: 'Jayakerta', value: 'JAYAKERTA' },
+    { label: 'Kutawaluya', value: 'KUTAWALUYA' },
+    { label: 'Pakisjaya', value: 'PAKISJAYA' },
+    { label: 'Pedes', value: 'PEDES' },
+    { label: 'Rengasdengklok', value: 'RENGASDENGKLOK' },
+    { label: 'Tirtajaya', value: 'TIRTAJAYA' },
+  ],
+};
+
+// HELPR IMAGE RULE
+export const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1 MB in Bytes
+
+export const ACCEPTED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+];

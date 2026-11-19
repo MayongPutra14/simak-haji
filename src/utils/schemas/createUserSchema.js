@@ -1,4 +1,11 @@
 import z from 'zod';
+import desaDanKelurahan from '../jsons/desanDanKelurahan.json';
+import { titleCase } from '../helpers/helpers';
+import {
+  DISTRICT_BY_ZONE,
+  MAX_FILE_SIZE,
+  ACCEPTED_IMAGE_TYPES,
+} from '../helpers/constant';
 
 // helper function
 const convertStringToArray = (val) => {
@@ -22,15 +29,6 @@ export const generateYearOptions = (startOffset = 0, yearsCount = 50) => {
     };
   });
 };
-
-// helper image rules
-const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1 MB in Bytes
-const ACCEPTED_IMAGE_TYPES = [
-  'image/jpeg',
-  'image/jpg',
-  'image/png',
-  'image/webp',
-];
 
 // STEP 1 SCHEMA: ACCOUNT
 export const step1Schema = z.object({
@@ -652,39 +650,6 @@ export const gender = [
   { label: 'Perempuan', value: 'perempuan' },
 ];
 
-export const districtOptions = [
-  { label: 'Banyusari', value: 'BANYUSARI' },
-  { label: 'Batujaya', value: 'BATUJAYA' },
-  { label: 'Ciampel', value: 'CIAMPEL' },
-  { label: 'Cibuaya', value: 'CIBUAYA' },
-  { label: 'Cikampek', value: 'CIKAMPEK' },
-  { label: 'Cilamaya Kulon', value: 'CILAMAYA KULON' },
-  { label: 'Cilamaya Wetan', value: 'CILAMAYA WETAN' },
-  { label: 'Cilebar', value: 'CILEBAR' },
-  { label: 'Jatisari', value: 'JATISARI' },
-  { label: 'Jayakerta', value: 'JAYAKERTA' },
-  { label: 'Karawang Barat', value: 'KARAWANG BARAT' },
-  { label: 'Karawang Timur', value: 'KARAWANG TIMUR' },
-  { label: 'Klari', value: 'KLARI' },
-  { label: 'Kutawaluya', value: 'KUTAWALUYA' },
-  { label: 'Lemahabang', value: 'LEMAHABANG' },
-  { label: 'Majalaya', value: 'MAJALAYA' },
-  { label: 'Pakisjaya', value: 'PAKISJAYA' },
-  { label: 'Pangkalan', value: 'PANGKALAN' },
-  { label: 'Pedes', value: 'PEDES' },
-  { label: 'Purwasari', value: 'PURWASARI' },
-  { label: 'Rawamerta', value: 'RAWAMERTA' },
-  { label: 'Rengasdengklok', value: 'RENGASDENGKLOK' },
-  { label: 'Tegalwaru', value: 'TEGALWARU' },
-  { label: 'Telagasari', value: 'TELAGASARI' },
-  { label: 'Telukjambe Barat', value: 'TELUKJAMBE BARAT' },
-  { label: 'Telukjambe Timur', value: 'TELUKJAMBE TIMUR' },
-  { label: 'Tempuran', value: 'TEMPURAN' },
-  { label: 'Tirtajaya', value: 'TIRTAJAYA' },
-  { label: 'Tirtamulya', value: 'TIRTAMULYA' },
-  { label: 'Kotabaru', value: 'KOTABARU' },
-];
-
 export const educationOptions = [
   { label: 'Tidak Sekolah / Belum Sekolah', value: 'tidak_sekolah' },
   { label: 'Tidak Lulus SD', value: 'tidak_lulus-sd' },
@@ -779,7 +744,6 @@ export const UpdateUserSchema = z.object({
 
 // Konfimasi password didahalam user profile
 export const updatePasswordSchemas = z
-
   .object({
     newPassword: z.string().min(8, 'Password baru minimal harus 8 karakter'),
     confirmPassword: z.string().min(1, 'Konfirmasi password harus diisi'),
@@ -788,3 +752,49 @@ export const updatePasswordSchemas = z
     message: 'Konfirmasi password tidak cocok dengan password baru',
     path: ['confirmPassword'],
   });
+//
+
+// ALL DISTRICTS SORTED ALPHABETICALLY FOR ADMIN ROLE
+export const districtOptions = Object.values(DISTRICT_BY_ZONE)
+  .flat()
+  .sort((a, b) => a.label.localeCompare(b.label));
+
+// FILTER DISTRICT OPTIONS BASED ON USER ROLE AND ASSIGNED ZONE
+export const getDistrictOptions = (role, zone) => {
+  // return all districts if user is admin
+  if (role === 'admin') {
+    return districtOptions;
+  }
+
+  // return zone-specific districts if user is leader with valid zone
+  if (role === 'leader' && zone) {
+    const normalizedZone = zone.toUpperCase().trim();
+    return DISTRICT_BY_ZONE[normalizedZone] || [];
+  }
+
+  return [];
+};
+
+// GET VILLAGE OPTIONS BASED ON SELECTED SUB-DISTRICT
+export const getVillageOptionsByDistrict = (selectedSubDistrict) => {
+  if (!selectedSubDistrict) {
+    return [];
+  }
+
+  const normalizedDistrict = selectedSubDistrict.trim().toUpperCase();
+
+  // find matching district key case-insensitively
+  const matchedKey = Object.keys(desaDanKelurahan).find(
+    (key) => key.trim().toUpperCase() === normalizedDistrict,
+  );
+
+  if (!matchedKey || !Array.isArray(desaDanKelurahan[matchedKey])) {
+    return [];
+  }
+
+  // map villages to { label: Title Case, value: UPPERCASE } matching districtOptions schema
+  return desaDanKelurahan[matchedKey].map((villageName) => ({
+    label: titleCase(villageName.trim()),
+    value: villageName.trim().toUpperCase(),
+  }));
+};
