@@ -167,49 +167,6 @@ export const getSchedules = async (userId) => {
   }
 };
 
-export const updatePasswordAPI = async (userId, newPassword) => {
-  if (!userId || !newPassword) {
-    return {
-      status: 'failed',
-      message: 'ID user atau password baru tidak boleh kosong.',
-    };
-  }
-
-  try {
-    const bodyPayload = {
-      action: 'update_pasword',
-      user_id: userId,
-      newPassword: newPassword,
-    };
-
-    const response = await api.post('user.php', bodyPayload);
-    if (
-      response.data?.status === 'failed' ||
-      response.data?.status === 'error'
-    ) {
-      return {
-        status: 'failed',
-        message: response.data?.message || 'Gagal memperbarui password.',
-      };
-    }
-
-    return {
-      status: 'success',
-      message: response.data?.message || 'Password berhasil diperbarui.',
-    };
-  } catch (error) {
-    const errorMessage =
-      error.response?.data?.message ||
-      error.message ||
-      'Terjadi kesalahan pada server.';
-
-    return {
-      status: 'error',
-      message: errorMessage,
-    };
-  }
-};
-
 export const attendanceAPI = async (payload) => {
   if (!payload)
     return {

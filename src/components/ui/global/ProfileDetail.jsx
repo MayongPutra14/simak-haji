@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router';
 import { useEffect, useMemo, useState } from 'react';
 import { move } from '@dnd-kit/helpers';
 import { DragDropProvider } from '@dnd-kit/react';
@@ -20,8 +21,27 @@ import Button from './Button';
 
 // Main Component: UserProfileDetail
 export default function ProfileDetail({ data, isLoading = false }) {
+  // AUTH & ROUTE HOOKS
   const { user: userData, logout } = useAuth();
-  const role = userData.role === 'user';
+  const { pathname } = useLocation();
+
+  // ACCESS & OWNERSHIP CHECK
+  // check if the logged-in user has a valid role
+  const allowedRoles = ['user', 'leader', 'admin'];
+  const hasAllowedRole = allowedRoles.includes(userData?.role);
+
+  // exclude admin and leader jamaah detail routes
+  const isUserDetailPage =
+    pathname.startsWith('/admin/users/detail') ||
+    pathname.startsWith('/leader/users/detail');
+
+  // verify that the viewed profile belongs to the logged-in user
+  const isOwnProfile = data?.id
+    ? data.id === userData?.id
+    : Boolean(userData?.id);
+
+  const canShowPasswordSection =
+    hasAllowedRole && !isUserDetailPage && isOwnProfile;
 
   // Fallback default empty object if data is null/undefined
   const user = useMemo(() => data || {}, [data]);
@@ -449,7 +469,7 @@ export default function ProfileDetail({ data, isLoading = false }) {
       </DragDropProvider>
 
       {/* CHANGE PASSWORD SECTION */}
-      {role && (
+      {canShowPasswordSection && (
         <div className="flex flex-col md:flex-row gap-6 w-full">
           {/* Card 1: Change Password */}
           {/* Class 'border' dihapus, hanya menggunakan 'shadow-md' sebagai pemisah visual */}
