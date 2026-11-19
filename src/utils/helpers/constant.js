@@ -267,3 +267,10 @@ export const ACCEPTED_IMAGE_TYPES = [
   'image/png',
   'image/webp',
 ];
+
+// ENDPOINT MAPPING BY USER ROLE
+export const ENDPOINT_BY_ROLE = {
+  user: 'user.php',
+  leader: 'leader.php',
+  admin: 'admin.php',
+};
