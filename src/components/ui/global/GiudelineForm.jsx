@@ -1,3 +1,5 @@
+import { IconExclamatinCircle } from '../../../utils/helpers/decorations';
+
 export const GuidelineForm = () => {
   const guidelines = [
     'Persiapkan Surat Pendaftaran Haji (SPPH) untuk mempermudah pengisian data.',
@@ -44,29 +46,15 @@ export const GuidelineForm = () => {
   );
 };
 
-export  function WarningAlert() {
+export function WarningAlert() {
   return (
     <div
       className="w-full rounded-lg border border-red-200 bg-red-50 p-4 text-red-700"
       role="alert"
     >
       <div className="flex items-start gap-3">
-        {/* Ikon Peringatan / Warning Icon */}
-        <svg
-          className="h-5 w-5 shrink-0 text-red-600"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
-          />
-        </svg>
+        <IconExclamatinCircle className="h-5 w-5 shrink-0 text-red-600" />
 
-        {/* Teks Peringatan yang Sudah Diperbaiki */}
         <p className="text-sm leading-relaxed font-medium">
           Jika tidak ada data yang ingin dimasukkan, silakan isi dengan{' '}
           <span className="font-bold underline">"tidak ada"</span> agar data

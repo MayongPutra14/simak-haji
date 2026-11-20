@@ -12,6 +12,7 @@ import {
   IconHome,
   IconTrash,
   IconCheckCircle,
+  IconCalendar,
 } from '../../../utils/helpers/decorations';
 
 export const UnderDevelopment = ({ userRole }) => {
@@ -336,5 +337,42 @@ export const CardValue = ({
         {badge}
       </div>
     </>
+  );
+};
+
+// HELPER FOR USER EVENT: empty state
+// Universal empty state for all tabs (Semua, Menunggu, Berlangsung, Selesai)
+export const EmptyStateFallback = ({
+  searchQuery,
+  activeTabLabel,
+  isFilterActive,
+  handleReset,
+}) => {
+  return (
+    <div className="col-span-full flex flex-col items-center justify-center py-12 px-4 text-center bg-slate-50/70 border border-dashed border-slate-200 rounded-2xl">
+      <div className="p-3 mb-3 rounded-full bg-slate-100 text-slate-400">
+        <IconCalendar className="w-6 h-6" />
+      </div>
+
+      <h3 className="text-sm font-bold text-slate-700">
+        Tidak ada acara ditemukan
+      </h3>
+
+      <p className="mt-1 text-xs text-slate-500 max-w-sm">
+        {searchQuery.trim()
+          ? `Tidak ada acara di kategori "${activeTabLabel}" yang cocok dengan kata kunci "${searchQuery}".`
+          : `Belum ada acara yang tersedia pada kategori "${activeTabLabel}".`}
+      </p>
+
+      {isFilterActive && (
+        <button
+          type="button"
+          onClick={handleReset}
+          className="mt-4 px-4 py-2 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl hover:bg-emerald-100 transition-colors cursor-pointer"
+        >
+          Tampilkan Semua Acara
+        </button>
+      )}
+    </div>
   );
 };
