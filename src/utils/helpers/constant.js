@@ -274,3 +274,11 @@ export const ENDPOINT_BY_ROLE = {
   leader: 'leader.php',
   admin: 'admin.php',
 };
+
+// FILTER LABEL FOR USER EVENT MENU
+export const EVENT_FILTER_TABS = [
+  { key: 'all', label: 'Semua' },
+  { key: 'mendatang', label: 'Menunggu' },
+  { key: 'live', label: 'Berlangsung' },
+  { key: 'selesai', label: 'Selesai' },
+];

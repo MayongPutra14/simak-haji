@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { MdOutlineArrowDropDown as IconFilter } from 'react-icons/md';
+import { useState, useRef, useEffect } from 'react';
+import { IconFilter } from '../../../utils/helpers/decorations';
 
 function CustomSelect({ filter }) {
   const [isOpen, setIsOpen] = useState(false);

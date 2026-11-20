@@ -22,8 +22,10 @@ import {
   AiOutlineLoading3Quarters as IconLoading,
   AiOutlineLayout as IconLayout,
   AiFillLayout as IconLayoutFIll,
+  AiOutlineExclamationCircle as IconExclamatinCircle,
 } from 'react-icons/ai';
 import {
+  MdOutlineArrowDropDown as IconFilter,
   MdTimelapse as IconTimeLapes,
   MdLocationOn as IconLocationFill,
   MdCameraAlt as IconCamera,
@@ -125,6 +127,8 @@ export const bgImage = {
 };
 
 export {
+  IconFilter,
+  IconExclamatinCircle,
   IconPhone,
   IconLogout,
   IconDocsFill,
