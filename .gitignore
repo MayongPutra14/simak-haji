@@ -25,9 +25,9 @@ dist-ssr
 prompt
 *.md
 !README,md
-zoba.js
 *.env
 .env.*
 db.json
 api_docs
 !example.env
+docs

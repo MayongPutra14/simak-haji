@@ -47,58 +47,67 @@ export default function getFeatureItems(role = 'user') {
   ];
 
   //  Subject menu & Operasional base on role
-  const roleSpecificItems =
-    role === 'admin'
-      ? [
-        {
-          id: 'landing',
-          label: 'Landing Page',
-          path: '/admin/landing-page/edit',
-          Icon: IconLayout,
-          bgColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
-        },
-        {
-          id: 'absen',
-          label: 'Rekap Absen',
-          path: '/maintenance',
-          Icon: IconQr,
-          bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
-        },
-      ]
-      : role === 'leader'
-        ? [
-          {
-            id: 'absen',
-            label: 'Rekap Absen',
-            path: '/maintenance',
-            Icon: IconQr,
-            bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
-          },
-        ]
-        : [
-          // {
-          //   id: 'materi',
-          //   label: 'Materi',
-          //   path: '/user/materi',
-          //   Icon: SavingIcon,
-          //   bgColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
-          // },
-          // {
-          //   id: 'absen',
-          //   label: 'Absen',
-          //   path: '/maintenance',
-          //   Icon: IconQr,
-          //   bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
-          // },
-          // {
-          //   id: 'keuangan',
-          //   label: 'Keuangan',
-          //   path: '/maintenance',
-          //   Icon: IconWallet,
-          //   bgColor: 'bg-green-500/10 text-green-600 dark:text-green-400',
-          // },
-        ];
+  let roleSpecificItems;
 
+  if (role === 'admin') {
+    roleSpecificItems = [
+      {
+        id: 'landing',
+        label: 'Landing Page',
+        path: '/admin/landing-page/edit',
+        Icon: IconLayout,
+        bgColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+      },
+      {
+        id: 'absen',
+        label: 'Rekap Absen',
+        path: '/maintenance',
+        Icon: IconQr,
+        bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
+      },
+    ];
+  } else if (role === 'leader') {
+    roleSpecificItems = [
+      {
+        id: 'absen',
+        label: 'Rekap Absen',
+        path: '/maintenance',
+        Icon: IconQr,
+        bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
+      },
+    ];
+  } else {
+    roleSpecificItems = [
+      {
+        id: 'absensi',
+        label: 'Absensi Saya',
+        path: '/absensi-saya',
+        Icon: IconQr,
+        bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
+      },
+      // {
+      //   id: 'materi',
+      //   label: 'Materi',
+      //   path: '/user/materi',
+      //   Icon: SavingIcon,
+      //   bgColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+      // },
+      // {
+      //   id: 'absen',
+      //   label: 'Absen',
+      //   path: '/maintenance',
+      //   Icon: IconQr,
+      //   bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
+      // },
+      // {
+      //   id: 'keuangan',
+      //   label: 'Keuangan',
+      //   path: '/maintenance',
+      //   Icon: IconWallet,
+      //   bgColor: 'bg-green-500/10 text-green-600 dark:text-green-400',
+      // },
+    ];
+  }
 
   //  Menu "Lainnya"
   const _moreItem = {
