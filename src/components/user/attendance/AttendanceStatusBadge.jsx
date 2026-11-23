@@ -1,5 +1,5 @@
 import { MdCancel, MdCheckCircle } from 'react-icons/md';
-import { ATTENDANCE_STATUS } from '../../../utils/helpers/attendance';
+import { ATTENDANCE_STATUS } from '../../../utils/helpers/constant';
 import { getAttendanceStatus } from '../../../utils/helpers/status';
 
 /**

@@ -51,7 +51,7 @@ import {
   IdentityPage,
   ScanQrPage,
   UserMaterialPage,
-  AbsensiSayaPage,
+  UserAttendancePage,
 } from '../pages/user/index';
 
 // LEADER
@@ -178,15 +178,13 @@ export default function AppRoutes() {
             <Route path="profile" element={<UserProfilePage />} />
             <Route path="events" element={<UserSchedulePage />} />
             <Route path="scan" element={<ScanQrPage />} />
+            <Route path="attendance" element={<UserAttendancePage />} />
           </Route>
 
           {/* FULL SCREEN MATERIAL PDF */}
           <Route element={<MaterialGuardRoute />}>
             <Route path="/user/materi/:id" element={<UserMaterialPage />} />
           </Route>
-
-          {/* JAMAAH ATTENDANCE RECAP (STANDALONE, MOCKUP HEADER) */}
-          <Route path="/absensi-saya" element={<AbsensiSayaPage />} />
         </Route>
 
         <Route element={<RequiredInCompletedIdentity />}>

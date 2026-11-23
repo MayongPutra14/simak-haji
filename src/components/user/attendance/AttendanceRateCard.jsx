@@ -1,5 +1,5 @@
-import { MdInsights } from 'react-icons/md';
-import { ATTENDANCE_MIN_PERCENTAGE } from '../../../utils/helpers/attendance';
+import { ATTENDANCE_MIN_PERCENTAGE } from '../../../utils/helpers/constant';
+import { IconInsights } from '../../../utils/helpers/decorations';
 
 const RING_RADIUS = 19;
 const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
@@ -38,17 +38,13 @@ function AttendanceRing({ percentage }) {
           className="text-sea-green-600 transition-[stroke-dashoffset] duration-700"
         />
       </svg>
-      <span className="absolute text-sm font-bold text-sea-green-800">
+      <span className="absolute text-sm font-bold text-white">
         {safePercentage}%
       </span>
     </div>
   );
 }
 
-/**
- * Overall attendance rate with the Istitha'ah minimum threshold.
- * Percentage follows PRD 5.1: present / (present + absent) * 100.
- */
 export default function AttendanceRateCard({ stats }) {
   const {
     percentage,
@@ -64,22 +60,17 @@ export default function AttendanceRateCard({ stats }) {
   return (
     <section
       aria-label="Tingkat kehadiran"
-      className="mb-4 rounded-2xl border border-sea-green-100/80 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
+      className="mb-4 rounded-2xl border border-emerald-200 bg-emerald-300 p-4 shadow-sm transition-shadow hover:shadow-md"
     >
       <div className="mb-3 flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sea-green-200/60 bg-sea-green-100/80">
-            <MdInsights
-              className="h-5 w-5 text-sea-green-700"
-              aria-hidden="true"
-            />
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-emerald-50 bg-emerald-50/60">
+            <IconInsights className="h-5 w-5 text-white" aria-hidden="true" />
           </div>
 
           <div className="min-w-0">
-            <h2 className="text-sm font-bold text-slate-800">
-              Tingkat Kehadiran
-            </h2>
-            <p className="text-xs text-slate-500">
+            <h2 className="text-sm font-bold text-white">Tingkat Kehadiran</h2>
+            <p className="text-xs text-white">
               Dari total akumulasi {totalRecords} agenda wajib
             </p>
           </div>
@@ -88,7 +79,7 @@ export default function AttendanceRateCard({ stats }) {
         <AttendanceRing percentage={percentage} />
       </div>
 
-      <div className="mb-2 h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
+      <div className="mb-2 h-2.5 w-full overflow-hidden rounded-full bg-white">
         <div
           className={`h-full rounded-full transition-all duration-500 ${
             isEligible
@@ -100,7 +91,7 @@ export default function AttendanceRateCard({ stats }) {
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-        <span className="flex items-center gap-1.5 font-medium text-slate-600">
+        <span className="flex items-center gap-1.5 font-medium text-white">
           <span
             className={`inline-block h-2.5 w-2.5 shrink-0 rounded-full ${
               isEligible ? 'bg-sea-green-500' : 'bg-rose-400'

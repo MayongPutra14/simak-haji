@@ -1,43 +1,9 @@
-/**
- * ATTENDANCE HELPERS — SHARED BY THE JAMAAH PAGE (PHASE 1) AND ADMIN/LEADER (PHASE 2)
- *
- * Records use the UI contract:
- * { id, eventId, eventName, eventDate: 'YYYY-MM-DD', checkInTime: 'HH:mm' | null, status: 'hadir' | 'absen' }
- *
- * Keep calculations here so pages/hooks stay free of business rules. The formula
- * follows PRD 5.1: percentage = present / (present + absent) * 100.
- */
-
-export const ATTENDANCE_STATUS = {
-  PRESENT: 'hadir',
-  ABSENT: 'absen',
-};
-
-export const ATTENDANCE_ALL_VALUE = 'all';
-
-// MINIMUM ATTENDANCE FOR THE ISTITHA'AH RECOMMENDATION (PRD / MOCKUP FOOTER NOTE)
-export const ATTENDANCE_MIN_PERCENTAGE = 75;
-
-export const ATTENDANCE_STATUS_OPTIONS = [
-  { value: ATTENDANCE_ALL_VALUE, label: 'Semua Status' },
-  { value: ATTENDANCE_STATUS.PRESENT, label: 'Hadir' },
-  { value: ATTENDANCE_STATUS.ABSENT, label: 'Tidak Hadir' },
-];
-
-const MONTH_LABELS = [
-  'Januari',
-  'Februari',
-  'Maret',
-  'April',
-  'Mei',
-  'Juni',
-  'Juli',
-  'Agustus',
-  'September',
-  'Oktober',
-  'November',
-  'Desember',
-];
+import {
+  ATTENDANCE_ALL_VALUE,
+  ATTENDANCE_MIN_PERCENTAGE,
+  ATTENDANCE_STATUS,
+  MONTH_LABELS,
+} from './constant';
 
 export const isPresent = (record) =>
   record?.status === ATTENDANCE_STATUS.PRESENT;

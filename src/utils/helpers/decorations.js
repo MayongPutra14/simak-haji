@@ -9,6 +9,7 @@ import {
   LuBookHeart as IconBookHeart,
   LuBookOpen as IconBookOpen2,
   LuPhone as IconPhone,
+  LuListFilter as IcontFilterList,
 } from 'react-icons/lu';
 import {
   BsTextParagraph as IconParagraph,
@@ -25,6 +26,8 @@ import {
   AiOutlineExclamationCircle as IconExclamatinCircle,
 } from 'react-icons/ai';
 import {
+  MdCancel as IconCancelCircle,
+  MdCheckCircle as IconCheckCircleFill,
   MdOutlineArrowDropDown as IconFilter,
   MdTimelapse as IconTimeLapes,
   MdLocationOn as IconLocationFill,
@@ -49,6 +52,9 @@ import {
   MdFavoriteBorder as IconFavorite,
   MdArchive as IconArchive,
   MdOutlineSearch as IconSearch,
+  MdEventBusy as IconEventBusy,
+  MdTrendingUp as IconTrendingUp,
+  MdInsights as IconInsights,
 } from 'react-icons/md';
 import {
   TbRefresh as IconRefresh,
@@ -100,6 +106,7 @@ import {
   IoLogoYoutube as IconYoutube,
 } from 'react-icons/io5';
 import {
+  FaRegCalendarAlt as IconCalendarMonth,
   FaInstagramSquare as IconInstagram,
   FaFilePdf as IconPdf,
   FaFileWord as IconWord,
@@ -127,6 +134,13 @@ export const bgImage = {
 };
 
 export {
+  IconCancelCircle,
+  IconCalendarMonth,
+  IcontFilterList,
+  IconInsights,
+  IconTrendingUp,
+  IconEventBusy,
+  IconCheckCircleFill,
   IconFilter,
   IconExclamatinCircle,
   IconPhone,

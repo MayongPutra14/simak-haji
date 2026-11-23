@@ -165,7 +165,7 @@ export default function EditEvent({
   return (
     <form
       onSubmit={handleSubmit(onSubmitForm)}
-      className="w-[95%] md:w-[98%] mx-auto py-4 space-y-6 font-sans"
+      className="w-[95%] md:w-[98%] mx-auto py-4 space-y-6 "
     >
       {/* 1. TOP ACTION CONTROL BAR */}
       <div className="sticky z-30 flex px-5 py-4 border border-teal-100 shadow-md top-22 bg-white/90 backdrop-blur-md rounded-2xl">

@@ -1,5 +1,8 @@
-import { MdExpandMore, MdFilterList } from 'react-icons/md';
-import { ATTENDANCE_STATUS_OPTIONS } from '../../../utils/helpers/attendance';
+import { ATTENDANCE_STATUS_OPTIONS } from '../../../utils/helpers/constant';
+import {
+  IconFilter,
+  IcontFilterList,
+} from '../../../utils/helpers/decorations';
 
 function FilterSelect({ id, label, value, options, onChange }) {
   return (
@@ -21,7 +24,7 @@ function FilterSelect({ id, label, value, options, onChange }) {
         ))}
       </select>
 
-      <MdExpandMore
+      <IconFilter
         className="pointer-events-none absolute right-2.5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400"
         aria-hidden="true"
       />
@@ -29,21 +32,13 @@ function FilterSelect({ id, label, value, options, onChange }) {
   );
 }
 
-/**
- * Month / year / status filters. Month and year options come from the records
- * (approved Phase 1 decision); status options are fixed.
- *
- * @param {{month: string, year: string, status: string}} filters
- * @param {{months: Array, years: Array}} options
- * @param {(key: 'month'|'year'|'status', value: string) => void} onChange
- */
 export default function AttendanceFilterBar({ filters, options, onChange }) {
   return (
     <section aria-label="Filter riwayat kehadiran" className="mb-4">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-1.5">
-          <MdFilterList
-            className="h-5 w-5 text-sea-green-700"
+          <IcontFilterList
+            className="h-5 w-5 text-slate-700"
             aria-hidden="true"
           />
           <span className="text-xs font-semibold text-slate-700">

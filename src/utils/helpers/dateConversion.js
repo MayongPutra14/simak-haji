@@ -54,16 +54,6 @@ export const hitungUmur = (birthDay) => {
 };
 
 /**
- * Change format to Indonesia date
- * Example: '2026-08-25' become '25 Agustus 2026'
- */
-export const formatTanggalIndonesia = (date) => {
-  if (!date) return '-';
-  const opsi = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(date).toLocaleDateString('id-ID', opsi);
-};
-
-/**
  * Short Indonesian date for compact tables/cards
  * Example: '2026-01-11' become '11 Jan 2026'
  */

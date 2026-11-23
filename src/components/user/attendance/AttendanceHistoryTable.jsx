@@ -1,9 +1,9 @@
 import Table from '../../ui/global/Table';
+import AttendanceStatusBadge from './AttendanceStatusBadge';
 import {
   formatCheckInTime,
   formatShortDate,
 } from '../../../utils/helpers/dateConversion';
-import AttendanceStatusBadge from './AttendanceStatusBadge';
 
 const COLUMNS = [
   {
@@ -25,7 +25,7 @@ const COLUMNS = [
       <span
         className={
           record.checkInTime
-            ? 'font-semibold text-teal-700'
+            ? 'font-medium text-teal-700'
             : 'font-medium text-slate-400'
         }
       >
@@ -52,8 +52,7 @@ export default function AttendanceHistoryTable({ records }) {
         columns={COLUMNS}
         data={records}
         rowKey="id"
-        showNumbering={false}
-        headerBgClass="border-sea-green-100 bg-sea-green-50/70 text-sea-green-900"
+        headerBgClass="bg-sea-green-500 text-white"
         emptyMessage="Belum ada riwayat absensi."
       />
     </div>

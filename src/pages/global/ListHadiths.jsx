@@ -173,7 +173,7 @@ export default function HadithListingPage() {
   }
   // MAIN PAGE RETURN
   return (
-    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100 font-sans selection:bg-teal-400 selection:text-emerald-950 pb-12">
+    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100  selection:bg-teal-400 selection:text-emerald-950 pb-12">
       <Header onBack={handleBack} />
       <div className="max-w-4xl mx-auto px-4 py-6 md:py-10">
         {/* HEADER SECTION */}

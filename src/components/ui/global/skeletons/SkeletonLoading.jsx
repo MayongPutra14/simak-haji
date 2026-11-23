@@ -408,7 +408,7 @@ export function EventDashboardSkeleton() {
 // LIST QURAN SKELETON
 export function ListQuranSkeleton() {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100 font-sans selection:bg-teal-400 selection:text-emerald-950">
+    <div className="container mx-auto px-4 py-8 max-w-7xl bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100  selection:bg-teal-400 selection:text-emerald-950">
       {/* HEADER SECTION SKELETON */}
       <header className="mb-10 md:mb-12 text-center max-w-2xl mx-auto animate-pulse">
         <div className="inline-block w-40 h-4 bg-emerald-900/60 border border-emerald-800/50 rounded-full mb-3"></div>
@@ -468,7 +468,7 @@ export function ListQuranSkeleton() {
 // READ SURAH SKELETON
 export function ReadSurahSkeleton() {
   return (
-    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100 font-sans pb-20">
+    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100  pb-20">
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 animate-pulse">
         {/* HEADER SECTION SKELETON */}
         <header className="mb-12 flex flex-col items-center text-center">
@@ -549,7 +549,7 @@ export function HadithSkeletonCard() {
 
 export function ReadHadithSkeleton({ bookName }) {
   return (
-    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100 font-sans pb-12">
+    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100  pb-12">
       <div className="max-w-4xl mx-auto px-4 py-6 md:py-10">
         {/* HEADER SECTION SKELETON */}
         <header className="flex justify-between items-center gap-4 mb-8">
@@ -639,7 +639,7 @@ function CollectionCardSkeleton() {
 // MAIN COMPONENT SKELETON PAGE
 export function HadithHubSkeleton() {
   return (
-    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100 font-sans selection:bg-teal-400 selection:text-emerald-950">
+    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100  selection:bg-teal-400 selection:text-emerald-950">
       {/* HEADER SKELETON */}
       <header className="sticky top-0 z-50 w-full bg-emerald-800/60 backdrop-blur-lg border-b border-emerald-200 animate-pulse">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -700,6 +700,43 @@ export function HadithHubSkeleton() {
           <CollectionCardSkeleton />
         </div>
       </main>
+    </div>
+  );
+}
+
+// SKELETON ATTENDANCE PAGE
+function SkeletonBlock({ className = '' }) {
+  return (
+    <div className={`animate-pulse rounded-xl bg-slate-200/70 ${className}`} />
+  );
+}
+
+/**
+ * Loading placeholders that mirror the real layout (stats, rate card, filters, list).
+ */
+export function AttendanceSkeleton() {
+  return (
+    <div className="space-y-3">
+      <div className="grid grid-cols-2 gap-3">
+        <SkeletonBlock className="h-28 rounded-2xl" />
+        <SkeletonBlock className="h-28 rounded-2xl" />
+      </div>
+
+      <SkeletonBlock className="h-32 rounded-2xl" />
+
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+        <SkeletonBlock className="h-10" />
+        <SkeletonBlock className="h-10" />
+        <SkeletonBlock className="h-10" />
+      </div>
+
+      <div className="space-y-2">
+        <SkeletonBlock className="h-20 rounded-2xl" />
+        <SkeletonBlock className="h-20 rounded-2xl" />
+        <SkeletonBlock className="h-20 rounded-2xl" />
+      </div>
+
+      <span className="sr-only">Memuat riwayat absensi...</span>
     </div>
   );
 }

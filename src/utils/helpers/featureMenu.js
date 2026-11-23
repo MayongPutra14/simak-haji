@@ -81,7 +81,7 @@ export default function getFeatureItems(role = 'user') {
       {
         id: 'absensi',
         label: 'Absensi Saya',
-        path: '/absensi-saya',
+        path: '/user/attendance',
         Icon: IconQr,
         bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
       },

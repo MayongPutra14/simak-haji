@@ -306,7 +306,7 @@ export default function HadithPage() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100 font-sans selection:bg-teal-400 selection:text-emerald-950 flex flex-col">
+    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100  selection:bg-teal-400 selection:text-emerald-950 flex flex-col">
       <Header onBack={handleBack} />
 
       <main className="grow">

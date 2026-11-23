@@ -53,7 +53,7 @@ export default function HajjDuasPage() {
   return (
     //  MAIN PAGE CONTAINER
     //  apply subtle diagonal gradient with primary and secondary backgrounds
-    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-950 to-emerald-900 p-4 md:p-8 font-sans selection:bg-teal-700">
+    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-950 to-emerald-900 p-4 md:p-8  selection:bg-teal-700">
       {/* CONTENT  limit max width for desktop view and center content */}
       <div className="max-w-4xl mx-auto">
         {/* HEADER SECTION */}
