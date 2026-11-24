@@ -7,8 +7,8 @@ import {
   AttendanceErrorState,
   AttendanceFilterBar,
   AttendanceHistorySection,
+  AttendanceLoadingState,
   AttendanceRateCard,
-  AttendanceSkeleton,
   AttendanceStatGrid,
 } from '../../components/user/attendance/index';
 
@@ -45,7 +45,7 @@ export default function UserAttendacePage() {
     <div className="min-h-screen bg-slate-50 pb-8">
       <main className="w-[95%] md:w-[98%] mx-auto pt-4 pb-6  md:pt-6">
         {isLoading ? (
-          <AttendanceSkeleton />
+          <AttendanceLoadingState />
         ) : error ? (
           <AttendanceErrorState message={error} onRetry={refetch} />
         ) : (

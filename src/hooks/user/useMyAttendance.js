@@ -1,34 +1,20 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { MOCK_MY_ATTENDANCE } from '../../data/mock/myAttendance';
+import { getMyAttendance } from '../../utils/user/api';
 import {
   calculateAttendanceStats,
   getAttendanceFilterOptions,
+  normalizeAttendanceRecords,
   sortAttendanceRecords,
 } from '../../utils/helpers/attendance';
 
-// SMALL DELAY SO THE PAGE CAN EXERCISE ITS LOADING STATE
-const MOCK_LATENCY_MS = 500;
-
-/**
- * TEMPORARY DATA SOURCE — PHASE 1 ONLY.
- *
- * TODO(PHASE 3): replace the body with the real request, e.g.
- * `api.post('user.php', { action: 'get_my_attendance', user_id: userId })`,
- * then map the response into the UI record shape before returning.
- * The hook contract below must stay the same so the page needs no changes.
- */
-const fetchMyAttendance = async (userId) => {
-  await new Promise((resolve) => setTimeout(resolve, MOCK_LATENCY_MS));
-
-  if (!userId) {
-    throw new Error('Sesi login tidak valid, silakan login kembali.');
-  }
-
-  return { status: 'success', data: MOCK_MY_ATTENDANCE };
-};
+const FALLBACK_ERROR_MESSAGE = 'Gagal memuat riwayat absensi.';
 
 /**
  * Data hook for the jamaah "Absensi Saya" page.
+ *
+ * Fetches `POST user.php { action: 'get_my_attendance' }`. The PHP session cookie
+ * identifies the logged-in congregant, so `userId` is only used to gate the request
+ * while the session is still loading — it is never sent to the API (PRD 7.4).
  *
  * Returns all-time stats (unaffected by filters) plus the newest-first record list
  * and the derived month/year options. Filter state lives in the page.
@@ -57,18 +43,21 @@ export const useMyAttendance = (userId) => {
       setError(null);
 
       try {
-        const response = await fetchMyAttendance(userId);
+        const response = await getMyAttendance();
 
         if (!isSubscribed) return;
 
+        // THE BACKEND REPLIES 200 WITH status failed ON SESSION / ROLE ERRORS
         if (response?.status === 'success') {
-          setRecords(sortAttendanceRecords(response.data));
+          setRecords(
+            sortAttendanceRecords(normalizeAttendanceRecords(response.data)),
+          );
         } else {
-          setError(response?.message || 'Gagal memuat riwayat absensi.');
+          setError(response?.message || FALLBACK_ERROR_MESSAGE);
         }
-      } catch (error) {
+      } catch (requestError) {
         if (isSubscribed) {
-          setError(error?.message || 'Gagal memuat riwayat absensi.');
+          setError(requestError?.message || FALLBACK_ERROR_MESSAGE);
         }
       } finally {
         if (isSubscribed) setIsLoading(false);

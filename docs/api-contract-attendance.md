@@ -1,11 +1,12 @@
 # API Contract — Attendance (Absensi)
 
-**Status:** Proposed — pending agreement with the backend repository (`htdocs`).
+**Status:** Agreed and implemented on the frontend — `getMyAttendance` (`src/utils/user/api.js`) and
+`useMyAttendance` consume this endpoint; the mock data source has been removed.
 **Owner of this document:** frontend repo (`simak_haji`).
 **Feature reference:** `docs/prd-attendance-recap-en.md` §5–§7, `docs/task.md` Phase 3.
 **Scope of this document:** the contract the frontend **already** expects. It describes what the
-backend must answer so that `src/hooks/user/useMyAttendance.js` can drop its mock without any
-change to the page, components, or helpers.
+backend must answer so that `src/hooks/user/useMyAttendance.js` can drive the page without any
+further change to the components or helpers.
 
 > Backend is a separate PHP repository. Do not treat PRD §7 (`GET /api/attendance/...`) as
 > authoritative — it is a proposal. The real convention in this project is flat PHP files with
@@ -16,16 +17,16 @@ change to the page, components, or helpers.
 
 ## 1. Transport conventions
 
-| Item | Value |
-| --- | --- |
-| Method | `POST` |
-| URL | `<VITE_API_BASE_URL>/user.php` |
-| Dev base URL | `http://localhost/simak_api/api` (`.env.development`) |
-| Prod base URL | `https://simak-api.my.id/api` (`.env.production`) |
-| Query string | **None.** All parameters go in the JSON body. |
-| Request `Content-Type` | `application/json` |
-| Response `Content-Type` | `application/json; charset=utf-8` |
-| Client | `api` axios instance in `src/utils/user/api.js` |
+| Item                    | Value                                                 |
+| ----------------------- | ----------------------------------------------------- |
+| Method                  | `POST`                                                |
+| URL                     | `<VITE_API_BASE_URL>/user.php`                        |
+| Dev base URL            | `http://localhost/simak_api/api` (`.env.development`) |
+| Prod base URL           | `https://simak-api.my.id/api` (`.env.production`)     |
+| Query string            | **None.** All parameters go in the JSON body.         |
+| Request `Content-Type`  | `application/json`                                    |
+| Response `Content-Type` | `application/json; charset=utf-8`                     |
+| Client                  | `api` axios instance in `src/utils/user/api.js`       |
 
 The endpoint is a single file, multiplexed by `body.action`. This mirrors
 `get_profile`, `get_events`, `submit_attendance`, etc.
@@ -34,32 +35,30 @@ The endpoint is a single file, multiplexed by `body.action`. This mirrors
 
 **Current reality (verified in code):**
 
-- `src/utils/user/api.js` creates axios with only `Content-Type: application/json`.
-- There are **no** request interceptors, no `Authorization` header, no `withCredentials`
-  anywhere in `src/`. Authentication is de-facto carried by `localStorage.user_data` plus a
-  client-supplied `user_id` in every payload.
+- `src/utils/user/api.js` creates axios with `withCredentials: true` and
+  `Content-Type: application/json`. The browser therefore sends the PHP session cookie
+  (`PHPSESSID`) automatically once `login.php` has started a session.
+- There are **no** request interceptors and no `Authorization` header anywhere in `src/`.
+  `localStorage.user_data` is UI state only — it is not proof of identity.
 - `login.php` returns the user object that is persisted as `user_data`; the frontend does not
   read or forward a token.
 
 **Required target (backend must implement, PRD §7.4 and §10.1):**
 
-- The backend **must not trust** `user_id` from the body as proof of identity. It must resolve
-  the caller from a server-side session cookie (`PHPSESSID`) or a bearer/API token, then compare
-  it to `user_id`.
-- If the resolved identity is role `user`, the endpoint must return **only that user's** records.
-  A `user_id` that differs from the session identity must not be honoured (return `status:
-  'failed'` with a clear message, or ignore `user_id` entirely and use the session id).
-- Until the backend issues a token, cookie-based PHP sessions are the least disruptive option:
-  the browser sends `PHPSESSID` automatically once `login.php` starts a session. If a token is
-  introduced instead, the frontend needs a follow-up change (`Authorization: Bearer <token>`),
-  which is **not** part of this contract yet.
+- The endpoint must resolve the caller from the PHP session and ignore any client-supplied
+  identity. `get_my_attendance` therefore accepts **no** `user_id`.
+- If the session is missing, expired, or belongs to a non-`user` role, reply HTTP 200 with
+  `status: "failed"` and an Indonesian `message` (confirmed backend behaviour).
+- Do not trust `localStorage`, a request body id, or anything else the client can edit.
+- If a token replaces cookies later, the frontend needs a follow-up change
+  (`Authorization: Bearer <token>`); that is **not** part of this contract.
 
 Request headers the backend should expect today:
 
 ```
 POST /simak_api/api/user.php HTTP/1.1
 Content-Type: application/json
-Cookie: PHPSESSID=...            # only if the backend uses PHP sessions
+Cookie: PHPSESSID=...            # sent automatically (withCredentials: true)
 ```
 
 ---
@@ -73,15 +72,14 @@ Retrieves the logged-in congregant's own attendance history. Consumed by
 
 ```json
 {
-  "action": "get_my_attendance",
-  "user_id": 42
+  "action": "get_my_attendance"
 }
 ```
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `action` | `string` | yes | Literal `"get_my_attendance"`. |
-| `user_id` | `number` \| `string` | yes | `user_data.id` from the session. Sent for compatibility; the backend must validate it against the session identity (§1.1). |
+| Field     | Type     | Required | Notes                                                                                                                        |
+| --------- | -------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `action`  | `string` | yes      | Literal `"get_my_attendance"`.                                                                                               |
+| `user_id` | —        | **no**   | Must **not** be sent. The PHP session cookie identifies the caller; a body-supplied id is ignored / rejected by the backend. |
 
 No date, status, month, year, or pagination parameters. See §5 for why.
 
@@ -115,11 +113,11 @@ at the root of the body. Do **not** wrap it in a second `{ "data": { ... } }` la
 }
 ```
 
-| Field | Type | Nullable | Rules |
-| --- | --- | --- | --- |
-| `status` | `"success"` | no | Envelope status. Anything else is treated as a failure (§2.3). |
-| `message` | `string` | yes on success | Not rendered on success; safe to include. |
-| `data` | `array<AttendanceRecord>` | **no** | Must be an array. `[]` is valid and renders the empty state. **Never `null`** — `sortAttendanceRecords` spreads it and would throw. |
+| Field     | Type                      | Nullable       | Rules                                                                                                                               |
+| --------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `status`  | `"success"`               | no             | Envelope status. Anything else is treated as a failure (§2.3).                                                                      |
+| `message` | `string`                  | yes on success | Not rendered on success; safe to include.                                                                                           |
+| `data`    | `array<AttendanceRecord>` | **no**         | Must be an array. `[]` is valid and renders the empty state. **Never `null`** — `sortAttendanceRecords` spreads it and would throw. |
 
 ### 2.3 Failure response
 
@@ -132,10 +130,10 @@ Used for any application-level failure (invalid session, not a congregant, query
 }
 ```
 
-| Field | Type | Nullable | Rules |
-| --- | --- | --- | --- |
-| `status` | `"failed"` \| `"error"` | no | Both are handled identically by the hook. |
-| `message` | `string` | yes | Shown verbatim in the error state, so it must be **Indonesian and user-facing**. Falls back to `"Gagal memuat riwayat absensi."` when omitted. |
+| Field     | Type                    | Nullable | Rules                                                                                                                                          |
+| --------- | ----------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `status`  | `"failed"` \| `"error"` | no       | Both are handled identically by the hook.                                                                                                      |
+| `message` | `string`                | yes      | Shown verbatim in the error state, so it must be **Indonesian and user-facing**. Falls back to `"Gagal memuat riwayat absensi."` when omitted. |
 
 ### 2.4 HTTP status codes — important
 
@@ -157,14 +155,14 @@ The hook's `catch` block uses `error.message` (the axios message), **not**
 
 Every `data[]` element is mapped 1:1 into the UI record consumed by the hook, table, and cards.
 
-| Field | Type | Nullable | Format / rules |
-| --- | --- | --- | --- |
-| `id` | `number` \| `string` | no | Unique per row; used as the React list key and table row key. Must be stable for the same event+user pair. |
-| `eventId` | `number` \| `string` | no | Event identifier. Used for navigation to event detail later. Must be unique within one user's list (PRD §5.6: one row per `user_id` + `event_id`). |
-| `eventName` | `string` | no | Display name, ready to render. Do not send HTML entities that need decoding. Can be empty only if the event genuinely has no title; prefer a fallback like `"Kegiatan Tanpa Judul"` server-side. |
-| `eventDate` | `string` | no | Calendar date of the event, **`YYYY-MM-DD`**. Not `DD-MM-YYYY`, not a localized string. Used for sorting (§4.2), month/year filter derivation (§4.3), and display. A `YYYY-MM-DD HH:mm:ss` value still works but is discouraged. |
-| `checkInTime` | `string` \| `null` | yes | Local Jakarta time (`Asia/Jakarta`, WIB) as **`HH:mm`** (24-hour). `null` when `status` is `absen`. `HH:mm:ss` is tolerated by the formatter; `-`, `""`, or `"00:00"` are not acceptable substitutes for `null`. |
-| `status` | `"hadir"` \| `"absen"` | no | Lowercase Indonesian enum, exactly these two values. See §5.1 — any third value silently becomes "absent". |
+| Field         | Type                   | Nullable | Format / rules                                                                                                                                                                                                                   |
+| ------------- | ---------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`          | `number` \| `string`   | no       | Unique per row; used as the React list key and table row key. Must be stable for the same event+user pair.                                                                                                                       |
+| `eventId`     | `number` \| `string`   | no       | Event identifier. Used for navigation to event detail later. Must be unique within one user's list (PRD §5.6: one row per `user_id` + `event_id`).                                                                               |
+| `eventName`   | `string`               | no       | Display name, ready to render. Do not send HTML entities that need decoding. Can be empty only if the event genuinely has no title; prefer a fallback like `"Kegiatan Tanpa Judul"` server-side.                                 |
+| `eventDate`   | `string`               | no       | Calendar date of the event, **`YYYY-MM-DD`**. Not `DD-MM-YYYY`, not a localized string. Used for sorting (§4.2), month/year filter derivation (§4.3), and display. A `YYYY-MM-DD HH:mm:ss` value still works but is discouraged. |
+| `checkInTime` | `string` \| `null`     | yes      | Local Jakarta time (`Asia/Jakarta`, WIB) as **`HH:mm`** (24-hour). `null` when `status` is `absen`. `HH:mm:ss` is tolerated by the formatter; `-`, `""`, or `"00:00"` are not acceptable substitutes for `null`.                 |
+| `status`      | `"hadir"` \| `"absen"` | no       | Lowercase Indonesian enum, exactly these two values. See §5.1 — any third value silently becomes "absent".                                                                                                                       |
 
 Nullability summary for the UI layer:
 
@@ -188,10 +186,10 @@ inside the hook. If the backend prefers database-style keys, return the same val
 }
 ```
 
-…then map it in a new `getMyAttendance` helper in `src/utils/user/api.js` before the hook sees
-it. The hook contract (`records` in camelCase) must not change. Mapping must also convert
-`"NULL"`/empty `waktu_absen` to `null` and derive `status` from `waktu_absen IS NULL` if the
-backend does not store an explicit status column.
+…then map it in `src/utils/helpers/attendance.js` (`normalizeAttendanceRecords`, already
+implemented and called by the hook) before it reaches the UI. The hook contract (`records` in
+camelCase) must not change. The normalizer also converts `"NULL"`/empty `waktu_absen` to `null`
+and derives `status` from the check-in time when the field is missing.
 
 ---
 
@@ -233,14 +231,14 @@ hardcoded calendar.
 
 `calculateAttendanceStats(records)` runs on the **full, unfiltered** list:
 
-| Output | Formula |
-| --- | --- |
-| `totalPresent` | count of records where `status === 'hadir'` |
-| `totalAbsent` | `records.length - totalPresent` |
-| `totalRecords` | `totalPresent + totalAbsent` (always `records.length`) |
-| `percentage` | `totalRecords === 0 ? 0 : Math.round(totalPresent / totalRecords * 100)` |
-| `minimumPercentage` | constant `75` (`ATTENDANCE_MIN_PERCENTAGE`) |
-| `isEligible` | `totalRecords > 0 && percentage >= 75` |
+| Output              | Formula                                                                  |
+| ------------------- | ------------------------------------------------------------------------ |
+| `totalPresent`      | count of records where `status === 'hadir'`                              |
+| `totalAbsent`       | `records.length - totalPresent`                                          |
+| `totalRecords`      | `totalPresent + totalAbsent` (always `records.length`)                   |
+| `percentage`        | `totalRecords === 0 ? 0 : Math.round(totalPresent / totalRecords * 100)` |
+| `minimumPercentage` | constant `75` (`ATTENDANCE_MIN_PERCENTAGE`)                              |
+| `isEligible`        | `totalRecords > 0 && percentage >= 75`                                   |
 
 The page applies month/year/status filters only to the visible list. Stats and the 75% ring
 never change when a filter changes.
@@ -327,7 +325,7 @@ changed to consume `stats` from the server. Do not paginate `data` under this co
 - [ ] `data[].eventDate` is `YYYY-MM-DD`; `checkInTime` is `HH:mm` in WIB or `null`.
 - [ ] `data[].id` is unique; `(user_id, event_id)` has no duplicates.
 - [ ] Completed events only; absent rows exist for non-scanners, including late registrants.
-- [ ] `user_id` from the body is validated against the session; another user's records are never returned.
+- [ ] `user_id` in the body is ignored/rejected; the session cookie determines the caller and another user's records are never returned.
 - [ ] Failure messages are Indonesian and arrive in the body (`status: "failed" | "error"`).
 - [ ] A revoked/invalid session cannot obtain data (document the chosen 200-vs-401 strategy).
 
@@ -342,11 +340,11 @@ plus aggregates. Leader calls also send `leader_id` and `zone` (existing client 
 `src/utils/leader/api.js`); the backend must still derive region from the leader session, never
 from `zone` alone.
 
-| Action | File | Purpose | Key request fields | Proposed response payload |
-| --- | --- | --- | --- | --- |
-| `get_attendance_recap` | `admin.php`, `leader.php` | Event list + global stats | `search`, `date_from`, `date_to`, `status`, `page`, `limit` | `{ stats: { totalEvents, totalPresent, totalAbsent, percentage }, data: [{ eventId, eventName, eventDate, totalPresent, totalAbsent, percentage }], meta: { page, limit, total, totalPages } }` |
-| `get_attendance_event_detail` | `admin.php`, `leader.php` | One event + participant list | `event_id`, `status` (`all`\|`hadir`\|`absen`), `search`, `page`, `limit` | `{ event: { eventId, eventName, eventDate, startTime, endTime }, stats: { totalCongregants, totalPresent, totalAbsent, percentage }, data: [{ userId, fullName, regionId, regionName, checkInTime, status }], meta: {...} }` |
-| `get_attendance_user_history` | `admin.php`, `leader.php` | One congregant's event history | `user_id`, optional `year`, `month` | `{ user: { userId, fullName, regionName }, data: [AttendanceRecord], meta: {...} }` |
+| Action                        | File                      | Purpose                        | Key request fields                                                        | Proposed response payload                                                                                                                                                                                                    |
+| ----------------------------- | ------------------------- | ------------------------------ | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `get_attendance_recap`        | `admin.php`, `leader.php` | Event list + global stats      | `search`, `date_from`, `date_to`, `status`, `page`, `limit`               | `{ stats: { totalEvents, totalPresent, totalAbsent, percentage }, data: [{ eventId, eventName, eventDate, totalPresent, totalAbsent, percentage }], meta: { page, limit, total, totalPages } }`                              |
+| `get_attendance_event_detail` | `admin.php`, `leader.php` | One event + participant list   | `event_id`, `status` (`all`\|`hadir`\|`absen`), `search`, `page`, `limit` | `{ event: { eventId, eventName, eventDate, startTime, endTime }, stats: { totalCongregants, totalPresent, totalAbsent, percentage }, data: [{ userId, fullName, regionId, regionName, checkInTime, status }], meta: {...} }` |
+| `get_attendance_user_history` | `admin.php`, `leader.php` | One congregant's event history | `user_id`, optional `year`, `month`                                       | `{ user: { userId, fullName, regionName }, data: [AttendanceRecord], meta: {...} }`                                                                                                                                          |
 
 Notes for those endpoints:
 

@@ -168,6 +168,22 @@ export const getSchedules = async (userId) => {
   }
 };
 
+export const getMyAttendance = async () => {
+  try {
+    // NO user_id IS SENT: THE PHP SESSION COOKIE IDENTIFIES THE JAMAAH (PRD 7.4)
+    const response = await api.post('user.php', {
+      action: 'get_my_attendance',
+    });
+
+    return response.data;
+  } catch (error) {
+    const message =
+      error.response?.data?.message || 'Gagal memuat riwayat absensi.';
+
+    throw new Error(message, { cause: error });
+  }
+};
+
 export const attendanceAPI = async (payload) => {
   if (!payload)
     return {

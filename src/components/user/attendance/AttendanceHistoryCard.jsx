@@ -1,9 +1,9 @@
-import { MdSchedule } from 'react-icons/md';
+import AttendanceStatusBadge from './AttendanceStatusBadge';
 import {
   formatCheckInTime,
   formatShortDate,
 } from '../../../utils/helpers/dateConversion';
-import AttendanceStatusBadge from './AttendanceStatusBadge';
+import { IconClock } from '../../../utils/helpers/decorations';
 
 /**
  * Mobile history card (< md). Keeps the PRD 8.2 rule: no wide tables on phones.
@@ -25,7 +25,7 @@ export default function AttendanceHistoryCard({ record }) {
       </div>
 
       <div className="mt-3 flex items-center gap-1.5 border-t border-slate-100 pt-2.5 text-xs">
-        <MdSchedule
+        <IconClock
           className="h-4 w-4 shrink-0 text-slate-400"
           aria-hidden="true"
         />

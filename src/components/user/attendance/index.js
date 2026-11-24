@@ -3,10 +3,13 @@ import AttendanceHistoryCard from './AttendanceHistoryCard';
 import AttendanceHistorySection from './AttendanceHistorySection';
 import AttendanceHistoryTable from './AttendanceHistoryTable';
 import AttendanceRateCard from './AttendanceRateCard';
-import { AttendanceEmptyState, AttendanceErrorState } from './AttendanceState';
+import {
+  AttendanceEmptyState,
+  AttendanceErrorState,
+  AttendanceLoadingState,
+} from './AttendanceState';
 import AttendanceStatGrid from './AttendanceStatGrid';
 import { AttendanceStatusBadge } from '../../ui/global/StatusComponents';
-import { AttendanceSkeleton } from '../../ui/global/skeletons/SkeletonLoading';
 
 export {
   AttendanceFilterBar,
@@ -16,7 +19,7 @@ export {
   AttendanceRateCard,
   AttendanceEmptyState,
   AttendanceErrorState,
+  AttendanceLoadingState,
   AttendanceStatGrid,
   AttendanceStatusBadge,
-  AttendanceSkeleton,
 };

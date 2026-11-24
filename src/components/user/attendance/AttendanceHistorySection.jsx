@@ -1,4 +1,4 @@
-import AttendanceEmptyState from './AttendanceState';
+import { AttendanceEmptyState } from './AttendanceState';
 import AttendanceHistoryCard from './AttendanceHistoryCard';
 import AttendanceHistoryTable from './AttendanceHistoryTable';
 

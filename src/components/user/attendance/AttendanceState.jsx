@@ -3,14 +3,32 @@ import {
   IconCalendarMonth,
   IconRefresh,
 } from '../../../utils/helpers/decorations';
+import { AttendanceSkeleton } from '../../ui/global/skeletons/SkeletonLoading';
 
 /**
- * Shown when the filtered history is empty. The reset action only appears when a
- * filter is actually active, so the button never does nothing.
+ * Loading placeholder for the first request. Reuses the global attendance skeleton
+ * so the real layout (stats, rate card, filters, list) is mirrored while it loads.
+ */
+export function AttendanceLoadingState() {
+  return (
+    <div role="status" aria-live="polite">
+      <AttendanceSkeleton />
+    </div>
+  );
+}
+
+/**
+ * Shown when the filtered history is empty. With real data this covers two cases:
+ * a congregant with no completed events yet, and a filter combination with no match.
+ * The reset action only appears when a filter is actually active, so the button
+ * never does nothing.
  */
 export function AttendanceEmptyState({ isFilterActive, onReset }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50/70 px-4 py-12 text-center">
+    <div
+      role="status"
+      className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50/70 px-4 py-12 text-center"
+    >
       <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-sea-green-100/70 text-sea-green-600">
         <IconCalendarMonth className="h-8 w-8" aria-hidden="true" />
       </div>
@@ -41,7 +59,10 @@ export function AttendanceEmptyState({ isFilterActive, onReset }) {
 
 export function AttendanceErrorState({ message, onRetry }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-2xl border border-rose-200/70 bg-rose-50/60 px-4 py-12 text-center">
+    <div
+      role="alert"
+      className="flex flex-col items-center justify-center rounded-2xl border border-rose-200/70 bg-rose-50/60 px-4 py-12 text-center"
+    >
       <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-rose-100 text-rose-500">
         <IconAlertCircle className="h-8 w-8" aria-hidden="true" />
       </div>

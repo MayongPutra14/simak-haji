@@ -9,18 +9,20 @@ const COLUMNS = [
   {
     key: 'eventName',
     header: 'Kegiatan',
-    className: 'min-w-56 font-semibold text-slate-800',
+    className: 'max-w-56 font-semibold text-slate-800',
   },
   {
     key: 'eventDate',
     header: 'Tanggal',
+    align: 'center',
     className: 'whitespace-nowrap text-slate-500',
     render: (record) => formatShortDate(record.eventDate),
   },
   {
     key: 'checkInTime',
-    header: 'Jam',
+    header: 'Waktu Absen',
     className: 'whitespace-nowrap',
+    align: 'center',
     render: (record) => (
       <span
         className={
@@ -36,7 +38,7 @@ const COLUMNS = [
   {
     key: 'status',
     header: 'Status',
-    align: 'right',
+    align: 'center',
     className: 'whitespace-nowrap',
     render: (record) => <AttendanceStatusBadge status={record.status} />,
   },

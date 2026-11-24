@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @theme {
-  --: 'Poppins', sans-serif;
+  --font-sans: 'Poppins', sans-serif;
 
   /* GREEN COLOR */
   --color-sea-green-50: #f0fdf5;
@@ -28,6 +28,15 @@
   --color-galliano-800: #89500a;
   --color-galliano-900: #74410f;
   --color-galliano-950: #442104;
+}
+
+/* GLOBAL BASE STYLES */
+@layer base {
+  html,
+  body {
+    /* apply the sans font family globally across all pages */
+    font-family: var(--font-sans);
+  }
 }
 
 /* poppins-regular - latin */

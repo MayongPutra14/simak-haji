@@ -8,6 +8,115 @@ import {
 export const isPresent = (record) =>
   record?.status === ATTENDANCE_STATUS.PRESENT;
 
+const pickFirstValue = (...values) =>
+  values.find((value) => value !== undefined && value !== null);
+
+/**
+ * Normalize `checkInTime` / `waktu_absen` into 'HH:mm' or null.
+ * Empty strings, 'NULL' and MySQL zero timestamps must become null, never '00:00'.
+ */
+export const normalizeCheckInTime = (value) => {
+  if (value === null || value === undefined) return null;
+
+  const text = String(value).trim();
+  if (!text || text.toUpperCase() === 'NULL') return null;
+  if (text.startsWith('0000-00-00')) return null;
+
+  const match = text.match(/(\d{1,2}):(\d{2})/);
+  if (!match) return null;
+
+  return `${match[1].padStart(2, '0')}:${match[2]}`;
+};
+
+/**
+ * The API status is 'hadir' | 'absen'. English aliases are tolerated, and when the
+ * field is missing the status is derived from the check-in time so a scanned row is
+ * never displayed as absent.
+ */
+export const normalizeAttendanceStatus = (status, checkInTime) => {
+  const value = String(status ?? '')
+    .trim()
+    .toLowerCase();
+
+  if (value === ATTENDANCE_STATUS.PRESENT || value === 'present') {
+    return ATTENDANCE_STATUS.PRESENT;
+  }
+
+  if (value === ATTENDANCE_STATUS.ABSENT || value === 'absent') {
+    return ATTENDANCE_STATUS.ABSENT;
+  }
+
+  return checkInTime ? ATTENDANCE_STATUS.PRESENT : ATTENDANCE_STATUS.ABSENT;
+};
+
+/**
+ * Keep the date filterable and sortable as 'YYYY-MM-DD'. A MySQL datetime is
+ * truncated to its date part, and 'DD-MM-YYYY' / 'DD/MM/YYYY' are flipped.
+ */
+export const normalizeEventDate = (value) => {
+  if (!value) return '';
+
+  const text = String(value).trim();
+
+  const iso = text.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (iso) return `${iso[1]}-${iso[2]}-${iso[3]}`;
+
+  const local = text.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
+  if (local) {
+    return `${local[3]}-${local[2].padStart(2, '0')}-${local[1].padStart(2, '0')}`;
+  }
+
+  return text;
+};
+
+/**
+ * Map one backend record into the UI shape used by the page and cards.
+ *
+ * Contract is camelCase (docs/api-contract-attendance.md 2.2); the snake_case keys
+ * from 3.1 are also accepted so a database-shaped payload does not blank the page.
+ */
+export const normalizeAttendanceRecord = (record = {}, index = 0) => {
+  const checkInTime = normalizeCheckInTime(
+    pickFirstValue(
+      record.checkInTime,
+      record.check_in_time,
+      record.waktu_absen,
+    ),
+  );
+
+  const eventId = pickFirstValue(record.eventId, record.event_id, '');
+  const rawId = pickFirstValue(record.id, record.attendance_id, eventId);
+  const id = rawId === '' ? `attendance-${index}` : rawId;
+
+  return {
+    id,
+    eventId,
+    eventName: pickFirstValue(
+      record.eventName,
+      record.event_name,
+      record.event_nama,
+      '',
+    ),
+    eventDate: normalizeEventDate(
+      pickFirstValue(record.eventDate, record.event_date, record.event_tanggal),
+    ),
+    checkInTime,
+    status: normalizeAttendanceStatus(
+      pickFirstValue(record.status, record.kehadiran),
+      checkInTime,
+    ),
+  };
+};
+
+/**
+ * Defensive list mapping: the hook must never receive null, because
+ * `sortAttendanceRecords` spreads the array.
+ */
+export const normalizeAttendanceRecords = (records) =>
+  (Array.isArray(records) ? records : [])
+    .filter((record) => record && typeof record === 'object')
+    .map((record, index) => normalizeAttendanceRecord(record, index));
+
 /**
  * Split an 'YYYY-MM-DD' value into filterable parts without timezone surprises.
  */

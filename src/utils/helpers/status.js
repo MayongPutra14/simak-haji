@@ -1,5 +1,5 @@
 export const getAttendanceStatus = (status, isAttended) => {
-  if (isAttended === 1) {
+  if (isAttended) {
     return {
       label: 'Hadir',
       badgeClass: 'bg-sea-green-100 text-sea-green-700',
