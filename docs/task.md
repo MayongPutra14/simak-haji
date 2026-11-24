@@ -96,8 +96,9 @@ Phase 1 decisions (approved):
 ### 3.1 Backend inspection & contract
 - [ ] Inspect `attendances`, events, users tables, QR scan flow, production data
 - [ ] Choose between `event_attendance_records` (PRD §6.1) and deriving from `attendances`
-- [ ] Confirm endpoint convention (flat PHP `user.php` / `admin.php` / `leader.php` + `action`, not the REST paths in PRD §7)
-- [ ] Agree request/response payloads incl. stats, filters, pagination, region scoping
+- [x] Confirm endpoint convention (flat PHP `user.php` / `admin.php` / `leader.php` + `action`, not the REST paths in PRD §7)
+- [x] Document the jamaah attendance contract in `docs/api-contract-attendance.md` (proposal for the backend repo)
+- [ ] Agree request/response payloads incl. stats, filters, pagination, region scoping with the backend
 
 ### 3.2 Frontend integration
 - [ ] Add `getMyAttendance` to `src/utils/user/api.js`
