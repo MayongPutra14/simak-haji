@@ -360,7 +360,7 @@ export default function HajjDuaDetailPage() {
   // Render error view if categoryId is invalid
   if (!category) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-950 to-emerald-900 p-8 flex flex-col items-center justify-center font-sans text-slate-100">
+      <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-950 to-emerald-900 p-8 flex flex-col items-center justify-center  text-slate-100">
         <p className="text-slate-200 mb-6">Kategori tidak ditemukan.</p>
         <button
           onClick={handleBack}
@@ -373,7 +373,7 @@ export default function HajjDuaDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-950 to-emerald-900 font-sans pb-24 text-slate-100">
+    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-950 to-emerald-900  pb-24 text-slate-100">
       <PrayerReadingHeader
         onNavigateBack={handleBack}
         onOpenNavigation={() => setIsNavOpen(true)}

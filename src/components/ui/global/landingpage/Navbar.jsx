@@ -35,7 +35,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="fixed left-0 right-0 z-40 flex justify-center w-full font-sans pointer-events-none top-4">
+      <header className="fixed left-0 right-0 z-40 flex justify-center w-full  pointer-events-none top-4">
         <motion.nav
           variants={motionFrames.blurVariants}
           initial="hidden"

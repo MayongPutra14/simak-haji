@@ -14,6 +14,7 @@ import {
   IconCheckCircle,
   IconCalendar,
 } from '../../../utils/helpers/decorations';
+import { CARD_TONES } from '../../../utils/helpers/constant';
 
 export const UnderDevelopment = ({ userRole }) => {
   const navigate = useNavigate();
@@ -374,5 +375,54 @@ export const EmptyStateFallback = ({
         </button>
       )}
     </div>
+  );
+};
+
+export const AttendanceStatCard = ({
+  label,
+  value,
+  unit,
+  hint,
+  tone,
+  icon: Icon,
+  hintIcon: HintIcon,
+}) => {
+  const style = CARD_TONES[tone] ?? CARD_TONES.present;
+
+  return (
+    <article
+      aria-label={label}
+      className={`flex flex-col justify-between rounded-2xl border p-4 shadow-sm transition-shadow hover:shadow-md ${style.card}`}
+    >
+      <div className="mb-2 flex items-center justify-between gap-2">
+        <p className={`text-xs font-semibold uppercase ${style.label}`}>
+          {label}
+        </p>
+        <span
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border ${style.iconWrap}`}
+        >
+          <Icon className="h-4 w-4" aria-hidden="true" />
+        </span>
+      </div>
+
+      <div className="flex items-baseline gap-1.5">
+        <data value={value} className={`text-2xl font-bold ${style.value}`}>
+          {value}
+        </data>
+        {unit && (
+          <span className="text-xs md:text-lg text-white font-semibold">
+            {unit}
+          </span>
+        )}
+      </div>
+
+      <div className="mt-1 flex items-center gap-1.5">
+        <HintIcon
+          className={`h-3.5 w-3.5 shrink-0 ${style.hintIcon}`}
+          aria-hidden="true"
+        />
+        <span className={`text-[10px] font-medium ${style.hint}`}>{hint}</span>
+      </div>
+    </article>
   );
 };

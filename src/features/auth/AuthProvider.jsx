@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback } from 'react';
+import { api } from '../../utils/user/api';
 import { AuthContext } from './AuthContext';
 
 export default function AuthProvider({ children }) {
@@ -20,12 +21,18 @@ export default function AuthProvider({ children }) {
   }, []);
 
   //  LOGOUT FUNCTION
-  const logout = useCallback(() => {
-    setUser(null);
-    localStorage.removeItem('user_data');
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    localStorage.removeItem('identity_form_draft_guest');
+  const logout = useCallback(async () => {
+    try {
+      await api.post('logout.php');
+    } catch (error) {
+      console.error('Failed delete session from server:', error);
+    } finally {
+      setUser(null);
+      localStorage.removeItem('user_data');
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      localStorage.removeItem('identity_form_draft_guest');
+    }
   }, []);
 
   // FUNCTION TO CHANGE is_complete TO true AFTER FILL THE FORM

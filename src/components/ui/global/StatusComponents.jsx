@@ -1,3 +1,10 @@
+import { ATTENDANCE_STATUS } from '../../../utils/helpers/constant';
+import { getAttendanceStatus } from '../../../utils/helpers/status';
+import {
+  IconCheckCircleFill,
+  IconCancelCircle,
+} from '../../../utils/helpers/decorations';
+
 // Helper Component: Display Key and Value with Fallback Handling
 export function DetailField({ label, value, icon: Icon, isFlex = false }) {
   const isEmpty =
@@ -191,3 +198,24 @@ export const GetRoleBadge = (rawRole) => {
     </span>
   );
 };
+
+// User: Attendace status
+
+/**
+ * Hadir / Absen badge shared by the jamaah page and, later, the admin/leader pages.
+ * Reuses the project's `getAttendanceStatus` so colors stay consistent.
+ */
+export function AttendanceStatusBadge({ status, className = '' }) {
+  const isPresent = status === ATTENDANCE_STATUS.PRESENT;
+  const config = getAttendanceStatus(status, isPresent);
+  const Icon = isPresent ? IconCheckCircleFill : IconCancelCircle;
+
+  return (
+    <span
+      className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold leading-4 ${config.badgeClass} ${className}`}
+    >
+      <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+      {config.label}
+    </span>
+  );
+}

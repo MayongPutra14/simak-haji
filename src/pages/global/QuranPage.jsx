@@ -39,7 +39,7 @@ export default function QuranPage() {
 
   return (
     // MAIN CONTAINER
-    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100 font-sans selection:bg-teal-400 selection:text-emerald-950 pb-16">
+    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-900 to-emerald-900 text-slate-100  selection:bg-teal-400 selection:text-emerald-950 pb-16">
       {/* NAVIGATION BAR */}
       <nav className="sticky top-0 z-50 bg-emerald-950/80 backdrop-blur-md border-b border-emerald-800/50 px-4 sm:px-6 lg:px-8 py-3">
         <div className="max-w-7xl mx-auto flex items-center justify-between">

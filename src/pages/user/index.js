@@ -5,6 +5,7 @@ import UserSchedulePage from './UserSchedulePage';
 import IdentityPage from './IdentityPage';
 import ScanQrPage from './ScanQrPage';
 import UserMaterialPage from './UserMaterialPage';
+import UserAttendancePage from './UserAttendancePage';
 
 export {
   UserLayout,
@@ -13,5 +14,6 @@ export {
   UserSchedulePage,
   IdentityPage,
   ScanQrPage,
-  UserMaterialPage
+  UserMaterialPage,
+  UserAttendancePage,
 };

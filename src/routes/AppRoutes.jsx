@@ -51,6 +51,7 @@ import {
   IdentityPage,
   ScanQrPage,
   UserMaterialPage,
+  UserAttendancePage,
 } from '../pages/user/index';
 
 // LEADER
@@ -177,6 +178,7 @@ export default function AppRoutes() {
             <Route path="profile" element={<UserProfilePage />} />
             <Route path="events" element={<UserSchedulePage />} />
             <Route path="scan" element={<ScanQrPage />} />
+            <Route path="attendance" element={<UserAttendancePage />} />
           </Route>
 
           {/* FULL SCREEN MATERIAL PDF */}

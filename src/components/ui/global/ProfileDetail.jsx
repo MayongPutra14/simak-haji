@@ -10,8 +10,8 @@ import { getDocumentStatus } from '../../../utils/helpers/status';
 import { StatusBadge } from './StatusComponents';
 import { DetailField } from './StatusComponents';
 import {
-  formatTanggalIndonesia,
   hitungUmur,
+  formatDateIndonesia,
 } from '../../../utils/helpers/dateConversion';
 import {
   SkeletonProfileImage,
@@ -77,7 +77,7 @@ export default function ProfileDetail({ data, isLoading = false }) {
                 />
                 <DetailField
                   label="Tanggal Lahir"
-                  value={formatTanggalIndonesia(user.birthDate)}
+                  value={formatDateIndonesia(user.birthDate)}
                 />
                 <DetailField
                   label="Usia"

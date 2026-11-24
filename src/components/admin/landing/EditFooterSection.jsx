@@ -61,7 +61,7 @@ export default function EditFooterSection({
   return (
     <form
       onSubmit={handleSubmit(handleSave)}
-      className="w-[95%] md:w-[98%] mx-auto py-4 space-y-8 font-sans"
+      className="w-[95%] md:w-[98%] mx-auto py-4 space-y-8 "
     >
       {/* SECTION HEADER */}
       <div>

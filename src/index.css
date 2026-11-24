@@ -30,6 +30,15 @@
   --color-galliano-950: #442104;
 }
 
+/* GLOBAL BASE STYLES */
+@layer base {
+  html,
+  body {
+    /* apply the sans font family globally across all pages */
+    font-family: var(--font-sans);
+  }
+}
+
 /* poppins-regular - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */

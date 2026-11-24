@@ -150,7 +150,7 @@ export default function HajjDuaListPage() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-950 to-emerald-900 p-4 md:p-8 font-sans">
+    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-teal-950 to-emerald-900 p-4 md:p-8 ">
       <div className="max-w-3xl mx-auto">
         <PrayerListHeader title={category.title} onNavigateBack={handleBack} />
         <CategoryInformation

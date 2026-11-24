@@ -54,14 +54,34 @@ export const hitungUmur = (birthDay) => {
 };
 
 /**
- * Change format to Indonesia date
- * Example: '2026-08-25' become '25 Agustus 2026'
+ * Short Indonesian date for compact tables/cards
+ * Example: '2026-01-11' become '11 Jan 2026'
  */
-export const formatTanggalIndonesia = (date) => {
-  if (!date) return '-';
-  const opsi = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(date).toLocaleDateString('id-ID', opsi);
-};
+export function formatShortDate(dateString) {
+  if (!dateString) return '-';
+
+  const dateObj = new Date(String(dateString).replace(' ', 'T'));
+  if (Number.isNaN(dateObj.getTime())) return dateString;
+
+  return new Intl.DateTimeFormat('id-ID', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  }).format(dateObj);
+}
+
+/**
+ * Format a stored attendance time for display
+ * Example: '08:05' or '08:05:00' become '08.05 WIB'; empty value becomes '-'
+ */
+export function formatCheckInTime(timeString) {
+  if (!timeString) return '-';
+
+  const [hours, minutes] = String(timeString).split(':');
+  if (!hours || !minutes) return String(timeString);
+
+  return `${hours}.${minutes} WIB`;
+}
 
 /**
  * PARSE DATETIME FROM BACKEND FOR FORM INPUTS

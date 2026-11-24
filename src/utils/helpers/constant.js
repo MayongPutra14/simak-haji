@@ -282,3 +282,55 @@ export const EVENT_FILTER_TABS = [
   { key: 'live', label: 'Berlangsung' },
   { key: 'selesai', label: 'Selesai' },
 ];
+
+// HELPER ATTENDANCE FOT USER(Absensi Saya)
+export const ATTENDANCE_STATUS = {
+  PRESENT: 'hadir',
+  ABSENT: 'absen',
+};
+
+export const ATTENDANCE_ALL_VALUE = 'all';
+
+// MINIMUM ATTENDANCE FOR THE ISTITHA'AH RECOMMENDATION (PRD / MOCKUP FOOTER NOTE)
+export const ATTENDANCE_MIN_PERCENTAGE = 75;
+
+export const ATTENDANCE_STATUS_OPTIONS = [
+  { value: ATTENDANCE_ALL_VALUE, label: 'Semua Status' },
+  { value: ATTENDANCE_STATUS.PRESENT, label: 'Hadir' },
+  { value: ATTENDANCE_STATUS.ABSENT, label: 'Tidak Hadir' },
+];
+
+export const MONTH_LABELS = [
+  'Januari',
+  'Februari',
+  'Maret',
+  'April',
+  'Mei',
+  'Juni',
+  'Juli',
+  'Agustus',
+  'September',
+  'Oktober',
+  'November',
+  'Desember',
+];
+
+// STATISTIC VALUES ON USER ABSENSI
+export const CARD_TONES = {
+  present: {
+    card: 'border-orange-200 bg-orange-400 hover:shadow-orange-200/80',
+    label: 'text-white',
+    value: 'text-white',
+    iconWrap: 'border-orange-200/60 bg-orange-50/60 text-white',
+    hint: 'text-white/90',
+    hintIcon: 'text-white',
+  },
+  absent: {
+    card: 'border-transparent bg-gradient-to-br from-pink-500 to-rose-600 hover:shadow-pink-600/40',
+    label: 'text-white',
+    value: 'text-white',
+    iconWrap: 'border-white/20 bg-white/20 backdrop-blur-xs text-white',
+    hint: 'text-white/90',
+    hintIcon: 'text-white',
+  },
+};

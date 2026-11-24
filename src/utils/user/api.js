@@ -4,6 +4,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const api = axios.create({
   baseURL: BASE_URL,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -164,6 +165,22 @@ export const getSchedules = async (userId) => {
   } catch (error) {
     console.error('Error fetching schedules:', error);
     throw new Error('Gagal mengambil jadwal', { cause: error });
+  }
+};
+
+export const getMyAttendance = async () => {
+  try {
+    // NO user_id IS SENT: THE PHP SESSION COOKIE IDENTIFIES THE JAMAAH (PRD 7.4)
+    const response = await api.post('user.php', {
+      action: 'get_my_attendance',
+    });
+
+    return response.data;
+  } catch (error) {
+    const message =
+      error.response?.data?.message || 'Gagal memuat riwayat absensi.';
+
+    throw new Error(message, { cause: error });
   }
 };
 
