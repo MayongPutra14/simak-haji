@@ -27,7 +27,7 @@ prompt
 !README,md
 *.env
 .env.*
-db.json
 api_docs
 !example.env
-docs
+!AGENTS.md
+!docs/**/*.md
