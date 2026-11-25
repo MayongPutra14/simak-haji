@@ -1,0 +1,176 @@
+import { useCallback, useEffect, useState } from 'react';
+import { getJamaahAttendanceHistoryMock } from '../../data/mock/attendanceRecap';
+import {
+  calculateAttendanceStats,
+  sortAttendanceRecords,
+} from '../../utils/helpers/attendance';
+import { ATTENDANCE_ALL_VALUE } from '../../utils/helpers/constant';
+import {
+  ATTENDANCE_RECAP_PAGE_SIZE,
+  ATTENDANCE_ZONE_NOT_SET_MESSAGE,
+  normalizeJamaahHistoryRecords,
+  normalizeJamaahIdentity,
+  paginateRows,
+} from '../../utils/helpers/attendanceRecap';
+
+const FALLBACK_ERROR_MESSAGE = 'Gagal memuat riwayat kehadiran jamaah.';
+const SESSION_ERROR_MESSAGE = 'Sesi login tidak valid, silakan login kembali.';
+const JAMAHA_NOT_FOUND_MESSAGE = 'Data jamaah tidak ditemukan.';
+
+const getEmptyPagination = (perPage) => paginateRows([], 1, perPage).pagination;
+
+/**
+ * Data hook for one jamaah's attendance history.
+ *
+ * History stats are all-time and ignore the search/month/status filters, the
+ * same rule as the jamaah "Absensi Saya" page (Phase 1).
+ *
+ * @param {{scope: object, userId: string|number, search?: string,
+ *          month?: string, status?: string, page?: number,
+ *          perPage?: number}} options
+ */
+export const useJamaahAttendanceHistory = ({
+  scope,
+  userId,
+  search = '',
+  month = ATTENDANCE_ALL_VALUE,
+  status = ATTENDANCE_ALL_VALUE,
+  page = 1,
+  perPage = ATTENDANCE_RECAP_PAGE_SIZE,
+} = {}) => {
+  const role = scope?.role ?? '';
+  const scopeZone = scope?.zone ?? '';
+  const isZoneLocked = Boolean(scope?.isZoneLocked);
+  const isBlocked = Boolean(scope?.isBlocked);
+
+  const [jamaah, setJamaah] = useState(null);
+  const [records, setRecords] = useState([]);
+  const [stats, setStats] = useState(() => calculateAttendanceStats([]));
+  const [pagination, setPagination] = useState(() =>
+    getEmptyPagination(perPage),
+  );
+  const [isLoading, setIsLoading] = useState(
+    () => Boolean(userId) && !isBlocked,
+  );
+  const [error, setError] = useState(null);
+  const [requestId, setRequestId] = useState(0);
+
+  const refetch = useCallback(
+    () => setRequestId((previous) => previous + 1),
+    [],
+  );
+
+  useEffect(() => {
+    let isSubscribed = true;
+
+    const loadHistory = async () => {
+      const resetHistory = () => {
+        setJamaah(null);
+        setRecords([]);
+        setStats(calculateAttendanceStats([]));
+        setPagination(getEmptyPagination(perPage));
+      };
+
+      if (isBlocked) {
+        if (!isSubscribed) return;
+
+        resetHistory();
+        setError(ATTENDANCE_ZONE_NOT_SET_MESSAGE);
+        setIsLoading(false);
+        return;
+      }
+
+      if (!role) {
+        if (!isSubscribed) return;
+
+        resetHistory();
+        setError(SESSION_ERROR_MESSAGE);
+        setIsLoading(false);
+        return;
+      }
+
+      if (!userId) {
+        if (!isSubscribed) return;
+
+        resetHistory();
+        setError(JAMAHA_NOT_FOUND_MESSAGE);
+        setIsLoading(false);
+        return;
+      }
+
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const response = await getJamaahAttendanceHistoryMock({
+          scope: {
+            role,
+            zone: scopeZone || null,
+            isZoneLocked,
+            isBlocked,
+          },
+          userId,
+          search,
+          month,
+          status,
+          page,
+          perPage,
+        });
+
+        if (!isSubscribed) return;
+
+        if (response?.status === 'success') {
+          const data = response.data || {};
+          const normalizedRecords = sortAttendanceRecords(
+            normalizeJamaahHistoryRecords(data.records),
+          );
+
+          setJamaah(data.jamaah ? normalizeJamaahIdentity(data.jamaah) : null);
+          setRecords(normalizedRecords);
+          setStats(data.stats || calculateAttendanceStats([]));
+          setPagination(data.pagination || getEmptyPagination(perPage));
+        } else {
+          resetHistory();
+          setError(response?.message || FALLBACK_ERROR_MESSAGE);
+        }
+      } catch (requestError) {
+        if (!isSubscribed) return;
+
+        resetHistory();
+        setError(requestError?.message || FALLBACK_ERROR_MESSAGE);
+      } finally {
+        if (isSubscribed) setIsLoading(false);
+      }
+    };
+
+    loadHistory();
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [
+    role,
+    scopeZone,
+    isZoneLocked,
+    isBlocked,
+    userId,
+    search,
+    month,
+    status,
+    page,
+    perPage,
+    requestId,
+  ]);
+
+  return {
+    jamaah,
+    records,
+    stats,
+    pagination,
+    isLoading,
+    error,
+    refetch,
+  };
+};
+
+export default useJamaahAttendanceHistory;

@@ -1,0 +1,981 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="web_dashboard" name="shell-type" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'surface-variant': '#d8e3fb',
+              error: '#e11d48',
+              'on-surface': '#0f172a',
+              'inverse-on-surface': '#ecf1ff',
+              tertiary: '#006a42',
+              'surface-container-low': '#f8fafc',
+              'surface-container-lowest': '#ffffff',
+              'surface-container': '#f1f5f9',
+              'surface-container-high': '#e2e8f0',
+              'on-surface-variant': '#64748b',
+              background: '#f4f6f8',
+              surface: '#f4f6f8',
+              primary: '#15803d',
+              'brand-dark': '#0e3d23',
+              'brand-sidebar': '#114728',
+            },
+            fontFamily: {
+              sans: ['Plus Jakarta Sans', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-[#f4f6f9] font-sans antialiased min-h-screen text-slate-800">
+    <!-- Left Sidebar (Dark Forest Green matching IMAGE_3) -->
+    <aside
+      class="fixed left-0 top-0 h-full w-64 bg-[#0e3d23] text-white z-50 flex flex-col shadow-xl"
+    >
+      <!-- Brand / Logo Area -->
+      <div class="h-20 px-6 flex items-center gap-3.5 border-b border-white/10">
+        <div
+          class="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-300 shadow-inner"
+        >
+          <span class="material-symbols-outlined text-[24px]">mosque</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-bold text-lg text-white tracking-wide leading-tight"
+            >SIMAK</span
+          >
+          <span class="text-xs text-emerald-200/80 font-medium leading-none"
+            >Haji Mandiri Karawang</span
+          >
+        </div>
+      </div>
+      <!-- Section Tag -->
+      <div class="px-5 pt-4 pb-2">
+        <span
+          class="text-[11px] font-bold text-emerald-300/70 uppercase tracking-wider px-2"
+          >Portal Administrasi</span
+        >
+      </div>
+      <!-- Navigation links -->
+      <nav class="flex-1 px-3 space-y-1.5 overflow-y-auto pt-1">
+        <a
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-emerald-100/80 hover:bg-white/10 hover:text-white transition-all text-sm font-medium"
+          data-path="dashboard"
+          href="#"
+        >
+          <span class="material-symbols-outlined text-[20px]">grid_view</span>
+          <span>Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-emerald-100/80 hover:bg-white/10 hover:text-white transition-all text-sm font-medium"
+          data-path="data-jamaah"
+          href="#"
+        >
+          <span class="material-symbols-outlined text-[20px]">groups</span>
+          <span>Data Jamaah</span>
+        </a>
+        <!-- Active Link (Clean mint/emerald highlight matching IMAGE_3) -->
+        <a
+          aria-current="page"
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-emerald-500 text-white font-semibold shadow-md shadow-emerald-950/30 transition-all text-sm"
+          data-path="absensi"
+          href="#"
+        >
+          <span class="material-symbols-outlined text-[20px]">fact_check</span>
+          <span>Absensi</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-emerald-100/80 hover:bg-white/10 hover:text-white transition-all text-sm font-medium"
+          data-path="kegiatan-jadwal"
+          href="#"
+        >
+          <span class="material-symbols-outlined text-[20px]"
+            >calendar_month</span
+          >
+          <span>Kegiatan/Jadwal</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-emerald-100/80 hover:bg-white/10 hover:text-white transition-all text-sm font-medium"
+          data-path="keuangan"
+          href="#"
+        >
+          <span class="material-symbols-outlined text-[20px]"
+            >account_balance_wallet</span
+          >
+          <span>Keuangan</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-emerald-100/80 hover:bg-white/10 hover:text-white transition-all text-sm font-medium"
+          data-path="laporan"
+          href="#"
+        >
+          <span class="material-symbols-outlined text-[20px]">assessment</span>
+          <span>Laporan</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-emerald-100/80 hover:bg-white/10 hover:text-white transition-all text-sm font-medium"
+          data-path="pengaturan"
+          href="#"
+        >
+          <span class="material-symbols-outlined text-[20px]">settings</span>
+          <span>Pengaturan</span>
+        </a>
+      </nav>
+      <!-- Bottom Status / Logout -->
+      <div class="p-4 border-t border-white/10 space-y-3">
+        <div
+          class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center gap-3"
+        >
+          <span class="material-symbols-outlined text-emerald-400 text-[22px]"
+            >verified_user</span
+          >
+          <div class="flex flex-col">
+            <span class="text-xs text-white font-semibold">Status Sistem</span>
+            <span class="text-[11px] text-emerald-300">Sinkronisasi Aktif</span>
+          </div>
+        </div>
+        <a
+          class="flex items-center gap-2.5 px-3 py-2 text-rose-300 hover:text-rose-100 hover:bg-rose-500/10 rounded-lg text-sm font-semibold transition-colors"
+          href="#"
+        >
+          <span class="material-symbols-outlined text-[18px]">logout</span>
+          <span>Keluar</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Main Body Wrapper -->
+    <div class="pl-64 flex flex-col min-h-screen">
+      <!-- Top Header Bar (Clean white with modern light styling) -->
+
+      <!-- Main Content Area -->
+      <main class="w-full flex-1 px-8 py-6">
+        <div class="flex flex-col w-full space-y-6">
+          <!-- A. Page Header Card -->
+          <div
+            class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white p-5 rounded-2xl shadow-xs border border-slate-200/80"
+          >
+            <div class="flex items-start sm:items-center gap-4">
+              <a
+                class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 border border-slate-200/60 flex items-center justify-center transition-all shrink-0"
+                href="#"
+                title="Kembali ke Dashboard"
+              >
+                <span class="material-symbols-outlined text-[20px]"
+                  >arrow_back</span
+                >
+              </a>
+              <div class="flex flex-col">
+                <div class="flex items-center gap-2.5 flex-wrap">
+                  <span
+                    class="text-2xl font-extrabold text-slate-900 tracking-tight"
+                    >Rekap Absensi</span
+                  >
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-100/70 text-emerald-800 border border-emerald-200 text-xs font-semibold"
+                  >
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-emerald-600"
+                    ></span>
+                    Akses: Admin &amp; Koordinator Wilayah
+                  </span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
+                  Pantau dan kelola rekap kehadiran jamaah pada setiap kegiatan
+                  SIMAK secara terpadu.
+                </p>
+              </div>
+            </div>
+            <!-- Quick Stat Pill / Status Sync Note -->
+            <div
+              class="flex items-center gap-3 self-start md:self-auto bg-slate-50 border border-slate-200/70 px-4 py-2.5 rounded-xl"
+            >
+              <div
+                class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center"
+              >
+                <span class="material-symbols-outlined text-[20px]"
+                  >verified</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span
+                  class="text-[10px] text-slate-400 font-bold uppercase tracking-wider"
+                  >Cakupan Wilayah</span
+                >
+                <span class="text-xs sm:text-sm text-slate-800 font-bold"
+                  >Kab. Karawang (Semua Sektor)</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- B. Attendance Statistics (Vibrant 4 summary cards matching IMAGE_2 & IMAGE_3) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Card 1: TOTAL KEGIATAN (Mint / Emerald Vibrant Gradient - inspired by TOTAL JAMAAH #2dd4bf -> #10b981) -->
+            <div
+              class="bg-gradient-to-br from-[#2dd4bf] to-[#059669] p-5 rounded-2xl shadow-md text-white flex flex-col justify-between relative overflow-hidden group hover:scale-[1.01] transition-transform"
+            >
+              <div class="flex items-start justify-between">
+                <div class="flex flex-col z-10">
+                  <span
+                    class="text-xs uppercase font-extrabold tracking-wider text-white/90"
+                    >Total Kegiatan</span
+                  >
+                  <span
+                    class="text-4xl font-black text-white mt-2 drop-shadow-xs"
+                    >12</span
+                  >
+                </div>
+                <div
+                  class="w-11 h-11 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center shrink-0 border border-white/25 shadow-xs"
+                >
+                  <span class="material-symbols-outlined text-[22px]"
+                    >event_available</span
+                  >
+                </div>
+              </div>
+              <div
+                class="mt-4 pt-3 flex items-center gap-1.5 text-xs text-white/95 border-t border-white/20 font-medium"
+              >
+                <span class="material-symbols-outlined text-[16px]"
+                  >check_circle</span
+                >
+                <span>Total kegiatan yang telah selesai.</span>
+              </div>
+              <!-- Background decorative shape -->
+              <div
+                class="absolute -right-6 -bottom-6 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none"
+              ></div>
+            </div>
+            <!-- Card 2: TOTAL HADIR (Bright Energetic Orange Gradient - inspired by TOTAL ZONA AKTIF / TOTAL HADIR #ff7a00 -> #ff9800) -->
+            <div
+              class="bg-gradient-to-br from-[#ff8800] to-[#ea580c] p-5 rounded-2xl shadow-md text-white flex flex-col justify-between relative overflow-hidden group hover:scale-[1.01] transition-transform"
+            >
+              <div class="flex items-start justify-between">
+                <div class="flex flex-col z-10">
+                  <span
+                    class="text-xs uppercase font-extrabold tracking-wider text-white/90"
+                    >Total Hadir</span
+                  >
+                  <div class="flex items-baseline gap-2 mt-2">
+                    <span class="text-4xl font-black text-white drop-shadow-xs"
+                      >450</span
+                    >
+                    <span class="text-xs font-semibold text-white/80"
+                      >Jamaah</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="w-11 h-11 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center shrink-0 border border-white/25 shadow-xs"
+                >
+                  <span class="material-symbols-outlined text-[22px]"
+                    >check_circle</span
+                  >
+                </div>
+              </div>
+              <div
+                class="mt-4 pt-3 flex items-center gap-1.5 text-xs text-white/95 border-t border-white/20 font-medium"
+              >
+                <span class="material-symbols-outlined text-[16px]"
+                  >groups</span
+                >
+                <span>Akumulasi jamaah yang hadir.</span>
+              </div>
+              <!-- Background decorative shape -->
+              <div
+                class="absolute -right-6 -bottom-6 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none"
+              ></div>
+            </div>
+            <!-- Card 3: TOTAL TIDAK HADIR (Vibrant Hot Pink / Magenta Gradient - inspired by BELUM LENGKAP / TOTAL ABSEN #ec4899 -> #e11d48) -->
+            <div
+              class="bg-gradient-to-br from-[#f43f5e] to-[#be123c] p-5 rounded-2xl shadow-md text-white flex flex-col justify-between relative overflow-hidden group hover:scale-[1.01] transition-transform"
+            >
+              <div class="flex items-start justify-between">
+                <div class="flex flex-col z-10">
+                  <span
+                    class="text-xs uppercase font-extrabold tracking-wider text-white/90"
+                    >Total Tidak Hadir</span
+                  >
+                  <div class="flex items-baseline gap-2 mt-2">
+                    <span class="text-4xl font-black text-white drop-shadow-xs"
+                      >150</span
+                    >
+                    <span class="text-xs font-semibold text-white/80"
+                      >Jamaah</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="w-11 h-11 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center shrink-0 border border-white/25 shadow-xs"
+                >
+                  <span class="material-symbols-outlined text-[22px]"
+                    >event_busy</span
+                  >
+                </div>
+              </div>
+              <div
+                class="mt-4 pt-3 flex items-center gap-1.5 text-xs text-white/95 border-t border-white/20 font-medium"
+              >
+                <span class="material-symbols-outlined text-[16px]"
+                  >cancel</span
+                >
+                <span>Akumulasi jamaah yang tidak hadir.</span>
+              </div>
+              <!-- Background decorative shape -->
+              <div
+                class="absolute -right-6 -bottom-6 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none"
+              ></div>
+            </div>
+            <!-- Card 4: TINGKAT KEHADIRAN (Vibrant Blue Gradient - inspired by DOKUMEN LENGKAP #0070f3 to #0284c7) -->
+            <div
+              class="bg-gradient-to-br from-[#0284c7] to-[#0369a1] p-5 rounded-2xl shadow-md text-white flex flex-col justify-between relative overflow-hidden group hover:scale-[1.01] transition-transform"
+            >
+              <div class="flex items-start justify-between">
+                <div class="flex flex-col z-10">
+                  <span
+                    class="text-xs uppercase font-extrabold tracking-wider text-white/90"
+                    >Tingkat Kehadiran</span
+                  >
+                  <div class="flex items-baseline gap-2 mt-2">
+                    <span class="text-4xl font-black text-white drop-shadow-xs"
+                      >75%</span
+                    >
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded-full bg-white/20 backdrop-blur-xs text-[11px] font-bold text-white border border-white/30"
+                    >
+                      Rata-rata
+                    </span>
+                  </div>
+                </div>
+                <!-- Radial ring badge -->
+                <div
+                  class="relative w-12 h-12 flex items-center justify-center shrink-0 bg-white/15 rounded-2xl border border-white/20 backdrop-blur-xs"
+                >
+                  <svg class="w-10 h-10 -rotate-90" viewBox="0 0 36 36">
+                    <path
+                      class="text-white/20"
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="4"
+                    ></path>
+                    <path
+                      class="text-white"
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-dasharray="75, 100"
+                      stroke-linecap="round"
+                      stroke-width="4"
+                    ></path>
+                  </svg>
+                  <span
+                    class="material-symbols-outlined absolute text-white text-[16px]"
+                    >trending_up</span
+                  >
+                </div>
+              </div>
+              <div
+                class="mt-4 pt-3 flex items-center gap-1.5 text-xs text-white/95 border-t border-white/20 font-medium"
+              >
+                <span class="material-symbols-outlined text-[16px]"
+                  >pie_chart</span
+                >
+                <span>Persentase keseluruhan kehadiran.</span>
+              </div>
+              <!-- Background decorative shape -->
+              <div
+                class="absolute -right-6 -bottom-6 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none"
+              ></div>
+            </div>
+          </div>
+          <!-- C. Search & Filter Bar -->
+          <div
+            class="bg-white p-4 rounded-2xl shadow-xs border border-slate-200/80 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3"
+          >
+            <div
+              class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-1"
+            >
+              <!-- Search Input -->
+              <div class="relative flex-1 min-w-[240px]">
+                <span
+                  class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]"
+                  >search</span
+                >
+                <input
+                  class="w-full h-11 pl-10 pr-4 bg-slate-50 border border-slate-200/80 rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
+                  id="eventSearchInput"
+                  placeholder="Cari nama kegiatan..."
+                  type="text"
+                />
+              </div>
+              <!-- Date Range Filter Picker -->
+              <button
+                class="h-11 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200/80 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-colors whitespace-nowrap"
+              >
+                <span
+                  class="material-symbols-outlined text-[18px] text-slate-500"
+                  >date_range</span
+                >
+                <span>Rentang Tanggal</span>
+                <span
+                  class="material-symbols-outlined text-[16px] text-slate-400"
+                  >expand_more</span
+                >
+              </button>
+              <!-- Filter Status Kegiatan -->
+              <div
+                class="h-11 px-4 bg-emerald-50/70 border border-emerald-200/80 text-emerald-900 rounded-xl text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap"
+              >
+                <span class="text-slate-500 text-xs font-medium">Status:</span>
+                <span
+                  class="inline-flex items-center gap-1.5 font-bold text-emerald-700"
+                >
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  Selesai (12)
+                </span>
+              </div>
+            </div>
+            <!-- Secondary Action: Unduh Laporan -->
+            <div class="flex items-center justify-end gap-2 pt-1 lg:pt-0">
+              <button
+                class="h-11 px-5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm shadow-emerald-700/20 active:scale-95"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >download</span
+                >
+                <span>Unduh Laporan (CSV/PDF)</span>
+              </button>
+            </div>
+          </div>
+          <!-- D. Event Recap Table (Tabel Rekap Kegiatan) with Emerald Header matching IMAGE_3 -->
+          <div
+            class="bg-white rounded-2xl shadow-xs border border-slate-200/80 overflow-hidden flex flex-col"
+          >
+            <div class="overflow-x-auto w-full">
+              <table
+                class="w-full text-left border-collapse"
+                id="attendanceRecapTable"
+              >
+                <thead>
+                  <!-- Emerald table header matching the green header bar in IMAGE_3 -->
+                  <tr
+                    class="bg-[#10b981] text-white text-xs font-bold uppercase tracking-wider"
+                  >
+                    <th class="py-3.5 px-5 text-center w-16">No.</th>
+                    <th class="py-3.5 px-5 min-w-[240px]">Nama Kegiatan</th>
+                    <th class="py-3.5 px-5 min-w-[160px]">Tanggal</th>
+                    <th class="py-3.5 px-5 text-center min-w-[130px]">Hadir</th>
+                    <th class="py-3.5 px-5 text-center min-w-[130px]">
+                      Tidak Hadir
+                    </th>
+                    <th class="py-3.5 px-5 min-w-[180px]">Persentase</th>
+                    <th class="py-3.5 px-5 text-center w-36">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody class="text-sm divide-y divide-slate-100 text-slate-700">
+                  <!-- Row 1 -->
+                  <tr class="hover:bg-slate-50/80 transition-colors">
+                    <td
+                      class="py-4 px-5 text-center font-bold text-slate-400 text-xs"
+                    >
+                      1
+                    </td>
+                    <td class="py-4 px-5">
+                      <div class="flex flex-col">
+                        <span class="font-bold text-slate-900"
+                          >Kajian Haji Mandiri Sesi 1</span
+                        >
+                        <span class="text-xs text-slate-400 font-medium mt-0.5"
+                          >Gedung Dakwah Karawang Barat</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 whitespace-nowrap">
+                      <div
+                        class="flex items-center gap-2 text-slate-500 text-xs sm:text-sm"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-slate-400"
+                          >calendar_today</span
+                        >
+                        <span class="font-medium text-slate-700"
+                          >11 Januari 2026</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 text-center">
+                      <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >check</span
+                        >
+                        40 Jamaah
+                      </span>
+                    </td>
+                    <td class="py-4 px-5 text-center">
+                      <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold border border-rose-200"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >close</span
+                        >
+                        10 Jamaah
+                      </span>
+                    </td>
+                    <td class="py-4 px-5">
+                      <div class="flex flex-col gap-1.5 w-full">
+                        <div class="flex items-center justify-between text-xs">
+                          <span class="font-bold text-emerald-600">80%</span>
+                          <span class="text-slate-400">40 / 50</span>
+                        </div>
+                        <div
+                          class="w-full h-2 rounded-full bg-slate-100 overflow-hidden"
+                        >
+                          <div
+                            class="h-full bg-emerald-500 rounded-full"
+                            style="width: 80%"
+                          ></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 text-center whitespace-nowrap">
+                      <button
+                        class="h-8 px-3.5 rounded-lg bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all border border-emerald-200 mx-auto"
+                        title="Lihat Rekap Sesi"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >visibility</span
+                        >
+                        <span>Lihat Detail</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <!-- Row 2 -->
+                  <tr class="hover:bg-slate-50/80 transition-colors">
+                    <td
+                      class="py-4 px-5 text-center font-bold text-slate-400 text-xs"
+                    >
+                      2
+                    </td>
+                    <td class="py-4 px-5">
+                      <div class="flex flex-col">
+                        <span class="font-bold text-slate-900"
+                          >Bimbingan Manasik Haji Akbar</span
+                        >
+                        <span class="text-xs text-slate-400 font-medium mt-0.5"
+                          >Masjid Agung Syekh Quro Karawang</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 whitespace-nowrap">
+                      <div
+                        class="flex items-center gap-2 text-slate-500 text-xs sm:text-sm"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-slate-400"
+                          >calendar_today</span
+                        >
+                        <span class="font-medium text-slate-700"
+                          >15 Januari 2026</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 text-center">
+                      <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >check</span
+                        >
+                        35 Jamaah
+                      </span>
+                    </td>
+                    <td class="py-4 px-5 text-center">
+                      <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold border border-rose-200"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >close</span
+                        >
+                        15 Jamaah
+                      </span>
+                    </td>
+                    <td class="py-4 px-5">
+                      <div class="flex flex-col gap-1.5 w-full">
+                        <div class="flex items-center justify-between text-xs">
+                          <span class="font-bold text-emerald-600">70%</span>
+                          <span class="text-slate-400">35 / 50</span>
+                        </div>
+                        <div
+                          class="w-full h-2 rounded-full bg-slate-100 overflow-hidden"
+                        >
+                          <div
+                            class="h-full bg-emerald-500 rounded-full"
+                            style="width: 70%"
+                          ></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 text-center whitespace-nowrap">
+                      <button
+                        class="h-8 px-3.5 rounded-lg bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all border border-emerald-200 mx-auto"
+                        title="Lihat Rekap Sesi"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >visibility</span
+                        >
+                        <span>Lihat Detail</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <!-- Row 3 -->
+                  <tr class="hover:bg-slate-50/80 transition-colors">
+                    <td
+                      class="py-4 px-5 text-center font-bold text-slate-400 text-xs"
+                    >
+                      3
+                    </td>
+                    <td class="py-4 px-5">
+                      <div class="flex flex-col">
+                        <span class="font-bold text-slate-900"
+                          >Pembekalan Pra-Keberangkatan</span
+                        >
+                        <span class="text-xs text-slate-400 font-medium mt-0.5"
+                          >Aula Kemenag Kab. Karawang</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 whitespace-nowrap">
+                      <div
+                        class="flex items-center gap-2 text-slate-500 text-xs sm:text-sm"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-slate-400"
+                          >calendar_today</span
+                        >
+                        <span class="font-medium text-slate-700"
+                          >20 Januari 2026</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 text-center">
+                      <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >check</span
+                        >
+                        45 Jamaah
+                      </span>
+                    </td>
+                    <td class="py-4 px-5 text-center">
+                      <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold border border-rose-200"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >close</span
+                        >
+                        5 Jamaah
+                      </span>
+                    </td>
+                    <td class="py-4 px-5">
+                      <div class="flex flex-col gap-1.5 w-full">
+                        <div class="flex items-center justify-between text-xs">
+                          <span class="font-bold text-emerald-600">90%</span>
+                          <span class="text-slate-400">45 / 50</span>
+                        </div>
+                        <div
+                          class="w-full h-2 rounded-full bg-slate-100 overflow-hidden"
+                        >
+                          <div
+                            class="h-full bg-emerald-500 rounded-full"
+                            style="width: 90%"
+                          ></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 text-center whitespace-nowrap">
+                      <button
+                        class="h-8 px-3.5 rounded-lg bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all border border-emerald-200 mx-auto"
+                        title="Lihat Rekap Sesi"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >visibility</span
+                        >
+                        <span>Lihat Detail</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <!-- Row 4 -->
+                  <tr class="hover:bg-slate-50/80 transition-colors">
+                    <td
+                      class="py-4 px-5 text-center font-bold text-slate-400 text-xs"
+                    >
+                      4
+                    </td>
+                    <td class="py-4 px-5">
+                      <div class="flex flex-col">
+                        <span class="font-bold text-slate-900"
+                          >Pemeriksaan Kesehatan &amp; Kebugaran</span
+                        >
+                        <span class="text-xs text-slate-400 font-medium mt-0.5"
+                          >RSUD Karawang / Klinik Haji</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 whitespace-nowrap">
+                      <div
+                        class="flex items-center gap-2 text-slate-500 text-xs sm:text-sm"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-slate-400"
+                          >calendar_today</span
+                        >
+                        <span class="font-medium text-slate-700"
+                          >28 Januari 2026</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 text-center">
+                      <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >check</span
+                        >
+                        42 Jamaah
+                      </span>
+                    </td>
+                    <td class="py-4 px-5 text-center">
+                      <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold border border-rose-200"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >close</span
+                        >
+                        8 Jamaah
+                      </span>
+                    </td>
+                    <td class="py-4 px-5">
+                      <div class="flex flex-col gap-1.5 w-full">
+                        <div class="flex items-center justify-between text-xs">
+                          <span class="font-bold text-emerald-600">84%</span>
+                          <span class="text-slate-400">42 / 50</span>
+                        </div>
+                        <div
+                          class="w-full h-2 rounded-full bg-slate-100 overflow-hidden"
+                        >
+                          <div
+                            class="h-full bg-emerald-500 rounded-full"
+                            style="width: 84%"
+                          ></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 text-center whitespace-nowrap">
+                      <button
+                        class="h-8 px-3.5 rounded-lg bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all border border-emerald-200 mx-auto"
+                        title="Lihat Rekap Sesi"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >visibility</span
+                        >
+                        <span>Lihat Detail</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <!-- Row 5 -->
+                  <tr class="hover:bg-slate-50/80 transition-colors">
+                    <td
+                      class="py-4 px-5 text-center font-bold text-slate-400 text-xs"
+                    >
+                      5
+                    </td>
+                    <td class="py-4 px-5">
+                      <div class="flex flex-col">
+                        <span class="font-bold text-slate-900"
+                          >Simulasi Tawaf dan Sai Mandiri</span
+                        >
+                        <span class="text-xs text-slate-400 font-medium mt-0.5"
+                          >Lapangan Alun-Alun Karawang</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 whitespace-nowrap">
+                      <div
+                        class="flex items-center gap-2 text-slate-500 text-xs sm:text-sm"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-slate-400"
+                          >calendar_today</span
+                        >
+                        <span class="font-medium text-slate-700"
+                          >05 Februari 2026</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 text-center">
+                      <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >check</span
+                        >
+                        38 Jamaah
+                      </span>
+                    </td>
+                    <td class="py-4 px-5 text-center">
+                      <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold border border-rose-200"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >close</span
+                        >
+                        12 Jamaah
+                      </span>
+                    </td>
+                    <td class="py-4 px-5">
+                      <div class="flex flex-col gap-1.5 w-full">
+                        <div class="flex items-center justify-between text-xs">
+                          <span class="font-bold text-emerald-600">76%</span>
+                          <span class="text-slate-400">38 / 50</span>
+                        </div>
+                        <div
+                          class="w-full h-2 rounded-full bg-slate-100 overflow-hidden"
+                        >
+                          <div
+                            class="h-full bg-emerald-500 rounded-full"
+                            style="width: 76%"
+                          ></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="py-4 px-5 text-center whitespace-nowrap">
+                      <button
+                        class="h-8 px-3.5 rounded-lg bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all border border-emerald-200 mx-auto"
+                        title="Lihat Rekap Sesi"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >visibility</span
+                        >
+                        <span>Lihat Detail</span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- Pagination Footer -->
+            <div
+              class="px-6 py-4 bg-slate-50 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3"
+            >
+              <span class="text-xs sm:text-sm text-slate-500">
+                Menampilkan <strong class="text-slate-800">1-5</strong> dari
+                <strong class="text-slate-800">12</strong> kegiatan selesai
+              </span>
+              <div class="inline-flex items-center gap-1.5">
+                <button
+                  class="w-9 h-9 rounded-xl border border-slate-200 bg-white text-slate-400 opacity-60 cursor-not-allowed flex items-center justify-center text-xs"
+                  disabled=""
+                  title="Halaman Sebelumnya"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >chevron_left</span
+                  >
+                </button>
+                <button
+                  class="w-9 h-9 rounded-xl bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shadow-xs"
+                >
+                  1
+                </button>
+                <button
+                  class="w-9 h-9 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 font-semibold text-xs flex items-center justify-center transition-colors"
+                >
+                  2
+                </button>
+                <button
+                  class="w-9 h-9 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 font-semibold text-xs flex items-center justify-center transition-colors"
+                >
+                  3
+                </button>
+                <button
+                  class="w-9 h-9 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 font-semibold text-xs flex items-center justify-center transition-colors"
+                  title="Halaman Selanjutnya"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >chevron_right</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Client-side Interactive Filter Script -->
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              const searchInput = document.getElementById('eventSearchInput');
+              const table = document.getElementById('attendanceRecapTable');
+              if (!searchInput || !table) return;
+
+              const rows = table.querySelectorAll('tbody tr');
+
+              searchInput.addEventListener('input', function (e) {
+                const query = e.target.value.toLowerCase().trim();
+
+                rows.forEach((row) => {
+                  const activityName =
+                    row
+                      .querySelector('td:nth-child(2)')
+                      ?.textContent?.toLowerCase() || '';
+                  if (activityName.includes(query)) {
+                    row.style.display = '';
+                  } else {
+                    row.style.display = 'none';
+                  }
+                });
+              });
+            });
+          </script>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

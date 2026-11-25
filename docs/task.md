@@ -89,42 +89,42 @@ Phase 2 decisions (approved):
 
 ### 2.1 Step 1 — API contract (docs only, no code)
 
-- [ ] Create `docs/api-contract-admin-leader-attendance.md`
-- [ ] Transport: `POST <VITE_API_BASE_URL>/{admin,leader}.php`, JSON body, `action` multiplexing, `withCredentials: true` → `PHPSESSID`, no query string, no `Authorization` header
-- [ ] Error envelope: every failure is HTTP 200 + `{ "status": "failed", "message": "<Indonesian>" }` (no/expired session, wrong role, leader zone unset, jamaah outside leader zone, invalid `event_id` / `user_id`)
-- [ ] Document `get_attendance_recap` — `{ action, page, per_page, search, month, year, zone? }` → `{ status, data: { stats, events[], pagination, scope, filters } }`; `zone` is admin-only (ignored/rejected for leader)
-- [ ] Document `get_event_attendance_detail` — `{ action, event_id, page, per_page, search, status, zone? }` → `{ data: { event, stats, participants[], pagination } }`; leader stats are the zone subset
-- [ ] Document `get_jamaah_attendance_history` — `{ action, user_id, page, per_page, month, status }` → `{ data: { jamaah, stats, records[], pagination } }`
-- [ ] Document business rules: completed (`selesai`) events only (§5.2), absent rows for post-event registrants (§5.3), `region_id` snapshot at attendance time (§5.4), unique `(user_id, event_id)` (§5.6), stats ignore filters
-- [ ] Document backend ↔ UI field mapping aligned with the real event payload (`eventName`, `date`, `timeStart`, `timeEnd`, `location`, `zone`, `status`)
-- [ ] Document which `src/utils/{admin,leader}/api.js` function calls which action and which hook consumes it
+- [x] Create `docs/api-contract-admin-leader-attendance.md`
+- [x] Transport: `POST <VITE_API_BASE_URL>/{admin,leader}.php`, JSON body, `action` multiplexing, `withCredentials: true` → `PHPSESSID`, no query string, no `Authorization` header
+- [x] Error envelope: every failure is HTTP 200 + `{ "status": "failed", "message": "<Indonesian>" }` (no/expired session, wrong role, leader zone unset, jamaah outside leader zone, invalid `event_id` / `user_id`)
+- [x] Document `get_attendance_recap` — `{ action, page, per_page, search, month, year, zone? }` → `{ status, data: { stats, events[], pagination, scope, filters } }`; `zone` is admin-only (ignored/rejected for leader)
+- [x] Document `get_event_attendance_detail` — `{ action, event_id, page, per_page, search, status, zone? }` → `{ data: { event, stats, participants[], pagination } }`; leader stats are the zone subset
+- [x] Document `get_jamaah_attendance_history` — `{ action, user_id, page, per_page, month, status }` → `{ data: { jamaah, stats, records[], pagination } }`
+- [x] Document business rules: completed (`selesai`) events only (§5.2), absent rows for post-event registrants (§5.3), `region_id` snapshot at attendance time (§5.4), unique `(user_id, event_id)` (§5.6), stats ignore filters
+- [x] Document backend ↔ UI field mapping aligned with the real event payload (`eventName`, `date`, `timeStart`, `timeEnd`, `location`, `zone`, `status`)
+- [x] Document which `src/utils/{admin,leader}/api.js` function calls which action and which hook consumes it
 
 ### 2.2 Step 2 — Data foundation (invisible, no UI)
 
 Helpers — `src/utils/helpers/attendanceRecap.js`:
 
-- [ ] `resolveAttendanceScope(user)` → `{ role, zone, isZoneLocked, isBlocked }` using `user.zone ?? user.zone_leader`
-- [ ] `applyAttendanceScope(rows, scope)` defensive client-side filter
-- [ ] `getAttendanceHomeRoute(role)` → `/admin/home` | `/leader/home` (local helper; do **not** patch `getHomeRoute`)
-- [ ] `isCompletedEvent` (`selesai`, with `completed` alias tolerated)
-- [ ] Normalizers for recap event rows, participants, and jamaah history rows (tolerant of snake_case, reusing `attendance.js` helpers)
-- [ ] `calculateRecapStats` (totalEvents / totalPresent / totalAbsent / percentage) and `calculateParticipantStats`
-- [ ] `filterRecapEvents`, `filterParticipants`, `filterJamaahHistory`
-- [ ] `getRecapFilterOptions` (month/year/zone derived from data), `paginateRows`, `getInitials`, `getPercentageTone`
+- [x] `resolveAttendanceScope(user)` → `{ role, zone, isZoneLocked, isBlocked }` using `user.zone ?? user.zone_leader`
+- [x] `applyAttendanceScope(rows, scope)` defensive client-side filter
+- [x] `getAttendanceHomeRoute(role)` → `/admin/home` | `/leader/home` (local helper; do **not** patch `getHomeRoute`)
+- [x] `isCompletedEvent` (`selesai`, with `completed` alias tolerated)
+- [x] Normalizers for recap event rows, participants, and jamaah history rows (tolerant of snake_case, reusing `attendance.js` helpers)
+- [x] `calculateRecapStats` (totalEvents / totalPresent / totalAbsent / percentage) and `calculateParticipantStats`
+- [x] `filterRecapEvents`, `filterParticipants`, `filterJamaahHistory`
+- [x] `getRecapFilterOptions` (month/year/zone derived from data), `paginateRows`, `getInitials`, `getPercentageTone`
 
 Mock — `src/data/mock/attendanceRecap.js`:
 
-- [ ] 8–10 `selesai` events (Jan–Feb 2026) + 1–2 `live` / `mendatang` to prove the exclusion rule
-- [ ] Seeded jamaah across zones A–F; deterministic participant derivation (no `Math.random` at render)
-- [ ] Mock honors the scope: leader sees only their zone; out-of-zone jamaah history returns `status: 'failed'`
+- [x] 8–10 `selesai` events (Jan–Feb 2026) + 1–2 `live` / `mendatang` to prove the exclusion rule
+- [x] Seeded jamaah across zones A–F; deterministic participant derivation (no `Math.random` at render)
+- [x] Mock honors the scope: leader sees only their zone; out-of-zone jamaah history returns `status: 'failed'`
 
 Hooks — `src/hooks/attendance/`:
 
-- [ ] `useAttendanceRecap.js` → `{ events, stats, filterOptions, isLoading, error, refetch }`
-- [ ] `useEventAttendanceDetail.js` → `{ event, participants, stats, isLoading, error, refetch }`
-- [ ] `useJamaahAttendanceHistory.js` → `{ jamaah, records, stats, isLoading, error, refetch }`
-- [ ] All three use the same `isSubscribed` cleanup guard as `useMyAttendance`
-- [ ] All three accept `scope` from `resolveAttendanceScope(user)` and keep the final shape so Phase 3 is a one-line swap
+- [x] `useAttendanceRecap.js` → `{ events, stats, filterOptions, isLoading, error, refetch }`
+- [x] `useEventAttendanceDetail.js` → `{ event, participants, stats, isLoading, error, refetch }`
+- [x] `useJamaahAttendanceHistory.js` → `{ jamaah, records, stats, isLoading, error, refetch }`
+- [x] All three use the same `isSubscribed` cleanup guard as `useMyAttendance`
+- [x] All three accept `scope` from `resolveAttendanceScope(user)` and keep the final shape so Phase 3 is a one-line swap
 
 ### 2.3 Step 3 — Shared UI + route shell + Attendance Recap (first visible milestone)
 
