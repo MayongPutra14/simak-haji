@@ -1,4 +1,3 @@
-import AttendancePageHeader from './shared/AttendancePageHeader';
 import AttendanceStatCards from './shared/AttendanceStatCards';
 import AttendanceRateBar from './shared/AttendanceRateBar';
 import AttendanceStatusTabs from './shared/AttendanceStatusTabs';
@@ -15,7 +14,6 @@ import AttendanceRecapCard from './recap/AttendanceRecapCard';
 import AttendanceRecapSection from './recap/AttendanceRecapSection';
 
 export {
-  AttendancePageHeader,
   AttendanceStatCards,
   AttendanceRateBar,
   AttendanceStatusTabs,

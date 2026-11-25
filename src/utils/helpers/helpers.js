@@ -90,18 +90,21 @@ export function openWa(number) {
   );
 }
 
-// Route Not found
+// Route
+const HOME_ROUTES = {
+  admin: '/admin/home',
+  leader: '/leader/home',
+  user: '/user/home',
+};
+
+// RESOLVE HOME ROUTE BY USER ROLE
 export function getHomeRoute(userRole) {
   if (!userRole) return '/';
 
-  switch (userRole) {
-  case 'admin':
-    return '/admin/home';
-  case 'user':
-    return '/user/home';
-  default:
-    return '/';
-  }
+  // normalize role string to prevent case-sensitivity issues
+  const normalizedRole = String(userRole).trim().toLowerCase();
+
+  return HOME_ROUTES[normalizedRole] || '/';
 }
 
 // JSON parser for Landing page
@@ -241,7 +244,6 @@ export const processAndUploadFiles = async (data, uploadFn) => {
 
   return data;
 };
-
 
 // DATA NORMALIZATION HELPER FOR DUA
 export const normalizePrayerData = (jsonData) => {

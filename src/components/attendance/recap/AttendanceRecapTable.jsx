@@ -23,8 +23,8 @@ export default function AttendanceRecapTable({
       itemsPerPage={pagination?.perPage ?? ATTENDANCE_RECAP_PAGE_SIZE}
       isLoading={isLoading}
       emptyMessage="Belum ada kegiatan selesai pada periode ini."
-      headerBgClass="bg-emerald-600 text-white"
-      stickyBgClass="bg-emerald-600"
+      headerBgClass="bg-sea-green-500 text-white"
+      stickyBgClass="bg-sea-green-500 text-white"
     />
   );
 }

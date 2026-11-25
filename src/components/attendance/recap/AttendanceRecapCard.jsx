@@ -1,4 +1,6 @@
 import { Link } from 'react-router';
+import AttendanceRateBar from '../shared/AttendanceRateBar';
+import { formatDateIndonesia } from '../../../utils/helpers/dateConversion';
 import {
   IconCalendar,
   IconCheck,
@@ -6,8 +8,6 @@ import {
   IconEye,
   IconLocation,
 } from '../../../utils/helpers/decorations';
-import { formatAttendanceRecapDate } from '../../../utils/helpers/attendanceRecap';
-import AttendanceRateBar from '../shared/AttendanceRateBar';
 
 const COUNT_PILL_BASE =
   'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-bold';
@@ -18,7 +18,7 @@ const COUNT_PILL_BASE =
  */
 export default function AttendanceRecapCard({ event, number }) {
   return (
-    <article className="flex flex-col gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-xs">
+    <article className="flex flex-col gap-6 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-xs">
       <header className="flex items-start gap-3">
         <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-xs font-bold text-emerald-700">
           {number}
@@ -36,7 +36,7 @@ export default function AttendanceRecapCard({ event, number }) {
 
           <p className="mt-0.5 flex items-center gap-1.5 text-xs text-slate-500">
             <IconCalendar className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-            {formatAttendanceRecapDate(event.eventDate)}
+            {formatDateIndonesia(event.eventDate)}
           </p>
         </div>
       </header>
@@ -68,7 +68,7 @@ export default function AttendanceRecapCard({ event, number }) {
           <Link
             to={`/absensi/rekap-kehadiran/${event.eventId}`}
             title="Lihat detail kegiatan"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 transition-colors hover:text-emerald-800"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-700 transition-colors hover:text-slate-800"
           >
             <IconEye className="h-4 w-4" aria-hidden="true" />
             Lihat Detail

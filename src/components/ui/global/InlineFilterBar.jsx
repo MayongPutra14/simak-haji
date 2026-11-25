@@ -8,7 +8,13 @@ function CustomSelect({ filter }) {
   const buttonRef = useRef(null);
   const menuRef = useRef(null);
 
-  const isActive = filter.value && !String(filter.value).startsWith('Semua');
+  const normalizedValue = String(filter.value ?? '')
+    .trim()
+    .toLowerCase();
+  const isActive =
+    normalizedValue !== '' &&
+    normalizedValue !== 'all' &&
+    !normalizedValue.startsWith('semua');
 
   // Cari label aktif saat ini
   const currentOption = filter.options.find((opt) => {
@@ -149,7 +155,7 @@ export default function InlineFilterBar({
 }) {
   return (
     <div className="w-full p-3 border bg-slate-50/80 rounded-xl border-slate-100">
-      <div className="flex items-center w-full gap-2 py-1.5 px-1 -mx-1 overflow-x-auto flex-nowrap scrollbar-none custom-scrollbar-hide">
+      <div className="flex items-center w-full gap-2 py-1.5 px-1 overflow-x-auto flex-nowrap scrollbar-none custom-scrollbar-hide">
         {filters.map((filter) => (
           <CustomSelect key={filter.key} filter={filter} />
         ))}

@@ -84,19 +84,6 @@ export const resolveAttendanceScope = (user) => {
 };
 
 /**
- * Home route fallback for the attendance feature. Kept local on purpose:
- * the shared `getHomeRoute` helper does not know the leader role yet.
- */
-export const getAttendanceHomeRoute = (role) => {
-  const normalizedRole = normalizeText(role).toLowerCase();
-
-  if (normalizedRole === 'admin') return '/admin/home';
-  if (normalizedRole === 'leader') return '/leader/home';
-
-  return '/';
-};
-
-/**
  * Only completed events belong in the recap (PRD 5.2). The API status is
  * 'selesai'; 'completed' and a boolean flag are tolerated as aliases.
  */
@@ -633,24 +620,6 @@ export const getPercentageTone = (percentage) => {
   if (value >= 50) return PERCENTAGE_TONE.WARNING;
 
   return PERCENTAGE_TONE.DANGER;
-};
-
-/**
- * Long Indonesian date used by the recap table/cards, e.g. "11 Januari 2026".
- * The value is already normalized to 'YYYY-MM-DD' by the row normalizers.
- */
-export const formatAttendanceRecapDate = (value) => {
-  const normalized = normalizeEventDate(value);
-  if (!normalized) return '-';
-
-  const date = new Date(`${normalized}T00:00:00`);
-  if (Number.isNaN(date.getTime())) return normalized;
-
-  return new Intl.DateTimeFormat('id-ID', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  }).format(date);
 };
 
 /**

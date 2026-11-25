@@ -1,12 +1,7 @@
 import { Link } from 'react-router';
-import {
-  IconCalendar,
-  IconCheck,
-  IconClose,
-  IconEye,
-} from '../../utils/helpers/decorations';
-import { formatAttendanceRecapDate } from '../../utils/helpers/attendanceRecap';
+import { IconCheck, IconClose, IconEye } from '../../utils/helpers/decorations';
 import AttendanceRateBar from '../../components/attendance/shared/AttendanceRateBar';
+import { formatDateIndonesia } from '../../utils/helpers/dateConversion';
 
 const COUNT_PILL_BASE =
   'inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold';
@@ -22,14 +17,9 @@ export const getAttendanceRecapColumns = () => [
     isSticky: true,
     className: 'min-w-60',
     render: (event) => (
-      <div className="flex flex-col">
-        <span className="text-sm font-bold wrap-break-words text-slate-900">
-          {event.eventName || '-'}
-        </span>
-        <span className="mt-0.5 text-xs font-medium text-slate-400">
-          {event.location || '-'}
-        </span>
-      </div>
+      <span className="text-sm wrap-break-words ">
+        {event.eventName || '-'}
+      </span>
     ),
   },
   {
@@ -37,9 +27,8 @@ export const getAttendanceRecapColumns = () => [
     header: 'Tanggal',
     className: 'whitespace-nowrap',
     render: (event) => (
-      <span className="inline-flex items-center gap-2 text-xs font-medium text-slate-700 sm:text-sm">
-        <IconCalendar className="h-4 w-4 text-slate-400" aria-hidden="true" />
-        {formatAttendanceRecapDate(event.eventDate)}
+      <span className="inline-flex items-center gap-2 text-xs   sm:text-sm">
+        {formatDateIndonesia(event.eventDate)}
       </span>
     ),
   },
@@ -93,7 +82,7 @@ export const getAttendanceRecapColumns = () => [
         <Link
           to={`/absensi/rekap-kehadiran/${event.eventId}`}
           title="Lihat detail kegiatan"
-          className="mx-auto inline-flex items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 text-xs font-semibold text-emerald-700 transition-all hover:bg-emerald-600 hover:text-white"
+          className="mx-auto inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-1.5 text-xs font-medium text-slate-700 transition-all hover:bg-slate-600 hover:text-white"
         >
           <IconEye className="h-4 w-4" aria-hidden="true" />
           Lihat Detail

@@ -19,7 +19,7 @@ export default function AttendanceLayout() {
       <div className="flex min-w-0 flex-1 flex-col transition-all duration-300 md:pl-55">
         <Header />
 
-        <main className="mx-auto w-full min-w-0 flex-1 bg-slate-50 pt-0 pb-20">
+        <main className="mx-auto w-full min-w-0 flex-1 bg-slate-50 pt-0 ">
           <Outlet />
         </main>
       </div>

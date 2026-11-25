@@ -12,14 +12,14 @@ export default function AttendanceRecapFilters({
   isFilterActive,
   onSearchChange,
   onClearFilters,
-  completedCount = 0,
 }) {
   return (
     <section
       aria-label="Pencarian dan filter rekap kehadiran"
       className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-xs"
     >
-      <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+        {/* SEARCH INPUT WRAPPER */}
         <div className="min-w-0 flex-1">
           <SeacrhInput
             placeHolder="Cari nama kegiatan..."
@@ -28,20 +28,13 @@ export default function AttendanceRecapFilters({
           />
         </div>
 
-        <div className="w-full lg:w-auto lg:min-w-80">
+        {/* FILTER BAR WRAPPER (AUTO-WIDTH TO PREVENT UNNECESSARY SCROLL) */}
+        <div className="w-full lg:w-auto lg:shrink-0">
           <InlineFilterBar
             filters={filterConfigs}
             isFilterActive={isFilterActive}
             onClear={onClearFilters}
           />
-        </div>
-
-        <div className="flex h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-xl border border-emerald-200/80 bg-emerald-50/70 px-4 text-xs text-emerald-900 sm:text-sm">
-          <span className="text-xs font-medium text-slate-500">Status:</span>
-          <span className="inline-flex items-center gap-1.5 font-bold text-emerald-700">
-            <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            Selesai ({completedCount})
-          </span>
         </div>
       </div>
     </section>

@@ -1,15 +1,13 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useAuth } from '../../features/auth/useAuth';
 import { useAttendanceRecap } from '../../hooks/attendance/useAttendanceRecap';
+import BackButton from '../../components/ui/global/BackButton';
 import { ATTENDANCE_ALL_VALUE } from '../../utils/helpers/constant';
 import {
   ATTENDANCE_RECAP_PAGE_SIZE,
-  ATTENDANCE_ZONE_NOT_SET_MESSAGE,
-  getAttendanceHomeRoute,
   resolveAttendanceScope,
 } from '../../utils/helpers/attendanceRecap';
 import {
-  AttendancePageHeader,
   AttendanceRecapErrorState,
   AttendanceRecapFilters,
   AttendanceRecapLoadingState,
@@ -140,24 +138,12 @@ export default function AttendanceRecapPage() {
 
   if (!user) return null;
 
-  const scopeLabel = scope.isZoneLocked
-    ? scope.zone
-      ? `Zona ${scope.zone}`
-      : ATTENDANCE_ZONE_NOT_SET_MESSAGE
-    : 'Semua Zona (Kab. Karawang)';
-
   const isFirstLoad = isLoading && events.length === 0;
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-8">
-      <div className="mx-auto w-[95%] max-w-7xl space-y-4 pt-4 pb-6 md:w-[98%] md:pt-6">
-        <AttendancePageHeader
-          backTo={getAttendanceHomeRoute(scope.role)}
-          title="Rekap Absensi"
-          description="Pantau dan kelola rekap kehadiran jamaah pada setiap kegiatan SIMAK secara terpadu."
-          accessLabel="Akses: Admin & Koordinator Wilayah"
-          scopeLabel={scopeLabel}
-        />
+    <div className="min-h-screen mx-auto w-[95%] md:w-[98%] px-2 pt-4 md:mt-6 shadow-sm rounded-2xl bg-white pb-8 mb-8">
+      <div className="space-y-4">
+        <BackButton userRole={scope.role} redirectToHome />
 
         {isFirstLoad ? (
           <AttendanceRecapLoadingState />
