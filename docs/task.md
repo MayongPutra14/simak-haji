@@ -1,6 +1,8 @@
 # Task Tracking — Absensi (Attendance Recap)
 
-Refs: `docs/prd-attendance-recap-en.md`, `docs/stich-jamaah-mockup.html`
+Refs: `docs/prd-attendance-recap-en.md`, `docs/api-contract-attendance.md`,
+`docs/api-contract-admin-leader-attendance.md` (created in Phase 2, Step 1),
+`docs/admin-leader-attendance/*.html` (visual/structural reference only), `docs/stich-jamaah-mockup.html`
 Branch: `client`
 
 Rules: tick a box only after `npm run build` + the manual flow pass. Keep all mock data
@@ -65,41 +67,146 @@ Phase 1 decisions (approved):
 
 ## Phase 2 — Frontend: admin & leader role
 
-### 2.1 Route shell (open decision: shared `/absensi/*` vs role-prefixed paths)
+Execution is incremental. Each step ends with `npm run build` + `npm run lint`
+(no new errors beyond the 6 known `react-hooks/set-state-in-effect` baseline errors)
+and is reviewed before the next step starts.
 
-- [ ] Decide and document the admin/leader layout wrapper (shared page, role-aware nav)
-- [ ] Point admin & leader "Rekap Absen" menu to `/absensi/rekap-kehadiran`
-- [ ] Register `/absensi/rekap-kehadiran`, `/absensi/rekap-kehadiran/:eventId`, `/absensi/riwayat-jamaah/:userId`
-- [ ] Guard routes with `ProtectedRoute` for `admin` & `leader`
+Phase 2 decisions (approved):
 
-### 2.2 Attendance Recap
+- **Routes:** one shared set `/absensi/*` for `admin` + `leader`, wrapped by
+  `src/layouts/AttendanceLayout.jsx`. No per-role page or component duplication.
+- **Date filter:** derived `Bulan` + `Tahun` selects (options built from the data, per Phase 1),
+  not a date-range picker.
+- **Event Detail:** `admin` gets an extra `Zona` select in the participant filter bar; `leader`
+  gets a locked zone chip and no select.
+- **Jamaah History stats:** exactly 2 derived cards (`Hadir`, `Absen`). No "Tingkat Disiplin" card.
+- **Congregation Data entry link:** deferred. Only Event Detail links into Jamaah History for now,
+  so no unrelated files are touched.
+- **Export / print / QR-scanner buttons** from the mockups are omitted (PRD §13, §3.1).
+- **Shared feature code** lives outside the role folders: `src/pages/attendance/`,
+  `src/components/attendance/`, `src/hooks/attendance/`, `src/features/attendance/`,
+  `src/utils/helpers/attendanceRecap.js`.
 
-- [ ] 4 statistic cards (Total Events / Present / Absent / Rate) from completed events only
-- [ ] Search by event name, date-range filter, status filter
-- [ ] Event recap table (No, Name, Date, Present, Absent, Percentage, Action) + mobile cards
-- [ ] Pagination
-- [ ] Leader: no region filter (enforced server-side later)
+### 2.1 Step 1 — API contract (docs only, no code)
 
-### 2.3 Event Details
+- [ ] Create `docs/api-contract-admin-leader-attendance.md`
+- [ ] Transport: `POST <VITE_API_BASE_URL>/{admin,leader}.php`, JSON body, `action` multiplexing, `withCredentials: true` → `PHPSESSID`, no query string, no `Authorization` header
+- [ ] Error envelope: every failure is HTTP 200 + `{ "status": "failed", "message": "<Indonesian>" }` (no/expired session, wrong role, leader zone unset, jamaah outside leader zone, invalid `event_id` / `user_id`)
+- [ ] Document `get_attendance_recap` — `{ action, page, per_page, search, month, year, zone? }` → `{ status, data: { stats, events[], pagination, scope, filters } }`; `zone` is admin-only (ignored/rejected for leader)
+- [ ] Document `get_event_attendance_detail` — `{ action, event_id, page, per_page, search, status, zone? }` → `{ data: { event, stats, participants[], pagination } }`; leader stats are the zone subset
+- [ ] Document `get_jamaah_attendance_history` — `{ action, user_id, page, per_page, month, status }` → `{ data: { jamaah, stats, records[], pagination } }`
+- [ ] Document business rules: completed (`selesai`) events only (§5.2), absent rows for post-event registrants (§5.3), `region_id` snapshot at attendance time (§5.4), unique `(user_id, event_id)` (§5.6), stats ignore filters
+- [ ] Document backend ↔ UI field mapping aligned with the real event payload (`eventName`, `date`, `timeStart`, `timeEnd`, `location`, `zone`, `status`)
+- [ ] Document which `src/utils/{admin,leader}/api.js` function calls which action and which hook consumes it
 
-- [ ] Header with back button, event name, date, time
-- [ ] 4 participant statistic cards
-- [ ] Participant list (Name, Region, Check-in Time, Status) + mobile cards
-- [ ] All / Present / Absent status filter
-- [ ] Congregant name links to Congregant History
+### 2.2 Step 2 — Data foundation (invisible, no UI)
 
-### 2.4 Congregant History
+Helpers — `src/utils/helpers/attendanceRecap.js`:
 
-- [ ] Identity header limited to name + region (no profile/document duplication)
-- [ ] Event history list (No, Event, Date, Check-in, Status) + mobile cards
-- [ ] Back mechanism to the originating page
-- [ ] Entry link from the existing Congregation Data detail page
+- [ ] `resolveAttendanceScope(user)` → `{ role, zone, isZoneLocked, isBlocked }` using `user.zone ?? user.zone_leader`
+- [ ] `applyAttendanceScope(rows, scope)` defensive client-side filter
+- [ ] `getAttendanceHomeRoute(role)` → `/admin/home` | `/leader/home` (local helper; do **not** patch `getHomeRoute`)
+- [ ] `isCompletedEvent` (`selesai`, with `completed` alias tolerated)
+- [ ] Normalizers for recap event rows, participants, and jamaah history rows (tolerant of snake_case, reusing `attendance.js` helpers)
+- [ ] `calculateRecapStats` (totalEvents / totalPresent / totalAbsent / percentage) and `calculateParticipantStats`
+- [ ] `filterRecapEvents`, `filterParticipants`, `filterJamaahHistory`
+- [ ] `getRecapFilterOptions` (month/year/zone derived from data), `paginateRows`, `getInitials`, `getPercentageTone`
 
-### 2.5 Verification
+Mock — `src/data/mock/attendanceRecap.js`:
 
-- [ ] Role matrix: admin sees all, leader sees own region only, jamaah blocked
-- [ ] `npm run build` / `npm run lint` clean vs. baseline
-- [ ] Responsive pass on all three pages
+- [ ] 8–10 `selesai` events (Jan–Feb 2026) + 1–2 `live` / `mendatang` to prove the exclusion rule
+- [ ] Seeded jamaah across zones A–F; deterministic participant derivation (no `Math.random` at render)
+- [ ] Mock honors the scope: leader sees only their zone; out-of-zone jamaah history returns `status: 'failed'`
+
+Hooks — `src/hooks/attendance/`:
+
+- [ ] `useAttendanceRecap.js` → `{ events, stats, filterOptions, isLoading, error, refetch }`
+- [ ] `useEventAttendanceDetail.js` → `{ event, participants, stats, isLoading, error, refetch }`
+- [ ] `useJamaahAttendanceHistory.js` → `{ jamaah, records, stats, isLoading, error, refetch }`
+- [ ] All three use the same `isSubscribed` cleanup guard as `useMyAttendance`
+- [ ] All three accept `scope` from `resolveAttendanceScope(user)` and keep the final shape so Phase 3 is a one-line swap
+
+### 2.3 Step 3 — Shared UI + route shell + Attendance Recap (first visible milestone)
+
+Shell & routing:
+
+- [ ] `src/layouts/AttendanceLayout.jsx` — `useAuth()` role → `<Navigation role={role} />` + `<Header />` + `<Outlet />` (same structure as `AdminLayout`)
+- [ ] `src/pages/attendance/index.js` barrel
+- [ ] `src/components/attendance/index.js` barrel (single barrel for the whole feature)
+- [ ] Register `/absensi/rekap-kehadiran` under `ProtectedRoute allowedRoles={['admin','leader']}`
+- [ ] Point admin & leader "Rekap Absen" menu to `/absensi/rekap-kehadiran` (2 lines in `featureMenu.js`)
+- [ ] No sidebar / bottom-nav item added; `Navigation.jsx` and `navbar.js` untouched
+
+Shared UI — `src/components/attendance/shared/`:
+
+- [ ] `AttendancePageHeader.jsx` — semantic `<header>`, back link, title, scope slot
+- [ ] `AttendanceStatCards.jsx` — config-driven (2/3/4 cards), existing gradient palette
+- [ ] `AttendanceRateBar.jsx` — `role="progressbar"` + aria values
+- [ ] `AttendanceStatusTabs.jsx` — `aria-pressed` toggle group with counts
+- [ ] `AttendancePagination.jsx` — `<nav aria-label>`, `aria-current="page"`
+- [ ] `AttendanceRecapState.jsx` — loading skeleton + empty + error/retry in ONE file
+- [ ] Reuse `Table`, `SeacrhInput`, `InlineFilterBar`, `AttendanceStatusBadge`, `StatisticContainer`
+
+Recap page:
+
+- [ ] `src/pages/attendance/AttendanceRecapPage.jsx` — filter state + `useMemo` derivation
+- [ ] `recap/AttendanceRecapFilters.jsx` — search + Bulan/Tahun via `InlineFilterBar` + static "Selesai (n)" chip
+- [ ] `recap/AttendanceRecapTable.jsx` — No, Kegiatan, Tanggal, Hadir, Tidak Hadir, Persentase, Aksi
+- [ ] `recap/AttendanceRecapCard.jsx` — mobile card with the same fields
+- [ ] `recap/AttendanceRecapSection.jsx` — table at `md+`, cards below `md`, pagination footer
+- [ ] `src/features/attendance/AttendanceRecapColumns.jsx`
+- [ ] 4 stat cards from `selesai` events only; upcoming/live excluded
+- [ ] Scope pill: admin "Semua Zona (Kab. Karawang)", leader locked zone
+- [ ] Pagination 10/page; reset page on filter change
+- [ ] No "Unduh Laporan" button (PRD §13)
+
+### 2.4 Step 4 — Event Details
+
+- [ ] `src/pages/attendance/EventAttendanceDetailPage.jsx`
+- [ ] Route `/absensi/rekap-kehadiran/:eventId`
+- [ ] Header: back to recap, event name, `Selesai` badge, date, `timeStart–timeEnd`, location (no QR / export buttons)
+- [ ] 4 participant stat cards, recomputed on the leader's zone subset
+- [ ] `eventDetail/EventParticipantFilters.jsx` — search + `AttendanceStatusTabs`; admin-only `Zona` select, leader locked zone chip
+- [ ] `eventDetail/EventParticipantTable.jsx` — No, Nama, Wilayah, Waktu Absen, Status
+- [ ] `eventDetail/EventParticipantCard.jsx` — mobile card
+- [ ] `eventDetail/EventParticipantSection.jsx` — table/cards switch + pagination
+- [ ] `src/features/attendance/EventParticipantColumns.jsx`
+- [ ] Congregant name links to `/absensi/riwayat-jamaah/:userId` with `state.from`
+- [ ] Invalid `eventId` → error state with retry/back
+
+### 2.5 Step 5 — Jamaah History
+
+- [ ] `src/pages/attendance/JamaahAttendanceHistoryPage.jsx`
+- [ ] Route `/absensi/riwayat-jamaah/:userId`
+- [ ] `jamaahHistory/JamaahHistoryIdentity.jsx` — name + zona only, initials avatar (no documents/profile duplication, no unbacked verification badges)
+- [ ] Exactly 2 stat cards (`Hadir`, `Absen`) — no "Tingkat Disiplin"
+- [ ] `jamaahHistory/JamaahHistoryFilters.jsx` — search + Bulan + `AttendanceStatusTabs`
+- [ ] `jamaahHistory/JamaahHistoryTable.jsx` — No, Kegiatan, Tanggal, Waktu Absen, Status
+- [ ] `jamaahHistory/JamaahHistoryCard.jsx` — mobile card
+- [ ] `jamaahHistory/JamaahHistorySection.jsx` — table/cards switch + pagination
+- [ ] `src/features/attendance/JamaahHistoryColumns.jsx`
+- [ ] Back via `location.state.from`, fallback `/absensi/rekap-kehadiran`
+- [ ] Leader opening a jamaah outside their zone → error state
+- [ ] Congregation Data entry link: DEFERRED (do not touch `ProfileDetail.jsx`)
+
+### 2.6 Step 6 — API client wiring (still mock-backed)
+
+- [ ] `withCredentials: true` on the axios instance in `src/utils/admin/api.js`
+- [ ] `withCredentials: true` on the axios instance in `src/utils/leader/api.js`
+- [ ] Add `getAttendanceRecapAPI`, `getEventAttendanceDetailAPI`, `getJamaahAttendanceHistoryAPI` to `src/utils/admin/api.js`
+- [ ] Add the same three to `src/utils/leader/api.js` (leader omits `zone`)
+- [ ] Hooks keep the mock source by default so Phase 3 is a flag flip
+
+### 2.7 Step 7 — Verification
+
+- [ ] Role matrix: admin = all zones, leader = own zone only, jamaah redirected to `/user/home`, unknown → `/login`
+- [ ] Leader direct-URL manipulation returns scoped or error data, never another zone
+- [ ] Leader without `user.zone` → "Zona belum ditetapkan" state, never all-zone fallback
+- [ ] `npm run build` passes (no new warnings beyond the known baseline)
+- [ ] `npm run lint` adds no new errors beyond the 6 known ones
+- [ ] Responsive pass 360 / 768 / 1280 on all three pages
+- [ ] Empty, error, retry, and zero-filter-match states on all three pages
+- [ ] No Attendance item added to sidebar or bottom navbar
 
 ## Phase 3 — Backend & API integration
 
@@ -109,13 +216,15 @@ Phase 1 decisions (approved):
 - [ ] Choose between `event_attendance_records` (PRD §6.1) and deriving from `attendances`
 - [x] Confirm endpoint convention (flat PHP `user.php` / `admin.php` / `leader.php` + `action`, not the REST paths in PRD §7)
 - [x] Document the jamaah attendance contract in `docs/api-contract-attendance.md` (agreed + implemented on the frontend)
-- [ ] Agree request/response payloads incl. stats, filters, pagination, region scoping with the backend
+- [ ] Agree admin/leader request/response payloads incl. stats, filters, pagination, region scoping with the backend (see `docs/api-contract-admin-leader-attendance.md`, Phase 2 Step 1)
 
 ### 3.2 Frontend integration
 
 - [x] Add `getMyAttendance` to `src/utils/user/api.js` (POST `user.php`, `{ action: 'get_my_attendance' }`, session cookie, no `user_id`)
-- [ ] Add recap / event-detail / congregant-history calls to admin & leader clients
+- [ ] Add recap / event-detail / congregant-history calls to admin & leader clients (Phase 2, Step 6)
 - [x] Swap `useMyAttendance` mock for the real endpoint, keep `{ stats, records }` shape
+- [ ] Swap the three admin/leader hooks from `src/data/mock/attendanceRecap.js` to the real actions
+- [ ] Delete `src/data/mock/attendanceRecap.js` and the mock branch
 - [ ] Send filters + pagination to the API instead of filtering client-side
 - [x] Delete `src/data/mock/myAttendance.js` and mock branches
 - [ ] Re-verify loading / empty / error / retry against real responses
@@ -127,6 +236,9 @@ Phase 1 decisions (approved):
 
 - [x] Jamaah endpoint ignores any client-supplied `userId` (request now sends `action` only)
 - [ ] Leader region enforcement verified with manipulated requests
+- [ ] Leader request that sends `zone` / `user_id` is ignored or rejected by the backend
+- [ ] Attendance recap excludes `live` / `mendatang` events against real data
+- [ ] Region snapshot (`region_id`) preserved when a jamaah changes zone
 - [ ] QR scan → recap reflects Present + `waktu_absen`
 - [ ] Absent rows appear for post-event registrants (PRD §5.3) and region history is preserved (§5.4)
 - [ ] Full manual regression of existing event/material/scan flows
