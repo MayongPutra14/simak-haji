@@ -634,3 +634,56 @@ export const getPercentageTone = (percentage) => {
 
   return PERCENTAGE_TONE.DANGER;
 };
+
+/**
+ * Long Indonesian date used by the recap table/cards, e.g. "11 Januari 2026".
+ * The value is already normalized to 'YYYY-MM-DD' by the row normalizers.
+ */
+export const formatAttendanceRecapDate = (value) => {
+  const normalized = normalizeEventDate(value);
+  if (!normalized) return '-';
+
+  const date = new Date(`${normalized}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return normalized;
+
+  return new Intl.DateTimeFormat('id-ID', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(date);
+};
+
+/**
+ * Compact page list for the pagination footer, e.g.
+ * [1, 'ellipsis-5', 5, 6, 7, 'ellipsis-8', 10].
+ * Strings mark a skipped range; numbers are clickable pages.
+ */
+export const getPaginationWindow = (page, totalPages, maxVisible = 5) => {
+  const total = Math.max(1, Math.floor(toNumber(totalPages, 1)));
+  const current = Math.min(Math.max(1, Math.floor(toNumber(page, 1))), total);
+  const visible = Math.max(3, Math.floor(toNumber(maxVisible, 5)));
+
+  if (total <= visible) {
+    return Array.from({ length: total }, (_, index) => index + 1);
+  }
+
+  const pages = new Set([1, total, current, current - 1, current + 1]);
+
+  if (current <= 3) [2, 3, 4].forEach((value) => pages.add(value));
+  if (current >= total - 2) {
+    [total - 3, total - 2, total - 1].forEach((value) => pages.add(value));
+  }
+
+  const sorted = [...pages]
+    .filter((value) => value >= 1 && value <= total)
+    .sort((first, second) => first - second);
+
+  return sorted.reduce((window, value, index) => {
+    if (index > 0 && value - sorted[index - 1] > 1) {
+      window.push(`ellipsis-${value}`);
+    }
+
+    window.push(value);
+    return window;
+  }, []);
+};

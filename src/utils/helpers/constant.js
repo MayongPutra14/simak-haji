@@ -315,8 +315,24 @@ export const MONTH_LABELS = [
   'Desember',
 ];
 
-// STATISTIC VALUES ON USER ABSENSI
+// STATISTIC VALUES FOR ATTENDANCE PAGES (USER + ADMIN/LEADER RECAP)
 export const CARD_TONES = {
+  event: {
+    card: 'border-transparent bg-gradient-to-br from-teal-400 to-emerald-600 hover:shadow-emerald-600/40',
+    label: 'text-white',
+    value: 'text-white',
+    iconWrap: 'border-white/25 bg-white/20 backdrop-blur-xs text-white',
+    hint: 'text-white/90',
+    hintIcon: 'text-white',
+  },
+  rate: {
+    card: 'border-transparent bg-gradient-to-br from-sky-600 to-blue-700 hover:shadow-sky-700/40',
+    label: 'text-white',
+    value: 'text-white',
+    iconWrap: 'border-white/20 bg-white/20 backdrop-blur-xs text-white',
+    hint: 'text-white/90',
+    hintIcon: 'text-white',
+  },
   present: {
     card: 'border-orange-200 bg-orange-400 hover:shadow-orange-200/80',
     label: 'text-white',

@@ -130,35 +130,35 @@ Hooks — `src/hooks/attendance/`:
 
 Shell & routing:
 
-- [ ] `src/layouts/AttendanceLayout.jsx` — `useAuth()` role → `<Navigation role={role} />` + `<Header />` + `<Outlet />` (same structure as `AdminLayout`)
-- [ ] `src/pages/attendance/index.js` barrel
-- [ ] `src/components/attendance/index.js` barrel (single barrel for the whole feature)
-- [ ] Register `/absensi/rekap-kehadiran` under `ProtectedRoute allowedRoles={['admin','leader']}`
-- [ ] Point admin & leader "Rekap Absen" menu to `/absensi/rekap-kehadiran` (2 lines in `featureMenu.js`)
-- [ ] No sidebar / bottom-nav item added; `Navigation.jsx` and `navbar.js` untouched
+- [x] `src/layouts/AttendanceLayout.jsx` — `useAuth()` role → `<Navigation role={role} />` + `<Header />` + `<Outlet />` (same structure as `AdminLayout`)
+- [x] `src/pages/attendance/index.js` barrel
+- [x] `src/components/attendance/index.js` barrel (single barrel for the whole feature)
+- [x] Register `/absensi/rekap-kehadiran` under `ProtectedRoute allowedRoles={['admin','leader']}`
+- [x] Point admin & leader "Rekap Absen" menu to `/absensi/rekap-kehadiran` (2 lines in `featureMenu.js`)
+- [x] No sidebar / bottom-nav item added; `Navigation.jsx` and `navbar.js` untouched
 
 Shared UI — `src/components/attendance/shared/`:
 
-- [ ] `AttendancePageHeader.jsx` — semantic `<header>`, back link, title, scope slot
-- [ ] `AttendanceStatCards.jsx` — config-driven (2/3/4 cards), existing gradient palette
-- [ ] `AttendanceRateBar.jsx` — `role="progressbar"` + aria values
-- [ ] `AttendanceStatusTabs.jsx` — `aria-pressed` toggle group with counts
-- [ ] `AttendancePagination.jsx` — `<nav aria-label>`, `aria-current="page"`
-- [ ] `AttendanceRecapState.jsx` — loading skeleton + empty + error/retry in ONE file
-- [ ] Reuse `Table`, `SeacrhInput`, `InlineFilterBar`, `AttendanceStatusBadge`, `StatisticContainer`
+- [x] `AttendancePageHeader.jsx` — semantic `<header>`, back link, title, scope slot
+- [x] `AttendanceStatCards.jsx` — config-driven (2/3/4 cards), existing gradient palette
+- [x] `AttendanceRateBar.jsx` — `role="progressbar"` + aria values
+- [x] `AttendanceStatusTabs.jsx` — `aria-pressed` toggle group with counts
+- [x] `AttendancePagination.jsx` — `<nav aria-label>`, `aria-current="page"`
+- [x] `AttendanceRecapState.jsx` — loading skeleton + empty + error/retry in ONE file
+- [x] Reuse `Table`, `SeacrhInput`, `InlineFilterBar`, `AttendanceStatusBadge`, `StatisticContainer`
 
 Recap page:
 
-- [ ] `src/pages/attendance/AttendanceRecapPage.jsx` — filter state + `useMemo` derivation
-- [ ] `recap/AttendanceRecapFilters.jsx` — search + Bulan/Tahun via `InlineFilterBar` + static "Selesai (n)" chip
-- [ ] `recap/AttendanceRecapTable.jsx` — No, Kegiatan, Tanggal, Hadir, Tidak Hadir, Persentase, Aksi
-- [ ] `recap/AttendanceRecapCard.jsx` — mobile card with the same fields
-- [ ] `recap/AttendanceRecapSection.jsx` — table at `md+`, cards below `md`, pagination footer
-- [ ] `src/features/attendance/AttendanceRecapColumns.jsx`
-- [ ] 4 stat cards from `selesai` events only; upcoming/live excluded
-- [ ] Scope pill: admin "Semua Zona (Kab. Karawang)", leader locked zone
-- [ ] Pagination 10/page; reset page on filter change
-- [ ] No "Unduh Laporan" button (PRD §13)
+- [x] `src/pages/attendance/AttendanceRecapPage.jsx` — filter state + `useMemo` derivation
+- [x] `recap/AttendanceRecapFilters.jsx` — search + Bulan/Tahun via `InlineFilterBar` + static "Selesai (n)" chip
+- [x] `recap/AttendanceRecapTable.jsx` — No, Kegiatan, Tanggal, Hadir, Tidak Hadir, Persentase, Aksi
+- [x] `recap/AttendanceRecapCard.jsx` — mobile card with the same fields
+- [x] `recap/AttendanceRecapSection.jsx` — table at `md+`, cards below `md`, pagination footer
+- [x] `src/features/attendance/AttendanceRecapColumns.jsx`
+- [x] 4 stat cards from `selesai` events only; upcoming/live excluded
+- [x] Scope pill: admin "Semua Zona (Kab. Karawang)", leader locked zone
+- [x] Pagination 10/page; reset page on filter change
+- [x] No "Unduh Laporan" button (PRD §13)
 
 ### 2.4 Step 4 — Event Details
 
