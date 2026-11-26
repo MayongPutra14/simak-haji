@@ -66,7 +66,7 @@ export default function AttendanceRecapCard({ event, number }) {
       {event.eventId && (
         <footer className="border-t border-slate-100 pt-3">
           <Link
-            to={`/absensi/rekap-kehadiran/${event.eventId}`}
+            to={`/attendance/recaps/${event.eventId}`}
             title="Lihat detail kegiatan"
             className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-700 transition-colors hover:text-slate-800"
           >

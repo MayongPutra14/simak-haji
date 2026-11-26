@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getAttendanceRecapMock } from '../../data/mock/attendanceRecap';
 import { ATTENDANCE_ALL_VALUE } from '../../utils/helpers/constant';
 import {
   ATTENDANCE_RECAP_PAGE_SIZE,
@@ -9,6 +8,7 @@ import {
   normalizeRecapEvents,
   paginateRows,
 } from '../../utils/helpers/attendanceRecap';
+import { getAttendanceDataSource } from './attendanceDataSource';
 
 const FALLBACK_ERROR_MESSAGE = 'Gagal memuat rekap kehadiran.';
 const SESSION_ERROR_MESSAGE = 'Sesi login tidak valid, silakan login kembali.';
@@ -18,9 +18,9 @@ const getEmptyPagination = (perPage) => paginateRows([], 1, perPage).pagination;
 /**
  * Data hook for the admin/leader attendance recap page.
  *
- * Phase 2 reads `src/data/mock/attendanceRecap.js`. Phase 3 swaps the mock call
- * for `getAttendanceRecapAPI` from `src/utils/{admin,leader}/api.js`; the
- * returned shape stays identical.
+ * Reads the local mock until `ATTENDANCE_USE_MOCK` is flipped in
+ * `src/utils/helpers/constant.js`; `getAttendanceDataSource(role)` then routes
+ * to the admin or leader PHP client. The returned shape stays identical.
  *
  * Stats and filter options come from the server/mock and ignore the active
  * filters, so the cards never shrink when the user narrows the list.
@@ -92,7 +92,8 @@ export const useAttendanceRecap = ({
       setError(null);
 
       try {
-        const response = await getAttendanceRecapMock({
+        const source = getAttendanceDataSource(role);
+        const response = await source.getAttendanceRecap({
           scope: {
             role,
             zone: scopeZone || null,

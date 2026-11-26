@@ -191,11 +191,11 @@ Recap page:
 
 ### 2.6 Step 6 — API client wiring (still mock-backed)
 
-- [ ] `withCredentials: true` on the axios instance in `src/utils/admin/api.js`
-- [ ] `withCredentials: true` on the axios instance in `src/utils/leader/api.js`
-- [ ] Add `getAttendanceRecapAPI`, `getEventAttendanceDetailAPI`, `getJamaahAttendanceHistoryAPI` to `src/utils/admin/api.js`
-- [ ] Add the same three to `src/utils/leader/api.js` (leader omits `zone`)
-- [ ] Hooks keep the mock source by default so Phase 3 is a flag flip
+- [x] `withCredentials: true` on the axios instance in `src/utils/admin/api.js`
+- [x] `withCredentials: true` on the axios instance in `src/utils/leader/api.js`
+- [x] Add `getAttendanceRecapAPI`, `getEventAttendanceDetailAPI`, `getJamaahAttendanceHistoryAPI` to `src/utils/admin/api.js`
+- [x] Add the same three to `src/utils/leader/api.js` (leader omits `zone`)
+- [x] Hooks keep the mock source by default so Phase 3 is a flag flip
 
 ### 2.7 Step 7 — Verification
 

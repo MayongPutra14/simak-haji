@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getEventAttendanceDetailMock } from '../../data/mock/attendanceRecap';
 import { ATTENDANCE_ALL_VALUE } from '../../utils/helpers/constant';
 import {
   ATTENDANCE_RECAP_PAGE_SIZE,
@@ -9,6 +8,7 @@ import {
   normalizeRecapEvent,
   paginateRows,
 } from '../../utils/helpers/attendanceRecap';
+import { getAttendanceDataSource } from './attendanceDataSource';
 
 const FALLBACK_ERROR_MESSAGE = 'Gagal memuat detail kehadiran kegiatan.';
 const SESSION_ERROR_MESSAGE = 'Sesi login tidak valid, silakan login kembali.';
@@ -18,6 +18,10 @@ const getEmptyPagination = (perPage) => paginateRows([], 1, perPage).pagination;
 
 /**
  * Data hook for the event detail page.
+ *
+ * Reads the local mock until `ATTENDANCE_USE_MOCK` is flipped in
+ * `src/utils/helpers/constant.js`; `getAttendanceDataSource(role)` then routes
+ * to the admin or leader PHP client.
  *
  * Participant stats cover the whole scoped participant list (leader = own zone)
  * and are not recalculated when the search/status/zone filters change.
@@ -99,7 +103,8 @@ export const useEventAttendanceDetail = ({
       setError(null);
 
       try {
-        const response = await getEventAttendanceDetailMock({
+        const source = getAttendanceDataSource(role);
+        const response = await source.getEventAttendanceDetail({
           scope: {
             role,
             zone: scopeZone || null,

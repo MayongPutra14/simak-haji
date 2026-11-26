@@ -178,15 +178,15 @@ export default function AppRoutes() {
 
       {/* ATTENDANCE ROUTES (ADMIN & LEADER) */}
       <Route element={<ProtectedRoute allowedRoles={['admin', 'leader']} />}>
-        <Route path="absensi" element={<AttendanceLayout />}>
-          <Route index element={<Navigate to="rekap-kehadiran" replace />} />
-          <Route path="rekap-kehadiran" element={<AttendanceRecapPage />} />
+        <Route path="attendance" element={<AttendanceLayout />}>
+          <Route index element={<Navigate to="recaps" replace />} />
+          <Route path="recaps" element={<AttendanceRecapPage />} />
           <Route
-            path="rekap-kehadiran/:eventId"
+            path="recaps/:eventId"
             element={<EventAttendanceDetailPage />}
           />
           <Route
-            path="riwayat-jamaah/:userId"
+            path="members/:userId"
             element={<JamaahAttendanceHistoryPage />}
           />
         </Route>

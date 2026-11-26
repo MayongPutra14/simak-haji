@@ -4,6 +4,8 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const api = axios.create({
   baseURL: BASE_URL,
+  // SEND PHPSESSID SO THE BACKEND CAN RESOLVE THE CALLER (CONTRACT 1.1)
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -364,6 +366,81 @@ export const leaderDeleteEventAPI = async (eventId, leaderId, zone) => {
     action: 'delete_event',
     leader_id: leaderId,
     zone: zone,
+  });
+
+  return response.data;
+};
+
+// ATTENDANCE RECAP (LEADER) — SEE docs/api-contract-admin-leader-attendance.md
+// LEADER NEVER SENDS `zone`: THE BACKEND DERIVES IT FROM THE SESSION (CONTRACT 3.2)
+export const getAttendanceRecapAPI = async ({
+  page = 1,
+  perPage = 10,
+  search = '',
+  month = 'all',
+  year = 'all',
+} = {}) => {
+  const response = await api.post('leader.php', {
+    action: 'get_attendance_recap',
+    page,
+    per_page: perPage,
+    search,
+    month,
+    year,
+  });
+
+  return response.data;
+};
+
+export const getEventAttendanceDetailAPI = async ({
+  eventId,
+  page = 1,
+  perPage = 10,
+  search = '',
+  status = 'all',
+} = {}) => {
+  if (!eventId) {
+    return {
+      status: 'failed',
+      message: 'Kegiatan tidak ditemukan.',
+    };
+  }
+
+  const response = await api.post('leader.php', {
+    action: 'get_event_attendance_detail',
+    event_id: Number(eventId),
+    page,
+    per_page: perPage,
+    search,
+    status,
+  });
+
+  return response.data;
+};
+
+export const getJamaahAttendanceHistoryAPI = async ({
+  userId,
+  page = 1,
+  perPage = 10,
+  search = '',
+  month = 'all',
+  status = 'all',
+} = {}) => {
+  if (!userId) {
+    return {
+      status: 'failed',
+      message: 'Data jamaah tidak ditemukan.',
+    };
+  }
+
+  const response = await api.post('leader.php', {
+    action: 'get_jamaah_attendance_history',
+    user_id: Number(userId),
+    page,
+    per_page: perPage,
+    search,
+    month,
+    status,
   });
 
   return response.data;

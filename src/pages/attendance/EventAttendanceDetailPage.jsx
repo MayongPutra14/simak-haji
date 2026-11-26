@@ -47,7 +47,7 @@ const DEFAULT_FILTERS = {
 function RecapBackLink() {
   return (
     <Link
-      to="/absensi/rekap-kehadiran"
+      to="/attendace/recaps"
       className="inline-flex w-fit items-center gap-1.5 text-xs font-semibold text-sea-green-700 transition-colors hover:text-sea-green-800"
     >
       <IconArrowLeft className="h-4 w-4" aria-hidden="true" />
@@ -228,6 +228,14 @@ export default function EventAttendanceDetailPage() {
                 <EventMeta icon={IconCalendar} value={eventDate || '-'} />
                 <EventMeta icon={IconClock} value={eventTime} />
                 <EventMeta icon={IconLocation} value={event.location || '-'} />
+              </div>
+
+              <div
+                role="alert"
+                className="max-w-fit font-semibold mt-3 flex items-center gap-2.5 rounded-xl border border-red-200/80 bg-red-50/70 px-3 py-2 text-xs text-red-800"
+              >
+                <IconAlertCircle className=" text-lg text-red-500 font-semibold" />
+                <p>Ketuk nama jamaah untuk melihat detail informasi.</p>
               </div>
             </header>
 

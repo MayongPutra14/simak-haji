@@ -80,7 +80,7 @@ export const getAttendanceRecapColumns = () => [
     render: (event) =>
       event.eventId ? (
         <Link
-          to={`/absensi/rekap-kehadiran/${event.eventId}`}
+          to={`/attendance/recaps/${event.eventId}`}
           title="Lihat detail kegiatan"
           className="mx-auto inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-1.5 text-xs font-medium text-slate-700 transition-all hover:bg-slate-600 hover:text-white"
         >

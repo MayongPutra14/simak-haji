@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getJamaahAttendanceHistoryMock } from '../../data/mock/attendanceRecap';
 import {
   calculateAttendanceStats,
   sortAttendanceRecords,
@@ -13,6 +12,7 @@ import {
   normalizeJamaahIdentity,
   paginateRows,
 } from '../../utils/helpers/attendanceRecap';
+import { getAttendanceDataSource } from './attendanceDataSource';
 
 const FALLBACK_ERROR_MESSAGE = 'Gagal memuat riwayat kehadiran jamaah.';
 const SESSION_ERROR_MESSAGE = 'Sesi login tidak valid, silakan login kembali.';
@@ -22,6 +22,10 @@ const getEmptyPagination = (perPage) => paginateRows([], 1, perPage).pagination;
 
 /**
  * Data hook for one jamaah's attendance history.
+ *
+ * Reads the local mock until `ATTENDANCE_USE_MOCK` is flipped in
+ * `src/utils/helpers/constant.js`; `getAttendanceDataSource(role)` then routes
+ * to the admin or leader PHP client.
  *
  * History stats are all-time and ignore the search/month/status filters, the
  * same rule as the jamaah "Absensi Saya" page (Phase 1).
@@ -107,7 +111,8 @@ export const useJamaahAttendanceHistory = ({
       setError(null);
 
       try {
-        const response = await getJamaahAttendanceHistoryMock({
+        const source = getAttendanceDataSource(role);
+        const response = await source.getJamaahAttendanceHistory({
           scope: {
             role,
             zone: scopeZone || null,

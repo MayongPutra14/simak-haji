@@ -40,7 +40,7 @@ export const renderParticipantName = (participant, fromPath = '') => {
 
   return (
     <Link
-      to={`/absensi/riwayat-jamaah/${participant.userId}`}
+      to={`/attendance/members/${participant.userId}`}
       state={{ from: fromPath }}
       title={`Lihat riwayat ${name}`}
       className="group flex min-w-0 items-center gap-2.5"
