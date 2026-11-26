@@ -202,7 +202,7 @@ Recap page:
 - [x] Role matrix: admin = all zones, leader = own zone only, jamaah redirected to `/user/home`, unknown → `/login`
 - [x] Leader direct-URL manipulation returns scoped or error data, never another zone
 - [x] Leader without `user.zone` → "Zona belum ditetapkan" state, never all-zone fallback
-- [ ] `npm run build` passes (no new warnings beyond the known baseline)
+- [x] `npm run build` passes (no new warnings beyond the known baseline)
 - [x] `npm run lint` adds no new errors beyond the 6 known ones
 - [x] Responsive pass 360 / 768 / 1280 on all three pages
 - [x] Empty, error, retry, and zero-filter-match states on all three pages
