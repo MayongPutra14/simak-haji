@@ -316,6 +316,19 @@ export const normalizeParticipants = (participants) =>
     .filter((participant) => participant && typeof participant === 'object')
     .map((participant, index) => normalizeParticipant(participant, index));
 
+/**
+ * Region label for a participant row: the historical region name when present,
+ * otherwise the zone snapshot. It never falls back to the jamaah's current zone.
+ */
+export const getParticipantRegionLabel = (participant) => {
+  const regionName = normalizeText(participant?.regionName);
+  if (regionName) return regionName;
+
+  const zone = normalizeZone(participant?.zone);
+
+  return zone ? `Zona ${zone}` : '-';
+};
+
 export const normalizeJamaahIdentity = (jamaah = {}) => {
   const userId = pickFirstValue(jamaah.userId, jamaah.user_id, jamaah.id, '');
 

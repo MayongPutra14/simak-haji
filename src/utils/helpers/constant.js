@@ -291,6 +291,15 @@ export const ATTENDANCE_STATUS = {
 
 export const ATTENDANCE_ALL_VALUE = 'all';
 
+// ADMIN-ONLY ZONE FILTER OPTIONS FOR THE EVENT DETAIL PARTICIPANT LIST
+export const ATTENDANCE_ZONE_OPTIONS = [
+  { value: ATTENDANCE_ALL_VALUE, label: 'Semua Zona' },
+  ...Object.keys(DISTRICT_BY_ZONE).map((zone) => ({
+    value: zone,
+    label: `Zona ${zone}`,
+  })),
+];
+
 // MINIMUM ATTENDANCE FOR THE ISTITHA'AH RECOMMENDATION (PRD / MOCKUP FOOTER NOTE)
 export const ATTENDANCE_MIN_PERCENTAGE = 75;
 

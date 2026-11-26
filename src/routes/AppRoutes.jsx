@@ -58,6 +58,7 @@ import {
 import {
   AttendanceLayout,
   AttendanceRecapPage,
+  EventAttendanceDetailPage,
 } from '../pages/attendance/index';
 
 // LEADER
@@ -179,6 +180,10 @@ export default function AppRoutes() {
         <Route path="absensi" element={<AttendanceLayout />}>
           <Route index element={<Navigate to="rekap-kehadiran" replace />} />
           <Route path="rekap-kehadiran" element={<AttendanceRecapPage />} />
+          <Route
+            path="rekap-kehadiran/:eventId"
+            element={<EventAttendanceDetailPage />}
+          />
         </Route>
       </Route>
 

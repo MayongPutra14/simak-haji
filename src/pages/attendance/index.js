@@ -1,4 +1,5 @@
 import AttendanceLayout from '../../layouts/AttendanceLayout';
 import AttendanceRecapPage from './AttendanceRecapPage';
+import EventAttendanceDetailPage from './EventAttendanceDetailPage';
 
-export { AttendanceLayout, AttendanceRecapPage };
+export { AttendanceLayout, AttendanceRecapPage, EventAttendanceDetailPage };

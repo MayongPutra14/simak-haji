@@ -12,6 +12,11 @@ import AttendanceRecapFilters from './recap/AttendanceRecapFilters';
 import AttendanceRecapTable from './recap/AttendanceRecapTable';
 import AttendanceRecapCard from './recap/AttendanceRecapCard';
 import AttendanceRecapSection from './recap/AttendanceRecapSection';
+import EventParticipantFilters from './eventDetail/EventParticipantFilters';
+import EventParticipantTable from './eventDetail/EventParticipantTable';
+import EventParticipantCard from './eventDetail/EventParticipantCard';
+import EventParticipantSection from './eventDetail/EventParticipantSection';
+import { EventParticipantEmptyState } from './eventDetail/EventParticipantState';
 
 export {
   AttendanceStatCards,
@@ -26,4 +31,9 @@ export {
   AttendanceRecapTable,
   AttendanceRecapCard,
   AttendanceRecapSection,
+  EventParticipantFilters,
+  EventParticipantTable,
+  EventParticipantCard,
+  EventParticipantSection,
+  EventParticipantEmptyState,
 };

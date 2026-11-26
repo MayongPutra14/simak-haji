@@ -139,7 +139,7 @@ Shell & routing:
 
 Shared UI — `src/components/attendance/shared/`:
 
-- [x] `AttendancePageHeader.jsx` — semantic `<header>`, back link, title, scope slot
+- [x] ~~`AttendancePageHeader.jsx`~~ — removed in the Step 3 cleanup; pages now use `BackButton` + an inline `<header>`
 - [x] `AttendanceStatCards.jsx` — config-driven (2/3/4 cards), existing gradient palette
 - [x] `AttendanceRateBar.jsx` — `role="progressbar"` + aria values
 - [x] `AttendanceStatusTabs.jsx` — `aria-pressed` toggle group with counts
