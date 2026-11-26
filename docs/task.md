@@ -199,14 +199,14 @@ Recap page:
 
 ### 2.7 Step 7 — Verification
 
-- [ ] Role matrix: admin = all zones, leader = own zone only, jamaah redirected to `/user/home`, unknown → `/login`
-- [ ] Leader direct-URL manipulation returns scoped or error data, never another zone
-- [ ] Leader without `user.zone` → "Zona belum ditetapkan" state, never all-zone fallback
+- [x] Role matrix: admin = all zones, leader = own zone only, jamaah redirected to `/user/home`, unknown → `/login`
+- [x] Leader direct-URL manipulation returns scoped or error data, never another zone
+- [x] Leader without `user.zone` → "Zona belum ditetapkan" state, never all-zone fallback
 - [ ] `npm run build` passes (no new warnings beyond the known baseline)
-- [ ] `npm run lint` adds no new errors beyond the 6 known ones
-- [ ] Responsive pass 360 / 768 / 1280 on all three pages
-- [ ] Empty, error, retry, and zero-filter-match states on all three pages
-- [ ] No Attendance item added to sidebar or bottom navbar
+- [x] `npm run lint` adds no new errors beyond the 6 known ones
+- [x] Responsive pass 360 / 768 / 1280 on all three pages
+- [x] Empty, error, retry, and zero-filter-match states on all three pages
+- [x] No Attendance item added to sidebar or bottom navbar
 
 ## Phase 3 — Backend & API integration
 
