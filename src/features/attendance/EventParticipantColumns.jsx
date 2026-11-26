@@ -59,13 +59,11 @@ export const getEventParticipantColumns = ({ fromPath = '' } = {}) => [
     key: 'fullName',
     header: 'Nama Jamaah',
     isSticky: true,
-    className: 'min-w-60',
     render: (participant) => renderParticipantName(participant, fromPath),
   },
   {
     key: 'regionName',
     header: 'Wilayah',
-    className: 'min-w-36',
     render: (participant) => (
       <span className="text-xs text-slate-600 sm:text-sm">
         {getParticipantRegionLabel(participant)}

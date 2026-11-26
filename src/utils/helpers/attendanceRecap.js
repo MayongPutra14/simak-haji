@@ -326,7 +326,7 @@ export const getParticipantRegionLabel = (participant) => {
 
   const zone = normalizeZone(participant?.zone);
 
-  return zone ? `Zona ${zone}` : '-';
+  return zone ? `${zone}` : '-';
 };
 
 export const normalizeJamaahIdentity = (jamaah = {}) => {

@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router';
 import { useAuth } from '../../features/auth/useAuth';
 import { useEventAttendanceDetail } from '../../hooks/attendance/useEventAttendanceDetail';
+import BackButton from '../../components/ui/global/BackButton';
 import {
   ATTENDANCE_ALL_VALUE,
   ATTENDANCE_STATUS,
@@ -59,7 +60,7 @@ function EventMeta({ icon: Icon, value }) {
   return (
     <span className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200/70 bg-slate-50 px-2.5 py-1.5 font-medium">
       <Icon className="h-4 w-4 shrink-0 text-emerald-700" aria-hidden="true" />
-      <span className="break-words">{value}</span>
+      <span className="wrap-break-words">{value}</span>
     </span>
   );
 }
@@ -211,7 +212,7 @@ export default function EventAttendanceDetailPage() {
         ) : event ? (
           <>
             <header className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-xs md:p-6">
-              <RecapBackLink />
+              <BackButton userRole={user.role} />
 
               <div className="mt-2 flex flex-wrap items-center gap-2">
                 <h1 className="text-lg font-bold tracking-tight text-slate-900 md:text-2xl">

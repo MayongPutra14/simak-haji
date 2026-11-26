@@ -228,7 +228,6 @@ const JAMAHA_SEED = [
 const JAMAHA = JAMAHA_SEED.map((jamaah, index) => ({
   ...jamaah,
   userId: 1001 + index,
-  regionName: `Wilayah ${jamaah.zone}`,
 }));
 
 // 10 COMPLETED EVENTS (JAN-FEB 2026) + 2 NOT COMPLETED, TO PROVE 5.2

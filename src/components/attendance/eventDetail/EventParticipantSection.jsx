@@ -27,7 +27,6 @@ export default function EventParticipantSection({
   }
 
   const firstRowNumber = pagination?.from ?? 1;
-
   return (
     <section
       aria-label="Daftar peserta kehadiran kegiatan"
