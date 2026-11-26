@@ -162,32 +162,32 @@ Recap page:
 
 ### 2.4 Step 4 — Event Details
 
-- [ ] `src/pages/attendance/EventAttendanceDetailPage.jsx`
-- [ ] Route `/absensi/rekap-kehadiran/:eventId`
-- [ ] Header: back to recap, event name, `Selesai` badge, date, `timeStart–timeEnd`, location (no QR / export buttons)
-- [ ] 4 participant stat cards, recomputed on the leader's zone subset
-- [ ] `eventDetail/EventParticipantFilters.jsx` — search + `AttendanceStatusTabs`; admin-only `Zona` select, leader locked zone chip
-- [ ] `eventDetail/EventParticipantTable.jsx` — No, Nama, Wilayah, Waktu Absen, Status
-- [ ] `eventDetail/EventParticipantCard.jsx` — mobile card
-- [ ] `eventDetail/EventParticipantSection.jsx` — table/cards switch + pagination
-- [ ] `src/features/attendance/EventParticipantColumns.jsx`
-- [ ] Congregant name links to `/absensi/riwayat-jamaah/:userId` with `state.from`
-- [ ] Invalid `eventId` → error state with retry/back
+- [x] `src/pages/attendance/EventAttendanceDetailPage.jsx`
+- [x] Route `/absensi/rekap-kehadiran/:eventId`
+- [x] Header: back to recap, event name, `Selesai` badge, date, `timeStart–timeEnd`, location (no QR / export buttons)
+- [x] 4 participant stat cards, recomputed on the leader's zone subset
+- [x] `eventDetail/EventParticipantFilters.jsx` — search + `AttendanceStatusTabs`; admin-only `Zona` select, leader locked zone chip
+- [x] `eventDetail/EventParticipantTable.jsx` — No, Nama, Wilayah, Waktu Absen, Status
+- [x] `eventDetail/EventParticipantCard.jsx` — mobile card
+- [x] `eventDetail/EventParticipantSection.jsx` — table/cards switch + pagination
+- [x] `src/features/attendance/EventParticipantColumns.jsx`
+- [x] Congregant name links to `/absensi/riwayat-jamaah/:userId` with `state.from`
+- [x] Invalid `eventId` → error state with retry/back
 
 ### 2.5 Step 5 — Jamaah History
 
-- [ ] `src/pages/attendance/JamaahAttendanceHistoryPage.jsx`
-- [ ] Route `/absensi/riwayat-jamaah/:userId`
-- [ ] `jamaahHistory/JamaahHistoryIdentity.jsx` — name + zona only, initials avatar (no documents/profile duplication, no unbacked verification badges)
-- [ ] Exactly 2 stat cards (`Hadir`, `Absen`) — no "Tingkat Disiplin"
-- [ ] `jamaahHistory/JamaahHistoryFilters.jsx` — search + Bulan + `AttendanceStatusTabs`
-- [ ] `jamaahHistory/JamaahHistoryTable.jsx` — No, Kegiatan, Tanggal, Waktu Absen, Status
-- [ ] `jamaahHistory/JamaahHistoryCard.jsx` — mobile card
-- [ ] `jamaahHistory/JamaahHistorySection.jsx` — table/cards switch + pagination
-- [ ] `src/features/attendance/JamaahHistoryColumns.jsx`
-- [ ] Back via `location.state.from`, fallback `/absensi/rekap-kehadiran`
-- [ ] Leader opening a jamaah outside their zone → error state
-- [ ] Congregation Data entry link: DEFERRED (do not touch `ProfileDetail.jsx`)
+- [x] `src/pages/attendance/JamaahAttendanceHistoryPage.jsx`
+- [x] Route `/absensi/riwayat-jamaah/:userId`
+- [x] `jamaahHistory/JamaahHistoryIdentity.jsx` — name + zona only, initials avatar (no documents/profile duplication, no unbacked verification badges)
+- [x] Exactly 2 stat cards (`Hadir`, `Absen`) — no "Tingkat Disiplin"
+- [x] `jamaahHistory/JamaahHistoryFilters.jsx` — search + Bulan + `AttendanceStatusTabs`
+- [x] `jamaahHistory/JamaahHistoryTable.jsx` — No, Kegiatan, Tanggal, Waktu Absen, Status
+- [x] `jamaahHistory/JamaahHistoryCard.jsx` — mobile card
+- [x] `jamaahHistory/JamaahHistorySection.jsx` — table/cards switch + pagination
+- [x] `src/features/attendance/JamaahHistoryColumns.jsx`
+- [x] Back via `location.state.from`, fallback `/absensi/rekap-kehadiran`
+- [x] Leader opening a jamaah outside their zone → error state
+- [x] Congregation Data entry link: DEFERRED (do not touch `ProfileDetail.jsx`)
 
 ### 2.6 Step 6 — API client wiring (still mock-backed)
 

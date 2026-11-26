@@ -561,6 +561,13 @@ Returns one jamaah's identity, all-time stats, and their event history.
       "to": 2,
       "hasNextPage": false,
       "hasPreviousPage": false
+    },
+    "filters": {
+      "months": [
+        { "value": "all", "label": "Semua Bulan" },
+        { "value": "02", "label": "Februari" },
+        { "value": "01", "label": "Januari" }
+      ]
     }
   }
 }
@@ -572,6 +579,12 @@ Returns one jamaah's identity, all-time stats, and their event history.
 | `stats`      | All-time, computed from **all** history rows in scope, ignoring `search`, `month`, and `status`. Required keys: `totalPresent`, `totalAbsent`, `totalRecords`, `percentage`. `minimumPercentage` / `isEligible` are optional parity fields. |
 | `records`    | Current page after filters, newest `eventDate` first.                                                              |
 | `pagination` | Applies to `records` only.                                                                                          |
+| `filters`    | Display-ready Indonesian options derived from the **complete scoped history**, ignoring active filters, so a month never disappears after being selected. `months` is required. |
+
+> The Jamaah History UI renders exactly two derived stat cards, `Hadir`
+> (`totalPresent`) and `Absen` (`totalAbsent`). There is no "Tingkat Disiplin"
+> card; `percentage`, `minimumPercentage`, and `isEligible` stay in the payload
+> for contract parity but are not displayed on this page.
 
 Leader rules:
 
@@ -698,7 +711,7 @@ useEventAttendanceDetail({ scope, eventId, search, status, zone, page, perPage }
 // -> { event, participants, stats, pagination, isLoading, error, refetch }
 
 useJamaahAttendanceHistory({ scope, userId, search, month, status, page, perPage })
-// -> { jamaah, records, stats, pagination, isLoading, error, refetch }
+// -> { jamaah, records, stats, filterOptions, pagination, isLoading, error, refetch }
 ```
 
 The hooks set `error` to the Indonesian `message` from a `status: "failed"` response, and to
@@ -744,3 +757,6 @@ zone) produces the zone message without calling the API.
    existing Congregation Data page is deferred; only Event Details links into it for now.
 6. **Congregant history access uses the jamaah's current zone; historical row display uses the
    snapshot zone.** The two must not be conflated.
+7. **Jamaah History shows two stat cards only.** `Hadir` and `Absen`; the "Tingkat Disiplin"
+   card from the mockup is intentionally omitted. `percentage` and related fields stay in
+   `stats` for contract parity but are not rendered.

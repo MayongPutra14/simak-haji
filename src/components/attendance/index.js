@@ -17,6 +17,17 @@ import EventParticipantTable from './eventDetail/EventParticipantTable';
 import EventParticipantCard from './eventDetail/EventParticipantCard';
 import EventParticipantSection from './eventDetail/EventParticipantSection';
 import { EventParticipantEmptyState } from './eventDetail/EventParticipantState';
+import JamaahHistoryIdentity from './jamaahHistory/JamaahHistoryIdentity';
+import JamaahHistoryFilters from './jamaahHistory/JamaahHistoryFilters';
+import JamaahHistoryTable from './jamaahHistory/JamaahHistoryTable';
+import JamaahHistoryCard from './jamaahHistory/JamaahHistoryCard';
+import JamaahHistorySection from './jamaahHistory/JamaahHistorySection';
+import {
+  JamaahHistoryEmptyState,
+  JamaahHistoryErrorState,
+  JamaahHistoryListSkeleton,
+  JamaahHistoryLoadingState,
+} from './jamaahHistory/JamaahHistoryState';
 
 export {
   AttendanceStatCards,
@@ -36,4 +47,13 @@ export {
   EventParticipantCard,
   EventParticipantSection,
   EventParticipantEmptyState,
+  JamaahHistoryIdentity,
+  JamaahHistoryFilters,
+  JamaahHistoryTable,
+  JamaahHistoryCard,
+  JamaahHistorySection,
+  JamaahHistoryEmptyState,
+  JamaahHistoryErrorState,
+  JamaahHistoryListSkeleton,
+  JamaahHistoryLoadingState,
 };

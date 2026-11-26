@@ -15,6 +15,7 @@ import {
   filterJamaahHistory,
   filterParticipants,
   filterRecapEvents,
+  getJamaahHistoryFilterOptions,
   getRecapFilterOptions,
   isCompletedEvent,
   normalizeJamaahHistoryRecords,
@@ -629,6 +630,7 @@ export const getJamaahAttendanceHistoryMock = async (request = {}) => {
       stats,
       records: rows,
       pagination,
+      filters: getJamaahHistoryFilterOptions(scopedRecords),
     },
     'Riwayat kehadiran jamaah berhasil diambil.',
   );

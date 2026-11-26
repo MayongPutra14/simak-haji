@@ -571,6 +571,21 @@ export const getRecapFilterOptions = (events = []) => {
 };
 
 /**
+ * Month options for the jamaah history filter. They are derived from the
+ * complete scoped history because stats (and therefore filter options) must
+ * ignore the active search/month/status filters.
+ */
+export const getJamaahHistoryFilterOptions = (records = []) => {
+  const { months } = getAttendanceFilterOptions(records);
+
+  return {
+    months: months.length
+      ? months
+      : [{ value: ATTENDANCE_ALL_VALUE, label: 'Semua Bulan' }],
+  };
+};
+
+/**
  * @returns {{rows: Array, pagination: {page: number, perPage: number,
  *            total: number, totalPages: number, from: number, to: number,
  *            hasNextPage: boolean, hasPreviousPage: boolean}}}

@@ -8,6 +8,7 @@ import { ATTENDANCE_ALL_VALUE } from '../../utils/helpers/constant';
 import {
   ATTENDANCE_RECAP_PAGE_SIZE,
   ATTENDANCE_ZONE_NOT_SET_MESSAGE,
+  getJamaahHistoryFilterOptions,
   normalizeJamaahHistoryRecords,
   normalizeJamaahIdentity,
   paginateRows,
@@ -46,6 +47,9 @@ export const useJamaahAttendanceHistory = ({
   const [jamaah, setJamaah] = useState(null);
   const [records, setRecords] = useState([]);
   const [stats, setStats] = useState(() => calculateAttendanceStats([]));
+  const [filterOptions, setFilterOptions] = useState(() =>
+    getJamaahHistoryFilterOptions([]),
+  );
   const [pagination, setPagination] = useState(() =>
     getEmptyPagination(perPage),
   );
@@ -68,6 +72,7 @@ export const useJamaahAttendanceHistory = ({
         setJamaah(null);
         setRecords([]);
         setStats(calculateAttendanceStats([]));
+        setFilterOptions(getJamaahHistoryFilterOptions([]));
         setPagination(getEmptyPagination(perPage));
       };
 
@@ -128,6 +133,11 @@ export const useJamaahAttendanceHistory = ({
           setJamaah(data.jamaah ? normalizeJamaahIdentity(data.jamaah) : null);
           setRecords(normalizedRecords);
           setStats(data.stats || calculateAttendanceStats([]));
+          setFilterOptions(
+            Array.isArray(data.filters?.months)
+              ? { months: data.filters.months }
+              : getJamaahHistoryFilterOptions(normalizedRecords),
+          );
           setPagination(data.pagination || getEmptyPagination(perPage));
         } else {
           resetHistory();
@@ -166,6 +176,7 @@ export const useJamaahAttendanceHistory = ({
     jamaah,
     records,
     stats,
+    filterOptions,
     pagination,
     isLoading,
     error,

@@ -59,6 +59,7 @@ import {
   AttendanceLayout,
   AttendanceRecapPage,
   EventAttendanceDetailPage,
+  JamaahAttendanceHistoryPage,
 } from '../pages/attendance/index';
 
 // LEADER
@@ -183,6 +184,10 @@ export default function AppRoutes() {
           <Route
             path="rekap-kehadiran/:eventId"
             element={<EventAttendanceDetailPage />}
+          />
+          <Route
+            path="riwayat-jamaah/:userId"
+            element={<JamaahAttendanceHistoryPage />}
           />
         </Route>
       </Route>
