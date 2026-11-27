@@ -334,16 +334,35 @@ export const normalizeJamaahIdentity = (jamaah = {}) => {
 };
 
 /**
+ * Event region label used by the history badge. The backend sends
+ * `eventRegionName` ('Wilayah B' or 'Umum'); when it is null we derive it from
+ * the event zone, and fall back to 'Umum' for an all-zone event.
+ */
+const resolveEventRegionName = (record, eventZone) => {
+  const regionName = normalizeText(
+    pickFirstValue(record.eventRegionName, record.event_region_name),
+  );
+
+  if (regionName) return regionName;
+  if (eventZone) return `Wilayah ${eventZone}`;
+
+  return 'Umum';
+};
+
+/**
  * Jamaah history rows reuse the `AttendanceRecord` shape from Phase 1 and add
  * the event location/zone as extra display data.
  */
-
 const normalizeJamaahHistoryRecord = (record = {}, index = 0) => {
   const attendanceRecord = normalizeAttendanceRecord(record, index);
+  const eventZone = normalizeZone(
+    pickFirstValue(record.eventZone, record.event_zone),
+  );
 
   return {
     ...attendanceRecord,
     location: pickFirstValue(record.location, record.lokasi, '', ''),
+    eventZone,
     zone: normalizeZone(
       pickFirstValue(
         record.zone,
@@ -352,6 +371,7 @@ const normalizeJamaahHistoryRecord = (record = {}, index = 0) => {
         record.regionZone,
       ),
     ),
+    eventRegionName: resolveEventRegionName(record, eventZone),
   };
 };
 

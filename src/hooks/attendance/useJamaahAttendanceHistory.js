@@ -24,6 +24,8 @@ const getEmptyPagination = (perPage) => paginateRows([], 1, perPage).pagination;
  * (`get_jamaah_attendance_history`). Search, month, status, and pagination are
  * sent to the API; the hook only normalizes the response. Record order is
  * server-defined (eventDate DESC, then eventId DESC), so it is never re-sorted.
+ * Each normalized record keeps the event zone (`eventZone`) and its display
+ * label (`eventRegionName`, 'Umum' when the event is not zone-specific).
  *
  * History stats are all-time and ignore the search/month/status filters, the
  * same rule as the jamaah "Absensi Saya" page (Phase 1).

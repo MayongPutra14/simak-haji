@@ -22,6 +22,7 @@ import JamaahHistoryFilters from './jamaahHistory/JamaahHistoryFilters';
 import JamaahHistoryTable from './jamaahHistory/JamaahHistoryTable';
 import JamaahHistoryCard from './jamaahHistory/JamaahHistoryCard';
 import JamaahHistorySection from './jamaahHistory/JamaahHistorySection';
+import { JamaahHistoryZoneBadge } from './jamaahHistory/JamaahHistoryBadges';
 import {
   JamaahHistoryEmptyState,
   JamaahHistoryErrorState,
@@ -52,6 +53,7 @@ export {
   JamaahHistoryTable,
   JamaahHistoryCard,
   JamaahHistorySection,
+  JamaahHistoryZoneBadge,
   JamaahHistoryEmptyState,
   JamaahHistoryErrorState,
   JamaahHistoryListSkeleton,
