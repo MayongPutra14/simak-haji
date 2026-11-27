@@ -1,4 +1,5 @@
 import { AttendanceStatusBadge } from '../../components/ui/global/StatusComponents';
+import { JamaahHistoryZoneBadge } from '../../components/attendance/jamaahHistory/JamaahHistoryBadges';
 import {
   formatCheckInTime,
   formatDateIndonesia,
@@ -36,6 +37,14 @@ export const getJamaahHistoryColumns = () => [
       <span className="inline-flex items-center gap-2 text-xs sm:text-sm">
         {formatDateIndonesia(record.eventDate)}
       </span>
+    ),
+  },
+  {
+    key: 'eventZone',
+    header: 'Zona Acara',
+    className: 'whitespace-nowrap',
+    render: (record) => (
+      <JamaahHistoryZoneBadge regionName={record.eventRegionName} />
     ),
   },
   {

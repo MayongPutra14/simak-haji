@@ -1,4 +1,5 @@
 import { AttendanceStatusBadge } from '../../ui/global/StatusComponents';
+import { JamaahHistoryZoneBadge } from './JamaahHistoryBadges';
 import {
   formatCheckInTime,
   formatDateIndonesia,
@@ -7,7 +8,7 @@ import { IconCalendar } from '../../../utils/helpers/decorations';
 
 /**
  * Mobile history card. Carries the same fields as the desktop table row:
- * number, kegiatan, date, check-in time, and status.
+ * number, kegiatan, zone, date, check-in time, and status.
  */
 export default function JamaahHistoryCard({ record, number }) {
   return (
@@ -32,6 +33,10 @@ export default function JamaahHistoryCard({ record, number }) {
             <IconCalendar className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
             {formatDateIndonesia(record.eventDate)}
           </p>
+
+          <div className="mt-1.5">
+            <JamaahHistoryZoneBadge regionName={record.eventRegionName} />
+          </div>
         </div>
 
         <AttendanceStatusBadge status={record.status} className="shrink-0" />
