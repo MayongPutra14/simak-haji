@@ -1,8 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import {
-  calculateAttendanceStats,
-  sortAttendanceRecords,
-} from '../../utils/helpers/attendance';
+import { calculateAttendanceStats } from '../../utils/helpers/attendance';
 import { ATTENDANCE_ALL_VALUE } from '../../utils/helpers/constant';
 import {
   ATTENDANCE_RECAP_PAGE_SIZE,
@@ -23,9 +20,10 @@ const getEmptyPagination = (perPage) => paginateRows([], 1, perPage).pagination;
 /**
  * Data hook for one jamaah's attendance history.
  *
- * Reads the local mock until `ATTENDANCE_USE_MOCK` is flipped in
- * `src/utils/helpers/constant.js`; `getAttendanceDataSource(role)` then routes
- * to the admin or leader PHP client.
+ * `getAttendanceDataSource(role)` routes to the admin or leader PHP client
+ * (`get_jamaah_attendance_history`). Search, month, status, and pagination are
+ * sent to the API; the hook only normalizes the response. Record order is
+ * server-defined (eventDate DESC, then eventId DESC), so it is never re-sorted.
  *
  * History stats are all-time and ignore the search/month/status filters, the
  * same rule as the jamaah "Absensi Saya" page (Phase 1).
@@ -131,9 +129,7 @@ export const useJamaahAttendanceHistory = ({
 
         if (response?.status === 'success') {
           const data = response.data || {};
-          const normalizedRecords = sortAttendanceRecords(
-            normalizeJamaahHistoryRecords(data.records),
-          );
+          const normalizedRecords = normalizeJamaahHistoryRecords(data.records);
 
           setJamaah(data.jamaah ? normalizeJamaahIdentity(data.jamaah) : null);
           setRecords(normalizedRecords);
@@ -141,7 +137,7 @@ export const useJamaahAttendanceHistory = ({
           setFilterOptions(
             Array.isArray(data.filters?.months)
               ? { months: data.filters.months }
-              : getJamaahHistoryFilterOptions(normalizedRecords),
+              : getJamaahHistoryFilterOptions([]),
           );
           setPagination(data.pagination || getEmptyPagination(perPage));
         } else {

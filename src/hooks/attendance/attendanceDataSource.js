@@ -1,14 +1,8 @@
 import {
-  getAttendanceRecapMock,
-  getEventAttendanceDetailMock,
-  getJamaahAttendanceHistoryMock,
-} from '../../data/mock/attendanceRecap';
-import {
   getAttendanceRecapAPI as getAdminAttendanceRecapAPI,
   getEventAttendanceDetailAPI as getAdminEventAttendanceDetailAPI,
   getJamaahAttendanceHistoryAPI as getAdminJamaahAttendanceHistoryAPI,
 } from '../../utils/admin/api';
-import { ATTENDANCE_USE_MOCK } from '../../utils/helpers/constant';
 import {
   getAttendanceRecapAPI as getLeaderAttendanceRecapAPI,
   getEventAttendanceDetailAPI as getLeaderEventAttendanceDetailAPI,
@@ -16,15 +10,10 @@ import {
 } from '../../utils/leader/api';
 
 /**
- * SINGLE SWITCH BETWEEN THE PHASE 2 MOCK AND THE REAL PHP ACTIONS.
- * Flip `ATTENDANCE_USE_MOCK` in `src/utils/helpers/constant.js` to `false`.
+ * ROLE → PHP ACTION ROUTER FOR THE ADMIN/LEADER ATTENDANCE PAGES.
+ * Each role already has its own session-scoped PHP file, so the hook only has
+ * to pick the matching client.
  */
-const MOCK_SOURCE = Object.freeze({
-  getAttendanceRecap: getAttendanceRecapMock,
-  getEventAttendanceDetail: getEventAttendanceDetailMock,
-  getJamaahAttendanceHistory: getJamaahAttendanceHistoryMock,
-});
-
 const ADMIN_SOURCE = Object.freeze({
   getAttendanceRecap: getAdminAttendanceRecapAPI,
   getEventAttendanceDetail: getAdminEventAttendanceDetailAPI,
@@ -37,12 +26,7 @@ const LEADER_SOURCE = Object.freeze({
   getJamaahAttendanceHistory: getLeaderJamaahAttendanceHistoryAPI,
 });
 
-export const getAttendanceDataSource = (role) => {
-  if (ATTENDANCE_USE_MOCK) return MOCK_SOURCE;
-
-  return String(role ?? '').toLowerCase() === 'leader'
-    ? LEADER_SOURCE
-    : ADMIN_SOURCE;
-};
+export const getAttendanceDataSource = (role) =>
+  String(role ?? '').toLowerCase() === 'leader' ? LEADER_SOURCE : ADMIN_SOURCE;
 
 export default getAttendanceDataSource;

@@ -212,25 +212,29 @@ Recap page:
 
 ### 3.1 Backend inspection & contract
 
-- [ ] Inspect `attendances`, events, users tables, QR scan flow, production data
-- [ ] Choose between `event_attendance_records` (PRD §6.1) and deriving from `attendances`
+- [x] Inspect `attendances`, events, users tables, QR scan flow, production data
+- [x] Choose between `event_attendance_records` (PRD §6.1) and deriving from `attendances`
 - [x] Confirm endpoint convention (flat PHP `user.php` / `admin.php` / `leader.php` + `action`, not the REST paths in PRD §7)
 - [x] Document the jamaah attendance contract in `docs/api-contract-attendance.md` (agreed + implemented on the frontend)
-- [ ] Agree admin/leader request/response payloads incl. stats, filters, pagination, region scoping with the backend (see `docs/api-contract-admin-leader-attendance.md`, Phase 2 Step 1)
+- [x] Agree admin/leader request/response payloads incl. stats, filters, pagination, region scoping with the backend (see `docs/api-contract-admin-leader-attendance.md`, Phase 2 Step 1)
 
 ### 3.2 Frontend integration
 
 - [x] Add `getMyAttendance` to `src/utils/user/api.js` (POST `user.php`, `{ action: 'get_my_attendance' }`, session cookie, no `user_id`)
-- [ ] Add recap / event-detail / congregant-history calls to admin & leader clients (Phase 2, Step 6)
+- [x] Add recap / event-detail / congregant-history calls to admin & leader clients (Phase 2, Step 6)
 - [x] Swap `useMyAttendance` mock for the real endpoint, keep `{ stats, records }` shape
-- [ ] Swap the three admin/leader hooks from `src/data/mock/attendanceRecap.js` to the real actions
-- [ ] Delete `src/data/mock/attendanceRecap.js` and the mock branch
-- [ ] Send filters + pagination to the API instead of filtering client-side
+- [x] Swap the three admin/leader hooks from `src/data/mock/attendanceRecap.js` to the real actions
+- [x] Delete `src/data/mock/attendanceRecap.js` and the mock branch
+- [x] Send filters + pagination to the API instead of filtering client-side
 - [x] Delete `src/data/mock/myAttendance.js` and mock branches
 - [ ] Re-verify loading / empty / error / retry against real responses
   - Failure path verified with curl: `POST user.php` without a session returns HTTP 200 +
     `status: "failed"` + Indonesian message, which now renders the error state. Success/empty
     still need a logged-in jamaah session.
+  - Admin/leader failure path verified the same way against the local dev API: `admin.php` and
+    `leader.php` `get_attendance_recap` without a session return HTTP 200 + `status: "failed"` +
+    `Sesi login tidak valid, silakan login kembali.` Success/empty/retry still need a logged-in
+    admin/leader session.
 
 ### 3.3 Security & regression
 

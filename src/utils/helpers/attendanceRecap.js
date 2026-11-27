@@ -1,6 +1,5 @@
 import { ATTENDANCE_ALL_VALUE, ATTENDANCE_MIN_PERCENTAGE } from './constant';
 import {
-  getAttendanceDateParts,
   getAttendanceFilterOptions,
   isPresent,
   normalizeAttendanceRecord,
@@ -26,8 +25,6 @@ const pickFirstValue = (...values) =>
   values.find((value) => value !== undefined && value !== null);
 
 const normalizeText = (value) => String(value ?? '').trim();
-
-const normalizeQuery = (value) => normalizeText(value).toLowerCase();
 
 const toNumber = (value, fallback = 0) => {
   if (value === null || value === undefined || value === '') return fallback;
@@ -96,40 +93,6 @@ export const isCompletedEvent = (event) => {
     event?.isCompleted === true ||
     event?.isCompleted === 1
   );
-};
-
-const getRowZone = (row) =>
-  normalizeZone(
-    pickFirstValue(
-      row?.zone,
-      row?.region_zone,
-      row?.regionZone,
-      row?.zone_leader,
-      row?.eventZone,
-      row?.event_zone,
-    ),
-  );
-
-/**
- * Defensive client-side scope filter. Rows that explicitly belong to another
- * zone are removed; rows without a zone are kept because the backend is
- * responsible for scoping open/all-zone data (docs/api-contract-admin-leader-
- * attendance.md 5).
- */
-export const applyAttendanceScope = (rows, scope) => {
-  const list = Array.isArray(rows) ? rows : [];
-
-  if (!scope?.isZoneLocked) return list;
-  if (scope?.isBlocked) return [];
-
-  const zone = normalizeZone(scope?.zone);
-  if (!zone) return [];
-
-  return list.filter((row) => {
-    const rowZone = getRowZone(row);
-
-    return !rowZone || rowZone === zone;
-  });
 };
 
 const resolveEventDate = (event) => {
@@ -247,8 +210,10 @@ export const normalizeRecapEvents = (events) =>
 
 /**
  * Map one event participant row into the UI shape.
- * `zone` / `regionName` are the historical snapshot taken when attendance was
- * recorded (PRD 5.4), never the congregant's current zone.
+ *
+ * `zone` / `regionName` are the jamaah's CURRENT zone (`users.zona`), not a
+ * snapshot: the schema has no region column on `attendances` yet. `regionId`
+ * is therefore always `null` from the backend (backend notes §4.2).
  */
 export const normalizeParticipant = (participant = {}, index = 0) => {
   const checkInTime = normalizeCheckInTime(
@@ -317,8 +282,9 @@ export const normalizeParticipants = (participants) =>
     .map((participant, index) => normalizeParticipant(participant, index));
 
 /**
- * Region label for a participant row: the historical region name when present,
- * otherwise the zone snapshot. It never falls back to the jamaah's current zone.
+ * Region label for a participant row: the backend's `regionName`
+ * ("Wilayah X") when present, otherwise the current zone. Never invents a
+ * historical region, because none is stored.
  */
 export const getParticipantRegionLabel = (participant) => {
   const regionName = normalizeText(participant?.regionName);
@@ -432,109 +398,6 @@ export const calculateParticipantStats = (participants = []) => {
     totalAbsent,
     percentage: calculatePercentage(totalPresent, totalAbsent),
   };
-};
-
-const matchesSearch = (value, query) =>
-  normalizeText(value).toLowerCase().includes(query);
-
-export const filterRecapEvents = (
-  events = [],
-  {
-    search = '',
-    month = ATTENDANCE_ALL_VALUE,
-    year = ATTENDANCE_ALL_VALUE,
-    zone = ATTENDANCE_ALL_VALUE,
-  } = {},
-) => {
-  const query = normalizeQuery(search);
-  const zoneFilter = normalizeZone(zone === ATTENDANCE_ALL_VALUE ? '' : zone);
-
-  return (Array.isArray(events) ? events : [])
-    .filter(isCompletedEvent)
-    .filter((event) => {
-      const { year: eventYear, month: eventMonth } =
-        getAttendanceDateParts(event);
-
-      if (year !== ATTENDANCE_ALL_VALUE && eventYear !== year) return false;
-      if (month !== ATTENDANCE_ALL_VALUE && eventMonth !== month) {
-        return false;
-      }
-
-      if (zoneFilter && normalizeZone(event.zone) !== zoneFilter) {
-        return false;
-      }
-
-      if (
-        query &&
-        !matchesSearch(event.eventName, query) &&
-        !matchesSearch(event.location, query)
-      ) {
-        return false;
-      }
-
-      return true;
-    });
-};
-
-export const filterParticipants = (
-  participants = [],
-  {
-    search = '',
-    status = ATTENDANCE_ALL_VALUE,
-    zone = ATTENDANCE_ALL_VALUE,
-  } = {},
-) => {
-  const query = normalizeQuery(search);
-  const zoneFilter = normalizeZone(zone === ATTENDANCE_ALL_VALUE ? '' : zone);
-
-  return (Array.isArray(participants) ? participants : []).filter(
-    (participant) => {
-      if (status !== ATTENDANCE_ALL_VALUE && participant.status !== status) {
-        return false;
-      }
-
-      if (zoneFilter && normalizeZone(participant.zone) !== zoneFilter) {
-        return false;
-      }
-
-      if (
-        query &&
-        !matchesSearch(participant.fullName, query) &&
-        !matchesSearch(participant.regionName, query)
-      ) {
-        return false;
-      }
-
-      return true;
-    },
-  );
-};
-
-export const filterJamaahHistory = (
-  records = [],
-  {
-    search = '',
-    month = ATTENDANCE_ALL_VALUE,
-    status = ATTENDANCE_ALL_VALUE,
-  } = {},
-) => {
-  const query = normalizeQuery(search);
-
-  return (Array.isArray(records) ? records : []).filter((record) => {
-    const { month: recordMonth } = getAttendanceDateParts(record);
-
-    if (month !== ATTENDANCE_ALL_VALUE && recordMonth !== month) {
-      return false;
-    }
-
-    if (status !== ATTENDANCE_ALL_VALUE && record.status !== status) {
-      return false;
-    }
-
-    if (query && !matchesSearch(record.eventName, query)) return false;
-
-    return true;
-  });
 };
 
 /**

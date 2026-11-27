@@ -18,12 +18,12 @@ const getEmptyPagination = (perPage) => paginateRows([], 1, perPage).pagination;
 /**
  * Data hook for the admin/leader attendance recap page.
  *
- * Reads the local mock until `ATTENDANCE_USE_MOCK` is flipped in
- * `src/utils/helpers/constant.js`; `getAttendanceDataSource(role)` then routes
- * to the admin or leader PHP client. The returned shape stays identical.
+ * `getAttendanceDataSource(role)` routes to the admin or leader PHP client
+ * (`get_attendance_recap`). Search, month, year, zone, and pagination are sent
+ * to the API; the hook only normalizes the response.
  *
- * Stats and filter options come from the server/mock and ignore the active
- * filters, so the cards never shrink when the user narrows the list.
+ * Stats and filter options come from the server and ignore the active filters,
+ * so the cards never shrink when the user narrows the list.
  *
  * @param {{scope: object, search?: string, month?: string, year?: string,
  *          zone?: string, page?: number, perPage?: number}} options
@@ -117,9 +117,7 @@ export const useAttendanceRecap = ({
 
           setEvents(normalizedEvents);
           setStats(data.stats || calculateRecapStats([]));
-          setFilterOptions(
-            data.filters || getRecapFilterOptions(normalizedEvents),
-          );
+          setFilterOptions(data.filters || getRecapFilterOptions([]));
           setPagination(data.pagination || getEmptyPagination(perPage));
         } else {
           setEvents([]);

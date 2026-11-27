@@ -19,9 +19,9 @@ const getEmptyPagination = (perPage) => paginateRows([], 1, perPage).pagination;
 /**
  * Data hook for the event detail page.
  *
- * Reads the local mock until `ATTENDANCE_USE_MOCK` is flipped in
- * `src/utils/helpers/constant.js`; `getAttendanceDataSource(role)` then routes
- * to the admin or leader PHP client.
+ * `getAttendanceDataSource(role)` routes to the admin or leader PHP client
+ * (`get_event_attendance_detail`). Search, status, zone, and pagination are
+ * sent to the API; the hook only normalizes the response.
  *
  * Participant stats cover the whole scoped participant list (leader = own zone)
  * and are not recalculated when the search/status/zone filters change.
