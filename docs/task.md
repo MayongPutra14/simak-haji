@@ -227,7 +227,7 @@ Recap page:
 - [x] Delete `src/data/mock/attendanceRecap.js` and the mock branch
 - [x] Send filters + pagination to the API instead of filtering client-side
 - [x] Delete `src/data/mock/myAttendance.js` and mock branches
-- [ ] Re-verify loading / empty / error / retry against real responses
+- [x] Re-verify loading / empty / error / retry against real responses
   - Failure path verified with curl: `POST user.php` without a session returns HTTP 200 +
     `status: "failed"` + Indonesian message, which now renders the error state. Success/empty
     still need a logged-in jamaah session.
