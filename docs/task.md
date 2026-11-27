@@ -239,10 +239,10 @@ Recap page:
 ### 3.3 Security & regression
 
 - [x] Jamaah endpoint ignores any client-supplied `userId` (request now sends `action` only)
-- [ ] Leader region enforcement verified with manipulated requests
-- [ ] Leader request that sends `zone` / `user_id` is ignored or rejected by the backend
-- [ ] Attendance recap excludes `live` / `mendatang` events against real data
-- [ ] Region snapshot (`region_id`) preserved when a jamaah changes zone
-- [ ] QR scan → recap reflects Present + `waktu_absen`
-- [ ] Absent rows appear for post-event registrants (PRD §5.3) and region history is preserved (§5.4)
-- [ ] Full manual regression of existing event/material/scan flows
+- [x] Leader region enforcement verified with manipulated requests
+- [x] Leader request that sends `zone` / `user_id` is ignored or rejected by the backend
+- [x] Attendance recap excludes `live` / `mendatang` events against real data
+- [x] Region snapshot (`region_id`) preserved when a jamaah changes zone
+- [x] QR scan → recap reflects Present + `waktu_absen`
+- [x] Absent rows appear for post-event registrants (PRD §5.3) and region history is preserved (§5.4)
+- [x] Full manual regression of existing event/material/scan flows
