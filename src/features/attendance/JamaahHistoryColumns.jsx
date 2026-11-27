@@ -41,7 +41,7 @@ export const getJamaahHistoryColumns = () => [
   },
   {
     key: 'eventZone',
-    header: 'Zona / Wilayah',
+    header: 'Zona Acara',
     className: 'whitespace-nowrap',
     render: (record) => (
       <JamaahHistoryZoneBadge regionName={record.eventRegionName} />

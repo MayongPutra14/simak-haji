@@ -11,8 +11,8 @@ export function JamaahHistoryZoneBadge({ regionName, className = '' }) {
   const label = regionName || 'Umum';
   const isGeneral = label.toLowerCase() === 'umum';
   const toneClass = isGeneral
-    ? 'border-slate-200 bg-slate-100 text-slate-600'
-    : 'border-sky-200 bg-sky-50 text-sky-700';
+    ? 'border-emerald-200 bg-emerald-100 text-emerald-600'
+    : 'border-yellow-200 bg-yellow-50 text-yellow-700';
 
   return (
     <span
