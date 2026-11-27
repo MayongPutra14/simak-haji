@@ -1,19 +1,8 @@
 import { Link } from 'react-router';
 import { AttendanceStatusBadge } from '../../components/ui/global/StatusComponents';
-import { ATTENDANCE_STATUS } from '../../utils/helpers/constant';
-import {
-  getInitials,
-  getParticipantRegionLabel,
-} from '../../utils/helpers/attendanceRecap';
+import AttendanceAvatar from '../../components/attendance/shared/AttendanceAvatar';
+import { getParticipantRegionLabel } from '../../utils/helpers/attendanceRecap';
 import { formatCheckInTime } from '../../utils/helpers/dateConversion';
-
-const AVATAR_BASE =
-  'flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-xs font-bold';
-
-const getAvatarClass = (status) =>
-  status === ATTENDANCE_STATUS.PRESENT
-    ? 'border-emerald-200 bg-emerald-100 text-emerald-800'
-    : 'border-slate-200 bg-slate-100 text-slate-600';
 
 /**
  * Congregant identity cell shared by the desktop table and the mobile card.
@@ -25,9 +14,11 @@ export const renderParticipantName = (participant, fromPath = '') => {
 
   const content = (
     <>
-      <span className={`${AVATAR_BASE} ${getAvatarClass(participant.status)}`}>
-        {getInitials(participant.fullName)}
-      </span>
+      <AttendanceAvatar
+        photoUrl={participant.photoUrl}
+        fullName={participant.fullName}
+        status={participant.status}
+      />
       <span className="truncate text-sm font-bold text-slate-900 transition-colors group-hover:text-sea-green-700">
         {name}
       </span>

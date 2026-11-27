@@ -243,6 +243,9 @@ export const normalizeParticipant = (participant = {}, index = 0) => {
       participant.username,
       '',
     ),
+    photoUrl: normalizeText(
+      pickFirstValue(participant.photoUrl, participant.photo_url),
+    ),
     zone: normalizeZone(
       pickFirstValue(
         participant.zone,
@@ -308,6 +311,7 @@ export const normalizeJamaahIdentity = (jamaah = {}) => {
       jamaah.name,
       '',
     ),
+    photoUrl: normalizeText(pickFirstValue(jamaah.photoUrl, jamaah.photo_url)),
     zone: normalizeZone(
       pickFirstValue(jamaah.zone, jamaah.zona, jamaah.zone_leader),
     ),
