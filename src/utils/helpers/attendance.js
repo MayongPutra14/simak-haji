@@ -120,7 +120,7 @@ export const normalizeAttendanceRecords = (records) =>
 /**
  * Split an 'YYYY-MM-DD' value into filterable parts without timezone surprises.
  */
-export const getAttendanceDateParts = (record) => {
+const getAttendanceDateParts = (record) => {
   const [year = '', month = ''] = String(record?.eventDate ?? '').split('-');
 
   return { year, month };

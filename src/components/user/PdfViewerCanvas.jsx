@@ -11,7 +11,10 @@ pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.vers
  * secure pdf viewer component using react-pdf with custom css watermark overlay
  * @param {object} props - component props containing pdfUrl and watermarkText
  */
-export const PdfViewerCanvas = ({ pdfUrl, watermarkText = 'CONFIDENTIAL' }) => {
+export default function PdfViewerCanvas({
+  pdfUrl,
+  watermarkText = 'CONFIDENTIAL',
+}) {
   const [numPages, setNumPages] = useState(null);
   const [_isLoading, setIsLoading] = useState(true);
 
@@ -88,6 +91,4 @@ export const PdfViewerCanvas = ({ pdfUrl, watermarkText = 'CONFIDENTIAL' }) => {
       </Document>
     </div>
   );
-};
-
-export default PdfViewerCanvas;
+}

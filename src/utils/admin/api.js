@@ -140,43 +140,6 @@ export const deleteAdminUserData = async (userId) => {
   }
 };
 
-export const updateQuotaProvince = async (payload) => {
-  if (!payload)
-    return {
-      status: 'failed',
-      message: 'Jumlah kuota tidak ada, pastikan anda meberikan nilainya',
-    };
-
-  try {
-    const bodyPayload = {
-      action: 'update_kuota',
-      ...payload,
-    };
-
-    const response = await api.post('admin.php', bodyPayload);
-    if (
-      response.data?.status === 'failed' ||
-      response.data?.status === 'error'
-    ) {
-      return {
-        status: 'failed',
-        message: response.data?.message || 'Update kuota provinsi gagal',
-      };
-    }
-
-    return response.data;
-  } catch (error) {
-    const errorMessage =
-      error.response?.data?.message ||
-      error.message | 'Terjadi kesalahan pada server';
-
-    return {
-      status: 'error',
-      message: errorMessage,
-    };
-  }
-};
-
 export const updateUserProfile = async (userId, formData) => {
   if (!userId || !formData) return null;
 

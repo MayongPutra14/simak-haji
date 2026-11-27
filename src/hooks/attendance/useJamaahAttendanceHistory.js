@@ -9,7 +9,7 @@ import {
   normalizeJamaahIdentity,
   paginateRows,
 } from '../../utils/helpers/attendanceRecap';
-import { getAttendanceDataSource } from './attendanceDataSource';
+import getAttendanceDataSource from './attendanceDataSource';
 
 const FALLBACK_ERROR_MESSAGE = 'Gagal memuat riwayat kehadiran jamaah.';
 const SESSION_ERROR_MESSAGE = 'Sesi login tidak valid, silakan login kembali.';
@@ -184,5 +184,3 @@ export const useJamaahAttendanceHistory = ({
     refetch,
   };
 };
-
-export default useJamaahAttendanceHistory;

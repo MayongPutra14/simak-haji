@@ -26,7 +26,8 @@ const LEADER_SOURCE = Object.freeze({
   getJamaahAttendanceHistory: getLeaderJamaahAttendanceHistoryAPI,
 });
 
-export const getAttendanceDataSource = (role) =>
-  String(role ?? '').toLowerCase() === 'leader' ? LEADER_SOURCE : ADMIN_SOURCE;
-
-export default getAttendanceDataSource;
+export default function getAttendanceDataSource(role) {
+  return String(role ?? '').toLowerCase() === 'leader'
+    ? LEADER_SOURCE
+    : ADMIN_SOURCE;
+}

@@ -46,7 +46,7 @@ const calculatePercentage = (present, absent) => {
  * Zone values arrive as 'A' from the API but can also be labelled ('Zona A',
  * 'Wilayah A') in mock/legacy payloads. Anything else is kept uppercased.
  */
-export const normalizeZone = (value) => {
+const normalizeZone = (value) => {
   const text = normalizeText(value);
   if (!text) return null;
 
@@ -84,7 +84,7 @@ export const resolveAttendanceScope = (user) => {
  * Only completed events belong in the recap (PRD 5.2). The API status is
  * 'selesai'; 'completed' and a boolean flag are tolerated as aliases.
  */
-export const isCompletedEvent = (event) => {
+const isCompletedEvent = (event) => {
   const status = normalizeText(event?.status).toLowerCase();
 
   return (
@@ -215,7 +215,7 @@ export const normalizeRecapEvents = (events) =>
  * snapshot: the schema has no region column on `attendances` yet. `regionId`
  * is therefore always `null` from the backend (backend notes §4.2).
  */
-export const normalizeParticipant = (participant = {}, index = 0) => {
+const normalizeParticipant = (participant = {}, index = 0) => {
   const checkInTime = normalizeCheckInTime(
     pickFirstValue(
       participant.checkInTime,
@@ -337,7 +337,8 @@ export const normalizeJamaahIdentity = (jamaah = {}) => {
  * Jamaah history rows reuse the `AttendanceRecord` shape from Phase 1 and add
  * the event location/zone as extra display data.
  */
-export const normalizeJamaahHistoryRecord = (record = {}, index = 0) => {
+
+const normalizeJamaahHistoryRecord = (record = {}, index = 0) => {
   const attendanceRecord = normalizeAttendanceRecord(record, index);
 
   return {

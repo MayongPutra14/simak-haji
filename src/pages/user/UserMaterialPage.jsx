@@ -3,7 +3,7 @@
 import { useNavigate } from 'react-router';
 import { useAuth } from '../../features/auth/useAuth';
 import { useMaterialAccess } from '../../hooks/global/useMaterialAccess';
-import { PdfViewerCanvas } from '../../components/user/PdfViewerCanvas';
+import PdfViewerCanvas from '../../components/user/PdfViewerCanvas';
 import Button from '../../components/ui/global/Button';
 import {
   IconLocation,

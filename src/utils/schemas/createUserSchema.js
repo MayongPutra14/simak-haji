@@ -666,12 +666,6 @@ export const educationOptions = [
   { label: 'Strata 3 (S3)', value: 's3' },
 ];
 
-export const statusPortionOptions = [
-  { label: 'Cadangan 1', value: 'cadangan 1' },
-  { label: 'Cadangan 2', value: 'cadangan 2' },
-  { label: 'Cadangan 3', value: 'cadangan 3' },
-];
-
 export const statusControlProcessOptions = [
   { label: 'Menunggu', value: 'menunggu' },
   { label: 'Ok', value: 'ok' },
@@ -761,7 +755,6 @@ export const districtOptions = Object.values(DISTRICT_BY_ZONE)
 
 // FILTER DISTRICT OPTIONS BASED ON USER ROLE AND ASSIGNED ZONE
 export const getDistrictOptions = (role, zone) => {
-  // return all districts if user is admin
   if (role === 'admin') {
     return districtOptions;
   }

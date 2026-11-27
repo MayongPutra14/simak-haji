@@ -20,11 +20,11 @@ import {
   IconCategory,
 } from '../../utils/helpers/decorations';
 
-export const EventDashboard = ({
+export default function EventDashboard({
   eventData,
   isLoading = false,
   onActionClick,
-}) => {
+}) {
   const navigate = useNavigate();
 
   if (isLoading) {
@@ -203,6 +203,4 @@ export const EventDashboard = ({
       </div>
     </section>
   );
-};
-
-export default EventDashboard;
+}

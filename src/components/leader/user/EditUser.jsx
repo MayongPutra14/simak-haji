@@ -11,13 +11,13 @@ import {
   InputSearchSelect,
 } from '../../ui/inputs/index';
 
-export const EditUser = ({
+export default function EditUser({
   zone,
   initialData,
   onSave,
   onCancel,
   isLoading,
-}) => {
+})  {
   const {
     register,
     handleSubmit,
@@ -677,5 +677,3 @@ export const EditUser = ({
     </form>
   );
 };
-
-export default EditUser;

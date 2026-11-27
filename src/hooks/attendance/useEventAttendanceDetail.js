@@ -8,7 +8,7 @@ import {
   normalizeRecapEvent,
   paginateRows,
 } from '../../utils/helpers/attendanceRecap';
-import { getAttendanceDataSource } from './attendanceDataSource';
+import getAttendanceDataSource from './attendanceDataSource';
 
 const FALLBACK_ERROR_MESSAGE = 'Gagal memuat detail kehadiran kegiatan.';
 const SESSION_ERROR_MESSAGE = 'Sesi login tidak valid, silakan login kembali.';
@@ -171,5 +171,3 @@ export const useEventAttendanceDetail = ({
     refetch,
   };
 };
-
-export default useEventAttendanceDetail;
