@@ -54,6 +54,14 @@ import {
   UserAttendancePage,
 } from '../pages/user/index';
 
+// ATTENDANCE (ADMIN & LEADER)
+import {
+  AttendanceLayout,
+  AttendanceRecapPage,
+  EventAttendanceDetailPage,
+  JamaahAttendanceHistoryPage,
+} from '../pages/attendance/index';
+
 // LEADER
 import {
   LeaderLayout,
@@ -165,6 +173,22 @@ export default function AppRoutes() {
             <Route path="detail/:eventId" element={<LeaderDetailEventPage />} />
             <Route path="edit/:eventId" element={<LeaderEditEventPage />} />
           </Route>
+        </Route>
+      </Route>
+
+      {/* ATTENDANCE ROUTES (ADMIN & LEADER) */}
+      <Route element={<ProtectedRoute allowedRoles={['admin', 'leader']} />}>
+        <Route path="attendance" element={<AttendanceLayout />}>
+          <Route index element={<Navigate to="recaps" replace />} />
+          <Route path="recaps" element={<AttendanceRecapPage />} />
+          <Route
+            path="recaps/:eventId"
+            element={<EventAttendanceDetailPage />}
+          />
+          <Route
+            path="members/:userId"
+            element={<JamaahAttendanceHistoryPage />}
+          />
         </Route>
       </Route>
 

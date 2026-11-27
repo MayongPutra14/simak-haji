@@ -11,7 +11,7 @@ import {
   InputSearchSelect,
 } from '../../ui/inputs/index';
 
-export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
+export default function EditUser({ initialData, onSave, onCancel, isLoading }) {
   const {
     register,
     handleSubmit,
@@ -651,4 +651,3 @@ export const EditUser = ({ initialData, onSave, onCancel, isLoading }) => {
   );
 };
 
-export default EditUser;

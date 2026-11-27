@@ -61,7 +61,7 @@ export default function getFeatureItems(role = 'user') {
       {
         id: 'absen',
         label: 'Rekap Absen',
-        path: '/maintenance',
+        path: '/attendance/recaps',
         Icon: IconQr,
         bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
       },
@@ -71,7 +71,7 @@ export default function getFeatureItems(role = 'user') {
       {
         id: 'absen',
         label: 'Rekap Absen',
-        path: '/maintenance',
+        path: '/attendance/recaps',
         Icon: IconQr,
         bgColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
       },

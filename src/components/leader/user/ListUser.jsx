@@ -230,9 +230,6 @@ export default function ListUser({
           </Button>
         </section>
 
-        {/* UPDATE NEW PROVINCE QUOTA */}
-        {/* <UpdateQuotaSection onRefresh={onRefresh} /> */}
-
         {/* BASIC STATISTIC */}
         <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
           <StatisticContainer

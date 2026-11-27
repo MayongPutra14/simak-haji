@@ -80,5 +80,3 @@ export const useMyAttendance = (userId) => {
 
   return { records, stats, filterOptions, isLoading, error, refetch };
 };
-
-export default useMyAttendance;

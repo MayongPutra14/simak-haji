@@ -4,6 +4,8 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const api = axios.create({
   baseURL: BASE_URL,
+  // SEND PHPSESSID SO THE BACKEND CAN RESOLVE THE CALLER (CONTRACT 1.1)
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -135,43 +137,6 @@ export const deleteAdminUserData = async (userId) => {
   } catch (error) {
     console.error('Error deleting users data:', error);
     throw error;
-  }
-};
-
-export const updateQuotaProvince = async (payload) => {
-  if (!payload)
-    return {
-      status: 'failed',
-      message: 'Jumlah kuota tidak ada, pastikan anda meberikan nilainya',
-    };
-
-  try {
-    const bodyPayload = {
-      action: 'update_kuota',
-      ...payload,
-    };
-
-    const response = await api.post('admin.php', bodyPayload);
-    if (
-      response.data?.status === 'failed' ||
-      response.data?.status === 'error'
-    ) {
-      return {
-        status: 'failed',
-        message: response.data?.message || 'Update kuota provinsi gagal',
-      };
-    }
-
-    return response.data;
-  } catch (error) {
-    const errorMessage =
-      error.response?.data?.message ||
-      error.message | 'Terjadi kesalahan pada server';
-
-    return {
-      status: 'error',
-      message: errorMessage,
-    };
   }
 };
 
@@ -370,6 +335,95 @@ export const updateLandingPageAPI = async (payload) => {
   };
 
   const response = await api.post('admin.php', bodyPayload);
+
+  return response.data;
+};
+
+// ATTENDANCE RECAP (ADMIN) — SEE docs/api-contract-admin-leader-attendance.md
+export const getAttendanceRecapAPI = async ({
+  page = 1,
+  perPage = 10,
+  search = '',
+  month = 'all',
+  year = 'all',
+  zone = 'all',
+} = {}) => {
+  const bodyPayload = {
+    action: 'get_attendance_recap',
+    page,
+    per_page: perPage,
+    search,
+    month,
+    year,
+  };
+
+  // ZONE IS ADMIN-ONLY AND OMITTED FOR "all" (CONTRACT 9.1)
+  if (zone && zone !== 'all') {
+    bodyPayload.zone = zone;
+  }
+
+  const response = await api.post('admin.php', bodyPayload);
+
+  return response.data;
+};
+
+export const getEventAttendanceDetailAPI = async ({
+  eventId,
+  page = 1,
+  perPage = 10,
+  search = '',
+  status = 'all',
+  zone = 'all',
+} = {}) => {
+  if (!eventId) {
+    return {
+      status: 'failed',
+      message: 'Kegiatan tidak ditemukan.',
+    };
+  }
+
+  const bodyPayload = {
+    action: 'get_event_attendance_detail',
+    event_id: Number(eventId),
+    page,
+    per_page: perPage,
+    search,
+    status,
+  };
+
+  if (zone && zone !== 'all') {
+    bodyPayload.zone = zone;
+  }
+
+  const response = await api.post('admin.php', bodyPayload);
+
+  return response.data;
+};
+
+export const getJamaahAttendanceHistoryAPI = async ({
+  userId,
+  page = 1,
+  perPage = 10,
+  search = '',
+  month = 'all',
+  status = 'all',
+} = {}) => {
+  if (!userId) {
+    return {
+      status: 'failed',
+      message: 'Data jamaah tidak ditemukan.',
+    };
+  }
+
+  const response = await api.post('admin.php', {
+    action: 'get_jamaah_attendance_history',
+    user_id: Number(userId),
+    page,
+    per_page: perPage,
+    search,
+    month,
+    status,
+  });
 
   return response.data;
 };

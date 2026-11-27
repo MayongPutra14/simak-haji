@@ -1,0 +1,15 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/main.jsx"
+  ],
+  "project": [
+    "src/**/*.{js,jsx,css}"
+  ],
+  "ignore": [
+    "**/index.js"
+  ],
+  "ignoreDependencies": [
+    "tailwindcss"
+  ]
+}

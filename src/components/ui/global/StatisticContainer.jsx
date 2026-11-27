@@ -1,4 +1,4 @@
-export const StatisticContainer = ({
+export default function StatisticContainer({
   label,
   value,
   icon: Icon,
@@ -10,7 +10,7 @@ export const StatisticContainer = ({
   iconColorClass = 'text-slate-700',
   iconBgClass = 'bg-slate-100',
   className = '',
-}) => {
+}) {
   const sizeStyles = {
     sm: {
       padding: 'p-3',
@@ -78,6 +78,4 @@ export const StatisticContainer = ({
       </p>
     </div>
   );
-};
-
-export default StatisticContainer;
+}

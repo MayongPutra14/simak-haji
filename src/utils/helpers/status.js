@@ -53,13 +53,6 @@ export const getDocumentStatus = (value) => {
   return 'Menunggu';
 };
 
-export const getButtonLabel = (status, isAttended) => {
-  if (status.toLowerCase() === 'live' && isAttended === 0) {
-    return 'Absen via QR';
-  }
-  return 'Materi Bacaan';
-};
-
 // EVENT ACTION TYPES
 export const EVENT_ACTION_TYPES = {
   SCAN: 'SCAN',
